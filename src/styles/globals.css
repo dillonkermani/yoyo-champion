@@ -1,0 +1,341 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Light theme as default - YoYoChampion branding */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 8%;
+
+    /* Card colors */
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 8%;
+
+    /* Popover colors */
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 8%;
+
+    /* Primary - Brand Blue */
+    --primary: 187 100% 78%;
+    --primary-foreground: 0 0% 8%;
+
+    /* Secondary - Surface secondary */
+    --secondary: 210 17% 98%;
+    --secondary-foreground: 0 0% 8%;
+
+    /* Muted */
+    --muted: 210 17% 95%;
+    --muted-foreground: 0 0% 40%;
+
+    /* Accent - Brand Teal */
+    --accent: 152 18% 63%;
+    --accent-foreground: 0 0% 8%;
+
+    /* Destructive */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Border colors */
+    --border: 220 13% 91%;
+    --border-muted: 220 13% 95%;
+
+    /* Input */
+    --input: 220 13% 91%;
+
+    /* Ring */
+    --ring: 187 100% 78%;
+
+    /* Border radius */
+    --radius: 0.75rem;
+
+    /* Font */
+    --font-jost: 'Jost', system-ui, sans-serif;
+  }
+
+  /* Dark mode for users who prefer it and video player */
+  .dark,
+  @media (prefers-color-scheme: dark) {
+    .auto-dark {
+      --background: 0 0% 8%;
+      --foreground: 0 0% 98%;
+
+      --card: 0 0% 10%;
+      --card-foreground: 0 0% 98%;
+
+      --popover: 0 0% 10%;
+      --popover-foreground: 0 0% 98%;
+
+      --primary: 187 100% 78%;
+      --primary-foreground: 0 0% 8%;
+
+      --secondary: 0 0% 15%;
+      --secondary-foreground: 0 0% 98%;
+
+      --muted: 0 0% 15%;
+      --muted-foreground: 0 0% 65%;
+
+      --accent: 152 18% 63%;
+      --accent-foreground: 0 0% 98%;
+
+      --destructive: 0 84% 60%;
+      --destructive-foreground: 0 0% 98%;
+
+      --border: 0 0% 20%;
+      --border-muted: 0 0% 15%;
+
+      --input: 0 0% 20%;
+
+      --ring: 187 100% 78%;
+    }
+  }
+
+  /* Explicit dark mode class */
+  .dark {
+    --background: 0 0% 8%;
+    --foreground: 0 0% 98%;
+
+    --card: 0 0% 10%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 0 0% 10%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 187 100% 78%;
+    --primary-foreground: 0 0% 8%;
+
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 65%;
+
+    --accent: 152 18% 63%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 20%;
+    --border-muted: 0 0% 15%;
+
+    --input: 0 0% 20%;
+
+    --ring: 187 100% 78%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    @apply scroll-smooth antialiased;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-jost);
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Custom scrollbar - Light theme */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-surface-secondary;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply rounded-full bg-brand-teal/30 transition-colors;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-brand-teal/50;
+  }
+
+  /* Firefox scrollbar */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--muted)) hsl(var(--background));
+  }
+
+  /* Focus styles */
+  :focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+  }
+
+  /* Selection styles */
+  ::selection {
+    @apply bg-brand-blue/30 text-foreground;
+  }
+}
+
+@layer components {
+  /* Clean card style */
+  .card-clean {
+    @apply bg-white border border-border rounded-xl shadow-subtle;
+  }
+
+  .card-clean-hover {
+    @apply transition-all duration-200;
+  }
+
+  .card-clean-hover:hover {
+    @apply shadow-card border-brand-teal/30;
+  }
+
+  /* Announcement bar style */
+  .announcement-bar {
+    @apply bg-brand-blue text-brand-black text-sm font-medium py-2 px-4 text-center;
+  }
+
+  /* Button base styles - Pill shaped */
+  .btn-pill {
+    @apply inline-flex items-center justify-center rounded-pill px-6 py-2.5 text-sm font-medium transition-all duration-200;
+  }
+
+  .btn-primary {
+    @apply btn-pill bg-brand-blue text-brand-black hover:bg-brand-blue/90;
+  }
+
+  .btn-primary:active {
+    @apply scale-[0.98];
+  }
+
+  .btn-secondary {
+    @apply btn-pill border border-border bg-white text-brand-black hover:bg-surface-secondary;
+  }
+
+  .btn-outline {
+    @apply btn-pill border-2 border-brand-black text-brand-black bg-transparent hover:bg-brand-black hover:text-white;
+  }
+
+  /* Input styles */
+  .input-base {
+    @apply w-full rounded-lg border border-border bg-white px-4 py-2.5 text-foreground placeholder:text-muted-foreground transition-all duration-200;
+  }
+
+  .input-base:focus {
+    @apply border-brand-teal outline-none ring-2 ring-brand-teal/20;
+  }
+
+  /* Badge styles */
+  .badge {
+    @apply inline-flex items-center rounded-full px-3 py-1 text-xs font-medium;
+  }
+
+  .badge-teal {
+    @apply bg-brand-teal/20 text-brand-black;
+  }
+
+  .badge-blue {
+    @apply bg-brand-blue text-brand-black;
+  }
+
+  .badge-green {
+    @apply bg-brand-green text-brand-black;
+  }
+
+  .badge-success {
+    @apply bg-brand-green text-brand-black;
+  }
+
+  .badge-warning {
+    @apply bg-amber-100 text-amber-800;
+  }
+
+  .badge-error {
+    @apply bg-red-100 text-red-800;
+  }
+
+  /* Sale badge */
+  .badge-sale {
+    @apply bg-brand-green text-brand-black font-semibold;
+  }
+
+  /* Shimmer loading effect */
+  .shimmer {
+    @apply relative overflow-hidden;
+  }
+
+  .shimmer::after {
+    content: "";
+    @apply absolute inset-0 -translate-x-full animate-shimmer bg-shimmer-gradient;
+  }
+
+  /* Video player dark container */
+  .video-player-container {
+    @apply bg-surface-dark-primary rounded-xl overflow-hidden;
+  }
+}
+
+@layer utilities {
+  /* Animation delays */
+  .animation-delay-100 {
+    animation-delay: 100ms;
+  }
+
+  .animation-delay-200 {
+    animation-delay: 200ms;
+  }
+
+  .animation-delay-300 {
+    animation-delay: 300ms;
+  }
+
+  .animation-delay-500 {
+    animation-delay: 500ms;
+  }
+
+  /* Safe area padding for mobile */
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .pt-safe {
+    padding-top: env(safe-area-inset-top);
+  }
+
+  /* Hide scrollbar but allow scrolling */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Text balance */
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Container query support */
+  .container-type-inline {
+    container-type: inline-size;
+  }
+
+  /* Custom line clamp */
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* Pill border radius utility */
+  .rounded-pill {
+    border-radius: 50px;
+  }
+}
