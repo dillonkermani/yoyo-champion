@@ -2,29 +2,33 @@
 
 import * as React from "react";
 import * as ProgressPrimitive from "@radix-ui/react-progress";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 export interface ProgressProps
   extends React.ComponentPropsWithoutRef<typeof ProgressPrimitive.Root> {
-  variant?: "default" | "brand" | "success" | "warning" | "error";
-  size?: "sm" | "default" | "lg";
+  variant?: "default" | "fun" | "xp" | "streak" | "lesson" | "rainbow";
+  size?: "sm" | "default" | "lg" | "xl";
   showValue?: boolean;
   animated?: boolean;
+  celebrate?: boolean;
+  sparkle?: boolean;
 }
 
 const progressVariants = {
   default: "bg-gray-400",
-  brand: "bg-gradient-to-r from-brand-teal to-brand-blue",
-  success: "bg-gradient-to-r from-emerald-500 to-green-400",
-  warning: "bg-gradient-to-r from-yellow-500 to-orange-400",
-  error: "bg-gradient-to-r from-red-500 to-red-400",
+  fun: "bg-gradient-to-r from-fun-green to-fun-green-light",
+  xp: "bg-gradient-to-r from-xp to-xp-light",
+  streak: "bg-gradient-to-r from-fun-red to-fun-orange",
+  lesson: "bg-gradient-to-r from-fun-blue to-fun-blue-light",
+  rainbow: "bg-gradient-to-r from-fun-red via-fun-yellow via-fun-green to-fun-blue",
 };
 
 const sizeVariants = {
-  sm: "h-1.5",
-  default: "h-2.5",
+  sm: "h-2",
+  default: "h-3",
   lg: "h-4",
+  xl: "h-6",
 };
 
 const Progress = React.forwardRef<
@@ -35,22 +39,43 @@ const Progress = React.forwardRef<
     {
       className,
       value = 0,
-      variant = "default",
+      variant = "fun",
       size = "default",
       showValue = false,
       animated = true,
+      celebrate = false,
+      sparkle = false,
       ...props
     },
     ref
   ) => {
     const percentage = Math.min(100, Math.max(0, value || 0));
+    const isComplete = percentage >= 100;
+    const [showCelebration, setShowCelebration] = React.useState(false);
+
+    React.useEffect(() => {
+      if (isComplete && celebrate) {
+        setShowCelebration(true);
+        const timer = setTimeout(() => setShowCelebration(false), 2000);
+        return () => clearTimeout(timer);
+      }
+      return undefined;
+    }, [isComplete, celebrate]);
 
     return (
-      <div className={cn("w-full", showValue && "space-y-1.5")}>
+      <div className={cn("w-full", showValue && "space-y-2")}>
         {showValue && (
-          <div className="flex justify-between text-xs text-gray-500">
-            <span>Progress</span>
-            <span>{percentage}%</span>
+          <div className="flex justify-between text-sm font-bold">
+            <span className="text-muted-foreground">Progress</span>
+            <motion.span
+              className={cn(
+                isComplete ? "text-fun-green" : "text-brand-black"
+              )}
+              animate={isComplete && celebrate ? { scale: [1, 1.2, 1] } : {}}
+              transition={{ duration: 0.3 }}
+            >
+              {percentage}%
+            </motion.span>
           </div>
         )}
         <ProgressPrimitive.Root
@@ -58,6 +83,7 @@ const Progress = React.forwardRef<
           className={cn(
             "relative w-full overflow-hidden rounded-full bg-gray-200",
             sizeVariants[size],
+            isComplete && celebrate && "progress-complete",
             className
           )}
           {...props}
@@ -65,16 +91,50 @@ const Progress = React.forwardRef<
           {animated ? (
             <motion.div
               className={cn(
-                "h-full w-full flex-1 rounded-full",
-                progressVariants[variant]
+                "h-full w-full flex-1 rounded-full relative",
+                progressVariants[variant],
+                sparkle && "progress-shine"
               )}
               initial={{ width: 0 }}
               animate={{ width: `${percentage}%` }}
               transition={{
-                duration: 0.5,
+                duration: 0.6,
                 ease: [0.16, 1, 0.3, 1],
               }}
-            />
+            >
+              {/* Shine effect */}
+              {percentage > 0 && (
+                <div className="absolute inset-0 overflow-hidden rounded-full">
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
+                    initial={{ x: "-100%" }}
+                    animate={{ x: "200%" }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      repeatDelay: 1,
+                      ease: "linear",
+                    }}
+                  />
+                </div>
+              )}
+
+              {/* Sparkle at the end */}
+              {sparkle && percentage > 5 && (
+                <motion.div
+                  className="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 bg-white rounded-full"
+                  animate={{
+                    scale: [1, 1.5, 1],
+                    opacity: [1, 0.5, 1],
+                  }}
+                  transition={{
+                    duration: 1,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                />
+              )}
+            </motion.div>
           ) : (
             <ProgressPrimitive.Indicator
               className={cn(
@@ -85,11 +145,136 @@ const Progress = React.forwardRef<
             />
           )}
         </ProgressPrimitive.Root>
+
+        {/* Celebration effect */}
+        <AnimatePresence>
+          {showCelebration && (
+            <motion.div
+              className="flex justify-center mt-2"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+            >
+              <span className="text-fun-green font-bold text-sm">Complete!</span>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     );
   }
 );
 Progress.displayName = ProgressPrimitive.Root.displayName;
+
+// XP Progress Bar with animation
+export interface XPProgressProps {
+  currentXP: number;
+  maxXP: number;
+  level?: number;
+  size?: ProgressProps["size"];
+  showXP?: boolean;
+  animated?: boolean;
+}
+
+const XPProgress = React.forwardRef<HTMLDivElement, XPProgressProps>(
+  ({ currentXP, maxXP, level, size = "lg", showXP = true, animated = true }, ref) => {
+    const percentage = Math.min(100, (currentXP / maxXP) * 100);
+
+    return (
+      <div ref={ref} className="w-full space-y-2">
+        <div className="flex justify-between items-center">
+          {level !== undefined && (
+            <div className="flex items-center gap-2">
+              <motion.div
+                className="w-8 h-8 rounded-full bg-gradient-to-br from-xp to-xp-light flex items-center justify-center shadow-fun-yellow"
+                whileHover={{ scale: 1.1, rotate: 5 }}
+              >
+                <span className="text-sm font-bold text-brand-black">{level}</span>
+              </motion.div>
+              <span className="font-bold text-brand-black">Level {level}</span>
+            </div>
+          )}
+          {showXP && (
+            <span className="text-sm font-bold text-xp-dark">
+              {currentXP} / {maxXP} XP
+            </span>
+          )}
+        </div>
+        <div className={cn(
+          "relative w-full overflow-hidden rounded-full bg-xp/20",
+          sizeVariants[size]
+        )}>
+          {animated ? (
+            <motion.div
+              className="h-full rounded-full bg-gradient-to-r from-xp to-xp-light relative progress-shine"
+              initial={{ width: 0 }}
+              animate={{ width: `${percentage}%` }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            />
+          ) : (
+            <div
+              className="h-full rounded-full bg-gradient-to-r from-xp to-xp-light"
+              style={{ width: `${percentage}%` }}
+            />
+          )}
+        </div>
+      </div>
+    );
+  }
+);
+XPProgress.displayName = "XPProgress";
+
+// Streak Progress
+export interface StreakProgressProps {
+  currentStreak: number;
+  targetStreak?: number;
+  size?: ProgressProps["size"];
+  animated?: boolean;
+}
+
+const StreakProgress = React.forwardRef<HTMLDivElement, StreakProgressProps>(
+  ({ currentStreak, targetStreak = 7, size = "default", animated = true }, ref) => {
+    const percentage = Math.min(100, (currentStreak / targetStreak) * 100);
+
+    return (
+      <div ref={ref} className="w-full space-y-2">
+        <div className="flex justify-between items-center">
+          <div className="flex items-center gap-2">
+            <motion.span
+              className="text-2xl"
+              animate={{ scale: [1, 1.1, 1] }}
+              transition={{ duration: 0.5, repeat: Infinity, repeatDelay: 2 }}
+            >
+              {currentStreak > 0 ? "&#128293;" : "&#10052;"}
+            </motion.span>
+            <span className="font-bold text-brand-black">{currentStreak} day streak!</span>
+          </div>
+          <span className="text-sm text-muted-foreground">
+            Goal: {targetStreak} days
+          </span>
+        </div>
+        <div className={cn(
+          "relative w-full overflow-hidden rounded-full bg-fun-red/20",
+          sizeVariants[size]
+        )}>
+          {animated ? (
+            <motion.div
+              className="h-full rounded-full bg-gradient-to-r from-fun-red to-fun-orange"
+              initial={{ width: 0 }}
+              animate={{ width: `${percentage}%` }}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            />
+          ) : (
+            <div
+              className="h-full rounded-full bg-gradient-to-r from-fun-red to-fun-orange"
+              style={{ width: `${percentage}%` }}
+            />
+          )}
+        </div>
+      </div>
+    );
+  }
+);
+StreakProgress.displayName = "StreakProgress";
 
 // Multi-segment progress for skill trees or level progress
 export interface MultiProgressProps {
@@ -118,7 +303,7 @@ const MultiProgress = React.forwardRef<HTMLDivElement, MultiProgressProps>(
       >
         {segments.map((segment, index) => {
           const width = (segment.value / total) * 100;
-          const variant = segment.variant || "default";
+          const variant = segment.variant || "fun";
 
           if (animated) {
             return (
@@ -167,22 +352,31 @@ export interface CircularProgressProps {
   value: number;
   size?: number;
   strokeWidth?: number;
-  variant?: ProgressProps["variant"];
+  variant?: "fun" | "xp" | "streak" | "lesson";
   showValue?: boolean;
   className?: string;
   animated?: boolean;
+  celebrate?: boolean;
 }
+
+const strokeColors: Record<string, string> = {
+  fun: "stroke-fun-green",
+  xp: "stroke-xp",
+  streak: "stroke-fun-red",
+  lesson: "stroke-fun-blue",
+};
 
 const CircularProgress = React.forwardRef<SVGSVGElement, CircularProgressProps>(
   (
     {
       value = 0,
-      size = 60,
-      strokeWidth = 6,
-      variant = "brand",
+      size = 80,
+      strokeWidth = 8,
+      variant = "fun",
       showValue = true,
       className,
       animated = true,
+      celebrate = false,
     },
     ref
   ) => {
@@ -190,14 +384,7 @@ const CircularProgress = React.forwardRef<SVGSVGElement, CircularProgressProps>(
     const radius = (size - strokeWidth) / 2;
     const circumference = radius * 2 * Math.PI;
     const offset = circumference - (percentage / 100) * circumference;
-
-    const strokeColors: Record<string, string> = {
-      default: "stroke-gray-400",
-      brand: "stroke-brand-teal",
-      success: "stroke-emerald-500",
-      warning: "stroke-yellow-500",
-      error: "stroke-red-500",
-    };
+    const isComplete = percentage >= 100;
 
     return (
       <div className={cn("relative inline-flex items-center justify-center", className)}>
@@ -226,7 +413,7 @@ const CircularProgress = React.forwardRef<SVGSVGElement, CircularProgressProps>(
               strokeLinecap="round"
               initial={{ strokeDasharray: circumference, strokeDashoffset: circumference }}
               animate={{ strokeDashoffset: offset }}
-              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             />
           ) : (
             <circle
@@ -242,9 +429,26 @@ const CircularProgress = React.forwardRef<SVGSVGElement, CircularProgressProps>(
           )}
         </svg>
         {showValue && (
-          <span className="absolute text-xs font-semibold text-gray-700">
+          <motion.span
+            className={cn(
+              "absolute text-lg font-bold",
+              isComplete ? "text-fun-green" : "text-brand-black"
+            )}
+            animate={isComplete && celebrate ? { scale: [1, 1.2, 1] } : {}}
+            transition={{ duration: 0.3 }}
+          >
             {percentage}%
-          </span>
+          </motion.span>
+        )}
+
+        {/* Celebration ring */}
+        {isComplete && celebrate && (
+          <motion.div
+            className="absolute inset-0 rounded-full border-4 border-fun-green"
+            initial={{ scale: 1, opacity: 0.8 }}
+            animate={{ scale: 1.3, opacity: 0 }}
+            transition={{ duration: 0.6, repeat: 2 }}
+          />
         )}
       </div>
     );
@@ -252,4 +456,55 @@ const CircularProgress = React.forwardRef<SVGSVGElement, CircularProgressProps>(
 );
 CircularProgress.displayName = "CircularProgress";
 
-export { Progress, MultiProgress, CircularProgress };
+// Lesson progress dots (like Duolingo)
+export interface LessonDotsProps {
+  total: number;
+  completed: number;
+  current?: number;
+  size?: "sm" | "default" | "lg";
+}
+
+const dotSizes = {
+  sm: "w-2 h-2",
+  default: "w-3 h-3",
+  lg: "w-4 h-4",
+};
+
+const LessonDots = React.forwardRef<HTMLDivElement, LessonDotsProps>(
+  ({ total, completed, current, size = "default" }, ref) => {
+    return (
+      <div ref={ref} className="flex items-center gap-2">
+        {Array.from({ length: total }).map((_, index) => {
+          const isCompleted = index < completed;
+          const isCurrent = index === current;
+
+          return (
+            <motion.div
+              key={index}
+              className={cn(
+                "rounded-full transition-all duration-200",
+                dotSizes[size],
+                isCompleted && "bg-fun-green",
+                isCurrent && "bg-fun-blue ring-2 ring-fun-blue/30",
+                !isCompleted && !isCurrent && "bg-gray-300"
+              )}
+              initial={isCompleted ? { scale: 0 } : {}}
+              animate={isCompleted ? { scale: 1 } : {}}
+              transition={{ delay: index * 0.05, type: "spring", stiffness: 500 }}
+            />
+          );
+        })}
+      </div>
+    );
+  }
+);
+LessonDots.displayName = "LessonDots";
+
+export {
+  Progress,
+  XPProgress,
+  StreakProgress,
+  MultiProgress,
+  CircularProgress,
+  LessonDots,
+};

@@ -2,7 +2,7 @@
 
 import { useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Sparkles,
   TrendingUp,
@@ -11,9 +11,9 @@ import {
   BookOpen,
   ArrowLeft,
   ArrowRight,
+  Zap,
 } from "lucide-react";
-import { MotionCard } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import { Button, MotionButton } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import {
   useOnboardingStore,
@@ -22,6 +22,7 @@ import {
   type SkillLevel,
 } from "@/stores";
 import { SkillQuiz } from "@/components/onboarding/skill-quiz";
+import { Mascot, getRandomMessage, ConfettiBurst } from "@/components/fun";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -34,13 +35,67 @@ const containerVariants = {
 };
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 20, scale: 0.95 },
   visible: {
     opacity: 1,
     y: 0,
+    scale: 1,
     transition: {
       duration: 0.4,
+      type: "spring",
+      bounce: 0.3,
     },
+  },
+};
+
+// Skill level configuration with fun colors and emojis
+const skillLevelConfig: Record<SkillLevel, {
+  icon: React.ReactNode;
+  emoji: string;
+  color: string;
+  bgColor: string;
+  borderColor: string;
+  description: string;
+}> = {
+  never: {
+    icon: <BookOpen className="h-6 w-6" />,
+    emoji: "🌱",
+    color: "text-fun-primary",
+    bgColor: "bg-fun-primary/20",
+    borderColor: "border-fun-primary",
+    description: "Brand new to yo-yos - let's start from scratch!",
+  },
+  beginner: {
+    icon: <Sparkles className="h-6 w-6" />,
+    emoji: "⭐",
+    color: "text-fun-blue",
+    bgColor: "bg-fun-blue/20",
+    borderColor: "border-fun-blue",
+    description: "Can do basic tricks like Sleeper and Rock the Baby",
+  },
+  intermediate: {
+    icon: <TrendingUp className="h-6 w-6" />,
+    emoji: "🔥",
+    color: "text-fun-accent",
+    bgColor: "bg-fun-accent/20",
+    borderColor: "border-fun-accent",
+    description: "Comfortable with string tricks like Trapeze and Matrix",
+  },
+  advanced: {
+    icon: <Trophy className="h-6 w-6" />,
+    emoji: "🏆",
+    color: "text-fun-purple",
+    bgColor: "bg-fun-purple/20",
+    borderColor: "border-fun-purple",
+    description: "Ready for expert combos and competition-level tricks",
+  },
+  expert: {
+    icon: <Trophy className="h-6 w-6" />,
+    emoji: "👑",
+    color: "text-fun-xp",
+    bgColor: "bg-fun-xp/20",
+    borderColor: "border-fun-xp",
+    description: "Master level - time for world-class techniques!",
   },
 };
 
@@ -48,80 +103,100 @@ interface SkillOptionProps {
   level: SkillLevel;
   isSelected: boolean;
   onClick: () => void;
-  icon: React.ReactNode;
+  index: number;
 }
 
-function SkillOption({ level, isSelected, onClick, icon }: SkillOptionProps) {
+function SkillOption({ level, isSelected, onClick, index }: SkillOptionProps) {
   const metadata = SKILL_LEVEL_METADATA[level];
+  const config = skillLevelConfig[level];
 
   return (
-    <MotionCard
+    <motion.div
       variants={cardVariants}
-      onClick={onClick}
-      className={cn(
-        "cursor-pointer transition-all duration-200 p-4",
-        isSelected
-          ? "border-2 border-brand-blue bg-brand-blue/5 shadow-elevated"
-          : "border border-border hover:border-brand-teal/50 hover:shadow-card"
-      )}
-      whileHover={{ scale: 1.02 }}
+      custom={index}
+      whileHover={{ scale: 1.02, y: -4 }}
       whileTap={{ scale: 0.98 }}
     >
-      <div className="flex items-start gap-4">
-        <div
-          className={cn(
-            "flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center transition-colors",
-            isSelected
-              ? "bg-brand-blue text-brand-black"
-              : "bg-surface-secondary text-muted-foreground"
-          )}
-        >
-          {icon}
-        </div>
-        <div className="flex-1 min-w-0">
-          <h3
-            className={cn(
-              "font-semibold mb-1 transition-colors",
-              isSelected ? "text-brand-black" : "text-brand-black"
-            )}
-          >
-            {metadata.label}
-          </h3>
-          <p className="text-sm text-muted-foreground">{metadata.description}</p>
-        </div>
-        {isSelected && (
-          <motion.div
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            className="flex-shrink-0 w-6 h-6 rounded-full bg-brand-blue flex items-center justify-center"
-          >
-            <svg
-              className="w-4 h-4 text-brand-black"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M5 13l4 4L19 7"
-              />
-            </svg>
-          </motion.div>
+      <motion.div
+        onClick={onClick}
+        className={cn(
+          "cursor-pointer transition-all duration-300 p-4 rounded-2xl border-2",
+          isSelected
+            ? `${config.bgColor} ${config.borderColor} shadow-lg`
+            : "border-gray-200 bg-white hover:border-gray-300 hover:shadow-md"
         )}
-      </div>
-    </MotionCard>
+      >
+        <div className="flex items-start gap-4">
+          {/* Icon with animation */}
+          <motion.div
+            className={cn(
+              "flex-shrink-0 w-14 h-14 rounded-2xl flex items-center justify-center transition-all",
+              isSelected
+                ? `${config.bgColor} ${config.color}`
+                : "bg-gray-100 text-gray-400"
+            )}
+            animate={isSelected ? { scale: [1, 1.1, 1] } : {}}
+            transition={{ duration: 0.3 }}
+          >
+            <span className="text-2xl">{config.emoji}</span>
+          </motion.div>
+
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center gap-2 mb-1">
+              <h3
+                className={cn(
+                  "font-bold text-lg transition-colors",
+                  isSelected ? config.color : "text-gray-900"
+                )}
+              >
+                {metadata.label}
+              </h3>
+              {isSelected && (
+                <motion.span
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  className="text-lg"
+                >
+                  ✓
+                </motion.span>
+              )}
+            </div>
+            <p className="text-sm text-gray-500">{config.description}</p>
+          </div>
+
+          {/* Selection indicator */}
+          <AnimatePresence>
+            {isSelected && (
+              <motion.div
+                initial={{ scale: 0, rotate: -180 }}
+                animate={{ scale: 1, rotate: 0 }}
+                exit={{ scale: 0, rotate: 180 }}
+                className={cn(
+                  "flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center",
+                  config.bgColor
+                )}
+              >
+                <svg
+                  className={cn("w-5 h-5", config.color)}
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={3}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      </motion.div>
+    </motion.div>
   );
 }
-
-const skillLevelIcons: Record<SkillLevel, React.ReactNode> = {
-  never: <BookOpen className="h-6 w-6" />,
-  beginner: <Sparkles className="h-6 w-6" />,
-  intermediate: <TrendingUp className="h-6 w-6" />,
-  advanced: <Trophy className="h-6 w-6" />,
-  expert: <Trophy className="h-6 w-6" />,
-};
 
 // Skill levels to show as main options
 const MAIN_SKILL_LEVELS: SkillLevel[] = [
@@ -134,6 +209,8 @@ const MAIN_SKILL_LEVELS: SkillLevel[] = [
 export default function SkillLevelPage() {
   const router = useRouter();
   const [showQuiz, setShowQuiz] = useState(false);
+  const [showConfetti, setShowConfetti] = useState(false);
+  const [selectionMessage, setSelectionMessage] = useState<string | null>(null);
   const selectedLevel = useOnboardingStore(selectSkillLevel);
   const setSkillLevel = useOnboardingStore((state) => state.setSkillLevel);
 
@@ -142,11 +219,15 @@ export default function SkillLevelPage() {
 
   const handleSelect = useCallback((level: SkillLevel) => {
     setSkillLevel(level);
+    setSelectionMessage(getRandomMessage("selection"));
+    setTimeout(() => setSelectionMessage(null), 2000);
   }, [setSkillLevel]);
 
   const handleQuizComplete = useCallback((level: SkillLevel) => {
     setSkillLevel(level);
     setShowQuiz(false);
+    setShowConfetti(true);
+    setTimeout(() => setShowConfetti(false), 2000);
   }, [setSkillLevel]);
 
   const handleBack = useCallback(() => {
@@ -155,7 +236,10 @@ export default function SkillLevelPage() {
 
   const handleNext = useCallback(() => {
     if (canProceed) {
-      router.push("/onboarding/goals");
+      setShowConfetti(true);
+      setTimeout(() => {
+        router.push("/onboarding/goals");
+      }, 300);
     }
   }, [canProceed, router]);
 
@@ -169,67 +253,123 @@ export default function SkillLevelPage() {
   }
 
   return (
-    <motion.div
-      variants={containerVariants}
-      initial="hidden"
-      animate="visible"
-      className="space-y-6"
-    >
-      {/* Header */}
-      <motion.div variants={cardVariants} className="text-center mb-8">
-        <h2 className="text-2xl font-bold text-brand-black mb-2">
-          What&apos;s Your Skill Level?
-        </h2>
-        <p className="text-muted-foreground">
-          Help us personalize your learning path
-        </p>
-      </motion.div>
+    <>
+      <ConfettiBurst trigger={showConfetti} />
 
-      {/* Skill options */}
-      <div className="space-y-3">
-        {MAIN_SKILL_LEVELS.map((level) => (
-          <SkillOption
-            key={level}
-            level={level}
-            isSelected={selectedLevel === level}
-            onClick={() => handleSelect(level)}
-            icon={skillLevelIcons[level]}
-          />
-        ))}
-      </div>
-
-      {/* Take quiz option */}
-      <motion.div variants={cardVariants} className="pt-4">
-        <Button
-          variant="outline"
-          onClick={() => setShowQuiz(true)}
-          className="w-full flex items-center justify-center gap-2 h-14"
-        >
-          <HelpCircle className="h-5 w-5 text-brand-teal" />
-          <span>Not sure? Take a quick skill quiz</span>
-        </Button>
-      </motion.div>
-
-      {/* Navigation buttons */}
       <motion.div
-        variants={cardVariants}
-        className="flex items-center justify-between mt-8 pt-4"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="space-y-6 max-w-lg mx-auto"
       >
-        <Button variant="ghost" onClick={handleBack}>
-          <ArrowLeft className="mr-2 h-4 w-4" />
-          Back
-        </Button>
+        {/* Header with mascot */}
+        <motion.div variants={cardVariants} className="text-center mb-8">
+          <Mascot size="md" mood={selectedLevel ? "excited" : "thinking"} className="mx-auto mb-4" />
+          <h2 className="text-2xl font-black text-gray-900 mb-2">
+            What&apos;s Your Skill Level?
+          </h2>
+          <p className="text-gray-500">
+            Help us personalize your learning journey
+          </p>
+        </motion.div>
 
-        <Button
-          variant="brand"
-          onClick={handleNext}
-          disabled={!canProceed}
-          size="lg"
+        {/* Selection feedback message */}
+        <AnimatePresence>
+          {selectionMessage && (
+            <motion.div
+              initial={{ opacity: 0, y: -10, scale: 0.9 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -10, scale: 0.9 }}
+              className="text-center py-2 px-4 rounded-full bg-fun-primary/20 text-fun-primary font-bold text-sm mx-auto w-fit"
+            >
+              {selectionMessage}
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Skill options - Colorful and bouncy */}
+        <div className="space-y-3">
+          {MAIN_SKILL_LEVELS.map((level, index) => (
+            <SkillOption
+              key={level}
+              level={level}
+              isSelected={selectedLevel === level}
+              onClick={() => handleSelect(level)}
+              index={index}
+            />
+          ))}
+        </div>
+
+        {/* Take quiz option - Fun button */}
+        <motion.div variants={cardVariants} className="pt-4">
+          <motion.button
+            onClick={() => setShowQuiz(true)}
+            className="w-full flex items-center justify-center gap-3 h-14 rounded-2xl border-2 border-dashed border-gray-300 bg-gray-50 hover:border-fun-blue hover:bg-fun-blue/5 transition-all font-semibold text-gray-600 hover:text-fun-blue"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            <div className="w-10 h-10 rounded-full bg-fun-blue/20 flex items-center justify-center">
+              <HelpCircle className="h-5 w-5 text-fun-blue" />
+            </div>
+            <span>Not sure? Take a quick skill quiz</span>
+            <Zap className="w-4 h-4 text-fun-xp" />
+          </motion.button>
+        </motion.div>
+
+        {/* Navigation buttons */}
+        <motion.div
+          variants={cardVariants}
+          className="flex items-center justify-between pt-6"
         >
-          Continue
-          <ArrowRight className="ml-2 h-4 w-4" />
-        </Button>
+          <Button
+            variant="ghost"
+            onClick={handleBack}
+            className="font-semibold"
+          >
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Back
+          </Button>
+
+          <motion.div
+            {...(canProceed && { whileHover: { scale: 1.05 } })}
+            {...(canProceed && { whileTap: { scale: 0.95 } })}
+          >
+            <MotionButton
+              variant="brand"
+              onClick={handleNext}
+              disabled={!canProceed}
+              size="lg"
+              className={cn(
+                "font-bold shadow-lg transition-all",
+                canProceed
+                  ? "bg-gradient-to-r from-fun-primary to-fun-primary-dark shadow-fun-primary/30"
+                  : "opacity-50"
+              )}
+            >
+              Continue
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </MotionButton>
+          </motion.div>
+        </motion.div>
+
+        {/* Progress indicator */}
+        <motion.div
+          variants={cardVariants}
+          className="flex justify-center gap-2 pt-4"
+        >
+          {[1, 2, 3, 4].map((step) => (
+            <motion.div
+              key={step}
+              className={cn(
+                "w-2 h-2 rounded-full transition-all",
+                step <= 2 ? "bg-fun-primary" : "bg-gray-200"
+              )}
+              animate={step === 2 ? { scale: [1, 1.3, 1] } : {}}
+              transition={{ duration: 1, repeat: Infinity }}
+            />
+          ))}
+        </motion.div>
       </motion.div>
-    </motion.div>
+    </>
   );
 }

@@ -144,13 +144,13 @@ export function RecommendationStep() {
     >
       {/* Header */}
       <motion.div variants={itemVariants} className="text-center">
-        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-blue/20 mb-4">
-          <Sparkles className="h-8 w-8 text-brand-blue" />
+        <div className="inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-brand-blue/20 mb-3 sm:mb-4">
+          <Sparkles className="h-6 w-6 sm:h-8 sm:w-8 text-brand-blue" />
         </div>
-        <h2 className="text-2xl font-bold text-brand-black mb-2">
+        <h2 className="text-xl sm:text-2xl font-bold text-brand-black mb-1 sm:mb-2">
           Your Personalized Path
         </h2>
-        <p className="text-muted-foreground">
+        <p className="text-sm sm:text-base text-muted-foreground">
           Based on your selections, we recommend this learning path
         </p>
       </motion.div>
@@ -161,78 +161,78 @@ export function RecommendationStep() {
           {/* Gradient header */}
           <div className="h-3 bg-gradient-to-r from-brand-blue via-brand-teal to-brand-green" />
 
-          <CardContent className="p-6">
+          <CardContent className="p-4 sm:p-6">
             {/* Path title and instructor */}
-            <div className="mb-4">
-              <div className="flex items-start justify-between mb-2">
-                <h3 className="text-xl font-bold text-brand-black">
+            <div className="mb-3 sm:mb-4">
+              <div className="flex items-start justify-between gap-2 mb-1 sm:mb-2">
+                <h3 className="text-lg sm:text-xl font-bold text-brand-black">
                   {path.title}
                 </h3>
                 {path.isFeatured && (
-                  <span className="flex items-center gap-1 px-2 py-1 text-xs font-medium bg-brand-blue/20 text-brand-black rounded-full">
-                    <Star className="h-3 w-3" />
+                  <span className="flex-shrink-0 flex items-center gap-1 px-1.5 py-0.5 sm:px-2 sm:py-1 text-[10px] sm:text-xs font-medium bg-brand-blue/20 text-brand-black rounded-full">
+                    <Star className="h-2.5 w-2.5 sm:h-3 sm:w-3" />
                     Featured
                   </span>
                 )}
               </div>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-xs sm:text-sm text-muted-foreground">
                 with {path.instructor.name}
               </p>
             </div>
 
             {/* Description */}
-            <p className="text-sm text-brand-black/80 mb-6 line-clamp-3">
+            <p className="text-xs sm:text-sm text-brand-black/80 mb-4 sm:mb-6 line-clamp-2 sm:line-clamp-3">
               {path.description}
             </p>
 
             {/* Stats */}
-            <div className="grid grid-cols-3 gap-4 mb-6">
-              <div className="text-center p-3 bg-surface-secondary rounded-lg">
-                <Clock className="h-5 w-5 mx-auto mb-1 text-brand-teal" />
-                <div className="text-lg font-bold text-brand-black">
+            <div className="grid grid-cols-3 gap-2 sm:gap-4 mb-4 sm:mb-6">
+              <div className="text-center p-2 sm:p-3 bg-surface-secondary rounded-lg">
+                <Clock className="h-4 w-4 sm:h-5 sm:w-5 mx-auto mb-0.5 sm:mb-1 text-brand-teal" />
+                <div className="text-base sm:text-lg font-bold text-brand-black">
                   {estimatedWeeks}
                 </div>
-                <div className="text-xs text-muted-foreground">weeks</div>
+                <div className="text-[10px] sm:text-xs text-muted-foreground">weeks</div>
               </div>
-              <div className="text-center p-3 bg-surface-secondary rounded-lg">
-                <BookOpen className="h-5 w-5 mx-auto mb-1 text-brand-teal" />
-                <div className="text-lg font-bold text-brand-black">
+              <div className="text-center p-2 sm:p-3 bg-surface-secondary rounded-lg">
+                <BookOpen className="h-4 w-4 sm:h-5 sm:w-5 mx-auto mb-0.5 sm:mb-1 text-brand-teal" />
+                <div className="text-base sm:text-lg font-bold text-brand-black">
                   {totalTricks}
                 </div>
-                <div className="text-xs text-muted-foreground">tricks</div>
+                <div className="text-[10px] sm:text-xs text-muted-foreground">tricks</div>
               </div>
-              <div className="text-center p-3 bg-surface-secondary rounded-lg">
-                <Trophy className="h-5 w-5 mx-auto mb-1 text-brand-teal" />
-                <div className="text-lg font-bold text-brand-black">
+              <div className="text-center p-2 sm:p-3 bg-surface-secondary rounded-lg">
+                <Trophy className="h-4 w-4 sm:h-5 sm:w-5 mx-auto mb-0.5 sm:mb-1 text-brand-teal" />
+                <div className="text-base sm:text-lg font-bold text-brand-black">
                   {totalXp.toLocaleString()}
                 </div>
-                <div className="text-xs text-muted-foreground">XP</div>
+                <div className="text-[10px] sm:text-xs text-muted-foreground">XP</div>
               </div>
             </div>
 
             {/* Difficulty */}
-            <div className="flex items-center justify-between mb-6">
-              <span className="text-sm text-muted-foreground">Difficulty</span>
+            <div className="flex items-center justify-between mb-4 sm:mb-6">
+              <span className="text-xs sm:text-sm text-muted-foreground">Difficulty</span>
               <DifficultyIndicator level={path.difficulty} />
             </div>
 
             {/* What you'll learn preview */}
-            <div className="mb-6">
-              <h4 className="text-sm font-medium text-brand-black mb-2">
+            <div className="mb-4 sm:mb-6">
+              <h4 className="text-xs sm:text-sm font-medium text-brand-black mb-1.5 sm:mb-2">
                 What you&apos;ll learn:
               </h4>
-              <ul className="space-y-1">
+              <ul className="space-y-0.5 sm:space-y-1">
                 {path.modules.slice(0, 3).map((module) => (
                   <li
                     key={module.id}
-                    className="flex items-center gap-2 text-sm text-muted-foreground"
+                    className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-muted-foreground"
                   >
-                    <ChevronRight className="h-4 w-4 text-brand-teal" />
-                    {module.title}
+                    <ChevronRight className="h-3 w-3 sm:h-4 sm:w-4 text-brand-teal flex-shrink-0" />
+                    <span className="truncate">{module.title}</span>
                   </li>
                 ))}
                 {path.modules.length > 3 && (
-                  <li className="text-sm text-brand-teal font-medium pl-6">
+                  <li className="text-xs sm:text-sm text-brand-teal font-medium pl-5 sm:pl-6">
                     + {path.modules.length - 3} more modules
                   </li>
                 )}
@@ -244,7 +244,7 @@ export function RecommendationStep() {
               variant="brand"
               size="lg"
               onClick={handleStartPath}
-              className="w-full"
+              className="w-full min-h-[48px] touch-manipulation"
             >
               Start This Path
               <ChevronRight className="ml-2 h-5 w-5" />
@@ -255,7 +255,7 @@ export function RecommendationStep() {
 
       {/* Alternative option */}
       <motion.div variants={itemVariants} className="text-center">
-        <Button variant="ghost" onClick={handleBrowsePaths}>
+        <Button variant="ghost" onClick={handleBrowsePaths} className="min-h-[44px] touch-manipulation">
           Browse All Paths
           <ChevronRight className="ml-1 h-4 w-4" />
         </Button>

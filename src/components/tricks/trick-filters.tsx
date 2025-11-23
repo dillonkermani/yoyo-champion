@@ -9,11 +9,11 @@ import type { TrickDifficulty, YoYoStyle, TrickGenre } from "@/lib/data/types";
 
 // Filter configuration
 const difficultyOptions: { value: TrickDifficulty; label: string; color: string }[] = [
-  { value: 1, label: "Beginner", color: "bg-emerald-100 text-emerald-700 border-emerald-300 hover:bg-emerald-200" },
-  { value: 2, label: "Intermediate", color: "bg-yellow-100 text-yellow-700 border-yellow-300 hover:bg-yellow-200" },
-  { value: 3, label: "Advanced", color: "bg-orange-100 text-orange-700 border-orange-300 hover:bg-orange-200" },
-  { value: 4, label: "Expert", color: "bg-red-100 text-red-700 border-red-300 hover:bg-red-200" },
-  { value: 5, label: "Master", color: "bg-purple-100 text-purple-700 border-purple-300 hover:bg-purple-200" },
+  { value: 1, label: "Beginner", color: "bg-emerald-100 text-emerald-700 border-emerald-300 active:bg-emerald-200" },
+  { value: 2, label: "Intermediate", color: "bg-yellow-100 text-yellow-700 border-yellow-300 active:bg-yellow-200" },
+  { value: 3, label: "Advanced", color: "bg-orange-100 text-orange-700 border-orange-300 active:bg-orange-200" },
+  { value: 4, label: "Expert", color: "bg-red-100 text-red-700 border-red-300 active:bg-red-200" },
+  { value: 5, label: "Master", color: "bg-purple-100 text-purple-700 border-purple-300 active:bg-purple-200" },
 ];
 
 const styleOptions: { value: YoYoStyle; label: string }[] = [
@@ -116,7 +116,7 @@ export function TrickFilters({
     filters.gentryRecommends;
 
   const filterContent = (
-    <div className="space-y-6">
+    <div className="space-y-5 sm:space-y-6">
       {/* Search */}
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-2">Search</label>
@@ -130,17 +130,17 @@ export function TrickFilters({
 
       {/* Difficulty Filter */}
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-3">Difficulty</label>
-        <div className="flex flex-wrap gap-2">
+        <label className="block text-sm font-medium text-gray-700 mb-2 sm:mb-3">Difficulty</label>
+        <div className="flex flex-wrap gap-1.5 sm:gap-2">
           {difficultyOptions.map((option) => (
             <button
               key={option.value}
               onClick={() => toggleArrayFilter("difficulty", option.value)}
               className={cn(
-                "px-3 py-1.5 rounded-full text-xs font-semibold border transition-all duration-200",
+                "px-2.5 py-1.5 sm:px-3 sm:py-1.5 rounded-full text-xs font-semibold border transition-all duration-200 min-h-[36px] touch-manipulation",
                 filters.difficulty.includes(option.value)
                   ? option.color + " border-current"
-                  : "bg-white border-gray-300 text-gray-600 hover:border-gray-400 hover:text-gray-800"
+                  : "bg-white border-gray-300 text-gray-600 active:border-gray-400 active:text-gray-800"
               )}
             >
               {option.label}
@@ -151,17 +151,17 @@ export function TrickFilters({
 
       {/* Style Filter */}
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-3">Style</label>
-        <div className="flex flex-wrap gap-2">
+        <label className="block text-sm font-medium text-gray-700 mb-2 sm:mb-3">Style</label>
+        <div className="flex flex-wrap gap-1.5 sm:gap-2">
           {styleOptions.map((option) => (
             <button
               key={option.value}
               onClick={() => toggleArrayFilter("style", option.value)}
               className={cn(
-                "px-3 py-1.5 rounded-full text-xs font-semibold border transition-all duration-200",
+                "px-2.5 py-1.5 sm:px-3 sm:py-1.5 rounded-full text-xs font-semibold border transition-all duration-200 min-h-[36px] touch-manipulation",
                 filters.style.includes(option.value)
                   ? "bg-brand-blue/30 text-gray-800 border-brand-blue"
-                  : "bg-white border-gray-300 text-gray-600 hover:border-gray-400 hover:text-gray-800"
+                  : "bg-white border-gray-300 text-gray-600 active:border-gray-400 active:text-gray-800"
               )}
             >
               {option.label}
@@ -172,17 +172,17 @@ export function TrickFilters({
 
       {/* Genre Filter */}
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-3">Genre</label>
-        <div className="flex flex-wrap gap-2">
+        <label className="block text-sm font-medium text-gray-700 mb-2 sm:mb-3">Genre</label>
+        <div className="flex flex-wrap gap-1.5 sm:gap-2">
           {genreOptions.map((option) => (
             <button
               key={option.value}
               onClick={() => toggleArrayFilter("genre", option.value)}
               className={cn(
-                "px-3 py-1.5 rounded-full text-xs font-semibold border transition-all duration-200 capitalize",
+                "px-2.5 py-1.5 sm:px-3 sm:py-1.5 rounded-full text-xs font-semibold border transition-all duration-200 capitalize min-h-[36px] touch-manipulation",
                 filters.genre.includes(option.value)
                   ? "bg-brand-blue/30 text-gray-800 border-brand-blue"
-                  : "bg-white border-gray-300 text-gray-600 hover:border-gray-400 hover:text-gray-800"
+                  : "bg-white border-gray-300 text-gray-600 active:border-gray-400 active:text-gray-800"
               )}
             >
               {option.label}
@@ -193,17 +193,17 @@ export function TrickFilters({
 
       {/* Status Filter */}
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-3">Status</label>
-        <div className="flex flex-wrap gap-2">
+        <label className="block text-sm font-medium text-gray-700 mb-2 sm:mb-3">Status</label>
+        <div className="flex flex-wrap gap-1.5 sm:gap-2">
           {statusOptions.map((option) => (
             <button
               key={option.value}
               onClick={() => updateFilter("status", option.value)}
               className={cn(
-                "px-3 py-1.5 rounded-full text-xs font-semibold border transition-all duration-200",
+                "px-2.5 py-1.5 sm:px-3 sm:py-1.5 rounded-full text-xs font-semibold border transition-all duration-200 min-h-[36px] touch-manipulation",
                 filters.status === option.value
                   ? "bg-brand-teal/20 text-brand-teal border-brand-teal"
-                  : "bg-white border-gray-300 text-gray-600 hover:border-gray-400 hover:text-gray-800"
+                  : "bg-white border-gray-300 text-gray-600 active:border-gray-400 active:text-gray-800"
               )}
             >
               {option.label}
@@ -217,10 +217,10 @@ export function TrickFilters({
         <button
           onClick={() => updateFilter("gentryRecommends", !filters.gentryRecommends)}
           className={cn(
-            "flex items-center gap-3 w-full px-4 py-3 rounded-lg border transition-all duration-200",
+            "flex items-center gap-3 w-full px-4 py-3 rounded-lg border transition-all duration-200 min-h-[48px] touch-manipulation",
             filters.gentryRecommends
               ? "bg-amber-100 border-amber-400 text-amber-700"
-              : "bg-white border-gray-300 text-gray-600 hover:border-gray-400"
+              : "bg-white border-gray-300 text-gray-600 active:border-gray-400"
           )}
         >
           <div className={cn(
@@ -246,17 +246,17 @@ export function TrickFilters({
 
       {/* Sort Options */}
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-3">Sort By</label>
-        <div className="grid grid-cols-2 gap-2">
+        <label className="block text-sm font-medium text-gray-700 mb-2 sm:mb-3">Sort By</label>
+        <div className="grid grid-cols-2 gap-1.5 sm:gap-2">
           {sortOptions.map((option) => (
             <button
               key={option.value}
               onClick={() => updateFilter("sortBy", option.value)}
               className={cn(
-                "px-3 py-2 rounded-lg text-xs font-semibold border transition-all duration-200",
+                "px-3 py-2 rounded-lg text-xs font-semibold border transition-all duration-200 min-h-[40px] touch-manipulation",
                 filters.sortBy === option.value
                   ? "bg-brand-teal/20 text-brand-teal border-brand-teal"
-                  : "bg-white border-gray-300 text-gray-600 hover:border-gray-400 hover:text-gray-800"
+                  : "bg-white border-gray-300 text-gray-600 active:border-gray-400 active:text-gray-800"
               )}
             >
               {option.label}
@@ -271,7 +271,7 @@ export function TrickFilters({
           variant="ghost"
           size="sm"
           onClick={clearFilters}
-          className="w-full text-gray-500 hover:text-gray-700"
+          className="w-full text-gray-500 hover:text-gray-700 min-h-[44px]"
         >
           <svg className="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />

@@ -3,16 +3,8 @@
 import * as React from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
-import { Badge, DifficultyBadge } from "@/components/ui/badge";
+import { DifficultyBadge } from "@/components/ui/badge";
 import {
   mockUser,
   mockUserProgress,
@@ -24,6 +16,17 @@ import {
 } from "@/lib/data";
 import type { TrickGenre } from "@/lib/data/types";
 import { ProductRecommendation } from "@/components/products";
+import {
+  Mascot,
+  StreakFire,
+  XPBadge,
+  LevelProgress,
+  DailyGoal,
+  AchievementBadge,
+  StatCard,
+  BounceCard,
+  getRandomMessage,
+} from "@/components/fun";
 
 // Icons (using simple SVG icons)
 const FlameIcon = ({ className }: { className?: string }) => (
@@ -36,36 +39,6 @@ const FlameIcon = ({ className }: { className?: string }) => (
     <path
       fillRule="evenodd"
       d="M12.963 2.286a.75.75 0 00-1.071-.136 9.742 9.742 0 00-3.539 6.177A7.547 7.547 0 016.648 6.61a.75.75 0 00-1.152-.082A9 9 0 1015.68 4.534a7.46 7.46 0 01-2.717-2.248zM15.75 14.25a3.75 3.75 0 11-7.313-1.172c.628.465 1.35.81 2.133 1a5.99 5.99 0 011.925-3.545 3.75 3.75 0 013.255 3.717z"
-      clipRule="evenodd"
-    />
-  </svg>
-);
-
-const StarIcon = ({ className }: { className?: string }) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 24 24"
-    fill="currentColor"
-    className={className}
-  >
-    <path
-      fillRule="evenodd"
-      d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
-      clipRule="evenodd"
-    />
-  </svg>
-);
-
-const TrophyIcon = ({ className }: { className?: string }) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 24 24"
-    fill="currentColor"
-    className={className}
-  >
-    <path
-      fillRule="evenodd"
-      d="M5.166 2.621v.858c-1.035.148-2.059.33-3.071.543a.75.75 0 00-.584.859 6.753 6.753 0 006.138 5.6 6.73 6.73 0 002.743 1.346A6.707 6.707 0 019.279 15H8.54c-1.036 0-1.875.84-1.875 1.875V19.5h-.75a2.25 2.25 0 00-2.25 2.25c0 .414.336.75.75.75h15.19a.75.75 0 00.75-.75 2.25 2.25 0 00-2.25-2.25h-.75v-2.625c0-1.036-.84-1.875-1.875-1.875h-.739a6.706 6.706 0 01-1.112-3.173 6.73 6.73 0 002.743-1.347 6.753 6.753 0 006.139-5.6.75.75 0 00-.585-.858 47.077 47.077 0 00-3.07-.543V2.62a.75.75 0 00-.658-.744 49.22 49.22 0 00-6.093-.377c-2.063 0-4.096.128-6.093.377a.75.75 0 00-.657.744zm0 2.629c0 1.196.312 2.32.857 3.294A5.266 5.266 0 013.16 5.337a45.6 45.6 0 012.006-.343v.256zm13.5 0v-.256c.674.1 1.343.214 2.006.343a5.265 5.265 0 01-2.863 3.207 6.72 6.72 0 00.857-3.294z"
       clipRule="evenodd"
     />
   </svg>
@@ -185,7 +158,6 @@ export default function DashboardPage() {
   // Get current date
   const currentDate = new Date().toLocaleDateString("en-US", {
     weekday: "long",
-    year: "numeric",
     month: "long",
     day: "numeric",
   });
@@ -261,186 +233,325 @@ export default function DashboardPage() {
   // Weekly goal (mock - 5 tricks per week)
   const weeklyGoal = { current: 3, target: 5 };
 
+  // XP to next level calculation
+  const xpToNextLevel = 1000;
+  const currentLevelXP = user.xp % xpToNextLevel;
+
+  // Get encouraging message
+  const [encouragingMessage] = React.useState(() =>
+    user.currentStreak >= 7 ? getRandomMessage("streak") : getRandomMessage("greeting")
+  );
+
   return (
-    <div className="space-y-8">
-      {/* Welcome Header */}
+    <div className="space-y-8 pb-8">
+      {/* Hero Welcome Section */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4 }}
+        transition={{ duration: 0.5 }}
+        className="relative overflow-hidden rounded-2xl sm:rounded-3xl bg-gradient-to-br from-fun-primary via-fun-primary-dark to-emerald-600 p-4 sm:p-6 lg:p-8 text-white"
       >
-        <Card className="bg-gradient-to-br from-white to-gray-50 border-gray-200">
-          <CardContent className="pt-6">
-            <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
-              <div>
-                <h1 className="text-2xl lg:text-3xl font-bold text-brand-black">
-                  Welcome back, {user.displayName}!
-                </h1>
-                <p className="text-gray-500 mt-1">{currentDate}</p>
-              </div>
+        {/* Background decorations */}
+        <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2" />
+        <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2" />
 
-              {/* Quick Stats */}
-              <div className="flex flex-wrap gap-4 lg:gap-6">
-                <div className="flex items-center gap-2 px-4 py-2 bg-brand-blue/20 rounded-full">
-                  <StarIcon className="w-5 h-5 text-brand-blue" />
-                  <span className="font-semibold text-brand-black">
-                    Level {user.level}
-                  </span>
-                </div>
-                <div className="flex items-center gap-2 px-4 py-2 bg-brand-teal/20 rounded-full">
-                  <TrophyIcon className="w-5 h-5 text-brand-teal" />
-                  <span className="font-semibold text-brand-black">
-                    {user.xp.toLocaleString()} XP
-                  </span>
-                </div>
-                <div className="flex items-center gap-2 px-4 py-2 bg-brand-green/30 rounded-full">
-                  <FlameIcon className="w-5 h-5 text-orange-500" />
-                  <span className="font-semibold text-brand-black">
-                    {user.currentStreak} Day Streak
-                  </span>
-                </div>
-              </div>
+        <div className="relative flex flex-col lg:flex-row lg:items-center gap-4 sm:gap-6">
+          {/* Mascot and Welcome */}
+          <div className="flex items-center gap-3 sm:gap-4 flex-1">
+            <Mascot
+              size="md"
+              mood={user.currentStreak >= 7 ? "celebrating" : "happy"}
+              className="flex-shrink-0 hidden sm:block"
+            />
+            <Mascot
+              size="sm"
+              mood={user.currentStreak >= 7 ? "celebrating" : "happy"}
+              className="flex-shrink-0 sm:hidden"
+            />
+            <div className="min-w-0">
+              <motion.h1
+                className="text-xl sm:text-2xl lg:text-4xl font-black mb-0.5 sm:mb-1 truncate"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.2 }}
+              >
+                Hey, {user.displayName}!
+              </motion.h1>
+              <motion.p
+                className="text-white/80 text-sm sm:text-lg line-clamp-1"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.3 }}
+              >
+                {encouragingMessage}
+              </motion.p>
+              <motion.p
+                className="text-white/60 text-xs sm:text-sm mt-0.5 sm:mt-1"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.4 }}
+              >
+                {currentDate}
+              </motion.p>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+
+          {/* Stats Row */}
+          <motion.div
+            className="flex flex-wrap gap-2 sm:gap-3 lg:gap-4 mt-2 sm:mt-0"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.3 }}
+          >
+            <LevelProgress
+              level={user.level}
+              currentXP={currentLevelXP}
+              requiredXP={xpToNextLevel}
+              size={56}
+              className="bg-white/10 rounded-full p-0.5 sm:p-1 sm:[&]:hidden"
+            />
+            <LevelProgress
+              level={user.level}
+              currentXP={currentLevelXP}
+              requiredXP={xpToNextLevel}
+              size={70}
+              className="bg-white/10 rounded-full p-1 hidden sm:block"
+            />
+            <StreakFire
+              count={user.currentStreak}
+              size="sm"
+              showLabel={false}
+              className="sm:hidden"
+            />
+            <StreakFire
+              count={user.currentStreak}
+              size="md"
+              showLabel={false}
+              className="hidden sm:block"
+            />
+          </motion.div>
+        </div>
+
+        {/* XP Progress Bar */}
+        <motion.div
+          className="mt-4 sm:mt-6 relative"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5 }}
+        >
+          <div className="flex items-center justify-between mb-1.5 sm:mb-2 text-xs sm:text-sm">
+            <span className="font-semibold flex items-center gap-1.5 sm:gap-2">
+              <span className="text-base sm:text-xl">⭐</span> {user.xp.toLocaleString()} XP Total
+            </span>
+            <span className="text-white/70">{xpToNextLevel - currentLevelXP} XP to Level {user.level + 1}</span>
+          </div>
+          <div className="h-2 sm:h-3 bg-white/20 rounded-full overflow-hidden">
+            <motion.div
+              className="h-full bg-gradient-to-r from-fun-xp to-yellow-300 rounded-full"
+              initial={{ width: 0 }}
+              animate={{ width: `${(currentLevelXP / xpToNextLevel) * 100}%` }}
+              transition={{ duration: 1, ease: "easeOut", delay: 0.6 }}
+            />
+          </div>
+        </motion.div>
+
+        {/* Fire message for streaks */}
+        {user.currentStreak >= 3 && (
+          <motion.div
+            className="mt-3 sm:mt-4 inline-flex items-center gap-1.5 sm:gap-2 bg-fun-streak/30 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-bold"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.7, type: "spring", bounce: 0.5 }}
+          >
+            <span className="text-base sm:text-xl">🔥</span>
+            You&apos;re on fire! {user.currentStreak} day streak!
+          </motion.div>
+        )}
       </motion.div>
 
-      {/* Continue Learning Section */}
+      {/* Continue Learning Card - Big and Bold */}
       <motion.section
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4, delay: 0.1 }}
       >
-        <h2 className="text-xl font-semibold text-brand-black mb-4">
-          Pick Up Where You Left Off
+        <h2 className="text-xl sm:text-2xl font-black text-gray-900 mb-3 sm:mb-4 flex items-center gap-2">
+          <span className="text-2xl sm:text-3xl">🎯</span> Continue Learning
         </h2>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-          {/* Last Watched Trick */}
-          {lastWatchedTrick && lastWatchedProgress ? (
-            <Card hover className="overflow-hidden">
-              <CardContent className="p-0">
-                <div className="flex">
-                  <div className="w-32 h-32 bg-gray-200 flex-shrink-0 relative">
-                    <div className="absolute inset-0 flex items-center justify-center bg-gray-300">
-                      <PlayIcon className="w-10 h-10 text-gray-500" />
-                    </div>
-                    {/* Progress overlay */}
-                    <div className="absolute bottom-0 left-0 right-0 h-1 bg-gray-400">
-                      <div
-                        className="h-full bg-brand-blue"
-                        style={{
-                          width: `${Math.min(
-                            100,
-                            (lastWatchedProgress.watchTime /
-                              (lastWatchedTrick.estimatedMinutes * 60)) *
-                              100
-                          )}%`,
-                        }}
+
+        {lastWatchedTrick && lastWatchedProgress ? (
+          <BounceCard className="overflow-hidden border-2 border-fun-primary/20 hover:border-fun-primary">
+            <Link href={`/trick/${lastWatchedTrick.slug}`} className="block min-h-[44px]">
+              <div className="flex flex-col sm:flex-row">
+                <div className="sm:w-44 lg:w-48 h-28 sm:h-auto bg-gradient-to-br from-fun-primary/20 to-fun-blue/20 flex-shrink-0 relative flex items-center justify-center">
+                  <motion.div
+                    className="w-16 h-16 rounded-full bg-fun-primary flex items-center justify-center shadow-lg"
+                    whileHover={{ scale: 1.1 }}
+                    animate={{ scale: [1, 1.05, 1] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                  >
+                    <PlayIcon className="w-8 h-8 text-white ml-1" />
+                  </motion.div>
+                  {/* Progress ring */}
+                  <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100">
+                    <circle
+                      cx="50"
+                      cy="50"
+                      r="45"
+                      fill="none"
+                      stroke="rgba(88,204,2,0.2)"
+                      strokeWidth="4"
+                    />
+                    <motion.circle
+                      cx="50"
+                      cy="50"
+                      r="45"
+                      fill="none"
+                      stroke="#58CC02"
+                      strokeWidth="4"
+                      strokeLinecap="round"
+                      strokeDasharray={283}
+                      initial={{ strokeDashoffset: 283 }}
+                      animate={{
+                        strokeDashoffset: 283 - (283 * Math.min(100, (lastWatchedProgress.watchTime / (lastWatchedTrick.estimatedMinutes * 60)) * 100)) / 100
+                      }}
+                      transition={{ duration: 1 }}
+                      transform="rotate(-90 50 50)"
+                    />
+                  </svg>
+                </div>
+                <div className="flex-1 p-3 sm:p-5 flex flex-col justify-between">
+                  <div>
+                    <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 mb-1.5 sm:mb-2">
+                      <span className="px-2 py-0.5 sm:px-3 sm:py-1 rounded-full bg-fun-accent/20 text-fun-accent text-[10px] sm:text-xs font-bold">
+                        IN PROGRESS
+                      </span>
+                      <DifficultyBadge
+                        level={difficultyLabels[lastWatchedTrick.difficulty] as any}
+                        showIcon={false}
+                        className="text-[10px] px-2 py-0.5"
                       />
                     </div>
+                    <h3 className="font-bold text-base sm:text-xl text-gray-900 mb-0.5 sm:mb-1">
+                      {lastWatchedTrick.name}
+                    </h3>
+                    <p className="text-gray-500 text-sm sm:text-base line-clamp-1">
+                      {lastWatchedTrick.description}
+                    </p>
                   </div>
-                  <div className="flex-1 p-4 flex flex-col justify-between">
-                    <div>
-                      <div className="flex items-center gap-2 mb-1">
-                        <DifficultyBadge
-                          level={
-                            difficultyLabels[
-                              lastWatchedTrick.difficulty
-                            ] as any
-                          }
-                          showIcon={false}
-                          className="text-[10px] px-2 py-0.5"
-                        />
-                        <Badge variant="teal" className="text-[10px] px-2 py-0.5">
-                          {lastWatchedProgress.status === "watching"
-                            ? "Watching"
-                            : "Practicing"}
-                        </Badge>
-                      </div>
-                      <h3 className="font-semibold text-brand-black">
-                        {lastWatchedTrick.name}
-                      </h3>
-                      <p className="text-sm text-gray-500 line-clamp-1">
-                        {lastWatchedTrick.description}
-                      </p>
+                  <div className="flex items-center justify-between mt-3 sm:mt-4">
+                    <div className="flex items-center gap-2 sm:gap-4 text-xs sm:text-sm text-gray-500">
+                      <span>{Math.floor(lastWatchedProgress.watchTime / 60)}m watched</span>
+                      <XPBadge amount={lastWatchedTrick.xpReward} size="sm" showPlus={true} animate={false} />
                     </div>
-                    <div className="flex items-center justify-between mt-2">
-                      <span className="text-xs text-gray-400">
-                        {Math.floor(lastWatchedProgress.watchTime / 60)}m
-                        watched
-                      </span>
-                      <Button
-                        variant="brand"
-                        size="sm"
-                        asChild
-                      >
-                        <Link href={`/trick/${lastWatchedTrick.slug}`}>
-                          Continue
-                        </Link>
-                      </Button>
-                    </div>
+                    <motion.div
+                      className="px-4 py-1.5 sm:px-6 sm:py-2 bg-fun-primary text-white font-bold rounded-full text-sm sm:text-base min-h-[44px] flex items-center"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      Continue
+                    </motion.div>
                   </div>
                 </div>
-              </CardContent>
-            </Card>
-          ) : (
-            <Card className="flex items-center justify-center h-32">
-              <CardContent className="text-center">
-                <p className="text-gray-500">No tricks in progress</p>
-                <Button variant="brand" size="sm" className="mt-2" asChild>
-                  <Link href="/library">Browse Tricks</Link>
-                </Button>
-              </CardContent>
-            </Card>
-          )}
+              </div>
+            </Link>
+          </BounceCard>
+        ) : nextRecommendedTrick ? (
+          <BounceCard className="overflow-hidden border-2 border-fun-blue/20 hover:border-fun-blue">
+            <Link href={`/trick/${nextRecommendedTrick.slug}`} className="block">
+              <div className="flex flex-col sm:flex-row">
+                <div className="sm:w-48 h-32 sm:h-auto bg-gradient-to-br from-fun-blue/20 to-fun-purple/20 flex-shrink-0 flex items-center justify-center">
+                  <motion.div
+                    animate={{ y: [0, -8, 0] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                  >
+                    <SparklesIcon className="w-16 h-16 text-fun-blue" />
+                  </motion.div>
+                </div>
+                <div className="flex-1 p-5">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="px-3 py-1 rounded-full bg-fun-blue/20 text-fun-blue text-xs font-bold">
+                      RECOMMENDED
+                    </span>
+                  </div>
+                  <h3 className="font-bold text-xl text-gray-900 mb-1">
+                    {nextRecommendedTrick.name}
+                  </h3>
+                  <p className="text-gray-500 line-clamp-1 mb-4">
+                    {nextRecommendedTrick.description}
+                  </p>
+                  <div className="flex items-center justify-between">
+                    <XPBadge amount={nextRecommendedTrick.xpReward} size="md" showPlus={true} />
+                    <motion.div
+                      className="px-6 py-2 bg-fun-blue text-white font-bold rounded-full"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      Start Learning
+                    </motion.div>
+                  </div>
+                </div>
+              </div>
+            </Link>
+          </BounceCard>
+        ) : (
+          <BounceCard className="p-8 text-center">
+            <Mascot size="lg" mood="thinking" className="mx-auto mb-4" />
+            <h3 className="text-xl font-bold text-gray-900 mb-2">All caught up!</h3>
+            <p className="text-gray-500 mb-4">Browse the library to discover new tricks</p>
+            <Button variant="brand" size="lg" asChild>
+              <Link href="/library">Browse Tricks</Link>
+            </Button>
+          </BounceCard>
+        )}
+      </motion.section>
 
-          {/* Next Recommended Trick */}
-          {nextRecommendedTrick && (
-            <Card hover className="overflow-hidden">
-              <CardContent className="p-0">
-                <div className="flex">
-                  <div className="w-32 h-32 bg-gradient-to-br from-brand-teal/20 to-brand-blue/20 flex-shrink-0 flex items-center justify-center">
-                    <SparklesIcon className="w-10 h-10 text-brand-teal" />
-                  </div>
-                  <div className="flex-1 p-4 flex flex-col justify-between">
-                    <div>
-                      <div className="flex items-center gap-2 mb-1">
-                        <Badge variant="info" className="text-[10px] px-2 py-0.5">
-                          Recommended
-                        </Badge>
-                        <DifficultyBadge
-                          level={
-                            difficultyLabels[
-                              nextRecommendedTrick.difficulty
-                            ] as any
-                          }
-                          showIcon={false}
-                          className="text-[10px] px-2 py-0.5"
-                        />
-                      </div>
-                      <h3 className="font-semibold text-brand-black">
-                        {nextRecommendedTrick.name}
-                      </h3>
-                      <p className="text-sm text-gray-500 line-clamp-1">
-                        {nextRecommendedTrick.description}
-                      </p>
-                    </div>
-                    <div className="flex items-center justify-between mt-2">
-                      <span className="text-xs text-gray-400">
-                        +{nextRecommendedTrick.xpReward} XP
-                      </span>
-                      <Button variant="teal" size="sm" asChild>
-                        <Link href={`/trick/${nextRecommendedTrick.slug}`}>
-                          Start Learning
-                        </Link>
-                      </Button>
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          )}
+      {/* Stats Grid */}
+      <motion.section
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, delay: 0.2 }}
+      >
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4">
+          <StatCard
+            icon="🏆"
+            label="Tricks Mastered"
+            value={user.completedTricks.length}
+            color="primary"
+          />
+          <StatCard
+            icon="⭐"
+            label="Total XP"
+            value={user.xp.toLocaleString()}
+            color="xp"
+          />
+          <StatCard
+            icon="🔥"
+            label="Best Streak"
+            value={user.longestStreak}
+            color="streak"
+          />
+          <StatCard
+            icon="📚"
+            label="Active Paths"
+            value={user.activePaths.length}
+            color="accent"
+          />
         </div>
+      </motion.section>
+
+      {/* Daily Goal */}
+      <motion.section
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, delay: 0.25 }}
+      >
+        <DailyGoal
+          current={weeklyGoal.current}
+          target={weeklyGoal.target}
+          icon="target"
+          label="Weekly Goal: Master Tricks"
+        />
       </motion.section>
 
       {/* Active Paths Progress */}
@@ -448,89 +559,85 @@ export default function DashboardPage() {
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.2 }}
+          transition={{ duration: 0.4, delay: 0.3 }}
         >
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-xl font-semibold text-brand-black">
-              Active Learning Paths
+          <div className="flex items-center justify-between mb-3 sm:mb-4">
+            <h2 className="text-xl sm:text-2xl font-black text-gray-900 flex items-center gap-2">
+              <span className="text-2xl sm:text-3xl">🛤️</span> Learning Paths
             </h2>
             <Link
               href="/paths"
-              className="text-sm text-brand-teal hover:underline flex items-center gap-1"
+              className="text-fun-primary hover:text-fun-primary-dark font-bold flex items-center gap-1 text-sm sm:text-base min-h-[44px] min-w-[44px] justify-center"
             >
               View All <ArrowRightIcon className="w-4 h-4" />
             </Link>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
             {activePathsWithProgress.map(
-              ({ path, progress }) =>
+              ({ path, progress }, index) =>
                 path && (
-                  <Card key={path.id} hover>
-                    <CardHeader className="pb-2">
-                      <div className="flex items-start justify-between">
+                  <BounceCard key={path.id} delay={index * 0.1}>
+                    <div className="p-5">
+                      <div className="flex items-start justify-between mb-3">
                         <div className="flex-1">
-                          <CardTitle className="text-lg">{path.title}</CardTitle>
-                          <CardDescription className="line-clamp-1">
+                          <h3 className="font-bold text-lg text-gray-900">{path.title}</h3>
+                          <p className="text-sm text-gray-500 line-clamp-1">
                             {path.description}
-                          </CardDescription>
+                          </p>
                         </div>
                         <DifficultyBadge
                           level={difficultyLabels[path.difficulty] as any}
                           showIcon={true}
                         />
                       </div>
-                    </CardHeader>
-                    <CardContent>
+
                       <div className="space-y-3">
                         <div className="flex items-center justify-between text-sm">
                           <span className="text-gray-500">Progress</span>
-                          <span className="font-medium text-brand-black">
+                          <span className="font-bold text-fun-primary">
                             {progress.completed}/{progress.total} tricks
                           </span>
                         </div>
-                        <Progress
-                          value={progress.percentage}
-                          variant="brand"
-                          size="default"
-                        />
+                        <div className="h-3 bg-gray-100 rounded-full overflow-hidden">
+                          <motion.div
+                            className="h-full bg-gradient-to-r from-fun-primary to-fun-primary-light rounded-full"
+                            initial={{ width: 0 }}
+                            animate={{ width: `${progress.percentage}%` }}
+                            transition={{ duration: 0.8, ease: "easeOut" }}
+                          />
+                        </div>
                         <div className="flex items-center justify-between">
-                          <span className="text-xs text-gray-400">
+                          <span className="text-xs text-gray-400 font-semibold">
                             {progress.percentage}% complete
                           </span>
                           <Button variant="brand" size="sm" asChild>
                             <Link href={`/paths/${path.slug}`}>
-                              Continue Path
+                              Continue
                             </Link>
                           </Button>
                         </div>
                       </div>
-                    </CardContent>
-                  </Card>
+                    </div>
+                  </BounceCard>
                 )
             )}
           </div>
         </motion.section>
       )}
 
-      {/* Skills Overview & Streak/Activity Row */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Skills Overview */}
+      {/* Skills Overview */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.3 }}
+          transition={{ duration: 0.4, delay: 0.35 }}
         >
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <ChartIcon className="w-5 h-5 text-brand-blue" />
+          <BounceCard>
+            <div className="p-5">
+              <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2 mb-4">
+                <ChartIcon className="w-5 h-5 text-fun-primary" />
                 Skills Overview
-              </CardTitle>
-              <CardDescription>
-                Your progress across trick categories
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
+              </h3>
               <div className="space-y-4">
                 {(
                   ["basics", "string", "slack", "tech", "flow", "horizontal"] as TrickGenre[]
@@ -543,91 +650,60 @@ export default function DashboardPage() {
                   return (
                     <div key={genre} className="space-y-1">
                       <div className="flex items-center justify-between text-sm">
-                        <span className="text-brand-black font-medium">
+                        <span className="font-semibold text-gray-700">
                           {genreLabels[genre]}
                         </span>
                         <span className="text-gray-500">
                           {skill.mastered}/{skill.total}
                         </span>
                       </div>
-                      <Progress
-                        value={percentage}
-                        variant="brand"
-                        size="sm"
-                      />
+                      <div className="h-2.5 bg-gray-100 rounded-full overflow-hidden">
+                        <motion.div
+                          className="h-full bg-gradient-to-r from-fun-primary to-fun-primary-light rounded-full"
+                          initial={{ width: 0 }}
+                          animate={{ width: `${percentage}%` }}
+                          transition={{ duration: 0.8, ease: "easeOut" }}
+                        />
+                      </div>
                     </div>
                   );
                 })}
               </div>
-              {/* Placeholder for skill radar chart */}
-              <div className="mt-6 p-4 bg-gray-100 rounded-lg text-center text-gray-400 text-sm">
-                Skill Radar Chart (Coming Soon)
-              </div>
-            </CardContent>
-          </Card>
+            </div>
+          </BounceCard>
         </motion.section>
 
         {/* Streak & Activity */}
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.35 }}
+          transition={{ duration: 0.4, delay: 0.4 }}
         >
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <FlameIcon className="w-5 h-5 text-orange-500" />
+          <BounceCard>
+            <div className="p-5">
+              <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2 mb-4">
+                <FlameIcon className="w-5 h-5 text-fun-streak" />
                 Streak & Activity
-              </CardTitle>
-              <CardDescription>
-                Keep your practice streak alive!
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
+              </h3>
+
               <div className="grid grid-cols-2 gap-4 mb-6">
-                <div className="text-center p-4 bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl">
-                  <div className="flex items-center justify-center gap-2 mb-1">
-                    <FlameIcon className="w-8 h-8 text-orange-500" />
-                    <span className="text-3xl font-bold text-brand-black">
-                      {user.currentStreak}
-                    </span>
-                  </div>
-                  <p className="text-sm text-gray-600">Current Streak</p>
+                <div className="text-center p-4 bg-gradient-to-br from-fun-streak/10 to-orange-100 rounded-2xl">
+                  <StreakFire count={user.currentStreak} size="md" />
                 </div>
-                <div className="text-center p-4 bg-gradient-to-br from-brand-teal/10 to-brand-teal/20 rounded-xl">
-                  <div className="flex items-center justify-center gap-2 mb-1">
-                    <TrophyIcon className="w-8 h-8 text-brand-teal" />
-                    <span className="text-3xl font-bold text-brand-black">
-                      {user.longestStreak}
-                    </span>
-                  </div>
-                  <p className="text-sm text-gray-600">Longest Streak</p>
+                <div className="text-center p-4 bg-gradient-to-br from-fun-xp/10 to-yellow-100 rounded-2xl">
+                  <div className="text-3xl mb-1">🏆</div>
+                  <span className="text-2xl font-black text-gray-900">{user.longestStreak}</span>
+                  <p className="text-xs text-gray-500 font-semibold uppercase tracking-wide">Best Streak</p>
                 </div>
               </div>
 
               {/* Calendar Heatmap Placeholder */}
-              <div className="p-4 bg-gray-100 rounded-lg text-center text-gray-400 text-sm mb-4">
-                Activity Calendar Heatmap (Coming Soon)
+              <div className="p-4 bg-gray-50 rounded-xl text-center text-gray-400 text-sm border-2 border-dashed border-gray-200">
+                <span className="text-2xl mb-2 block">📅</span>
+                Activity Calendar Coming Soon
               </div>
-
-              {/* Weekly Goal */}
-              <div className="space-y-2">
-                <div className="flex items-center justify-between text-sm">
-                  <span className="text-brand-black font-medium">
-                    Weekly Goal
-                  </span>
-                  <span className="text-gray-500">
-                    {weeklyGoal.current}/{weeklyGoal.target} tricks
-                  </span>
-                </div>
-                <Progress
-                  value={(weeklyGoal.current / weeklyGoal.target) * 100}
-                  variant="success"
-                  size="default"
-                />
-              </div>
-            </CardContent>
-          </Card>
+            </div>
+          </BounceCard>
         </motion.section>
       </div>
 
@@ -636,48 +712,35 @@ export default function DashboardPage() {
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.4 }}
+          transition={{ duration: 0.4, delay: 0.45 }}
         >
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-xl font-semibold text-brand-black">
-              Recent Achievements
+          <div className="flex items-center justify-between mb-3 sm:mb-4">
+            <h2 className="text-xl sm:text-2xl font-black text-gray-900 flex items-center gap-2">
+              <span className="text-2xl sm:text-3xl">🏅</span> Recent Achievements
             </h2>
             <Link
               href="/profile/achievements"
-              className="text-sm text-brand-teal hover:underline flex items-center gap-1"
+              className="text-fun-primary hover:text-fun-primary-dark font-bold flex items-center gap-1 text-sm sm:text-base min-h-[44px] min-w-[44px] justify-center"
             >
-              View All Achievements <ArrowRightIcon className="w-4 h-4" />
+              View All <ArrowRightIcon className="w-4 h-4" />
             </Link>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {userBadges.map((badge) => (
-              <Card key={badge.id} hover className="text-center">
-                <CardContent className="pt-6">
-                  <div className="w-16 h-16 mx-auto mb-3 rounded-full bg-gradient-to-br from-brand-teal/20 to-brand-blue/20 flex items-center justify-center">
-                    <TrophyIcon className="w-8 h-8 text-brand-teal" />
-                  </div>
-                  <h3 className="font-semibold text-brand-black text-sm">
-                    {badge.name}
-                  </h3>
-                  <p className="text-xs text-gray-500 mt-1 line-clamp-2">
-                    {badge.description}
-                  </p>
-                  <Badge
-                    variant={
-                      badge.rarity === "legendary"
-                        ? "brand"
-                        : badge.rarity === "epic"
-                        ? "teal"
-                        : badge.rarity === "rare"
-                        ? "blue"
-                        : "default"
-                    }
-                    className="mt-2 text-[10px]"
-                  >
-                    {badge.rarity.charAt(0).toUpperCase() + badge.rarity.slice(1)}
-                  </Badge>
-                </CardContent>
-              </Card>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-4">
+            {userBadges.map((badge, index) => (
+              <motion.div
+                key={badge.id}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.5 + index * 0.1 }}
+              >
+                <AchievementBadge
+                  icon={badge.rarity === "legendary" ? "🌟" : badge.rarity === "epic" ? "💎" : badge.rarity === "rare" ? "✨" : "🎖️"}
+                  name={badge.name}
+                  description={badge.description}
+                  rarity={badge.rarity as any}
+                  unlocked={true}
+                />
+              </motion.div>
             ))}
           </div>
         </motion.section>
@@ -687,51 +750,47 @@ export default function DashboardPage() {
       <motion.section
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, delay: 0.45 }}
+        transition={{ duration: 0.4, delay: 0.5 }}
       >
-        <h2 className="text-xl font-semibold text-brand-black mb-4">
-          Quick Actions
+        <h2 className="text-xl sm:text-2xl font-black text-gray-900 mb-3 sm:mb-4 flex items-center gap-2">
+          <span className="text-2xl sm:text-3xl">⚡</span> Quick Actions
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <Button
-            variant="secondary"
-            size="lg"
-            className="h-auto py-6 flex-col gap-2"
-            asChild
-          >
-            <Link href="/library">
-              <BookIcon className="w-6 h-6 text-brand-blue" />
-              <span>Browse Tricks</span>
-            </Link>
-          </Button>
-          <Button
-            variant="secondary"
-            size="lg"
-            className="h-auto py-6 flex-col gap-2"
-            asChild
-          >
-            <Link href="/paths">
-              <ChartIcon className="w-6 h-6 text-brand-teal" />
-              <span>Start New Path</span>
-            </Link>
-          </Button>
-          <Button
-            variant="secondary"
-            size="lg"
-            className="h-auto py-6 flex-col gap-2"
-            asChild
-          >
+        <div className="grid grid-cols-3 gap-2 sm:gap-4">
+          <motion.div whileHover={{ scale: 1.02, y: -4 }} whileTap={{ scale: 0.98 }}>
             <Link
-              href={
-                nextRecommendedTrick
-                  ? `/trick/${nextRecommendedTrick.slug}`
-                  : "/library"
-              }
+              href="/library"
+              className="flex flex-col items-center gap-2 sm:gap-3 p-3 sm:p-6 rounded-xl sm:rounded-2xl bg-gradient-to-br from-fun-blue/10 to-fun-blue/5 border-2 border-fun-blue/20 hover:border-fun-blue transition-colors min-h-[100px] sm:min-h-[130px]"
             >
-              <ShuffleIcon className="w-6 h-6 text-brand-green" />
-              <span>Random Trick</span>
+              <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-fun-blue/20 flex items-center justify-center">
+                <BookIcon className="w-5 h-5 sm:w-7 sm:h-7 text-fun-blue" />
+              </div>
+              <span className="font-bold text-gray-900 text-xs sm:text-base text-center">Browse Tricks</span>
             </Link>
-          </Button>
+          </motion.div>
+
+          <motion.div whileHover={{ scale: 1.02, y: -4 }} whileTap={{ scale: 0.98 }}>
+            <Link
+              href="/paths"
+              className="flex flex-col items-center gap-2 sm:gap-3 p-3 sm:p-6 rounded-xl sm:rounded-2xl bg-gradient-to-br from-fun-primary/10 to-fun-primary/5 border-2 border-fun-primary/20 hover:border-fun-primary transition-colors min-h-[100px] sm:min-h-[130px]"
+            >
+              <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-fun-primary/20 flex items-center justify-center">
+                <ChartIcon className="w-5 h-5 sm:w-7 sm:h-7 text-fun-primary" />
+              </div>
+              <span className="font-bold text-gray-900 text-xs sm:text-base text-center">Learning Paths</span>
+            </Link>
+          </motion.div>
+
+          <motion.div whileHover={{ scale: 1.02, y: -4 }} whileTap={{ scale: 0.98 }}>
+            <Link
+              href={nextRecommendedTrick ? `/trick/${nextRecommendedTrick.slug}` : "/library"}
+              className="flex flex-col items-center gap-2 sm:gap-3 p-3 sm:p-6 rounded-xl sm:rounded-2xl bg-gradient-to-br from-fun-accent/10 to-fun-accent/5 border-2 border-fun-accent/20 hover:border-fun-accent transition-colors min-h-[100px] sm:min-h-[130px]"
+            >
+              <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-fun-accent/20 flex items-center justify-center">
+                <ShuffleIcon className="w-5 h-5 sm:w-7 sm:h-7 text-fun-accent" />
+              </div>
+              <span className="font-bold text-gray-900 text-xs sm:text-base text-center">Random Trick</span>
+            </Link>
+          </motion.div>
         </div>
       </motion.section>
 
@@ -739,7 +798,7 @@ export default function DashboardPage() {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, delay: 0.5 }}
+        transition={{ duration: 0.4, delay: 0.55 }}
       >
         <ProductRecommendation
           context="dashboard"

@@ -32,7 +32,7 @@ const itemVariants = {
 function YoYoLogo() {
   return (
     <motion.div
-      className="relative w-24 h-24 mx-auto mb-6"
+      className="relative w-20 h-20 sm:w-24 sm:h-24 mx-auto mb-4 sm:mb-6"
       initial={{ scale: 0.8, rotate: -180 }}
       animate={{ scale: 1, rotate: 0 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
@@ -88,7 +88,7 @@ export function WelcomeStep() {
       {/* Title */}
       <motion.h1
         variants={itemVariants}
-        className="text-3xl font-bold text-brand-black mb-3"
+        className="text-2xl sm:text-3xl font-bold text-brand-black mb-2 sm:mb-3"
       >
         Welcome to YoYoChampion!
       </motion.h1>
@@ -96,26 +96,26 @@ export function WelcomeStep() {
       {/* Subtitle */}
       <motion.p
         variants={itemVariants}
-        className="text-lg text-muted-foreground mb-8 max-w-md mx-auto"
+        className="text-base sm:text-lg text-muted-foreground mb-6 sm:mb-8 max-w-md mx-auto px-2 sm:px-0"
       >
         Your personal journey to mastering yo-yo starts here. Learn at your own
         pace with expert instruction from world champions.
       </motion.p>
 
       {/* Gentry message card */}
-      <motion.div variants={itemVariants} className="mb-8">
+      <motion.div variants={itemVariants} className="mb-6 sm:mb-8">
         <Card className="bg-brand-green/30 border-brand-teal/20">
-          <CardContent className="p-6">
-            <div className="flex items-start gap-4">
+          <CardContent className="p-4 sm:p-6">
+            <div className="flex items-start gap-3 sm:gap-4">
               {/* Avatar placeholder */}
-              <div className="flex-shrink-0 w-12 h-12 rounded-full bg-brand-teal/20 flex items-center justify-center">
-                <Sparkles className="h-6 w-6 text-brand-teal" />
+              <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-brand-teal/20 flex items-center justify-center">
+                <Sparkles className="h-5 w-5 sm:h-6 sm:w-6 text-brand-teal" />
               </div>
               <div className="text-left">
-                <p className="font-semibold text-brand-black mb-1">
+                <p className="font-semibold text-brand-black mb-1 text-sm sm:text-base">
                   From Gentry Stein
                 </p>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-xs sm:text-sm text-muted-foreground">
                   &quot;Hey there! I&apos;m so excited to help you on your yo-yo
                   journey. Whether you&apos;re just starting out or looking to
                   level up, we&apos;ve got you covered. Let&apos;s find the
@@ -130,7 +130,7 @@ export function WelcomeStep() {
       {/* What you'll learn */}
       <motion.div
         variants={itemVariants}
-        className="grid grid-cols-3 gap-4 mb-8"
+        className="grid grid-cols-3 gap-2 sm:gap-4 mb-6 sm:mb-8"
       >
         {[
           { icon: "1A", label: "String Tricks" },
@@ -139,12 +139,12 @@ export function WelcomeStep() {
         ].map((item) => (
           <div
             key={item.label}
-            className="flex flex-col items-center p-3 rounded-lg bg-white border border-border"
+            className="flex flex-col items-center p-2 sm:p-3 rounded-lg bg-white border border-border min-h-[60px] sm:min-h-[72px] justify-center"
           >
-            <span className="text-lg font-bold text-brand-blue mb-1">
+            <span className="text-base sm:text-lg font-bold text-brand-blue mb-0.5 sm:mb-1">
               {item.icon}
             </span>
-            <span className="text-xs text-muted-foreground">{item.label}</span>
+            <span className="text-[10px] sm:text-xs text-muted-foreground text-center leading-tight">{item.label}</span>
           </div>
         ))}
       </motion.div>
@@ -155,7 +155,7 @@ export function WelcomeStep() {
           variant="brand"
           size="xl"
           onClick={nextStep}
-          className="w-full sm:w-auto min-w-[200px]"
+          className="w-full sm:w-auto min-w-[200px] min-h-[48px] touch-manipulation"
         >
           <Play className="mr-2 h-5 w-5" />
           Let&apos;s Get Started

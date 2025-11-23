@@ -148,7 +148,7 @@ export function Sidebar({ className }: SidebarProps) {
               </div>
               <Progress
                 value={xpPercentage}
-                variant="brand"
+                variant="fun"
                 size="sm"
                 className="bg-gray-100"
               />

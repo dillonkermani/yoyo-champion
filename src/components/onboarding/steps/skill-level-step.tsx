@@ -56,18 +56,18 @@ function SkillOption({ level, isSelected, onClick, icon }: SkillOptionProps) {
       variants={cardVariants}
       onClick={onClick}
       className={cn(
-        "cursor-pointer transition-all duration-200 p-4",
+        "cursor-pointer transition-all duration-200 p-3 sm:p-4 min-h-[72px] touch-manipulation",
         isSelected
           ? "border-2 border-brand-blue bg-brand-blue/5 shadow-elevated"
-          : "border border-border hover:border-brand-teal/50 hover:shadow-card"
+          : "border border-border active:border-brand-teal/50 active:shadow-card sm:hover:border-brand-teal/50 sm:hover:shadow-card"
       )}
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
     >
-      <div className="flex items-start gap-4">
+      <div className="flex items-start gap-3 sm:gap-4">
         <div
           className={cn(
-            "flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center transition-colors",
+            "flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center transition-colors",
             isSelected
               ? "bg-brand-blue text-brand-black"
               : "bg-surface-secondary text-muted-foreground"
@@ -78,22 +78,22 @@ function SkillOption({ level, isSelected, onClick, icon }: SkillOptionProps) {
         <div className="flex-1 min-w-0">
           <h3
             className={cn(
-              "font-semibold mb-1 transition-colors",
+              "font-semibold mb-0.5 sm:mb-1 text-sm sm:text-base transition-colors",
               isSelected ? "text-brand-black" : "text-brand-black"
             )}
           >
             {metadata.label}
           </h3>
-          <p className="text-sm text-muted-foreground">{metadata.description}</p>
+          <p className="text-xs sm:text-sm text-muted-foreground">{metadata.description}</p>
         </div>
         {isSelected && (
           <motion.div
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
-            className="flex-shrink-0 w-6 h-6 rounded-full bg-brand-blue flex items-center justify-center"
+            className="flex-shrink-0 w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-brand-blue flex items-center justify-center"
           >
             <svg
-              className="w-4 h-4 text-brand-black"
+              className="w-3 h-3 sm:w-4 sm:h-4 text-brand-black"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -159,11 +159,11 @@ export function SkillLevelStep() {
       className="space-y-6"
     >
       {/* Header */}
-      <motion.div variants={cardVariants} className="text-center mb-8">
-        <h2 className="text-2xl font-bold text-brand-black mb-2">
+      <motion.div variants={cardVariants} className="text-center mb-6 sm:mb-8">
+        <h2 className="text-xl sm:text-2xl font-bold text-brand-black mb-1 sm:mb-2">
           What&apos;s Your Skill Level?
         </h2>
-        <p className="text-muted-foreground">
+        <p className="text-sm sm:text-base text-muted-foreground">
           Help us personalize your learning path
         </p>
       </motion.div>
@@ -186,10 +186,10 @@ export function SkillLevelStep() {
         <Button
           variant="outline"
           onClick={() => setShowQuiz(true)}
-          className="w-full flex items-center justify-center gap-2 h-14"
+          className="w-full flex items-center justify-center gap-2 h-12 sm:h-14 min-h-[48px] touch-manipulation"
         >
           <HelpCircle className="h-5 w-5 text-brand-teal" />
-          <span>Not sure? Take a quick skill quiz</span>
+          <span className="text-sm sm:text-base">Not sure? Take a quick skill quiz</span>
         </Button>
       </motion.div>
     </motion.div>

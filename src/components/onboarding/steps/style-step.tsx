@@ -89,10 +89,10 @@ function StyleOption({ style, isSelected, onToggle }: StyleOptionProps) {
       variants={cardVariants}
       onClick={onToggle}
       className={cn(
-        "cursor-pointer transition-all duration-200 overflow-hidden",
+        "cursor-pointer transition-all duration-200 overflow-hidden min-h-[120px] touch-manipulation",
         isSelected
           ? "border-2 border-brand-blue shadow-elevated"
-          : "border border-border hover:border-brand-teal/50 hover:shadow-card"
+          : "border border-border active:border-brand-teal/50 active:shadow-card sm:hover:border-brand-teal/50 sm:hover:shadow-card"
       )}
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
@@ -100,26 +100,26 @@ function StyleOption({ style, isSelected, onToggle }: StyleOptionProps) {
       {/* Color bar */}
       <div
         className={cn(
-          "h-1.5 bg-gradient-to-r transition-opacity",
+          "h-1 sm:h-1.5 bg-gradient-to-r transition-opacity",
           details.color,
           isSelected ? "opacity-100" : "opacity-50"
         )}
       />
 
-      <div className="p-4">
-        <div className="flex items-start justify-between mb-2">
+      <div className="p-3 sm:p-4">
+        <div className="flex items-start justify-between mb-1.5 sm:mb-2">
           {/* Style name */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5 sm:gap-2">
             <span
               className={cn(
-                "text-2xl font-bold transition-colors",
+                "text-xl sm:text-2xl font-bold transition-colors",
                 isSelected ? "text-brand-black" : "text-muted-foreground"
               )}
             >
               {style}
             </span>
             {style === "1A" && (
-              <span className="px-2 py-0.5 text-xs font-medium bg-brand-blue/20 text-brand-black rounded-full">
+              <span className="px-1.5 py-0.5 text-[10px] sm:text-xs font-medium bg-brand-blue/20 text-brand-black rounded-full">
                 Recommended
               </span>
             )}
@@ -128,7 +128,7 @@ function StyleOption({ style, isSelected, onToggle }: StyleOptionProps) {
           {/* Checkbox */}
           <div
             className={cn(
-              "flex-shrink-0 w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all",
+              "flex-shrink-0 w-5 h-5 sm:w-6 sm:h-6 rounded-full border-2 flex items-center justify-center transition-all",
               isSelected
                 ? "border-brand-blue bg-brand-blue"
                 : "border-gray-300 bg-white"
@@ -138,7 +138,7 @@ function StyleOption({ style, isSelected, onToggle }: StyleOptionProps) {
               <motion.svg
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
-                className="w-4 h-4 text-brand-black"
+                className="w-3 h-3 sm:w-4 sm:h-4 text-brand-black"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -155,19 +155,19 @@ function StyleOption({ style, isSelected, onToggle }: StyleOptionProps) {
         </div>
 
         {/* Description */}
-        <p className="text-sm font-medium text-brand-black mb-1">
+        <p className="text-xs sm:text-sm font-medium text-brand-black mb-0.5 sm:mb-1">
           {metadata.label.split(" - ")[1] || metadata.label}
         </p>
-        <p className="text-xs text-muted-foreground mb-3">
+        <p className="text-[10px] sm:text-xs text-muted-foreground mb-2 sm:mb-3 line-clamp-2">
           {metadata.description}
         </p>
 
         {/* Tags */}
-        <div className="flex items-center gap-2">
-          <span className="px-2 py-0.5 text-xs bg-surface-secondary text-muted-foreground rounded">
+        <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
+          <span className="px-1.5 py-0.5 text-[10px] sm:text-xs bg-surface-secondary text-muted-foreground rounded">
             {details.popularity}
           </span>
-          <span className="px-2 py-0.5 text-xs bg-surface-secondary text-muted-foreground rounded">
+          <span className="px-1.5 py-0.5 text-[10px] sm:text-xs bg-surface-secondary text-muted-foreground rounded">
             {details.difficulty}
           </span>
         </div>
@@ -190,11 +190,11 @@ export function StyleStep() {
       className="space-y-6"
     >
       {/* Header */}
-      <motion.div variants={cardVariants} className="text-center mb-6">
-        <h2 className="text-2xl font-bold text-brand-black mb-2">
+      <motion.div variants={cardVariants} className="text-center mb-4 sm:mb-6">
+        <h2 className="text-xl sm:text-2xl font-bold text-brand-black mb-1 sm:mb-2">
           What Styles Interest You?
         </h2>
-        <p className="text-muted-foreground">
+        <p className="text-sm sm:text-base text-muted-foreground">
           Select the play styles you&apos;d like to explore
         </p>
       </motion.div>
@@ -214,7 +214,7 @@ export function StyleStep() {
       </motion.div>
 
       {/* Style grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div className="grid grid-cols-2 gap-2 sm:gap-4">
         {ALL_STYLES.map((style) => (
           <StyleOption
             key={style}
@@ -242,9 +242,9 @@ export function StyleStep() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
-          className="text-center p-4 bg-brand-green/30 rounded-lg"
+          className="text-center p-3 sm:p-4 bg-brand-green/30 rounded-lg"
         >
-          <p className="text-sm text-brand-black">
+          <p className="text-xs sm:text-sm text-brand-black">
             <strong>Tip:</strong> If you&apos;re new, start with{" "}
             <span className="font-semibold text-brand-teal">1A (String Tricks)</span>{" "}
             - it&apos;s the most popular and has the most learning resources!

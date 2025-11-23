@@ -78,19 +78,19 @@ function GoalOption({ goal, isSelected, onToggle }: GoalOptionProps) {
       variants={cardVariants}
       onClick={onToggle}
       className={cn(
-        "cursor-pointer transition-all duration-200 p-4",
+        "cursor-pointer transition-all duration-200 p-3 sm:p-4 min-h-[64px] touch-manipulation",
         isSelected
           ? "border-2 border-brand-blue bg-brand-blue/5 shadow-card"
-          : "border border-border hover:border-brand-teal/50"
+          : "border border-border active:border-brand-teal/50 sm:hover:border-brand-teal/50"
       )}
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
     >
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-2 sm:gap-3">
         {/* Checkbox */}
         <div
           className={cn(
-            "flex-shrink-0 w-6 h-6 rounded-md border-2 flex items-center justify-center transition-all",
+            "flex-shrink-0 w-5 h-5 sm:w-6 sm:h-6 rounded-md border-2 flex items-center justify-center transition-all",
             isSelected
               ? "border-brand-blue bg-brand-blue"
               : "border-gray-300 bg-white"
@@ -100,7 +100,7 @@ function GoalOption({ goal, isSelected, onToggle }: GoalOptionProps) {
             <motion.svg
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
-              className="w-4 h-4 text-brand-black"
+              className="w-3 h-3 sm:w-4 sm:h-4 text-brand-black"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -118,7 +118,7 @@ function GoalOption({ goal, isSelected, onToggle }: GoalOptionProps) {
         {/* Icon */}
         <div
           className={cn(
-            "flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center transition-colors",
+            "flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition-colors",
             isSelected
               ? "bg-brand-blue text-brand-black"
               : "bg-surface-secondary text-muted-foreground"
@@ -129,10 +129,10 @@ function GoalOption({ goal, isSelected, onToggle }: GoalOptionProps) {
 
         {/* Content */}
         <div className="flex-1 min-w-0">
-          <h3 className="font-medium text-brand-black text-sm">
+          <h3 className="font-medium text-brand-black text-xs sm:text-sm">
             {metadata.label}
           </h3>
-          <p className="text-xs text-muted-foreground truncate">
+          <p className="text-[10px] sm:text-xs text-muted-foreground truncate">
             {metadata.description}
           </p>
         </div>
@@ -153,11 +153,11 @@ export function GoalsStep() {
       className="space-y-6"
     >
       {/* Header */}
-      <motion.div variants={cardVariants} className="text-center mb-6">
-        <h2 className="text-2xl font-bold text-brand-black mb-2">
+      <motion.div variants={cardVariants} className="text-center mb-4 sm:mb-6">
+        <h2 className="text-xl sm:text-2xl font-bold text-brand-black mb-1 sm:mb-2">
           What Are Your Goals?
         </h2>
-        <p className="text-muted-foreground">
+        <p className="text-sm sm:text-base text-muted-foreground">
           Select all that apply - you can change these later
         </p>
       </motion.div>
@@ -177,7 +177,7 @@ export function GoalsStep() {
       </motion.div>
 
       {/* Goal grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
         {ALL_GOALS.map((goal) => (
           <GoalOption
             key={goal}

@@ -7,32 +7,68 @@ import { motion, type HTMLMotionProps } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex items-center justify-center whitespace-nowrap font-bold ring-offset-background transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fun-blue focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
+        // Default - Fun Green (Duolingo style)
         default:
-          "rounded-full bg-brand-black text-white hover:bg-brand-black/90 active:bg-brand-black/80",
+          "rounded-2xl bg-fun-green text-white shadow-fun-green hover:bg-fun-green-light hover:-translate-y-0.5 active:translate-y-0 active:scale-95",
+        // Secondary - Outlined style
         secondary:
-          "rounded-full bg-surface-secondary text-brand-black border border-border hover:bg-surface-tertiary active:bg-surface-tertiary/80",
+          "rounded-2xl bg-white text-brand-black border-2 border-gray-200 hover:border-fun-blue hover:text-fun-blue hover:-translate-y-0.5 active:translate-y-0 active:scale-95",
+        // Outline - Bold border
         outline:
-          "rounded-full border-2 border-brand-black text-brand-black bg-transparent hover:bg-brand-black hover:text-white active:bg-brand-black/90",
+          "rounded-2xl border-2 border-brand-black text-brand-black bg-transparent hover:bg-brand-black hover:text-white active:scale-95",
+        // Ghost - Minimal
         ghost:
-          "rounded-lg text-brand-black hover:bg-surface-secondary active:bg-surface-tertiary",
+          "rounded-2xl text-brand-black hover:bg-gray-100 active:bg-gray-200",
+        // Destructive - Red
         destructive:
-          "rounded-full bg-red-500 text-white hover:bg-red-600 active:bg-red-700",
+          "rounded-2xl bg-fun-red text-white shadow-fun-red hover:bg-fun-red-light hover:-translate-y-0.5 active:translate-y-0 active:scale-95",
+        // Brand - Original brand blue
         brand:
-          "rounded-full bg-brand-blue text-brand-black font-semibold hover:bg-brand-blue/90 active:scale-[0.98]",
-        link: "text-brand-black underline-offset-4 hover:underline",
+          "rounded-2xl bg-brand-blue text-brand-black font-bold shadow-fun-blue hover:bg-brand-blue/90 hover:-translate-y-0.5 active:translate-y-0 active:scale-95",
+        // Link style
+        link: "text-fun-blue underline-offset-4 hover:underline",
+        // Teal variant
         teal:
-          "rounded-full bg-brand-teal text-white font-semibold hover:bg-brand-teal/90 active:scale-[0.98]",
+          "rounded-2xl bg-brand-teal text-white font-bold hover:bg-brand-teal/90 hover:-translate-y-0.5 active:translate-y-0 active:scale-95",
+
+        // === NEW FUN VARIANTS ===
+        // Success - Vibrant Green (like completing a lesson)
+        success:
+          "rounded-2xl bg-fun-green text-white shadow-fun-green-lg hover:bg-fun-green-light hover:-translate-y-1 hover:shadow-glow-green active:translate-y-0 active:scale-95",
+        // Streak - Fire gradient for streaks
+        streak:
+          "rounded-2xl text-white shadow-fun-red hover:-translate-y-1 active:translate-y-0 active:scale-95 bg-gradient-to-r from-fun-red to-fun-orange hover:shadow-glow-red",
+        // XP - Gold gradient for XP/rewards
+        xp:
+          "rounded-2xl text-brand-black shadow-fun-yellow hover:-translate-y-1 active:translate-y-0 active:scale-95 bg-gradient-to-r from-xp to-xp-light hover:shadow-glow-yellow",
+        // Fun Blue - Bright blue
+        funBlue:
+          "rounded-2xl bg-fun-blue text-white shadow-fun-blue-lg hover:bg-fun-blue-light hover:-translate-y-1 hover:shadow-glow-blue active:translate-y-0 active:scale-95",
+        // Fun Purple - Playful purple
+        funPurple:
+          "rounded-2xl bg-fun-purple text-white shadow-fun-purple-lg hover:bg-fun-purple-light hover:-translate-y-1 hover:shadow-glow-purple active:translate-y-0 active:scale-95",
+        // Fun Orange - Energetic orange
+        funOrange:
+          "rounded-2xl bg-fun-orange text-white shadow-fun-orange-lg hover:bg-fun-orange-light hover:-translate-y-1 active:translate-y-0 active:scale-95",
+        // Fun Pink - Playful pink
+        funPink:
+          "rounded-2xl bg-fun-pink text-white shadow-fun-pink-lg hover:bg-fun-pink-light hover:-translate-y-1 active:translate-y-0 active:scale-95",
+        // Celebration - Rainbow gradient
+        celebration:
+          "rounded-2xl text-white hover:-translate-y-1 active:translate-y-0 active:scale-95 bg-gradient-to-r from-fun-red via-fun-yellow to-fun-green animate-pulse",
       },
       size: {
-        sm: "h-9 px-4 text-xs",
-        default: "h-11 px-6 py-2.5",
-        lg: "h-12 px-8 text-base",
-        xl: "h-14 px-10 text-base font-semibold",
-        icon: "h-10 w-10 p-0 rounded-full",
+        sm: "h-10 px-4 text-sm",
+        default: "h-12 px-6 py-3 text-base",
+        lg: "h-14 px-8 text-lg",
+        xl: "h-16 px-10 text-xl",
+        icon: "h-12 w-12 p-0 rounded-full",
+        "icon-sm": "h-10 w-10 p-0 rounded-full",
+        "icon-lg": "h-14 w-14 p-0 rounded-full",
       },
     },
     defaultVariants: {
@@ -47,18 +83,22 @@ export interface ButtonProps
     VariantProps<typeof buttonVariants> {
   asChild?: boolean;
   loading?: boolean;
+  sparkle?: boolean;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (
-    { className, variant, size, asChild = false, loading = false, children, disabled, ...props },
+    { className, variant, size, asChild = false, loading = false, sparkle = false, children, disabled, ...props },
     ref
   ) => {
     const Comp = asChild ? Slot : "button";
 
     return (
       <Comp
-        className={cn(buttonVariants({ variant, size, className }))}
+        className={cn(
+          buttonVariants({ variant, size, className }),
+          sparkle && "sparkle"
+        )}
         ref={ref}
         disabled={disabled || loading}
         {...props}
@@ -66,7 +106,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {loading ? (
           <span className="flex items-center gap-2">
             <svg
-              className="animate-spin h-4 w-4"
+              className="animate-spin h-5 w-5"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
@@ -101,18 +141,27 @@ export interface MotionButtonProps
   extends Omit<HTMLMotionProps<"button">, "ref">,
     VariantProps<typeof buttonVariants> {
   loading?: boolean;
+  sparkle?: boolean;
+  bouncy?: boolean;
 }
 
 const MotionButton = React.forwardRef<HTMLButtonElement, MotionButtonProps>(
-  ({ className, variant, size, loading = false, children, disabled, ...props }, ref) => {
+  ({ className, variant, size, loading = false, sparkle = false, bouncy = true, children, disabled, ...props }, ref) => {
     return (
       <motion.button
-        className={cn(buttonVariants({ variant, size, className }))}
+        className={cn(
+          buttonVariants({ variant, size, className }),
+          sparkle && "sparkle"
+        )}
         ref={ref}
         disabled={disabled || loading}
-        whileHover={{ scale: 1.02 }}
-        whileTap={{ scale: 0.98 }}
-        transition={{ duration: 0.15 }}
+        whileHover={bouncy ? { scale: 1.05, y: -2 } : { scale: 1.02 }}
+        whileTap={{ scale: 0.95, y: 0 }}
+        transition={{
+          type: "spring",
+          stiffness: 400,
+          damping: 17
+        }}
         {...props}
       >
         {loading ? (
@@ -122,7 +171,7 @@ const MotionButton = React.forwardRef<HTMLButtonElement, MotionButtonProps>(
             animate={{ opacity: 1 }}
           >
             <motion.svg
-              className="h-4 w-4"
+              className="h-5 w-5"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
@@ -154,4 +203,53 @@ const MotionButton = React.forwardRef<HTMLButtonElement, MotionButtonProps>(
 );
 MotionButton.displayName = "MotionButton";
 
-export { Button, MotionButton, buttonVariants };
+// Fun icon button for actions like hearts, streaks, XP
+export interface IconButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  icon: React.ReactNode;
+  color?: "green" | "blue" | "purple" | "orange" | "yellow" | "red" | "pink";
+  glow?: boolean;
+}
+
+const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
+  ({ className, icon, color = "green", glow = false, ...props }, ref) => {
+    const colorClasses = {
+      green: "bg-fun-green text-white hover:bg-fun-green-light shadow-fun-green",
+      blue: "bg-fun-blue text-white hover:bg-fun-blue-light shadow-fun-blue",
+      purple: "bg-fun-purple text-white hover:bg-fun-purple-light shadow-fun-purple",
+      orange: "bg-fun-orange text-white hover:bg-fun-orange-light shadow-fun-orange",
+      yellow: "bg-xp text-brand-black hover:bg-xp-light shadow-fun-yellow",
+      red: "bg-fun-red text-white hover:bg-fun-red-light shadow-fun-red",
+      pink: "bg-fun-pink text-white hover:bg-fun-pink-light shadow-fun-pink",
+    };
+
+    const glowClasses = {
+      green: "hover:shadow-glow-green",
+      blue: "hover:shadow-glow-blue",
+      purple: "hover:shadow-glow-purple",
+      orange: "hover:shadow-glow-green",
+      yellow: "hover:shadow-glow-yellow",
+      red: "hover:shadow-glow-red",
+      pink: "hover:shadow-glow-purple",
+    };
+
+    return (
+      <button
+        ref={ref}
+        className={cn(
+          "h-12 w-12 rounded-full flex items-center justify-center transition-all duration-200",
+          "hover:-translate-y-1 active:translate-y-0 active:scale-95",
+          colorClasses[color],
+          glow && glowClasses[color],
+          className
+        )}
+        {...props}
+      >
+        {icon}
+      </button>
+    );
+  }
+);
+IconButton.displayName = "IconButton";
+
+export { Button, MotionButton, IconButton, buttonVariants };

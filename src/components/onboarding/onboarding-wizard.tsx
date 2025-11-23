@@ -87,17 +87,17 @@ function StepIndicator({
   const displaySteps = totalSteps - 1;
 
   return (
-    <div className="flex items-center justify-center gap-2">
+    <div className="flex items-center justify-center gap-1.5 sm:gap-2">
       {Array.from({ length: displaySteps }).map((_, index) => (
         <motion.div
           key={index}
           className={cn(
-            "h-2 rounded-full transition-all duration-300",
+            "h-1.5 sm:h-2 rounded-full transition-all duration-300",
             index === currentIndex
-              ? "w-8 bg-brand-teal"
+              ? "w-6 sm:w-8 bg-brand-teal"
               : index < currentIndex
-              ? "w-2 bg-brand-blue"
-              : "w-2 bg-gray-300"
+              ? "w-1.5 sm:w-2 bg-brand-blue"
+              : "w-1.5 sm:w-2 bg-gray-300"
           )}
           initial={false}
           animate={{
@@ -152,19 +152,19 @@ export function OnboardingWizard() {
   }
 
   return (
-    <div className="w-full max-w-lg mx-auto">
+    <div className="w-full max-w-lg mx-auto px-4 sm:px-0">
       {/* Skip button */}
       {stepConfig.showSkip && (
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="flex justify-end mb-4"
+          className="flex justify-end mb-3 sm:mb-4"
         >
           <Button
             variant="ghost"
             size="sm"
             onClick={handleSkip}
-            className="text-muted-foreground hover:text-brand-black"
+            className="text-muted-foreground hover:text-brand-black min-h-[44px] touch-manipulation"
           >
             Skip
             <X className="ml-1 h-4 w-4" />
@@ -177,13 +177,13 @@ export function OnboardingWizard() {
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
-        className="mb-8"
+        className="mb-6 sm:mb-8"
       >
         <StepIndicator currentIndex={currentIndex} totalSteps={total} />
       </motion.div>
 
       {/* Step content */}
-      <div className="relative overflow-hidden min-h-[400px]">
+      <div className="relative overflow-hidden min-h-[350px] sm:min-h-[400px]">
         <AnimatePresence mode="wait" custom={direction}>
           <motion.div
             key={currentStep}
@@ -209,13 +209,13 @@ export function OnboardingWizard() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="flex items-center justify-between mt-8"
+          className="flex items-center justify-between mt-6 sm:mt-8 gap-3"
         >
           <Button
             variant="ghost"
             onClick={handleBack}
             disabled={isFirstStep}
-            className={cn(isFirstStep && "invisible")}
+            className={cn("min-h-[44px] touch-manipulation", isFirstStep && "invisible")}
           >
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back
@@ -226,6 +226,7 @@ export function OnboardingWizard() {
             onClick={handleNext}
             disabled={!canProceed}
             size="lg"
+            className="min-h-[48px] touch-manipulation"
           >
             Continue
             <ArrowRight className="ml-2 h-4 w-4" />
