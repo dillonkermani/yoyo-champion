@@ -21,6 +21,22 @@ const config: Config = {
           blue: "#9bedff",
         },
 
+        // Navy colors for video player dark backgrounds
+        navy: {
+          DEFAULT: "#1e293b",
+          light: "#334155",
+          dark: "#0f172a",
+        },
+        "navy-dark": "#0f172a",
+        "navy-light": "#334155",
+
+        // Electric blue for video controls
+        "electric-blue": {
+          DEFAULT: "#1CB0F6",
+          light: "#4DC4F9",
+          dark: "#0095DB",
+        },
+
         // Primary Colors - Aqua Blue Theme
         // Primary - Aqua Blue (brand color)
         "fun-primary": {
