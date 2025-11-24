@@ -60,7 +60,7 @@ const STYLE_DETAILS: Record<
   "4A": {
     popularity: "Spectacular",
     difficulty: "Intermediate",
-    color: "from-green-500 to-emerald-400",
+    color: "from-fun-blue to-cyan-400",
   },
   "5A": {
     popularity: "Creative",
@@ -92,7 +92,7 @@ function StyleOption({ style, isSelected, onToggle }: StyleOptionProps) {
         "cursor-pointer transition-all duration-200 overflow-hidden min-h-[120px] touch-manipulation",
         isSelected
           ? "border-2 border-brand-blue shadow-elevated"
-          : "border border-border active:border-brand-teal/50 active:shadow-card sm:hover:border-brand-teal/50 sm:hover:shadow-card"
+          : "border border-border active:border-fun-blue/50 active:shadow-card sm:hover:border-fun-blue/50 sm:hover:shadow-card"
       )}
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
@@ -205,7 +205,7 @@ export function StyleStep() {
           className={cn(
             "inline-flex items-center px-3 py-1 rounded-full text-sm font-medium transition-colors",
             selectedStyles.length > 0
-              ? "bg-brand-teal/20 text-brand-black"
+              ? "bg-fun-blue/20 text-brand-black"
               : "bg-gray-100 text-muted-foreground"
           )}
         >
@@ -242,11 +242,11 @@ export function StyleStep() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
-          className="text-center p-3 sm:p-4 bg-brand-green/30 rounded-lg"
+          className="text-center p-3 sm:p-4 bg-fun-blue/30 rounded-lg"
         >
           <p className="text-xs sm:text-sm text-brand-black">
             <strong>Tip:</strong> If you&apos;re new, start with{" "}
-            <span className="font-semibold text-brand-teal">1A (String Tricks)</span>{" "}
+            <span className="font-semibold text-fun-blue">1A (String Tricks)</span>{" "}
             - it&apos;s the most popular and has the most learning resources!
           </p>
         </motion.div>

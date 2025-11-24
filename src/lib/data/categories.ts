@@ -8,7 +8,7 @@ export interface TrickCategory {
   slug: string;
   description: string;
   icon: 'Target' | 'Sparkles' | 'Zap' | 'Cpu' | 'Wind' | 'RotateCcw' | 'Rocket' | 'Hand';
-  color: 'green' | 'blue' | 'purple' | 'cyan' | 'pink' | 'yellow' | 'orange' | 'red';
+  color: 'teal' | 'blue' | 'purple' | 'cyan' | 'pink' | 'yellow' | 'orange' | 'red';
   order: number;
   genres: TrickGenre[];
   completionBadge: string;
@@ -22,7 +22,7 @@ export const categories: TrickCategory[] = [
     slug: 'foundations',
     description: 'Master the essential basics that every yo-yo player needs. These fundamental skills form the foundation for all advanced tricks.',
     icon: 'Target',
-    color: 'green',
+    color: 'teal',
     order: 1,
     genres: ['basics'],
     completionBadge: 'Foundation Master',
@@ -137,14 +137,14 @@ export const categoryColorConfig: Record<TrickCategory['color'], {
   gradient: string;
   ring: string;
 }> = {
-  green: {
-    bg: 'bg-brand-teal',
-    bgLight: 'bg-brand-teal/10',
-    text: 'text-brand-teal',
-    border: 'border-brand-teal',
-    shadow: 'shadow-fun-blue',
-    gradient: 'from-brand-teal to-brand-teal/80',
-    ring: 'ring-brand-teal/30',
+  teal: {
+    bg: 'bg-xp',
+    bgLight: 'bg-xp/10',
+    text: 'text-xp-dark',
+    border: 'border-xp',
+    shadow: 'shadow-fun-yellow',
+    gradient: 'from-xp to-xp-light',
+    ring: 'ring-xp/30',
   },
   blue: {
     bg: 'bg-fun-blue',

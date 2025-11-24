@@ -231,7 +231,7 @@ const stringVariants: Record<MascotState, Variants> = {
 
 // Confetti pieces for celebrating state - limited animation
 function CelebrationConfetti({ size }: { size: number }) {
-  const confettiColors = ["#9bedff", "#91afa2", "#e3f2e6", "#FFD700", "#FF6B6B"];
+  const confettiColors = ["#9bedff", "#1CB0F6", "#e3f2e6", "#FFD700", "#FF6B6B"];
 
   return (
     <>
@@ -271,7 +271,7 @@ function ThinkingBubbles({ size }: { size: number }) {
       {[0, 1, 2].map((i) => (
         <div
           key={i}
-          className="absolute rounded-full bg-brand-teal/30"
+          className="absolute rounded-full bg-fun-blue/30"
           style={{
             width: size * (0.1 - i * 0.02),
             height: size * (0.1 - i * 0.02),
@@ -349,7 +349,7 @@ export const Mascot = React.forwardRef<HTMLDivElement, MascotProps>(
           <defs>
             <linearGradient id="yoyoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stopColor="#9bedff" />
-              <stop offset="50%" stopColor="#91afa2" />
+              <stop offset="50%" stopColor="#1CB0F6" />
               <stop offset="100%" stopColor="#9bedff" />
             </linearGradient>
             <radialGradient id="innerGlow" cx="50%" cy="30%" r="50%">
@@ -442,7 +442,7 @@ export const Mascot = React.forwardRef<HTMLDivElement, MascotProps>(
           {showString && (
             <motion.path
               d="M 30 58 Q 32 78 30 98"
-              stroke="#91afa2"
+              stroke="#1CB0F6"
               strokeWidth={2}
               strokeLinecap="round"
               fill="none"

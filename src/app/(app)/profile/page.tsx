@@ -68,7 +68,7 @@ const mockActivities: ActivityItem[] = [
     title: "Mastered Trapeze",
     description: "You nailed it! The foundation of 1A play.",
     timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000),
-    icon: <CheckCircle className="w-4 h-4 text-brand-green" />,
+    icon: <CheckCircle className="w-4 h-4 text-fun-blue" />,
   },
   {
     id: "2",
@@ -151,7 +151,7 @@ const ProfileHeader: React.FC = () => {
   return (
     <Card className="overflow-hidden">
       {/* Banner gradient */}
-      <div className="h-24 bg-gradient-to-r from-brand-teal via-brand-blue to-purple-500" />
+      <div className="h-24 bg-gradient-to-r from-fun-blue via-brand-blue to-purple-500" />
 
       <CardContent className="relative pb-6">
         {/* Avatar with edit button */}
@@ -159,7 +159,7 @@ const ProfileHeader: React.FC = () => {
           <div className="relative">
             <Avatar size="2xl" variant="brand" className="border-4 border-white shadow-lg">
               <AvatarImage src={user?.avatarUrl} alt={displayName} />
-              <AvatarFallback className="text-2xl bg-brand-teal text-white">
+              <AvatarFallback className="text-2xl bg-xp text-white">
                 {initials}
               </AvatarFallback>
             </Avatar>
@@ -240,7 +240,7 @@ const StatsOverview: React.FC = () => {
 
   const stats = [
     {
-      icon: <Target className="w-5 h-5 text-brand-teal" />,
+      icon: <Target className="w-5 h-5 text-fun-blue" />,
       label: "Tricks Mastered",
       value: totalTricksMastered,
     },
@@ -295,7 +295,7 @@ const FeaturedBadges: React.FC = () => {
         </CardTitle>
         <Link
           href="/profile/achievements"
-          className="text-sm text-brand-teal hover:underline flex items-center gap-1"
+          className="text-sm text-fun-blue hover:underline flex items-center gap-1"
         >
           View All
           <ChevronRight className="w-4 h-4" />
@@ -337,7 +337,7 @@ const ActivityFeed: React.FC = () => {
     <Card>
       <CardHeader className="pb-4">
         <CardTitle className="flex items-center gap-2 text-lg">
-          <Clock className="w-5 h-5 text-brand-teal" />
+          <Clock className="w-5 h-5 text-fun-blue" />
           Recent Activity
         </CardTitle>
       </CardHeader>
@@ -384,7 +384,7 @@ const LearningStats: React.FC = () => {
 
   // Mock genre data - in a real app, this would be calculated from progress
   const genres = [
-    { name: "String Tricks", percentage: 65, color: "bg-brand-teal" },
+    { name: "String Tricks", percentage: 65, color: "bg-xp" },
     { name: "Slack", percentage: 40, color: "bg-brand-blue" },
     { name: "Tech", percentage: 25, color: "bg-purple-500" },
     { name: "Flow", percentage: 15, color: "bg-brand-gold" },
@@ -394,7 +394,7 @@ const LearningStats: React.FC = () => {
     <Card>
       <CardHeader className="pb-4">
         <CardTitle className="flex items-center gap-2 text-lg">
-          <Target className="w-5 h-5 text-brand-teal" />
+          <Target className="w-5 h-5 text-fun-blue" />
           Learning Stats
         </CardTitle>
       </CardHeader>
@@ -434,7 +434,7 @@ const LearningStats: React.FC = () => {
             {preferredStyles.map((style) => (
               <span
                 key={style}
-                className="px-3 py-1 rounded-full text-xs font-medium bg-brand-teal/10 text-brand-teal"
+                className="px-3 py-1 rounded-full text-xs font-medium bg-fun-blue/10 text-fun-blue"
               >
                 {STYLE_METADATA[style]?.label || style}
               </span>

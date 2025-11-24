@@ -205,8 +205,8 @@ const confettiColors = [
   "#F59E0B", // Amber
   "#EC4899", // Pink
   "#8B5CF6", // Purple
-  "#3B82F6", // Blue
-  "#34D399", // Green
+  "#1CB0F6", // Aqua Blue
+  "#9bedff", // Light Blue
 ];
 
 export const LevelUpModal: React.FC<LevelUpModalProps> = ({

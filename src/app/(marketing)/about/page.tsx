@@ -95,7 +95,7 @@ export default function AboutPage() {
       <section className="relative pt-32 pb-20 sm:pt-40 sm:pb-32">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute -top-40 -right-40 w-80 h-80 rounded-full bg-[#9bedff]/10 blur-3xl" />
-          <div className="absolute top-20 -left-40 w-80 h-80 rounded-full bg-[#91afa2]/10 blur-3xl" />
+          <div className="absolute top-20 -left-40 w-80 h-80 rounded-full bg-[#1CB0F6]/10 blur-3xl" />
         </div>
 
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -117,7 +117,7 @@ export default function AboutPage() {
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             {/* Image placeholder */}
             <div className="relative">
-              <div className="aspect-[4/5] rounded-3xl bg-gradient-to-br from-[#9bedff]/20 to-[#91afa2]/20 flex items-center justify-center">
+              <div className="aspect-[4/5] rounded-3xl bg-gradient-to-br from-[#9bedff]/20 to-[#1CB0F6]/20 flex items-center justify-center">
                 <div className="text-center p-8">
                   <div className="w-32 h-32 mx-auto rounded-full bg-[#9bedff]/30 flex items-center justify-center mb-4">
                     <span className="text-4xl font-bold text-[#9bedff]">GS</span>
@@ -194,7 +194,7 @@ export default function AboutPage() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {differentiators.map((item, index) => (
               <div key={index} className="text-center">
-                <div className="w-14 h-14 rounded-2xl bg-[#91afa2]/10 flex items-center justify-center mx-auto mb-4 text-[#91afa2]">
+                <div className="w-14 h-14 rounded-2xl bg-[#1CB0F6]/10 flex items-center justify-center mx-auto mb-4 text-[#1CB0F6]">
                   <item.icon />
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">
@@ -253,11 +253,11 @@ export default function AboutPage() {
               </div>
               <div className="space-y-4 pt-8">
                 <div className="bg-gray-800 rounded-2xl p-6 border border-gray-700">
-                  <p className="text-3xl font-bold text-[#91afa2]">5</p>
+                  <p className="text-3xl font-bold text-[#1CB0F6]">5</p>
                   <p className="text-gray-400 text-sm">Learning paths</p>
                 </div>
                 <div className="bg-gray-800 rounded-2xl p-6 border border-gray-700">
-                  <p className="text-3xl font-bold text-[#91afa2]">24/7</p>
+                  <p className="text-3xl font-bold text-[#1CB0F6]">24/7</p>
                   <p className="text-gray-400 text-sm">Community support</p>
                 </div>
               </div>
@@ -281,7 +281,7 @@ export default function AboutPage() {
           <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
             {teamMembers.map((member, index) => (
               <div key={index} className="text-center">
-                <div className="w-24 h-24 rounded-full bg-gradient-to-br from-[#9bedff] to-[#91afa2] flex items-center justify-center mx-auto mb-4">
+                <div className="w-24 h-24 rounded-full bg-gradient-to-br from-[#9bedff] to-[#1CB0F6] flex items-center justify-center mx-auto mb-4">
                   <span className="text-2xl font-bold text-white">{member.initials}</span>
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900">{member.name}</h3>

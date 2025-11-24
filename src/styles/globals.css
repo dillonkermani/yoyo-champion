@@ -55,9 +55,9 @@
     --font-jost: 'Jost', system-ui, sans-serif;
 
     /* Fun colors as CSS variables - Aqua Blue Primary */
-    --fun-green: #91afa2;
-    --fun-green-light: #a8c4b7;
-    --fun-green-dark: #7a9a8c;
+    --fun-green: #1CB0F6;
+    --fun-green-light: #4DC4F9;
+    --fun-green-dark: #0095DB;
     --fun-blue: #1CB0F6;
     --fun-purple: #CE82FF;
     --fun-orange: #FF9600;
@@ -226,7 +226,7 @@
 
   /* ===== COLORED SHADOWS ===== */
   .shadow-fun-green {
-    box-shadow: 0 4px 14px rgba(88, 204, 2, 0.4);
+    box-shadow: 0 4px 14px rgba(28, 176, 246, 0.4);
   }
 
   .shadow-fun-blue {
@@ -247,7 +247,7 @@
 
   /* ===== GLOW EFFECTS ===== */
   .glow-green {
-    box-shadow: 0 0 20px rgba(88, 204, 2, 0.5), 0 0 40px rgba(88, 204, 2, 0.3);
+    box-shadow: 0 0 20px rgba(28, 176, 246, 0.5), 0 0 40px rgba(28, 176, 246, 0.3);
   }
 
   .glow-blue {
@@ -668,7 +668,7 @@
   }
 
   .badge-teal {
-    @apply bg-brand-teal/20 text-brand-black;
+    @apply bg-fun-blue/20 text-brand-black;
   }
 
   .badge-success {

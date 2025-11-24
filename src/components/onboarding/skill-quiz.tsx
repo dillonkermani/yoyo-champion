@@ -165,7 +165,7 @@ export function SkillQuiz({ onComplete, onCancel }: SkillQuizProps) {
           initial={{ scale: 0.8 }}
           animate={{ scale: 1 }}
           transition={{ delay: 0.2, type: "spring" }}
-          className="inline-block px-6 py-3 rounded-full bg-brand-teal/20 mb-8"
+          className="inline-block px-6 py-3 rounded-full bg-fun-blue/20 mb-8"
         >
           <span className="text-2xl font-bold text-brand-black">
             {levelLabels[level]}
@@ -210,7 +210,7 @@ export function SkillQuiz({ onComplete, onCancel }: SkillQuizProps) {
       {/* Progress bar */}
       <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
         <motion.div
-          className="h-full bg-brand-teal"
+          className="h-full bg-xp"
           initial={{ width: 0 }}
           animate={{ width: `${progress}%` }}
           transition={{ duration: 0.3 }}
@@ -251,7 +251,7 @@ export function SkillQuiz({ onComplete, onCancel }: SkillQuizProps) {
                   className={cn(
                     "px-2 py-0.5 text-xs font-medium rounded-full",
                     currentQuestion.difficulty <= 1 &&
-                      "bg-green-100 text-green-700",
+                      "bg-brand-blue/20 text-fun-blue-dark",
                     currentQuestion.difficulty === 2 &&
                       "bg-yellow-100 text-yellow-700",
                     currentQuestion.difficulty === 3 &&
@@ -287,9 +287,9 @@ export function SkillQuiz({ onComplete, onCancel }: SkillQuizProps) {
                   variant="outline"
                   size="lg"
                   onClick={() => handleAnswer(true)}
-                  className="flex-1 border-green-200 hover:border-green-400 hover:bg-green-50"
+                  className="flex-1 border-fun-blue/30 hover:border-fun-blue hover:bg-fun-blue/10"
                 >
-                  <Check className="mr-2 h-5 w-5 text-green-500" />
+                  <Check className="mr-2 h-5 w-5 text-fun-blue" />
                   Yes, I can!
                 </MotionButton>
               </div>

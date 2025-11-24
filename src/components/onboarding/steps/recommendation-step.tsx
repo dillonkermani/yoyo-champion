@@ -52,7 +52,7 @@ function DifficultyIndicator({ level }: { level: number }) {
           key={i}
           className={cn(
             "w-2 h-2 rounded-full",
-            i < level ? "bg-brand-teal" : "bg-gray-200"
+            i < level ? "bg-xp" : "bg-gray-200"
           )}
         />
       ))}
@@ -159,7 +159,7 @@ export function RecommendationStep() {
       <motion.div variants={itemVariants}>
         <Card className="overflow-hidden border-2 border-brand-blue">
           {/* Gradient header */}
-          <div className="h-3 bg-gradient-to-r from-brand-blue via-brand-teal to-brand-green" />
+          <div className="h-3 bg-gradient-to-r from-brand-blue via-fun-blue to-fun-purple" />
 
           <CardContent className="p-4 sm:p-6">
             {/* Path title and instructor */}
@@ -188,21 +188,21 @@ export function RecommendationStep() {
             {/* Stats */}
             <div className="grid grid-cols-3 gap-2 sm:gap-4 mb-4 sm:mb-6">
               <div className="text-center p-2 sm:p-3 bg-surface-secondary rounded-lg">
-                <Clock className="h-4 w-4 sm:h-5 sm:w-5 mx-auto mb-0.5 sm:mb-1 text-brand-teal" />
+                <Clock className="h-4 w-4 sm:h-5 sm:w-5 mx-auto mb-0.5 sm:mb-1 text-fun-blue" />
                 <div className="text-base sm:text-lg font-bold text-brand-black">
                   {estimatedWeeks}
                 </div>
                 <div className="text-[10px] sm:text-xs text-muted-foreground">weeks</div>
               </div>
               <div className="text-center p-2 sm:p-3 bg-surface-secondary rounded-lg">
-                <BookOpen className="h-4 w-4 sm:h-5 sm:w-5 mx-auto mb-0.5 sm:mb-1 text-brand-teal" />
+                <BookOpen className="h-4 w-4 sm:h-5 sm:w-5 mx-auto mb-0.5 sm:mb-1 text-fun-blue" />
                 <div className="text-base sm:text-lg font-bold text-brand-black">
                   {totalTricks}
                 </div>
                 <div className="text-[10px] sm:text-xs text-muted-foreground">tricks</div>
               </div>
               <div className="text-center p-2 sm:p-3 bg-surface-secondary rounded-lg">
-                <Trophy className="h-4 w-4 sm:h-5 sm:w-5 mx-auto mb-0.5 sm:mb-1 text-brand-teal" />
+                <Trophy className="h-4 w-4 sm:h-5 sm:w-5 mx-auto mb-0.5 sm:mb-1 text-fun-blue" />
                 <div className="text-base sm:text-lg font-bold text-brand-black">
                   {totalXp.toLocaleString()}
                 </div>
@@ -227,12 +227,12 @@ export function RecommendationStep() {
                     key={module.id}
                     className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-muted-foreground"
                   >
-                    <ChevronRight className="h-3 w-3 sm:h-4 sm:w-4 text-brand-teal flex-shrink-0" />
+                    <ChevronRight className="h-3 w-3 sm:h-4 sm:w-4 text-fun-blue flex-shrink-0" />
                     <span className="truncate">{module.title}</span>
                   </li>
                 ))}
                 {path.modules.length > 3 && (
-                  <li className="text-xs sm:text-sm text-brand-teal font-medium pl-5 sm:pl-6">
+                  <li className="text-xs sm:text-sm text-fun-blue font-medium pl-5 sm:pl-6">
                     + {path.modules.length - 3} more modules
                   </li>
                 )}

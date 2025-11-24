@@ -10,11 +10,11 @@ const inputVariants = cva(
     variants: {
       variant: {
         default:
-          "border-gray-300 focus:border-brand-teal focus:ring-2 focus:ring-brand-teal/20 focus:outline-none hover:border-gray-400",
+          "border-gray-300 focus:border-fun-blue focus:ring-2 focus:ring-fun-blue/20 focus:outline-none hover:border-gray-400",
         ghost:
-          "border-transparent bg-transparent focus:bg-white focus:border-gray-300 focus:ring-2 focus:ring-brand-teal/20 focus:outline-none",
+          "border-transparent bg-transparent focus:bg-white focus:border-gray-300 focus:ring-2 focus:ring-fun-blue/20 focus:outline-none",
         filled:
-          "border-transparent bg-gray-100 focus:border-brand-teal focus:ring-2 focus:ring-brand-teal/20 focus:outline-none",
+          "border-transparent bg-gray-100 focus:border-fun-blue focus:ring-2 focus:ring-fun-blue/20 focus:outline-none",
         error:
           "border-red-500 focus:border-red-500 focus:ring-2 focus:ring-red-500/20 focus:outline-none",
       },

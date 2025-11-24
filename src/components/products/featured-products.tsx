@@ -125,7 +125,7 @@ export function FeaturedProducts({
               ? "bg-brand-blue/20"
               : type === 'sale'
                 ? "bg-red-100"
-                : "bg-brand-teal/20"
+                : "bg-fun-blue/20"
           )}>
             <SectionIcon className={cn(
               "w-5 h-5",
@@ -133,7 +133,7 @@ export function FeaturedProducts({
                 ? "text-brand-blue"
                 : type === 'sale'
                   ? "text-red-500"
-                  : "text-brand-teal"
+                  : "text-fun-blue"
             )} />
           </div>
           <h2 className="text-xl font-bold text-brand-black">
@@ -171,7 +171,7 @@ export function FeaturedProducts({
             href="https://gentrystein.com/collections/shop-all"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm text-brand-teal hover:underline flex items-center gap-1 ml-2"
+            className="text-sm text-fun-blue hover:underline flex items-center gap-1 ml-2"
           >
             Shop All <ChevronRight className="w-4 h-4" />
           </a>
@@ -213,7 +213,7 @@ export function FeaturedProducts({
                 className={cn(
                   "w-2 h-2 rounded-full transition-colors",
                   Math.floor(currentIndex / visibleItems) === index
-                    ? "bg-brand-teal"
+                    ? "bg-xp"
                     : "bg-gray-300"
                 )}
               />
@@ -228,7 +228,7 @@ export function FeaturedProducts({
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="mt-6 p-4 rounded-xl bg-gradient-to-r from-brand-teal to-brand-blue text-white text-center"
+          className="mt-6 p-4 rounded-xl bg-gradient-to-r from-fun-blue to-brand-blue text-white text-center"
         >
           <p className="font-medium">
             Free US Domestic Shipping on Orders Over $70!

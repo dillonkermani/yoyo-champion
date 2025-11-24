@@ -68,9 +68,9 @@ export function TrickList({
                 className={cn(
                   "w-full flex items-center gap-4 p-4 rounded-xl border transition-all duration-200 text-left",
                   isLocked && "bg-surface-secondary border-border opacity-60 cursor-not-allowed",
-                  isCompleted && "bg-brand-green/5 border-brand-green/30 hover:border-brand-green/50",
+                  isCompleted && "bg-fun-blue/5 border-fun-blue/30 hover:border-fun-blue/50",
                   isInProgress && "bg-brand-blue/5 border-brand-blue/30 hover:border-brand-blue/50",
-                  isAvailable && "bg-white border-border hover:border-brand-teal/50 hover:shadow-sm",
+                  isAvailable && "bg-white border-border hover:border-fun-blue/50 hover:shadow-sm",
                   !isLocked && "cursor-pointer"
                 )}
               >
@@ -79,9 +79,9 @@ export function TrickList({
                   className={cn(
                     "flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm",
                     isLocked && "bg-surface-tertiary text-muted-foreground",
-                    isCompleted && "bg-brand-green text-brand-black",
+                    isCompleted && "bg-xp text-brand-black",
                     isInProgress && "bg-brand-blue text-brand-black",
-                    isAvailable && "bg-brand-teal/20 text-brand-teal"
+                    isAvailable && "bg-fun-blue/20 text-fun-blue"
                   )}
                 >
                   {isLocked ? (
@@ -150,7 +150,7 @@ export function TrickList({
                           key={i}
                           className={cn(
                             "w-3 h-3",
-                            i < trick.difficulty ? "text-brand-teal" : "text-border"
+                            i < trick.difficulty ? "text-fun-blue" : "text-border"
                           )}
                           fill="currentColor"
                           viewBox="0 0 24 24"
@@ -178,8 +178,8 @@ export function TrickList({
                     className={cn(
                       "flex-shrink-0 flex items-center gap-1 px-3 py-1.5 rounded-full text-sm font-semibold",
                       isLocked && "bg-surface-tertiary text-muted-foreground",
-                      isCompleted && "bg-brand-green/20 text-brand-green",
-                      (isInProgress || isAvailable) && "bg-brand-teal/10 text-brand-teal"
+                      isCompleted && "bg-fun-blue/20 text-fun-blue",
+                      (isInProgress || isAvailable) && "bg-fun-blue/10 text-fun-blue"
                     )}
                   >
                     <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
@@ -196,11 +196,11 @@ export function TrickList({
                       <path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                     </svg>
                   ) : isCompleted ? (
-                    <svg className="w-5 h-5 text-brand-green" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <svg className="w-5 h-5 text-fun-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                     </svg>
                   ) : (
-                    <svg className="w-5 h-5 text-brand-teal" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <svg className="w-5 h-5 text-fun-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                     </svg>
                   )}
@@ -250,7 +250,7 @@ export function TrickListCompact({
             <div
               className={cn(
                 "w-6 h-6 rounded-full flex items-center justify-center text-xs font-semibold",
-                isCompleted && "bg-brand-green text-brand-black",
+                isCompleted && "bg-xp text-brand-black",
                 isInProgress && "bg-brand-blue text-brand-black",
                 !isCompleted && !isInProgress && !isLocked && "bg-surface-secondary text-muted-foreground",
                 isLocked && "bg-surface-tertiary text-muted-foreground"

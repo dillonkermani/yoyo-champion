@@ -51,17 +51,17 @@ function YoYoLogo() {
       >
         {/* Decorative dots */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-brand-blue" />
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-3 h-3 rounded-full bg-brand-teal" />
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-3 h-3 rounded-full bg-xp" />
       </motion.div>
 
       {/* Inner circle */}
-      <div className="absolute inset-4 rounded-full bg-gradient-to-br from-brand-blue to-brand-teal flex items-center justify-center">
+      <div className="absolute inset-4 rounded-full bg-gradient-to-br from-brand-blue to-fun-purple flex items-center justify-center">
         <span className="text-white font-bold text-xl">YC</span>
       </div>
 
       {/* String */}
       <motion.div
-        className="absolute left-1/2 -translate-x-1/2 bottom-0 w-0.5 bg-gradient-to-b from-brand-teal to-transparent"
+        className="absolute left-1/2 -translate-x-1/2 bottom-0 w-0.5 bg-gradient-to-b from-fun-blue to-transparent"
         initial={{ height: 0 }}
         animate={{ height: 40 }}
         transition={{ delay: 0.5, duration: 0.3 }}
@@ -104,12 +104,12 @@ export function WelcomeStep() {
 
       {/* Gentry message card */}
       <motion.div variants={itemVariants} className="mb-6 sm:mb-8">
-        <Card className="bg-brand-green/30 border-brand-teal/20">
+        <Card className="bg-fun-blue/30 border-fun-blue/20">
           <CardContent className="p-4 sm:p-6">
             <div className="flex items-start gap-3 sm:gap-4">
               {/* Avatar placeholder */}
-              <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-brand-teal/20 flex items-center justify-center">
-                <Sparkles className="h-5 w-5 sm:h-6 sm:w-6 text-brand-teal" />
+              <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-fun-blue/20 flex items-center justify-center">
+                <Sparkles className="h-5 w-5 sm:h-6 sm:w-6 text-fun-blue" />
               </div>
               <div className="text-left">
                 <p className="font-semibold text-brand-black mb-1 text-sm sm:text-base">

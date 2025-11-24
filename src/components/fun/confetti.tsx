@@ -39,9 +39,9 @@ export interface ConfettiProps {
 }
 
 const defaultColors = [
+  "#1CB0F6", // aqua-blue
   "#9bedff", // brand-blue
-  "#91afa2", // brand-teal
-  "#e3f2e6", // brand-green
+  "#1CB0F6", // fun-blue (formerly brand-teal)
   "#FFD700", // gold
   "#FF6B6B", // coral
   "#A78BFA", // purple
@@ -229,7 +229,7 @@ export function SuccessConfetti({ active, onComplete }: { active: boolean; onCom
     <Confetti
       active={active}
       count={isMobile ? 30 : 60}
-      colors={["#91afa2", "#e3f2e6", "#9bedff", "#FFD700"]}
+      colors={["#1CB0F6", "#e3f2e6", "#9bedff", "#FFD700"]}
       duration={2.5}
       shapes={["circle", "square", "star"]}
       {...(onComplete ? { onComplete } : {})}

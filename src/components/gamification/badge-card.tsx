@@ -57,14 +57,14 @@ const rarityConfig = {
     ringColor: "ring-gray-300",
   },
   uncommon: {
-    bg: "bg-gradient-to-br from-green-50 to-emerald-100",
-    border: "border-green-300",
-    text: "text-green-700",
-    glow: "rgba(34, 197, 94, 0.4)",
-    glowColor: "#22C55E",
+    bg: "bg-gradient-to-br from-sky-50 to-cyan-100",
+    border: "border-fun-blue",
+    text: "text-fun-blue-dark",
+    glow: "rgba(28, 176, 246, 0.4)",
+    glowColor: "#1CB0F6",
     label: "Uncommon",
-    iconBg: "bg-gradient-to-br from-green-400 to-emerald-500",
-    ringColor: "ring-green-400",
+    iconBg: "bg-gradient-to-br from-fun-blue to-fun-blue-light",
+    ringColor: "ring-fun-blue",
   },
   rare: {
     bg: "bg-gradient-to-br from-blue-50 to-indigo-100",
@@ -148,7 +148,7 @@ const RainbowBorder = () => (
   <motion.div
     className="absolute inset-0 rounded-2xl pointer-events-none"
     style={{
-      background: "linear-gradient(90deg, #f59e0b, #ef4444, #8b5cf6, #3b82f6, #10b981, #f59e0b)",
+      background: "linear-gradient(90deg, #f59e0b, #ef4444, #8b5cf6, #1CB0F6, #9bedff, #f59e0b)",
       backgroundSize: "300% 100%",
       padding: "3px",
       WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",

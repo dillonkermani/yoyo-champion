@@ -49,7 +49,7 @@ export function ModuleProgress({
         <motion.div
           className={cn(
             "absolute left-0 top-1/2 h-1 -translate-y-1/2 rounded-full",
-            isModuleComplete ? "bg-brand-green" : "bg-brand-teal"
+            isModuleComplete ? "bg-xp" : "bg-xp"
           )}
           initial={{ width: 0 }}
           animate={{
@@ -76,10 +76,10 @@ export function ModuleProgress({
                 disabled={!isClickable}
                 className={cn(
                   "relative flex items-center justify-center w-10 h-10 rounded-full transition-all duration-200",
-                  stepStatus === "completed" && "bg-brand-green text-brand-black",
+                  stepStatus === "completed" && "bg-xp text-brand-black",
                   stepStatus === "in-progress" && "bg-brand-blue text-brand-black ring-4 ring-brand-blue/20",
-                  stepStatus === "current" && "bg-brand-teal text-white ring-4 ring-brand-teal/20",
-                  stepStatus === "available" && "bg-white border-2 border-brand-teal text-brand-teal",
+                  stepStatus === "current" && "bg-xp text-white ring-4 ring-fun-blue/20",
+                  stepStatus === "available" && "bg-white border-2 border-fun-blue text-fun-blue",
                   stepStatus === "locked" && "bg-surface-secondary border-2 border-border text-muted-foreground cursor-not-allowed",
                   isClickable && "cursor-pointer hover:scale-110"
                 )}
@@ -118,7 +118,7 @@ export function ModuleProgress({
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.4, delay: 0.2 }}
-          className="mt-4 flex items-center justify-center gap-2 text-brand-green"
+          className="mt-4 flex items-center justify-center gap-2 text-fun-blue"
         >
           <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
@@ -160,7 +160,7 @@ export function ModuleProgressVertical({
 
       {/* Progress fill */}
       <motion.div
-        className="absolute left-4 top-4 w-0.5 bg-brand-teal"
+        className="absolute left-4 top-4 w-0.5 bg-xp"
         initial={{ height: 0 }}
         animate={{
           height: `${(completedCount / tricks.length) * 100}%`,
@@ -187,9 +187,9 @@ export function ModuleProgressVertical({
               <div
                 className={cn(
                   "relative z-10 w-8 h-8 rounded-full flex items-center justify-center transition-all",
-                  isMastered && "bg-brand-green text-brand-black",
+                  isMastered && "bg-xp text-brand-black",
                   isInProgress && "bg-brand-blue text-brand-black",
-                  !isMastered && !isInProgress && "bg-white border-2 border-border text-muted-foreground group-hover:border-brand-teal"
+                  !isMastered && !isInProgress && "bg-white border-2 border-border text-muted-foreground group-hover:border-fun-blue"
                 )}
               >
                 {isMastered ? (
@@ -209,7 +209,7 @@ export function ModuleProgressVertical({
                   "text-sm flex-1 truncate",
                   isMastered && "text-muted-foreground line-through",
                   isInProgress && "text-brand-black font-medium",
-                  !isMastered && !isInProgress && "text-brand-black group-hover:text-brand-teal"
+                  !isMastered && !isInProgress && "text-brand-black group-hover:text-fun-blue"
                 )}
               >
                 {trick.name}

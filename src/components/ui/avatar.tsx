@@ -19,7 +19,7 @@ const avatarVariants = cva(
       },
       variant: {
         default: "ring-2 ring-gray-200",
-        brand: "ring-2 ring-brand-teal shadow-md shadow-brand-teal/25",
+        brand: "ring-2 ring-fun-blue shadow-md shadow-fun-blue/25",
         gold: "ring-2 ring-brand-gold shadow-md shadow-brand-gold/25",
         none: "",
       },
@@ -57,7 +57,7 @@ const Avatar = React.forwardRef<
           size === "lg" && "h-3 w-3",
           size === "xl" && "h-3.5 w-3.5",
           size === "2xl" && "h-4 w-4",
-          online ? "bg-emerald-500" : "bg-gray-400"
+          online ? "bg-xp" : "bg-gray-400"
         )}
       />
     )}

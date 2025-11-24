@@ -8,7 +8,7 @@ export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   elevated?: boolean;
   hover?: boolean;
   variant?: "default" | "fun" | "achievement" | "streak" | "xp" | "lesson";
-  glowColor?: "green" | "blue" | "purple" | "orange" | "yellow" | "red" | "pink";
+  glowColor?: "teal" | "blue" | "purple" | "orange" | "yellow" | "red" | "pink";
 }
 
 const variantStyles = {
@@ -21,7 +21,7 @@ const variantStyles = {
 };
 
 const glowStyles = {
-  green: "hover:shadow-fun-blue",
+  teal: "hover:shadow-fun-blue",
   blue: "hover:shadow-fun-blue",
   purple: "hover:shadow-fun-purple",
   orange: "hover:shadow-fun-orange",

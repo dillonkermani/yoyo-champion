@@ -154,7 +154,7 @@ export default function PathsPage() {
             </div>
 
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-full bg-brand-green/50 flex items-center justify-center">
+              <div className="w-8 h-8 rounded-full bg-fun-blue/50 flex items-center justify-center">
                 <svg
                   className="w-4 h-4 text-brand-black"
                   fill="none"

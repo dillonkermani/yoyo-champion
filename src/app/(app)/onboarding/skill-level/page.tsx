@@ -92,9 +92,9 @@ const skillLevelConfig: Record<SkillLevel, {
   expert: {
     icon: <Trophy className="h-6 w-6" />,
     emoji: "👑",
-    color: "text-fun-xp",
-    bgColor: "bg-fun-xp/20",
-    borderColor: "border-fun-xp",
+    color: "text-xp",
+    bgColor: "bg-xp/20",
+    borderColor: "border-xp",
     description: "Master level - time for world-class techniques!",
   },
 };
@@ -312,7 +312,7 @@ export default function SkillLevelPage() {
               <HelpCircle className="h-5 w-5 text-fun-blue" />
             </div>
             <span>Not sure? Take a quick skill quiz</span>
-            <Zap className="w-4 h-4 text-fun-xp" />
+            <Zap className="w-4 h-4 text-xp" />
           </motion.button>
         </motion.div>
 

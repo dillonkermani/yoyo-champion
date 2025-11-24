@@ -9,7 +9,7 @@ import type { TrickDifficulty, YoYoStyle, TrickGenre } from "@/lib/data/types";
 
 // Filter configuration
 const difficultyOptions: { value: TrickDifficulty; label: string; color: string }[] = [
-  { value: 1, label: "Beginner", color: "bg-emerald-100 text-emerald-700 border-emerald-300 active:bg-emerald-200" },
+  { value: 1, label: "Beginner", color: "bg-fun-blue/10 text-fun-blue-dark border-fun-blue/30 active:bg-fun-blue/20" },
   { value: 2, label: "Intermediate", color: "bg-yellow-100 text-yellow-700 border-yellow-300 active:bg-yellow-200" },
   { value: 3, label: "Advanced", color: "bg-orange-100 text-orange-700 border-orange-300 active:bg-orange-200" },
   { value: 4, label: "Expert", color: "bg-red-100 text-red-700 border-red-300 active:bg-red-200" },
@@ -202,7 +202,7 @@ export function TrickFilters({
               className={cn(
                 "px-2.5 py-1.5 sm:px-3 sm:py-1.5 rounded-full text-xs font-semibold border transition-all duration-200 min-h-[36px] touch-manipulation",
                 filters.status === option.value
-                  ? "bg-brand-teal/20 text-brand-teal border-brand-teal"
+                  ? "bg-fun-blue/20 text-fun-blue border-fun-blue"
                   : "bg-white border-gray-300 text-gray-600 active:border-gray-400 active:text-gray-800"
               )}
             >
@@ -255,7 +255,7 @@ export function TrickFilters({
               className={cn(
                 "px-3 py-2 rounded-lg text-xs font-semibold border transition-all duration-200 min-h-[40px] touch-manipulation",
                 filters.sortBy === option.value
-                  ? "bg-brand-teal/20 text-brand-teal border-brand-teal"
+                  ? "bg-fun-blue/20 text-fun-blue border-fun-blue"
                   : "bg-white border-gray-300 text-gray-600 active:border-gray-400 active:text-gray-800"
               )}
             >
@@ -296,7 +296,7 @@ export function TrickFilters({
             </svg>
             <span className="font-medium text-gray-800">Filters</span>
             {hasActiveFilters && (
-              <span className="px-2 py-0.5 rounded-full bg-brand-teal/20 text-brand-teal text-xs font-semibold">
+              <span className="px-2 py-0.5 rounded-full bg-fun-blue/20 text-fun-blue text-xs font-semibold">
                 Active
               </span>
             )}

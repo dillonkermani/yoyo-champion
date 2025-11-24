@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Twitter, Instagram, Youtube, Github } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Separator } from "@/components/ui/separator";
@@ -45,9 +46,13 @@ export function Footer({ className, variant = "default" }: FooterProps) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-2">
-              <span className="text-lg font-bold text-gray-900">
-                YoYo<span className="text-brand-teal">Champion</span>
-              </span>
+              <Image
+                src="/images/logo.avif"
+                alt="YoYoChampion"
+                width={120}
+                height={32}
+                className="h-6 w-auto"
+              />
             </div>
             <p className="text-sm text-gray-500">
               {currentYear} YoYoChampion. All rights reserved.
@@ -66,16 +71,20 @@ export function Footer({ className, variant = "default" }: FooterProps) {
           {/* Brand section */}
           <div className="lg:col-span-1">
             <Link href="/" className="inline-block">
-              <span className="text-xl font-bold text-gray-900">
-                YoYo<span className="text-brand-teal">Champion</span>
-              </span>
+              <Image
+                src="/images/logo.avif"
+                alt="YoYoChampion"
+                width={150}
+                height={40}
+                className="h-8 w-auto"
+              />
             </Link>
             <p className="mt-4 text-sm text-gray-600 max-w-xs">
               Master yo-yo tricks with world champion-approved tutorials.
               From beginner to competition-ready.
             </p>
-            <div className="mt-4 inline-flex items-center gap-2 px-3 py-1.5 bg-brand-teal/10 rounded-full">
-              <span className="text-xs font-semibold text-brand-teal">
+            <div className="mt-4 inline-flex items-center gap-2 px-3 py-1.5 bg-fun-blue/10 rounded-full">
+              <span className="text-xs font-semibold text-fun-blue">
                 World Champion Approved
               </span>
             </div>
@@ -88,7 +97,7 @@ export function Footer({ className, variant = "default" }: FooterProps) {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-brand-teal transition-colors"
+                  className="text-gray-400 hover:text-fun-blue transition-colors"
                   aria-label={social.label}
                 >
                   <social.icon className="h-5 w-5" />
@@ -107,7 +116,7 @@ export function Footer({ className, variant = "default" }: FooterProps) {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-gray-600 hover:text-brand-teal transition-colors"
+                    className="text-sm text-gray-600 hover:text-fun-blue transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -126,7 +135,7 @@ export function Footer({ className, variant = "default" }: FooterProps) {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-gray-600 hover:text-brand-teal transition-colors"
+                    className="text-sm text-gray-600 hover:text-fun-blue transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -145,7 +154,7 @@ export function Footer({ className, variant = "default" }: FooterProps) {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-gray-600 hover:text-brand-teal transition-colors"
+                    className="text-sm text-gray-600 hover:text-fun-blue transition-colors"
                   >
                     {link.label}
                   </Link>

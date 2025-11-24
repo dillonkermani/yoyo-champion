@@ -109,7 +109,7 @@ function GoalOption({ goal, isSelected, onToggle }: GoalOptionProps) {
           "cursor-pointer transition-all duration-200 p-4 select-none",
           isSelected
             ? "border-2 border-brand-blue bg-brand-blue/5 shadow-card"
-            : "border border-border hover:border-brand-teal/50"
+            : "border border-border hover:border-fun-blue/50"
         )}
       >
         <div className="flex items-center gap-3">

@@ -104,7 +104,7 @@ export default function WelcomePage() {
           >
             {/* Decorative sparkles */}
             <motion.div
-              className="absolute top-4 right-4 text-fun-xp"
+              className="absolute top-4 right-4 text-xp"
               animate={{ rotate: [0, 15, -15, 0], scale: [1, 1.2, 1] }}
               transition={{ duration: 2, repeat: Infinity }}
             >
@@ -123,7 +123,7 @@ export default function WelcomePage() {
               <div className="text-left">
                 <p className="font-bold text-gray-900 mb-1 flex items-center gap-2">
                   From Gentry Stein
-                  <span className="text-fun-xp">🏆</span>
+                  <span className="text-xp">🏆</span>
                 </p>
                 <p className="text-gray-600 text-sm leading-relaxed">
                   &quot;Hey there! I&apos;m so excited to help you on your yo-yo
@@ -177,10 +177,10 @@ export default function WelcomePage() {
           className="grid grid-cols-2 gap-3 mb-8"
         >
           <motion.div
-            className="flex items-center gap-2 p-3 rounded-xl bg-fun-xp/10 border border-fun-xp/20"
+            className="flex items-center gap-2 p-3 rounded-xl bg-xp/10 border border-xp/20"
             whileHover={{ scale: 1.02 }}
           >
-            <div className="w-8 h-8 rounded-full bg-fun-xp/20 flex items-center justify-center">
+            <div className="w-8 h-8 rounded-full bg-xp/20 flex items-center justify-center">
               <Trophy className="w-4 h-4 text-fun-accent" />
             </div>
             <div className="text-left">
@@ -190,11 +190,11 @@ export default function WelcomePage() {
           </motion.div>
 
           <motion.div
-            className="flex items-center gap-2 p-3 rounded-xl bg-fun-streak/10 border border-fun-streak/20"
+            className="flex items-center gap-2 p-3 rounded-xl bg-streak/10 border border-streak/20"
             whileHover={{ scale: 1.02 }}
           >
-            <div className="w-8 h-8 rounded-full bg-fun-streak/20 flex items-center justify-center">
-              <Zap className="w-4 h-4 text-fun-streak" />
+            <div className="w-8 h-8 rounded-full bg-streak/20 flex items-center justify-center">
+              <Zap className="w-4 h-4 text-streak" />
             </div>
             <div className="text-left">
               <p className="text-xs font-bold text-gray-900">Build Streaks</p>

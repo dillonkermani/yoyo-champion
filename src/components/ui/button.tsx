@@ -31,14 +31,14 @@ const buttonVariants = cva(
           "rounded-2xl bg-brand-blue text-brand-black font-bold shadow-fun-blue hover:bg-brand-blue/90 hover:-translate-y-0.5 active:translate-y-0 active:scale-95",
         // Link style
         link: "text-fun-blue underline-offset-4 hover:underline",
-        // Teal variant
+        // Gold variant (formerly teal)
         teal:
-          "rounded-2xl bg-brand-teal text-white font-bold hover:bg-brand-teal/90 hover:-translate-y-0.5 active:translate-y-0 active:scale-95",
+          "rounded-2xl bg-xp text-brand-black font-bold hover:bg-xp-light hover:-translate-y-0.5 active:translate-y-0 active:scale-95",
 
         // === NEW FUN VARIANTS ===
-        // Success - Brand Teal (like completing a lesson)
+        // Success - Gold (like completing a lesson/achievement)
         success:
-          "rounded-2xl bg-brand-teal text-white shadow-fun-blue-lg hover:bg-brand-teal/90 hover:-translate-y-1 hover:shadow-glow-blue active:translate-y-0 active:scale-95",
+          "rounded-2xl bg-xp text-brand-black shadow-fun-yellow-lg hover:bg-xp-light hover:-translate-y-1 hover:shadow-glow-yellow active:translate-y-0 active:scale-95",
         // Streak - Fire gradient for streaks
         streak:
           "rounded-2xl text-white shadow-fun-red hover:-translate-y-1 active:translate-y-0 active:scale-95 bg-gradient-to-r from-fun-red to-fun-orange hover:shadow-glow-red",
@@ -207,14 +207,14 @@ MotionButton.displayName = "MotionButton";
 export interface IconButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   icon: React.ReactNode;
-  color?: "green" | "blue" | "purple" | "orange" | "yellow" | "red" | "pink";
+  color?: "teal" | "blue" | "purple" | "orange" | "yellow" | "red" | "pink";
   glow?: boolean;
 }
 
 const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
   ({ className, icon, color = "blue", glow = false, ...props }, ref) => {
     const colorClasses = {
-      green: "bg-brand-teal text-white hover:bg-brand-teal/90 shadow-fun-blue",
+      teal: "bg-xp text-brand-black hover:bg-xp-light shadow-fun-yellow",
       blue: "bg-fun-blue text-white hover:bg-fun-blue-light shadow-fun-blue",
       purple: "bg-fun-purple text-white hover:bg-fun-purple-light shadow-fun-purple",
       orange: "bg-fun-orange text-white hover:bg-fun-orange-light shadow-fun-orange",
@@ -224,7 +224,7 @@ const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
     };
 
     const glowClasses = {
-      green: "hover:shadow-glow-blue",
+      teal: "hover:shadow-glow-blue",
       blue: "hover:shadow-glow-blue",
       purple: "hover:shadow-glow-purple",
       orange: "hover:shadow-glow-blue",

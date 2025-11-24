@@ -59,7 +59,7 @@ function SkillOption({ level, isSelected, onClick, icon }: SkillOptionProps) {
         "cursor-pointer transition-all duration-200 p-3 sm:p-4 min-h-[72px] touch-manipulation",
         isSelected
           ? "border-2 border-brand-blue bg-brand-blue/5 shadow-elevated"
-          : "border border-border active:border-brand-teal/50 active:shadow-card sm:hover:border-brand-teal/50 sm:hover:shadow-card"
+          : "border border-border active:border-fun-blue/50 active:shadow-card sm:hover:border-fun-blue/50 sm:hover:shadow-card"
       )}
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
@@ -188,7 +188,7 @@ export function SkillLevelStep() {
           onClick={() => setShowQuiz(true)}
           className="w-full flex items-center justify-center gap-2 h-12 sm:h-14 min-h-[48px] touch-manipulation"
         >
-          <HelpCircle className="h-5 w-5 text-brand-teal" />
+          <HelpCircle className="h-5 w-5 text-fun-blue" />
           <span className="text-sm sm:text-base">Not sure? Take a quick skill quiz</span>
         </Button>
       </motion.div>

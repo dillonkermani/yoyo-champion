@@ -134,7 +134,7 @@ export const SpeedBadge: React.FC<SpeedBadgeProps> = ({ speed, className }) => {
         "inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium",
         speed < 1
           ? "bg-amber-500/20 text-amber-400"
-          : "bg-emerald-500/20 text-emerald-400",
+          : "bg-fun-blue/20 text-fun-blue",
         className
       )}
     >

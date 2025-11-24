@@ -363,7 +363,7 @@ export default function ModuleDetailPage() {
             >
               {/* Module number and badges */}
               <div className="flex flex-wrap items-center gap-3 mb-3">
-                <span className="text-sm font-semibold text-brand-teal">
+                <span className="text-sm font-semibold text-fun-blue">
                   Module {moduleIndex + 1} of {path.modules.length}
                 </span>
                 <DifficultyBadge level={difficultyLevelMap[path.difficulty]} />
@@ -395,7 +395,7 @@ export default function ModuleDetailPage() {
               {/* Stats Row */}
               <div className="flex flex-wrap items-center gap-4 md:gap-6 mt-6 text-sm">
                 <div className="flex items-center gap-2">
-                  <svg className="w-5 h-5 text-brand-teal" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <svg className="w-5 h-5 text-fun-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
                   </svg>
                   <span className="font-semibold text-brand-black">
@@ -404,7 +404,7 @@ export default function ModuleDetailPage() {
                   <span className="text-muted-foreground">tricks completed</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <svg className="w-5 h-5 text-brand-teal" fill="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-5 h-5 text-fun-blue" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
                   </svg>
                   <span className="font-semibold text-brand-black">
@@ -414,7 +414,7 @@ export default function ModuleDetailPage() {
                 </div>
                 {!isComplete && (
                   <div className="flex items-center gap-2">
-                    <svg className="w-5 h-5 text-brand-teal" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <svg className="w-5 h-5 text-fun-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                     <span className="font-semibold text-brand-black">{estimatedTimeRemaining}</span>
@@ -427,7 +427,7 @@ export default function ModuleDetailPage() {
               <div className="mt-6 max-w-md">
                 <div className="flex items-center justify-between text-sm mb-2">
                   <span className="text-muted-foreground">Progress</span>
-                  <span className={cn("font-semibold", isComplete ? "text-brand-green" : "text-brand-teal")}>
+                  <span className={cn("font-semibold", isComplete ? "text-fun-blue" : "text-fun-blue")}>
                     {moduleProgress.percentage}%
                   </span>
                 </div>
@@ -435,7 +435,7 @@ export default function ModuleDetailPage() {
                   <motion.div
                     className={cn(
                       "h-full rounded-full",
-                      isComplete ? "bg-brand-green" : "bg-brand-teal"
+                      isComplete ? "bg-xp" : "bg-xp"
                     )}
                     initial={{ width: 0 }}
                     animate={{ width: `${moduleProgress.percentage}%` }}
@@ -460,7 +460,7 @@ export default function ModuleDetailPage() {
                   Module Locked
                 </div>
               ) : isComplete ? (
-                <div className="px-6 py-3 rounded-full bg-brand-green text-brand-black font-semibold text-center">
+                <div className="px-6 py-3 rounded-full bg-xp text-brand-black font-semibold text-center">
                   <svg className="w-5 h-5 inline-block mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                   </svg>
@@ -522,9 +522,9 @@ export default function ModuleDetailPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: 0.2 }}
-                className="mt-8 p-6 rounded-xl border-2 border-brand-green bg-brand-green/5 text-center"
+                className="mt-8 p-6 rounded-xl border-2 border-fun-blue bg-fun-blue/5 text-center"
               >
-                <div className="flex items-center justify-center gap-2 text-brand-green mb-2">
+                <div className="flex items-center justify-center gap-2 text-fun-blue mb-2">
                   <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
                   </svg>
@@ -539,7 +539,7 @@ export default function ModuleDetailPage() {
                 {nextModule && (
                   <Link
                     href={`/paths/${path.slug}/${nextModule.id}`}
-                    className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-brand-teal text-white font-semibold hover:bg-brand-teal/90 transition-colors"
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-xp text-white font-semibold hover:bg-fun-blue/90 transition-colors"
                   >
                     Next Module: {nextModule.title}
                     <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -561,8 +561,8 @@ export default function ModuleDetailPage() {
               className="rounded-xl border border-border bg-white p-6"
             >
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-full bg-brand-teal/20 flex items-center justify-center flex-shrink-0">
-                  <svg className="w-7 h-7 text-brand-teal" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <div className="w-12 h-12 rounded-full bg-fun-blue/20 flex items-center justify-center flex-shrink-0">
+                  <svg className="w-7 h-7 text-fun-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
@@ -586,7 +586,7 @@ export default function ModuleDetailPage() {
               <ul className="space-y-3">
                 {learningPoints.map((point, index) => (
                   <li key={index} className="flex items-start gap-3">
-                    <svg className="w-5 h-5 text-brand-teal flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <svg className="w-5 h-5 text-fun-blue flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                     </svg>
                     <span className="text-sm text-brand-black">{point}</span>
@@ -609,7 +609,7 @@ export default function ModuleDetailPage() {
                 <ul className="space-y-2">
                   {prerequisites.map((prereq, index) => (
                     <li key={index} className="flex items-center gap-2 text-sm">
-                      <svg className="w-4 h-4 text-brand-teal" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <svg className="w-4 h-4 text-fun-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                       </svg>
                       <span className="text-brand-black">{prereq}</span>
@@ -631,7 +631,7 @@ export default function ModuleDetailPage() {
                 {previousModule ? (
                   <Link
                     href={`/paths/${path.slug}/${previousModule.id}`}
-                    className="flex items-center gap-2 px-4 py-3 rounded-xl border border-border bg-white hover:border-brand-teal/30 transition-colors"
+                    className="flex items-center gap-2 px-4 py-3 rounded-xl border border-border bg-white hover:border-fun-blue/30 transition-colors"
                   >
                     <svg className="w-4 h-4 text-muted-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
@@ -649,7 +649,7 @@ export default function ModuleDetailPage() {
                 {nextModule ? (
                   <Link
                     href={`/paths/${path.slug}/${nextModule.id}`}
-                    className="flex items-center gap-2 px-4 py-3 rounded-xl border border-border bg-white hover:border-brand-teal/30 transition-colors text-right"
+                    className="flex items-center gap-2 px-4 py-3 rounded-xl border border-border bg-white hover:border-fun-blue/30 transition-colors text-right"
                   >
                     <div className="flex-1 min-w-0">
                       <p className="text-xs text-muted-foreground">Next</p>
@@ -669,7 +669,7 @@ export default function ModuleDetailPage() {
               {/* Back to Path */}
               <Link
                 href={`/paths/${path.slug}`}
-                className="flex items-center justify-center gap-2 w-full px-4 py-3 rounded-xl border border-border bg-white hover:border-brand-teal/30 transition-colors text-center"
+                className="flex items-center justify-center gap-2 w-full px-4 py-3 rounded-xl border border-border bg-white hover:border-fun-blue/30 transition-colors text-center"
               >
                 <svg className="w-4 h-4 text-muted-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />

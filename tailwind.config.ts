@@ -14,14 +14,11 @@ const config: Config = {
         "brand-white": "#ffffff",
         "brand-black": "#151515",
         "brand-blue": "#9bedff",
-        "brand-teal": "#91afa2",
-        "brand-green": "#e3f2e6",
+        // brand-teal removed - use fun-blue or xp instead
         brand: {
           white: "#ffffff",
           black: "#151515",
           blue: "#9bedff",
-          teal: "#91afa2",
-          green: "#e3f2e6",
         },
 
         // Primary Colors - Aqua Blue Theme
@@ -68,9 +65,10 @@ const config: Config = {
           blue: "#1CB0F6",
           "blue-light": "#4DC4F9",
           "blue-dark": "#0095DB",
-          green: "#58CC02",
-          "green-light": "#7ED321",
-          "green-dark": "#46A302",
+          // Note: green removed - use fun-blue instead
+          green: "#1CB0F6",
+          "green-light": "#4DC4F9",
+          "green-dark": "#0095DB",
           purple: "#CE82FF",
           "purple-light": "#E5B8FF",
           "purple-dark": "#A855F7",
@@ -361,7 +359,7 @@ const config: Config = {
         "gradient-blue": "linear-gradient(135deg, #1CB0F6 0%, #4DC4F9 100%)",
         "gradient-purple": "linear-gradient(135deg, #CE82FF 0%, #E5B8FF 100%)",
         "gradient-rainbow":
-          "linear-gradient(90deg, #FF4B4B, #FF9600, #FFC800, #58CC02, #1CB0F6, #CE82FF)",
+          "linear-gradient(90deg, #FF4B4B, #FF9600, #FFC800, #1CB0F6, #9bedff, #CE82FF)",
         "gradient-celebration":
           "linear-gradient(135deg, #FF4B4B 0%, #FF9600 25%, #FFC800 50%, #1CB0F6 75%, #9bedff 100%)",
       },
@@ -370,8 +368,8 @@ const config: Config = {
         card: "0 2px 8px rgba(0, 0, 0, 0.06)",
         elevated: "0 4px 16px rgba(0, 0, 0, 0.1)",
         // Colored shadows for fun effects
-        "fun-green": "0 4px 14px rgba(88, 204, 2, 0.4)",
-        "fun-green-lg": "0 8px 25px rgba(88, 204, 2, 0.35)",
+        "fun-green": "0 4px 14px rgba(28, 176, 246, 0.4)",
+        "fun-green-lg": "0 8px 25px rgba(28, 176, 246, 0.35)",
         "fun-blue": "0 4px 14px rgba(28, 176, 246, 0.4)",
         "fun-blue-lg": "0 8px 25px rgba(28, 176, 246, 0.35)",
         "fun-purple": "0 4px 14px rgba(206, 130, 255, 0.4)",
@@ -385,7 +383,7 @@ const config: Config = {
         "fun-pink": "0 4px 14px rgba(255, 134, 208, 0.4)",
         "fun-pink-lg": "0 8px 25px rgba(255, 134, 208, 0.35)",
         // Glow shadows
-        "glow-green": "0 0 20px rgba(88, 204, 2, 0.5), 0 0 40px rgba(88, 204, 2, 0.3)",
+        "glow-green": "0 0 20px rgba(28, 176, 246, 0.5), 0 0 40px rgba(28, 176, 246, 0.3)",
         "glow-blue": "0 0 20px rgba(28, 176, 246, 0.5), 0 0 40px rgba(28, 176, 246, 0.3)",
         "glow-purple": "0 0 20px rgba(206, 130, 255, 0.5), 0 0 40px rgba(206, 130, 255, 0.3)",
         "glow-yellow": "0 0 20px rgba(255, 200, 0, 0.5), 0 0 40px rgba(255, 200, 0, 0.3)",
@@ -394,7 +392,7 @@ const config: Config = {
         "button-pressed": "inset 0 3px 5px rgba(0, 0, 0, 0.2)",
       },
       dropShadow: {
-        "fun-green": "0 4px 8px rgba(88, 204, 2, 0.4)",
+        "fun-green": "0 4px 8px rgba(28, 176, 246, 0.4)",
         "fun-blue": "0 4px 8px rgba(28, 176, 246, 0.4)",
         "fun-purple": "0 4px 8px rgba(206, 130, 255, 0.4)",
         "fun-yellow": "0 4px 8px rgba(255, 200, 0, 0.5)",

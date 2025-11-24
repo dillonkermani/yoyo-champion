@@ -65,7 +65,7 @@ export default function SignupPage() {
     if (/[^A-Za-z0-9]/.test(password)) strength++;
 
     const labels = ["", "Weak", "Fair", "Good", "Strong"];
-    const colors = ["", "bg-red-500", "bg-orange-500", "bg-yellow-500", "bg-green-500"];
+    const colors = ["", "bg-red-500", "bg-orange-500", "bg-yellow-500", "bg-fun-blue"];
     return { strength, label: labels[strength], color: colors[strength] };
   };
 
@@ -259,11 +259,11 @@ export default function SignupPage() {
               </button>
               <label className="text-sm text-gray-600">
                 I agree to the{" "}
-                <Link href="/terms" className="text-brand-teal hover:underline">
+                <Link href="/terms" className="text-fun-blue hover:underline">
                   Terms of Service
                 </Link>{" "}
                 and{" "}
-                <Link href="/privacy" className="text-brand-teal hover:underline">
+                <Link href="/privacy" className="text-fun-blue hover:underline">
                   Privacy Policy
                 </Link>
               </label>
@@ -353,7 +353,7 @@ export default function SignupPage() {
         {/* Login Link */}
         <p className="text-center mt-6 text-gray-600">
           Already have an account?{" "}
-          <Link href="/login" className="text-brand-teal font-semibold hover:text-brand-teal/80 transition-colors">
+          <Link href="/login" className="text-fun-blue font-semibold hover:text-fun-blue/80 transition-colors">
             Log in
           </Link>
         </p>

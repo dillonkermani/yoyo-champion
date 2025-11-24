@@ -16,7 +16,7 @@ const difficultyConfig: Record<
   1: { label: "Beginner", color: "text-fun-primary", bgColor: "bg-fun-primary/20", stars: 1 },
   2: { label: "Intermediate", color: "text-fun-accent", bgColor: "bg-fun-accent/20", stars: 2 },
   3: { label: "Advanced", color: "text-orange-600", bgColor: "bg-orange-100", stars: 3 },
-  4: { label: "Expert", color: "text-fun-streak", bgColor: "bg-fun-streak/20", stars: 4 },
+  4: { label: "Expert", color: "text-streak", bgColor: "bg-streak/20", stars: 4 },
   5: { label: "Master", color: "text-fun-purple", bgColor: "bg-fun-purple/20", stars: 5 },
 };
 
@@ -82,8 +82,8 @@ const genreColors: Record<string, { bg: string; text: string }> = {
   slack: { bg: "bg-fun-purple/20", text: "text-purple-700" },
   tech: { bg: "bg-cyan-100", text: "text-cyan-700" },
   flow: { bg: "bg-pink-100", text: "text-pink-700" },
-  horizontal: { bg: "bg-fun-xp/20", text: "text-amber-700" },
-  speed: { bg: "bg-fun-streak/20", text: "text-red-700" },
+  horizontal: { bg: "bg-xp/20", text: "text-amber-700" },
+  speed: { bg: "bg-streak/20", text: "text-red-700" },
   grinds: { bg: "bg-orange-100", text: "text-orange-700" },
   regens: { bg: "bg-lime-100", text: "text-lime-700" },
   hops: { bg: "bg-indigo-100", text: "text-indigo-700" },

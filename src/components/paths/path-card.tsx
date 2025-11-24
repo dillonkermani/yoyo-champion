@@ -35,7 +35,7 @@ export function PathCard({ path, progress, className }: PathCardProps) {
       <motion.div
         className={cn(
           "group relative rounded-xl border border-border bg-white overflow-hidden transition-all duration-300",
-          "hover:border-brand-teal/30 hover:shadow-elevated",
+          "hover:border-fun-blue/30 hover:shadow-elevated",
           className
         )}
         whileHover={{ y: -4, scale: 1.01 }}
@@ -44,7 +44,7 @@ export function PathCard({ path, progress, className }: PathCardProps) {
         {/* Thumbnail Section */}
         <div className="relative aspect-[16/9] bg-surface-secondary overflow-hidden">
           {/* Placeholder gradient background */}
-          <div className="absolute inset-0 bg-gradient-to-br from-brand-blue/30 to-brand-teal/30" />
+          <div className="absolute inset-0 bg-gradient-to-br from-brand-blue/30 to-fun-purple/30" />
 
           {/* Preview overlay on hover */}
           <div className="absolute inset-0 bg-brand-black/0 group-hover:bg-brand-black/10 transition-all duration-300" />
@@ -72,7 +72,7 @@ export function PathCard({ path, progress, className }: PathCardProps) {
 
           {/* Completion Badge */}
           {isComplete && (
-            <div className="absolute top-3 right-3 w-10 h-10 rounded-full bg-brand-green flex items-center justify-center shadow-lg">
+            <div className="absolute top-3 right-3 w-10 h-10 rounded-full bg-xp flex items-center justify-center shadow-lg">
               <svg className="w-6 h-6 text-brand-black" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
               </svg>
@@ -82,7 +82,7 @@ export function PathCard({ path, progress, className }: PathCardProps) {
           {/* XP Badge */}
           <div className="absolute bottom-3 left-3">
             <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/90 backdrop-blur-sm text-xs font-semibold text-brand-black shadow-sm">
-              <svg className="w-4 h-4 text-brand-teal" fill="currentColor" viewBox="0 0 24 24">
+              <svg className="w-4 h-4 text-fun-blue" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
               </svg>
               {path.totalXp.toLocaleString()} XP
@@ -103,7 +103,7 @@ export function PathCard({ path, progress, className }: PathCardProps) {
         {/* Content Section */}
         <div className="p-5 space-y-4">
           {/* Title */}
-          <h3 className="font-semibold text-brand-black text-lg leading-tight line-clamp-2 group-hover:text-brand-teal transition-colors">
+          <h3 className="font-semibold text-brand-black text-lg leading-tight line-clamp-2 group-hover:text-fun-blue transition-colors">
             {path.title}
           </h3>
 
@@ -131,7 +131,7 @@ export function PathCard({ path, progress, className }: PathCardProps) {
                 <span className="text-muted-foreground">
                   {progress.completed} of {progress.total} tricks completed
                 </span>
-                <span className="font-semibold text-brand-teal">
+                <span className="font-semibold text-fun-blue">
                   {progress.percentage}%
                 </span>
               </div>
@@ -139,7 +139,7 @@ export function PathCard({ path, progress, className }: PathCardProps) {
                 <motion.div
                   className={cn(
                     "h-full rounded-full",
-                    isComplete ? "bg-brand-green" : "bg-brand-blue"
+                    isComplete ? "bg-xp" : "bg-brand-blue"
                   )}
                   initial={{ width: 0 }}
                   animate={{ width: `${progress.percentage}%` }}
@@ -151,9 +151,9 @@ export function PathCard({ path, progress, className }: PathCardProps) {
 
           {/* Instructor Info */}
           <div className="flex items-center gap-3 pt-2 border-t border-border">
-            <div className="w-8 h-8 rounded-full bg-brand-teal/20 flex items-center justify-center overflow-hidden">
+            <div className="w-8 h-8 rounded-full bg-fun-blue/20 flex items-center justify-center overflow-hidden">
               {/* Avatar placeholder */}
-              <span className="text-xs font-semibold text-brand-teal">
+              <span className="text-xs font-semibold text-fun-blue">
                 {path.instructor.name.split(' ').map(n => n[0]).join('')}
               </span>
             </div>

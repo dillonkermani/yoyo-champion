@@ -109,7 +109,7 @@ export function Sidebar({ className }: SidebarProps) {
               variant="brand"
             >
               <AvatarImage src={user.avatarUrl} alt={displayName} />
-              <AvatarFallback className="bg-brand-teal text-white">
+              <AvatarFallback className="bg-fun-blue text-white">
                 {initials}
               </AvatarFallback>
             </Avatar>
@@ -124,10 +124,10 @@ export function Sidebar({ className }: SidebarProps) {
                   {displayName}
                 </p>
                 <div className="flex items-center gap-1.5 mt-0.5">
-                  <span className="text-xs font-medium text-brand-teal">
+                  <span className="text-xs font-medium text-xp-dark">
                     Level {level}
                   </span>
-                  <Zap className="h-3 w-3 text-brand-teal" />
+                  <Zap className="h-3 w-3 text-xp" />
                 </div>
               </motion.div>
             )}
@@ -148,16 +148,16 @@ export function Sidebar({ className }: SidebarProps) {
               </div>
               <Progress
                 value={xpPercentage}
-                variant="fun"
+                variant="xp"
                 size="sm"
-                className="bg-gray-100"
+                className="bg-gray-200"
               />
             </motion.div>
           )}
 
           {!sidebarOpen && (
             <div className="mt-2 text-center">
-              <span className="text-xs font-bold text-brand-teal">Lv.{level}</span>
+              <span className="text-xs font-bold text-xp-dark">Lv.{level}</span>
             </div>
           )}
         </div>
@@ -192,7 +192,7 @@ export function Sidebar({ className }: SidebarProps) {
                           "flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all",
                           sidebarOpen ? "justify-start" : "justify-center",
                           isActive
-                            ? "bg-brand-teal/10 text-brand-teal"
+                            ? "bg-fun-blue/10 text-fun-blue"
                             : "text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                         )}
                         title={!sidebarOpen ? item.label : undefined}
@@ -201,7 +201,7 @@ export function Sidebar({ className }: SidebarProps) {
                           className={cn(
                             "flex-shrink-0 transition-colors",
                             sidebarOpen ? "h-5 w-5" : "h-6 w-6",
-                            isActive ? "text-brand-teal" : "text-gray-600"
+                            isActive ? "text-fun-blue" : "text-gray-600"
                           )}
                         />
                         {sidebarOpen && (
@@ -216,7 +216,7 @@ export function Sidebar({ className }: SidebarProps) {
                         {isActive && sidebarOpen && (
                           <motion.div
                             layoutId="sidebar-active-indicator"
-                            className="absolute left-0 w-1 h-6 bg-brand-teal rounded-r-full"
+                            className="absolute left-0 w-1 h-6 bg-fun-blue rounded-r-full"
                             transition={{ type: "spring", bounce: 0.2, duration: 0.4 }}
                           />
                         )}

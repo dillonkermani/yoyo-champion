@@ -68,7 +68,7 @@ const ToggleSwitch: React.FC<ToggleSwitchProps> = ({ checked, onCheckedChange, d
     onClick={() => onCheckedChange(!checked)}
     className={cn(
       "relative inline-flex h-6 w-11 items-center rounded-full transition-colors",
-      checked ? "bg-brand-teal" : "bg-gray-200",
+      checked ? "bg-xp" : "bg-gray-200",
       disabled && "opacity-50 cursor-not-allowed"
     )}
   >
@@ -130,7 +130,7 @@ const AccountSettings: React.FC = () => {
     <Card>
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
-          <User className="w-5 h-5 text-brand-teal" />
+          <User className="w-5 h-5 text-fun-blue" />
           Account Settings
         </CardTitle>
         <CardDescription>Manage your profile information</CardDescription>
@@ -141,7 +141,7 @@ const AccountSettings: React.FC = () => {
           <div className="relative">
             <Avatar size="xl" variant="brand">
               <AvatarImage src={user?.avatarUrl} alt={user?.displayName || "User"} />
-              <AvatarFallback className="bg-brand-teal text-white text-xl">{initials}</AvatarFallback>
+              <AvatarFallback className="bg-xp text-white text-xl">{initials}</AvatarFallback>
             </Avatar>
             <button
               className="absolute bottom-0 right-0 p-1.5 rounded-full bg-white shadow-md border border-border hover:bg-surface-secondary transition-colors"
@@ -227,7 +227,7 @@ const VideoPreferences: React.FC = () => {
     <Card>
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
-          <Video className="w-5 h-5 text-brand-teal" />
+          <Video className="w-5 h-5 text-fun-blue" />
           Video Preferences
         </CardTitle>
         <CardDescription>Customize your video playback experience</CardDescription>
@@ -339,7 +339,7 @@ const NotificationPreferences: React.FC = () => {
     <Card>
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
-          <Bell className="w-5 h-5 text-brand-teal" />
+          <Bell className="w-5 h-5 text-fun-blue" />
           Notifications
         </CardTitle>
         <CardDescription>Manage how you receive updates</CardDescription>
@@ -384,7 +384,7 @@ const AppearancePreferences: React.FC = () => {
     <Card>
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
-          <Moon className="w-5 h-5 text-brand-teal" />
+          <Moon className="w-5 h-5 text-fun-blue" />
           Appearance
         </CardTitle>
         <CardDescription>Customize how the app looks</CardDescription>
@@ -414,7 +414,7 @@ const LearningPreferences: React.FC = () => {
     <Card>
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
-          <Target className="w-5 h-5 text-brand-teal" />
+          <Target className="w-5 h-5 text-fun-blue" />
           Learning Preferences
         </CardTitle>
         <CardDescription>Your personalized learning settings</CardDescription>
@@ -446,7 +446,7 @@ const LearningPreferences: React.FC = () => {
               goals.map((goal) => (
                 <span
                   key={goal}
-                  className="px-3 py-1 rounded-full text-xs font-medium bg-brand-teal/10 text-brand-teal"
+                  className="px-3 py-1 rounded-full text-xs font-medium bg-fun-blue/10 text-fun-blue"
                 >
                   {GOAL_METADATA[goal]?.label || goal}
                 </span>
@@ -499,7 +499,7 @@ const DataPrivacy: React.FC = () => {
     <Card>
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
-          <Shield className="w-5 h-5 text-brand-teal" />
+          <Shield className="w-5 h-5 text-fun-blue" />
           Data & Privacy
         </CardTitle>
         <CardDescription>Manage your data and privacy settings</CardDescription>
@@ -583,7 +583,7 @@ const AboutSection: React.FC = () => {
     <Card>
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
-          <Info className="w-5 h-5 text-brand-teal" />
+          <Info className="w-5 h-5 text-fun-blue" />
           About
         </CardTitle>
       </CardHeader>

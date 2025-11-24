@@ -123,7 +123,7 @@ export function ProductRecommendation({
       <Card className={className}>
         <CardHeader className="pb-3">
           <CardTitle className="text-lg flex items-center gap-2">
-            <SectionIcon className="w-5 h-5 text-brand-teal" />
+            <SectionIcon className="w-5 h-5 text-fun-blue" />
             {sectionTitle}
           </CardTitle>
         </CardHeader>
@@ -138,7 +138,7 @@ export function ProductRecommendation({
           <Button
             variant="ghost"
             size="sm"
-            className="w-full text-brand-teal"
+            className="w-full text-fun-blue"
             asChild
           >
             <a
@@ -166,14 +166,14 @@ export function ProductRecommendation({
       >
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-xl font-semibold text-brand-black flex items-center gap-2">
-            <SectionIcon className="w-5 h-5 text-brand-teal" />
+            <SectionIcon className="w-5 h-5 text-fun-blue" />
             {sectionTitle}
           </h2>
           <a
             href="https://gentrystein.com/collections/shop-all"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm text-brand-teal hover:underline flex items-center gap-1"
+            className="text-sm text-fun-blue hover:underline flex items-center gap-1"
           >
             Shop All <ChevronRight className="w-4 h-4" />
           </a>
@@ -205,14 +205,14 @@ export function ProductRecommendation({
     >
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-xl font-semibold text-brand-black flex items-center gap-2">
-          <SectionIcon className="w-5 h-5 text-brand-teal" />
+          <SectionIcon className="w-5 h-5 text-fun-blue" />
           {sectionTitle}
         </h2>
         <a
           href="https://gentrystein.com/collections/shop-all"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-sm text-brand-teal hover:underline flex items-center gap-1"
+          className="text-sm text-fun-blue hover:underline flex items-center gap-1"
         >
           Shop All <ChevronRight className="w-4 h-4" />
         </a>

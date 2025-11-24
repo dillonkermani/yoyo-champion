@@ -48,8 +48,8 @@ export function ModuleCard({
     <div
       className={cn(
         "rounded-xl border bg-white overflow-hidden transition-all duration-200",
-        isLocked ? "border-border opacity-60" : "border-border hover:border-brand-teal/30",
-        isComplete && "border-brand-green/50 bg-brand-green/5",
+        isLocked ? "border-border opacity-60" : "border-border hover:border-fun-blue/30",
+        isComplete && "border-fun-blue/50 bg-fun-blue/5",
         isInProgress && !isComplete && "border-brand-blue/50",
         isCurrent && !isComplete && "ring-2 ring-brand-blue/30",
         className
@@ -69,9 +69,9 @@ export function ModuleCard({
         <div
           className={cn(
             "flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center text-sm font-semibold",
-            isComplete && "bg-brand-green text-brand-black",
+            isComplete && "bg-xp text-brand-black",
             isInProgress && "bg-brand-blue text-brand-black",
-            !isComplete && !isInProgress && !isLocked && "bg-brand-teal/20 text-brand-teal",
+            !isComplete && !isInProgress && !isLocked && "bg-fun-blue/20 text-fun-blue",
             isLocked && "bg-surface-secondary text-muted-foreground"
           )}
         >
@@ -120,7 +120,7 @@ export function ModuleCard({
                   <motion.div
                     className={cn(
                       "h-full rounded-full",
-                      isComplete ? "bg-brand-green" : "bg-brand-blue"
+                      isComplete ? "bg-xp" : "bg-brand-blue"
                     )}
                     initial={{ width: 0 }}
                     animate={{ width: `${completionPercentage}%` }}
@@ -188,7 +188,7 @@ export function ModuleCard({
                       <div
                         className={cn(
                           "flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center",
-                          isMastered && "bg-brand-green text-brand-black",
+                          isMastered && "bg-xp text-brand-black",
                           isWatching && "bg-brand-blue text-brand-black",
                           !isMastered && !isWatching && "bg-surface-secondary text-muted-foreground"
                         )}
@@ -222,7 +222,7 @@ export function ModuleCard({
 
                       {/* XP */}
                       <div className="flex items-center gap-1 text-xs text-muted-foreground">
-                        <svg className="w-3.5 h-3.5 text-brand-teal" fill="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-3.5 h-3.5 text-fun-blue" fill="currentColor" viewBox="0 0 24 24">
                           <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
                         </svg>
                         {trick.xpReward}
@@ -250,10 +250,10 @@ export function ModuleCard({
                     className={cn(
                       "w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg font-medium text-sm transition-colors",
                       isComplete
-                        ? "bg-brand-green/10 text-brand-green hover:bg-brand-green/20"
+                        ? "bg-fun-blue/10 text-fun-blue hover:bg-fun-blue/20"
                         : isInProgress || isCurrent
                         ? "bg-brand-blue text-brand-black hover:bg-brand-blue/80"
-                        : "bg-brand-teal/10 text-brand-teal hover:bg-brand-teal/20"
+                        : "bg-fun-blue/10 text-fun-blue hover:bg-fun-blue/20"
                     )}
                   >
                     {isComplete ? (

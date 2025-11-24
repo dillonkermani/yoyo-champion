@@ -98,9 +98,9 @@ const confettiColors = [
   "#FF6B6B", // Red
   "#4ECDC4", // Teal
   "#A855F7", // Purple
-  "#3B82F6", // Blue
+  "#1CB0F6", // Aqua Blue
   "#F472B6", // Pink
-  "#34D399", // Green
+  "#9bedff", // Light Blue
 ];
 
 export const AchievementToast = React.forwardRef<HTMLDivElement, AchievementToastProps>(

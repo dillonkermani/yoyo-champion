@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ChevronDown, LogOut, Settings, User, LayoutDashboard } from "lucide-react";
@@ -86,16 +87,15 @@ export function Header({ transparent = false, className }: HeaderProps) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-2 group">
-              <span
-                className={cn(
-                  "text-xl font-bold tracking-tight transition-colors",
-                  transparent && !scrolled ? "text-white" : "text-gray-900"
-                )}
-                style={{ fontFamily: "var(--font-sans)" }}
-              >
-                YoYo<span className="text-brand-teal">Champion</span>
-              </span>
+            <Link href="/" className="flex items-center">
+              <Image
+                src="/images/logo.avif"
+                alt="YoYoChampion"
+                width={150}
+                height={40}
+                className="h-8 w-auto"
+                priority
+              />
             </Link>
 
             {/* Desktop Navigation */}
@@ -115,7 +115,7 @@ export function Header({ transparent = false, className }: HeaderProps) {
                           ? "text-white"
                           : "text-white/80 hover:text-white"
                         : isActive
-                          ? "text-brand-teal"
+                          ? "text-fun-blue"
                           : "text-gray-700 hover:text-gray-900 hover:bg-gray-100"
                     )}
                   >
@@ -125,7 +125,7 @@ export function Header({ transparent = false, className }: HeaderProps) {
                         layoutId="header-nav-indicator"
                         className={cn(
                           "absolute bottom-0 left-2 right-2 h-0.5 rounded-full",
-                          transparent && !scrolled ? "bg-white" : "bg-brand-teal"
+                          transparent && !scrolled ? "bg-white" : "bg-xp"
                         )}
                         transition={{ type: "spring", bounce: 0.2, duration: 0.4 }}
                       />
@@ -141,9 +141,9 @@ export function Header({ transparent = false, className }: HeaderProps) {
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <button className="flex items-center gap-2 outline-none">
-                      <Avatar size="sm" variant="none" className="ring-2 ring-brand-teal/30">
+                      <Avatar size="sm" variant="none" className="ring-2 ring-fun-blue/30">
                         <AvatarImage src={user.avatarUrl} alt={displayName} />
-                        <AvatarFallback className="bg-brand-teal text-white text-xs">
+                        <AvatarFallback className="bg-xp text-white text-xs">
                           {initials}
                         </AvatarFallback>
                       </Avatar>
@@ -262,7 +262,7 @@ export function Header({ transparent = false, className }: HeaderProps) {
                       className={cn(
                         "block px-4 py-3 rounded-lg text-base font-medium transition-colors",
                         isActive
-                          ? "bg-brand-teal/10 text-brand-teal"
+                          ? "bg-fun-blue/10 text-fun-blue"
                           : "text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                       )}
                     >

@@ -305,7 +305,7 @@ export function DailyGoal({ current, target, icon = "target", label = "Daily Goa
           className={cn(
             "h-full rounded-full",
             isComplete
-              ? "bg-gradient-to-r from-fun-blue to-brand-teal"
+              ? "bg-gradient-to-r from-xp to-xp-light"
               : "bg-gradient-to-r from-fun-blue to-fun-blue-light"
           )}
           initial={{ width: 0 }}
@@ -530,11 +530,11 @@ export function ConfettiBurst({ trigger, duration = 2000, className }: ConfettiB
 
   React.useEffect(() => {
     if (trigger) {
-      const colors = ["#58CC02", "#FF9600", "#FFC800", "#1CB0F6", "#CE82FF", "#FF4B4B"] as const;
+      const colors = ["#1CB0F6", "#FF9600", "#FFC800", "#9bedff", "#CE82FF", "#FF4B4B"] as const;
       const newParticles = Array.from({ length: 30 }, (_, i) => ({
         id: i,
         x: 50 + (Math.random() - 0.5) * 100,
-        color: colors[Math.floor(Math.random() * colors.length)] ?? "#58CC02",
+        color: colors[Math.floor(Math.random() * colors.length)] ?? "#1CB0F6",
         delay: Math.random() * 0.3,
       }));
       setParticles(newParticles);

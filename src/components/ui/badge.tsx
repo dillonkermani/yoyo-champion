@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 const badgeVariants = cva(
-  "inline-flex items-center rounded-full border px-3 py-1 text-xs font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-brand-teal focus:ring-offset-2",
+  "inline-flex items-center rounded-full border px-3 py-1 text-xs font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-fun-blue focus:ring-offset-2",
   {
     variants: {
       variant: {
@@ -18,25 +18,23 @@ const badgeVariants = cva(
           "border-border text-brand-black bg-transparent",
         // Brand variants
         teal:
-          "border-transparent bg-brand-teal/20 text-brand-black",
+          "border-transparent bg-fun-blue/20 text-brand-black",
         blue:
           "border-transparent bg-brand-blue text-brand-black",
-        green:
-          "border-transparent bg-brand-green text-brand-black",
         // Difficulty level variants
         beginner:
-          "border-transparent bg-brand-green text-brand-black",
+          "border-transparent bg-brand-blue text-brand-black",
         intermediate:
           "border-transparent bg-brand-blue text-brand-black",
         advanced:
-          "border-transparent bg-brand-teal/30 text-brand-black",
+          "border-transparent bg-fun-blue/30 text-brand-black",
         master:
-          "border-transparent bg-brand-teal text-white",
+          "border-transparent bg-xp text-white",
         legendary:
           "border-transparent bg-brand-black text-white",
         // Status variants
         success:
-          "border-transparent bg-brand-green text-brand-black",
+          "border-transparent bg-xp text-white",
         warning:
           "border-transparent bg-amber-100 text-amber-800",
         error:
@@ -45,9 +43,9 @@ const badgeVariants = cva(
           "border-transparent bg-brand-blue/50 text-brand-black",
         // Sale/completed states
         sale:
-          "border-transparent bg-brand-green text-brand-black font-semibold",
+          "border-transparent bg-fun-blue text-white font-semibold",
         completed:
-          "border-transparent bg-brand-green text-brand-black",
+          "border-transparent bg-xp text-white",
         // Brand variant
         brand:
           "border-transparent bg-brand-blue text-brand-black font-semibold",

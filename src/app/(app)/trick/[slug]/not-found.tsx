@@ -45,15 +45,15 @@ export default function TrickNotFound() {
           </h3>
           <ul className="space-y-2 text-sm text-muted-foreground">
             <li className="flex items-start gap-2">
-              <span className="text-brand-teal">1.</span>
+              <span className="text-fun-blue">1.</span>
               Check the trick name spelling in the URL
             </li>
             <li className="flex items-start gap-2">
-              <span className="text-brand-teal">2.</span>
+              <span className="text-fun-blue">2.</span>
               Use the search feature in the Trick Library
             </li>
             <li className="flex items-start gap-2">
-              <span className="text-brand-teal">3.</span>
+              <span className="text-fun-blue">3.</span>
               Browse tricks by difficulty or style
             </li>
           </ul>

@@ -42,7 +42,7 @@ const defaultColors: Record<ParticleType, string[]> = {
   sparkle: ["#FFD700", "#FFA500", "#FFEC8B", "#9bedff"],
   fire: ["#FF4500", "#FF6B35", "#FFA500", "#FFD700"],
   star: ["#FFD700", "#9bedff", "#A78BFA", "#F472B6"],
-  bubble: ["#9bedff", "#91afa2", "#e3f2e6", "#A78BFA"],
+  bubble: ["#9bedff", "#1CB0F6", "#e3f2e6", "#A78BFA"],
   heart: ["#FF6B6B", "#F472B6", "#FF4500"],
 };
 
@@ -290,7 +290,7 @@ export function XPSparkles({ active, className }: { active: boolean; className?:
       active={active}
       config={{
         type: "sparkle",
-        colors: ["#FFD700", "#9bedff", "#91afa2"],
+        colors: ["#FFD700", "#9bedff", "#1CB0F6"],
         intensity: "medium",
         size: "sm",
       }}

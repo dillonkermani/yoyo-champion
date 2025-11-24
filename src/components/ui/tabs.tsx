@@ -42,13 +42,13 @@ const TabsTrigger = React.forwardRef<
   <TabsPrimitive.Trigger
     ref={ref}
     className={cn(
-      "inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-white transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+      "inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-white transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fun-blue focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
       variant === "default" &&
         "rounded-md px-3 py-1.5 data-[state=active]:bg-white data-[state=active]:text-gray-900 data-[state=active]:shadow-sm",
       variant === "pills" &&
-        "rounded-full px-4 py-2 data-[state=active]:bg-brand-teal data-[state=active]:text-white data-[state=active]:shadow-md data-[state=active]:shadow-brand-teal/25",
+        "rounded-full px-4 py-2 data-[state=active]:bg-xp data-[state=active]:text-white data-[state=active]:shadow-md data-[state=active]:shadow-fun-blue/25",
       variant === "underline" &&
-        "px-4 py-3 border-b-2 border-transparent -mb-px data-[state=active]:border-brand-teal data-[state=active]:text-gray-900",
+        "px-4 py-3 border-b-2 border-transparent -mb-px data-[state=active]:border-fun-blue data-[state=active]:text-gray-900",
       className
     )}
     {...props}
@@ -63,7 +63,7 @@ const TabsContent = React.forwardRef<
   <TabsPrimitive.Content
     ref={ref}
     className={cn(
-      "mt-4 ring-offset-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal focus-visible:ring-offset-2",
+      "mt-4 ring-offset-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fun-blue focus-visible:ring-offset-2",
       className
     )}
     {...props}
@@ -79,7 +79,7 @@ const AnimatedTabsContent = React.forwardRef<
   <TabsPrimitive.Content
     ref={ref}
     className={cn(
-      "mt-4 ring-offset-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal focus-visible:ring-offset-2",
+      "mt-4 ring-offset-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fun-blue focus-visible:ring-offset-2",
       className
     )}
     {...props}

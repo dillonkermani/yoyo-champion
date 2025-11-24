@@ -33,7 +33,7 @@ function StepIndicator({ currentIndex }: { currentIndex: number }) {
           className={cn(
             "h-2 rounded-full transition-all duration-300",
             index === currentIndex
-              ? "w-8 bg-brand-teal"
+              ? "w-8 bg-xp"
               : index < currentIndex
               ? "w-2 bg-brand-blue"
               : "w-2 bg-gray-300"

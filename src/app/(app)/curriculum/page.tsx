@@ -121,9 +121,9 @@ const TRICK_CATEGORIES: CategoryInfo[] = [
     id: "hops",
     name: "Hop Tricks",
     icon: "arrow-up",
-    color: "text-emerald-500",
-    bgColor: "bg-emerald-500/10",
-    borderColor: "border-emerald-500/30",
+    color: "text-fun-blue",
+    bgColor: "bg-fun-blue/10",
+    borderColor: "border-fun-blue/30",
     description: "Popping and hopping",
     order: 8,
   },
@@ -539,7 +539,7 @@ function LearningPathCard({ path, progress, isActive, index }: LearningPathCardP
                   <span className="text-gray-500">{progress.completed}/{progress.total} tricks</span>
                   <span className={cn(
                     "font-bold",
-                    isComplete ? "text-brand-teal" : "text-fun-blue"
+                    isComplete ? "text-fun-blue" : "text-fun-blue"
                   )}>
                     {progress.percentage}%
                   </span>
@@ -549,7 +549,7 @@ function LearningPathCard({ path, progress, isActive, index }: LearningPathCardP
                     className={cn(
                       "h-full rounded-full",
                       isComplete
-                        ? "bg-brand-teal"
+                        ? "bg-xp"
                         : "bg-gradient-to-r from-fun-blue to-fun-blue-light"
                     )}
                     initial={{ width: 0 }}
@@ -678,7 +678,7 @@ export default function CurriculumPage() {
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="relative overflow-hidden bg-gradient-to-br from-fun-blue via-fun-blue-dark to-brand-teal px-4 py-6 md:py-10"
+        className="relative overflow-hidden bg-gradient-to-br from-fun-blue via-fun-blue-dark to-fun-purple px-4 py-6 md:py-10"
       >
         {/* Background decorations */}
         <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2" />
@@ -965,7 +965,7 @@ export default function CurriculumPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
         >
-          <BounceCard className="p-6 md:p-8 text-center bg-gradient-to-br from-fun-blue/5 to-brand-teal/5 border-fun-blue/20">
+          <BounceCard className="p-6 md:p-8 text-center bg-gradient-to-br from-fun-blue/5 to-fun-purple/5 border-fun-blue/20">
             <Mascot size="lg" mood="excited" className="mx-auto mb-4" />
             <h3 className="text-xl md:text-2xl font-black text-gray-900 mb-2">
               Ready to learn something new?

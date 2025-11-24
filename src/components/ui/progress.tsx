@@ -21,7 +21,7 @@ const progressVariants = {
   xp: "bg-gradient-to-r from-xp to-xp-light",
   streak: "bg-gradient-to-r from-fun-red to-fun-orange",
   lesson: "bg-gradient-to-r from-fun-blue to-fun-blue-light",
-  rainbow: "bg-gradient-to-r from-fun-red via-fun-yellow via-fun-blue to-brand-blue",
+  rainbow: "bg-gradient-to-r from-fun-red via-fun-yellow via-fun-blue to-fun-blue-light",
 };
 
 const sizeVariants = {
@@ -200,7 +200,7 @@ const XPProgress = React.forwardRef<HTMLDivElement, XPProgressProps>(
           )}
         </div>
         <div className={cn(
-          "relative w-full overflow-hidden rounded-full bg-xp/20",
+          "relative w-full overflow-hidden rounded-full bg-gray-200",
           sizeVariants[size]
         )}>
           {animated ? (
@@ -485,7 +485,7 @@ const LessonDots = React.forwardRef<HTMLDivElement, LessonDotsProps>(
                 "rounded-full transition-all duration-200",
                 dotSizes[size],
                 isCompleted && "bg-fun-blue",
-                isCurrent && "bg-brand-teal ring-2 ring-brand-teal/30",
+                isCurrent && "bg-xp ring-2 ring-xp/30",
                 !isCompleted && !isCurrent && "bg-gray-300"
               )}
               initial={isCompleted ? { scale: 0 } : {}}

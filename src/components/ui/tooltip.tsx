@@ -25,7 +25,7 @@ const TooltipContent = React.forwardRef<
     className={cn(
       "z-50 overflow-hidden rounded-lg px-3 py-1.5 text-sm shadow-lg animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
       variant === "default" && "bg-gray-900 text-white",
-      variant === "brand" && "bg-brand-teal text-brand-black",
+      variant === "brand" && "bg-xp text-brand-black",
       variant === "dark" && "bg-gray-800 border border-gray-700 text-gray-100",
       className
     )}
@@ -87,7 +87,7 @@ const InfoTooltip: React.FC<InfoTooltipProps> = ({
     <SimpleTooltip content={content} {...props}>
       <button
         type="button"
-        className="inline-flex items-center justify-center text-gray-500 hover:text-gray-700 transition-colors focus:outline-none focus:ring-2 focus:ring-brand-teal focus:ring-offset-2 focus:ring-offset-white rounded-full"
+        className="inline-flex items-center justify-center text-gray-500 hover:text-gray-700 transition-colors focus:outline-none focus:ring-2 focus:ring-fun-blue focus:ring-offset-2 focus:ring-offset-white rounded-full"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

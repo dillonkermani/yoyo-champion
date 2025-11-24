@@ -81,7 +81,7 @@ function GoalOption({ goal, isSelected, onToggle }: GoalOptionProps) {
         "cursor-pointer transition-all duration-200 p-3 sm:p-4 min-h-[64px] touch-manipulation",
         isSelected
           ? "border-2 border-brand-blue bg-brand-blue/5 shadow-card"
-          : "border border-border active:border-brand-teal/50 sm:hover:border-brand-teal/50"
+          : "border border-border active:border-fun-blue/50 sm:hover:border-fun-blue/50"
       )}
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}

@@ -249,7 +249,7 @@ export default function DashboardPage() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="relative overflow-hidden rounded-2xl sm:rounded-3xl bg-gradient-to-br from-fun-blue via-fun-blue-dark to-brand-teal p-4 sm:p-6 lg:p-8 text-white"
+        className="relative overflow-hidden rounded-2xl sm:rounded-3xl bg-gradient-to-br from-fun-blue via-fun-blue-dark to-fun-purple p-4 sm:p-6 lg:p-8 text-white"
       >
         {/* Background decorations */}
         <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2" />
@@ -347,7 +347,7 @@ export default function DashboardPage() {
           </div>
           <div className="h-2 sm:h-3 bg-white/20 rounded-full overflow-hidden">
             <motion.div
-              className="h-full bg-gradient-to-r from-fun-xp to-yellow-300 rounded-full"
+              className="h-full bg-gradient-to-r from-xp to-xp-light rounded-full"
               initial={{ width: 0 }}
               animate={{ width: `${(currentLevelXP / xpToNextLevel) * 100}%` }}
               transition={{ duration: 1, ease: "easeOut", delay: 0.6 }}
@@ -358,7 +358,7 @@ export default function DashboardPage() {
         {/* Fire message for streaks */}
         {user.currentStreak >= 3 && (
           <motion.div
-            className="mt-3 sm:mt-4 inline-flex items-center gap-1.5 sm:gap-2 bg-fun-streak/30 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-bold"
+            className="mt-3 sm:mt-4 inline-flex items-center gap-1.5 sm:gap-2 bg-streak/30 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-bold"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.7, type: "spring", bounce: 0.5 }}
@@ -383,7 +383,7 @@ export default function DashboardPage() {
           <BounceCard className="overflow-hidden border-2 border-fun-blue/20 hover:border-fun-blue">
             <Link href={`/trick/${lastWatchedTrick.slug}`} className="block min-h-[44px]">
               <div className="flex flex-col sm:flex-row">
-                <div className="sm:w-44 lg:w-48 h-28 sm:h-auto bg-gradient-to-br from-fun-blue/20 to-brand-teal/20 flex-shrink-0 relative flex items-center justify-center">
+                <div className="sm:w-44 lg:w-48 h-28 sm:h-auto bg-gradient-to-br from-fun-blue/20 to-fun-purple/20 flex-shrink-0 relative flex items-center justify-center">
                   <motion.div
                     className="w-16 h-16 rounded-full bg-fun-blue flex items-center justify-center shadow-lg"
                     whileHover={{ scale: 1.1 }}
@@ -682,15 +682,15 @@ export default function DashboardPage() {
           <BounceCard>
             <div className="p-5">
               <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2 mb-4">
-                <FlameIcon className="w-5 h-5 text-fun-streak" />
+                <FlameIcon className="w-5 h-5 text-streak" />
                 Streak & Activity
               </h3>
 
               <div className="grid grid-cols-2 gap-4 mb-6">
-                <div className="text-center p-4 bg-gradient-to-br from-fun-streak/10 to-orange-100 rounded-2xl">
+                <div className="text-center p-4 bg-gradient-to-br from-streak/10 to-orange-100 rounded-2xl">
                   <StreakFire count={user.currentStreak} size="md" />
                 </div>
-                <div className="text-center p-4 bg-gradient-to-br from-fun-xp/10 to-yellow-100 rounded-2xl">
+                <div className="text-center p-4 bg-gradient-to-br from-xp/10 to-yellow-100 rounded-2xl">
                   <div className="text-3xl mb-1">🏆</div>
                   <span className="text-2xl font-black text-gray-900">{user.longestStreak}</span>
                   <p className="text-xs text-gray-500 font-semibold uppercase tracking-wide">Best Streak</p>
@@ -771,10 +771,10 @@ export default function DashboardPage() {
           <motion.div whileHover={{ scale: 1.02, y: -4 }} whileTap={{ scale: 0.98 }}>
             <Link
               href="/paths"
-              className="flex flex-col items-center gap-2 sm:gap-3 p-3 sm:p-6 rounded-xl sm:rounded-2xl bg-gradient-to-br from-brand-teal/10 to-brand-teal/5 border-2 border-brand-teal/20 hover:border-brand-teal transition-colors min-h-[100px] sm:min-h-[130px]"
+              className="flex flex-col items-center gap-2 sm:gap-3 p-3 sm:p-6 rounded-xl sm:rounded-2xl bg-gradient-to-br from-fun-purple/10 to-fun-purple/5 border-2 border-fun-purple/20 hover:border-fun-purple transition-colors min-h-[100px] sm:min-h-[130px]"
             >
-              <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-brand-teal/20 flex items-center justify-center">
-                <ChartIcon className="w-5 h-5 sm:w-7 sm:h-7 text-brand-teal" />
+              <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-fun-purple/20 flex items-center justify-center">
+                <ChartIcon className="w-5 h-5 sm:w-7 sm:h-7 text-fun-purple" />
               </div>
               <span className="font-bold text-gray-900 text-xs sm:text-base text-center">Learning Paths</span>
             </Link>

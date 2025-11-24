@@ -35,8 +35,8 @@ const genreColorMap: Record<string, { bg: string; text: string }> = {
   slack: { bg: "bg-fun-purple/20", text: "text-fun-purple" },
   tech: { bg: "bg-cyan-100", text: "text-cyan-700" },
   flow: { bg: "bg-pink-100", text: "text-pink-700" },
-  horizontal: { bg: "bg-fun-xp/20", text: "text-fun-accent" },
-  speed: { bg: "bg-fun-streak/20", text: "text-fun-streak" },
+  horizontal: { bg: "bg-xp/20", text: "text-fun-accent" },
+  speed: { bg: "bg-streak/20", text: "text-streak" },
   grinds: { bg: "bg-orange-100", text: "text-orange-700" },
   regens: { bg: "bg-lime-100", text: "text-lime-700" },
   hops: { bg: "bg-indigo-100", text: "text-indigo-700" },
@@ -228,7 +228,7 @@ export default function LibraryPage() {
             {/* Completion Percentage */}
             {stats.mastered > 0 && (
               <motion.div
-                className="flex items-center gap-1.5 sm:gap-2 px-2.5 py-1.5 sm:px-4 sm:py-2 rounded-full bg-fun-xp/10 border-2 border-fun-xp/20"
+                className="flex items-center gap-1.5 sm:gap-2 px-2.5 py-1.5 sm:px-4 sm:py-2 rounded-full bg-xp/10 border-2 border-xp/20"
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 whileHover={{ scale: 1.05 }}

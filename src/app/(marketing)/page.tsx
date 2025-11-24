@@ -58,7 +58,7 @@ const features = [
     icon: PathIcon,
     title: "Personalized Learning Paths",
     description: "AI-guided progression that adapts to your skill level. Learn the right tricks in the right order.",
-    color: "#91afa2",
+    color: "#1CB0F6",
   },
   {
     icon: ChartIcon,
@@ -70,7 +70,7 @@ const features = [
     icon: TrophyIcon,
     title: "World Champion Secrets",
     description: "Exclusive tips and insights from Gentry Stein himself. Learn the techniques that won world titles.",
-    color: "#91afa2",
+    color: "#1CB0F6",
   },
 ];
 
@@ -80,7 +80,7 @@ const skillLevels = [
     level: "Beginner",
     description: "Start your journey",
     difficulty: 1,
-    color: "#91afa2",
+    color: "#1CB0F6",
     tricks: ["Sleeper", "Gravity Pull", "Forward Pass"],
   },
   {
@@ -94,7 +94,7 @@ const skillLevels = [
     level: "Advanced",
     description: "Master complex tricks",
     difficulty: 3,
-    color: "#91afa2",
+    color: "#1CB0F6",
     tricks: ["Spirit Bomb", "Kamikaze", "Black Hops"],
   },
   {
@@ -143,7 +143,7 @@ export default function LandingPage() {
         {/* Background decorative elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute -top-40 -right-40 w-80 h-80 rounded-full bg-[#9bedff]/10 blur-3xl" />
-          <div className="absolute top-20 -left-40 w-80 h-80 rounded-full bg-[#91afa2]/10 blur-3xl" />
+          <div className="absolute top-20 -left-40 w-80 h-80 rounded-full bg-[#1CB0F6]/10 blur-3xl" />
         </div>
 
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -194,7 +194,7 @@ export default function LandingPage() {
 
             {/* Hero Image Placeholder */}
             <div className="relative">
-              <div className="aspect-square max-w-lg mx-auto rounded-3xl bg-gradient-to-br from-[#9bedff]/20 to-[#91afa2]/20 p-8 flex items-center justify-center">
+              <div className="aspect-square max-w-lg mx-auto rounded-3xl bg-gradient-to-br from-[#9bedff]/20 to-[#1CB0F6]/20 p-8 flex items-center justify-center">
                 <div className="text-center">
                   <div className="w-32 h-32 mx-auto rounded-full bg-[#9bedff]/30 flex items-center justify-center mb-6">
                     <PlayIcon />
@@ -395,7 +395,7 @@ export default function LandingPage() {
       {/* CTA Section */}
       <section className="py-20 sm:py-32">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#9bedff] to-[#91afa2] p-8 sm:p-16">
+          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#9bedff] to-[#1CB0F6] p-8 sm:p-16">
             {/* Background pattern */}
             <div className="absolute inset-0 opacity-10">
               <svg className="h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">

@@ -32,7 +32,7 @@ export interface RewardPopupProps {
 
 const rewardConfig: Record<RewardType, { defaultColor: string; defaultLabel: string; icon: string }> = {
   xp: {
-    defaultColor: "text-brand-teal",
+    defaultColor: "text-fun-blue",
     defaultLabel: "XP",
     icon: "star",
   },

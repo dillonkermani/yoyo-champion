@@ -267,21 +267,21 @@ export default function PathDetailPage() {
               {/* Stats */}
               <div className="flex flex-wrap items-center gap-6 mt-6 text-sm">
                 <div className="flex items-center gap-2">
-                  <svg className="w-5 h-5 text-brand-teal" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <svg className="w-5 h-5 text-fun-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
                   <span className="font-semibold text-brand-black">{path.estimatedDays} days</span>
                   <span className="text-muted-foreground">to complete</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <svg className="w-5 h-5 text-brand-teal" fill="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-5 h-5 text-fun-blue" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
                   </svg>
                   <span className="font-semibold text-brand-black">{path.totalXp.toLocaleString()} XP</span>
                   <span className="text-muted-foreground">total reward</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <svg className="w-5 h-5 text-brand-teal" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <svg className="w-5 h-5 text-fun-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                   </svg>
                   <span className="font-semibold text-brand-black">{path.modules.length} modules</span>
@@ -298,13 +298,13 @@ export default function PathDetailPage() {
                     <span className="text-muted-foreground">
                       {progress.completed} of {progress.total} tricks completed
                     </span>
-                    <span className="font-semibold text-brand-teal">{progress.percentage}%</span>
+                    <span className="font-semibold text-fun-blue">{progress.percentage}%</span>
                   </div>
                   <div className="h-3 rounded-full bg-surface-secondary overflow-hidden">
                     <motion.div
                       className={cn(
                         "h-full rounded-full",
-                        isComplete ? "bg-brand-green" : "bg-brand-blue"
+                        isComplete ? "bg-xp" : "bg-brand-blue"
                       )}
                       initial={{ width: 0 }}
                       animate={{ width: `${progress.percentage}%` }}
@@ -341,7 +341,7 @@ export default function PathDetailPage() {
                   Continue Learning
                 </button>
               ) : (
-                <div className="px-6 py-3 rounded-full bg-brand-green text-brand-black font-semibold text-center">
+                <div className="px-6 py-3 rounded-full bg-xp text-brand-black font-semibold text-center">
                   <svg className="w-5 h-5 inline-block mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                   </svg>
@@ -396,8 +396,8 @@ export default function PathDetailPage() {
                 Your Instructor
               </h3>
               <div className="flex items-center gap-4">
-                <div className="w-16 h-16 rounded-full bg-brand-teal/20 flex items-center justify-center overflow-hidden">
-                  <span className="text-lg font-semibold text-brand-teal">
+                <div className="w-16 h-16 rounded-full bg-fun-blue/20 flex items-center justify-center overflow-hidden">
+                  <span className="text-lg font-semibold text-fun-blue">
                     {path.instructor.name.split(' ').map(n => n[0]).join('')}
                   </span>
                 </div>
@@ -426,7 +426,7 @@ export default function PathDetailPage() {
               <ul className="space-y-3">
                 {path.modules.slice(0, 4).map((module) => (
                   <li key={module.id} className="flex items-start gap-3">
-                    <svg className="w-5 h-5 text-brand-teal flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <svg className="w-5 h-5 text-fun-blue flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                     </svg>
                     <span className="text-sm text-brand-black">{module.title}</span>
@@ -461,7 +461,7 @@ export default function PathDetailPage() {
                     return trick ? (
                       <li key={trickId} className="flex items-center gap-2 text-sm">
                         {isCompleted ? (
-                          <svg className="w-4 h-4 text-brand-green" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                          <svg className="w-4 h-4 text-fun-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                             <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                           </svg>
                         ) : (

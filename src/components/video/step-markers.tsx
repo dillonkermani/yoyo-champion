@@ -152,7 +152,7 @@ export const StepList: React.FC<StepListProps> = ({
                   isActive
                     ? "bg-electric-blue text-white"
                     : isCompleted
-                    ? "bg-emerald-500 text-white"
+                    ? "bg-xp text-white"
                     : "bg-slate-700 text-slate-400"
                 )}
               >

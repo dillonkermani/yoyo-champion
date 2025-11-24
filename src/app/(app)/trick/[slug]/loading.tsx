@@ -91,7 +91,7 @@ export default function TrickDetailLoading() {
             </div>
 
             {/* Mastery Section Skeleton */}
-            <div className="rounded-xl border-2 border-brand-teal bg-white p-6 space-y-4">
+            <div className="rounded-xl border-2 border-fun-blue bg-white p-6 space-y-4">
               <div className="flex items-center gap-2">
                 <Skeleton className="w-6 h-6" animation="shimmer" />
                 <Skeleton className="h-6 w-48" animation="shimmer" />

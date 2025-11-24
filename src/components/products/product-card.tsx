@@ -13,8 +13,8 @@ import { calculateSavings, formatPrice } from "@/lib/data/mock-products";
 // Skill level badge colors
 const skillLevelStyles: Record<SkillLevel, { bg: string; text: string; label: string }> = {
   beginner: {
-    bg: "bg-green-100",
-    text: "text-green-700",
+    bg: "bg-brand-blue/20",
+    text: "text-fun-blue-dark",
     label: "Beginner",
   },
   intermediate: {
@@ -83,7 +83,7 @@ export function ProductCard({
                 {/* Product Info */}
                 <div className="flex-1 min-w-0">
                   <div className="flex items-start justify-between gap-2">
-                    <h4 className="font-medium text-brand-black text-sm line-clamp-1 group-hover:text-brand-teal transition-colors">
+                    <h4 className="font-medium text-brand-black text-sm line-clamp-1 group-hover:text-fun-blue transition-colors">
                       {product.name}
                     </h4>
                     {product.isSignature && (
@@ -131,17 +131,17 @@ export function ProductCard({
       >
         <Card
           hover
-          className="overflow-hidden border-2 border-brand-teal/30 bg-gradient-to-br from-white to-brand-teal/5"
+          className="overflow-hidden border-2 border-fun-blue/30 bg-gradient-to-br from-white to-fun-purple/5"
         >
           <CardContent className="p-0">
             {/* Featured Banner */}
-            <div className="bg-brand-teal px-4 py-2 flex items-center gap-2">
+            <div className="bg-xp px-4 py-2 flex items-center gap-2">
               <Sparkles className="w-4 h-4 text-white" />
               <span className="text-white text-sm font-medium">
                 {product.isSignature ? "Gentry's Pick" : "Featured"}
               </span>
               {savings && (
-                <Badge className="ml-auto bg-white text-brand-teal text-xs">
+                <Badge className="ml-auto bg-white text-fun-blue text-xs">
                   {savings}% OFF
                 </Badge>
               )}

@@ -53,7 +53,7 @@ function DifficultyIndicator({ level }: { level: number }) {
           key={i}
           className={cn(
             "w-2 h-2 rounded-full",
-            i < level ? "bg-brand-teal" : "bg-gray-200"
+            i < level ? "bg-xp" : "bg-gray-200"
           )}
         />
       ))}
@@ -161,7 +161,7 @@ export default function RecommendationPage() {
       <motion.div variants={itemVariants}>
         <Card className="overflow-hidden border-2 border-brand-blue">
           {/* Gradient header */}
-          <div className="h-3 bg-gradient-to-r from-brand-blue via-brand-teal to-brand-green" />
+          <div className="h-3 bg-gradient-to-r from-brand-blue via-fun-blue to-fun-purple" />
 
           <CardContent className="p-6">
             {/* Path title and instructor */}
@@ -190,21 +190,21 @@ export default function RecommendationPage() {
             {/* Stats */}
             <div className="grid grid-cols-3 gap-4 mb-6">
               <div className="text-center p-3 bg-surface-secondary rounded-lg">
-                <Clock className="h-5 w-5 mx-auto mb-1 text-brand-teal" />
+                <Clock className="h-5 w-5 mx-auto mb-1 text-fun-blue" />
                 <div className="text-lg font-bold text-brand-black">
                   {estimatedWeeks}
                 </div>
                 <div className="text-xs text-muted-foreground">weeks</div>
               </div>
               <div className="text-center p-3 bg-surface-secondary rounded-lg">
-                <BookOpen className="h-5 w-5 mx-auto mb-1 text-brand-teal" />
+                <BookOpen className="h-5 w-5 mx-auto mb-1 text-fun-blue" />
                 <div className="text-lg font-bold text-brand-black">
                   {totalTricks}
                 </div>
                 <div className="text-xs text-muted-foreground">tricks</div>
               </div>
               <div className="text-center p-3 bg-surface-secondary rounded-lg">
-                <Trophy className="h-5 w-5 mx-auto mb-1 text-brand-teal" />
+                <Trophy className="h-5 w-5 mx-auto mb-1 text-fun-blue" />
                 <div className="text-lg font-bold text-brand-black">
                   {totalXp.toLocaleString()}
                 </div>
@@ -229,12 +229,12 @@ export default function RecommendationPage() {
                     key={module.id}
                     className="flex items-center gap-2 text-sm text-muted-foreground"
                   >
-                    <ChevronRight className="h-4 w-4 text-brand-teal" />
+                    <ChevronRight className="h-4 w-4 text-fun-blue" />
                     {module.title}
                   </li>
                 ))}
                 {path.modules.length > 3 && (
-                  <li className="text-sm text-brand-teal font-medium pl-6">
+                  <li className="text-sm text-fun-blue font-medium pl-6">
                     + {path.modules.length - 3} more modules
                   </li>
                 )}

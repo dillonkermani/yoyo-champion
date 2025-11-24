@@ -44,7 +44,7 @@ const StatItem: React.FC<StatItemProps> = ({
   value,
   subValue,
   trend,
-  color = "text-brand-teal",
+  color = "text-fun-blue",
 }) => (
   <motion.div
     className="flex items-start gap-3 p-3 rounded-lg bg-surface-secondary/50 hover:bg-surface-secondary transition-colors"
@@ -66,7 +66,7 @@ const StatItem: React.FC<StatItemProps> = ({
             className={cn(
               "w-3 h-3",
               trend === "up"
-                ? "text-brand-green"
+                ? "text-fun-blue"
                 : trend === "down"
                 ? "text-red-500 rotate-180"
                 : "text-muted-foreground"
@@ -141,7 +141,7 @@ export const StatsCard = React.forwardRef<HTMLDivElement, StatsCardProps>(
           </div>
           <div className="p-3 rounded-lg bg-white border border-border">
             <div className="flex items-center gap-2">
-              <Target className="w-4 h-4 text-brand-teal" />
+              <Target className="w-4 h-4 text-fun-blue" />
               <span className="text-xs text-muted-foreground">Mastered</span>
             </div>
             <p className="text-xl font-bold text-brand-black mt-1">
@@ -156,7 +156,7 @@ export const StatsCard = React.forwardRef<HTMLDivElement, StatsCardProps>(
       <Card ref={ref} className={cn("overflow-hidden", className)}>
         <CardHeader className="pb-4">
           <CardTitle className="flex items-center gap-2 text-lg">
-            <TrendingUp className="w-5 h-5 text-brand-teal" />
+            <TrendingUp className="w-5 h-5 text-fun-blue" />
             Your Statistics
           </CardTitle>
         </CardHeader>
@@ -173,7 +173,7 @@ export const StatsCard = React.forwardRef<HTMLDivElement, StatsCardProps>(
               label="Tricks Mastered"
               value={totalTricksMastered}
               subValue="tricks"
-              color="text-brand-teal"
+              color="text-fun-blue"
             />
             <StatItem
               icon={<Route className="w-4 h-4" />}
@@ -219,7 +219,7 @@ export const StatsCard = React.forwardRef<HTMLDivElement, StatsCardProps>(
 
           {/* Motivational message */}
           <motion.div
-            className="p-3 rounded-lg bg-brand-teal/10 border border-brand-teal/20"
+            className="p-3 rounded-lg bg-fun-blue/10 border border-fun-blue/20"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}

@@ -643,7 +643,7 @@ export default function TrickDetailPage() {
                   {/* Practice Drills */}
                   <Card>
                     <CardHeader className="pb-3">
-                      <CardTitle className="text-lg flex items-center gap-2 text-brand-green">
+                      <CardTitle className="text-lg flex items-center gap-2 text-fun-blue">
                         <Target className="w-5 h-5" />
                         Practice Drills
                       </CardTitle>
@@ -651,15 +651,15 @@ export default function TrickDetailPage() {
                     <CardContent>
                       <ul className="space-y-3">
                         <li className="flex items-start gap-3 text-brand-black">
-                          <Target className="w-5 h-5 text-brand-green shrink-0 mt-0.5" />
+                          <Target className="w-5 h-5 text-fun-blue shrink-0 mt-0.5" />
                           <span>Practice each step 10 times before moving to the next</span>
                         </li>
                         <li className="flex items-start gap-3 text-brand-black">
-                          <Target className="w-5 h-5 text-brand-green shrink-0 mt-0.5" />
+                          <Target className="w-5 h-5 text-fun-blue shrink-0 mt-0.5" />
                           <span>Try performing the complete trick 5 times in a row without mistakes</span>
                         </li>
                         <li className="flex items-start gap-3 text-brand-black">
-                          <Target className="w-5 h-5 text-brand-green shrink-0 mt-0.5" />
+                          <Target className="w-5 h-5 text-fun-blue shrink-0 mt-0.5" />
                           <span>Record yourself and compare with the tutorial video</span>
                         </li>
                       </ul>
@@ -677,13 +677,13 @@ export default function TrickDetailPage() {
             >
               <Card className={cn(
                 "border-2",
-                status === "mastered" ? "border-brand-green bg-brand-green/5" : "border-brand-teal"
+                status === "mastered" ? "border-fun-blue bg-fun-blue/5" : "border-fun-blue"
               )}>
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <Award className={cn(
                       "w-6 h-6",
-                      status === "mastered" ? "text-brand-green" : "text-brand-teal"
+                      status === "mastered" ? "text-fun-blue" : "text-fun-blue"
                     )} />
                     {status === "mastered"
                       ? "Trick Mastered!"
@@ -693,8 +693,8 @@ export default function TrickDetailPage() {
                 <CardContent>
                   {status === "mastered" ? (
                     <div className="text-center py-4">
-                      <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-green/20 mb-4">
-                        <CheckCircle2 className="w-8 h-8 text-brand-green" />
+                      <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-fun-blue/20 mb-4">
+                        <CheckCircle2 className="w-8 h-8 text-fun-blue" />
                       </div>
                       <p className="text-brand-black font-medium">
                         Congratulations! You&apos;ve mastered {trick.name}
@@ -720,7 +720,7 @@ export default function TrickDetailPage() {
                                 watchedFully: e.target.checked,
                               }))
                             }
-                            className="w-5 h-5 rounded border-border text-brand-teal focus:ring-brand-teal"
+                            className="w-5 h-5 rounded border-border text-fun-blue focus:ring-fun-blue"
                           />
                           <span className="text-brand-black">
                             I&apos;ve watched the full tutorial
@@ -737,7 +737,7 @@ export default function TrickDetailPage() {
                                 canPerform: e.target.checked,
                               }))
                             }
-                            className="w-5 h-5 rounded border-border text-brand-teal focus:ring-brand-teal"
+                            className="w-5 h-5 rounded border-border text-fun-blue focus:ring-fun-blue"
                           />
                           <span className="text-brand-black">
                             I can perform this trick
@@ -754,7 +754,7 @@ export default function TrickDetailPage() {
                                 consistent: e.target.checked,
                               }))
                             }
-                            className="w-5 h-5 rounded border-border text-brand-teal focus:ring-brand-teal"
+                            className="w-5 h-5 rounded border-border text-fun-blue focus:ring-fun-blue"
                           />
                           <span className="text-brand-black">
                             I can land it 3 out of 5 attempts consistently
@@ -947,7 +947,7 @@ export default function TrickDetailPage() {
                               className="text-xs py-0.5 px-2"
                             />
                             {relatedProgress?.status === "mastered" && (
-                              <CheckCircle2 className="w-4 h-4 text-brand-green" />
+                              <CheckCircle2 className="w-4 h-4 text-fun-blue" />
                             )}
                           </div>
                         </div>

@@ -36,7 +36,7 @@ export function PathProgress({
 
       {/* Progress fill line */}
       <motion.div
-        className="absolute left-[19px] top-[40px] w-0.5 bg-brand-teal"
+        className="absolute left-[19px] top-[40px] w-0.5 bg-xp"
         initial={{ height: 0 }}
         animate={{
           height: `${Math.max(0, (completedModules.length / modules.length) * 100 - 10)}%`,
@@ -66,9 +66,9 @@ export function PathProgress({
               <div
                 className={cn(
                   "relative z-10 flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200",
-                  status === "completed" && "bg-brand-teal text-white",
+                  status === "completed" && "bg-xp text-white",
                   status === "current" && "bg-brand-blue text-brand-black ring-4 ring-brand-blue/20",
-                  status === "available" && "bg-white border-2 border-brand-teal text-brand-teal",
+                  status === "available" && "bg-white border-2 border-fun-blue text-fun-blue",
                   status === "locked" && "bg-surface-secondary border-2 border-border text-muted-foreground",
                   isClickable && "group-hover:scale-110"
                 )}
@@ -91,7 +91,7 @@ export function PathProgress({
                 className={cn(
                   "flex-1 min-w-0 p-4 rounded-lg transition-all duration-200",
                   status === "current" && "bg-brand-blue/10 border border-brand-blue/30",
-                  status === "completed" && "bg-brand-green/10",
+                  status === "completed" && "bg-fun-blue/10",
                   status === "available" && "bg-surface-secondary hover:bg-surface-tertiary",
                   status === "locked" && "bg-surface-secondary opacity-60"
                 )}
@@ -111,7 +111,7 @@ export function PathProgress({
                     </span>
                   )}
                   {status === "completed" && (
-                    <span className="px-2 py-0.5 text-[10px] font-semibold rounded-full bg-brand-green text-brand-black">
+                    <span className="px-2 py-0.5 text-[10px] font-semibold rounded-full bg-xp text-brand-black">
                       Complete
                     </span>
                   )}
@@ -170,7 +170,7 @@ export function PathProgressHorizontal({
               transition={{ duration: 0.2, delay: index * 0.05 }}
               className={cn(
                 "w-3 h-3 rounded-full transition-all duration-200",
-                isCompleted && "bg-brand-teal",
+                isCompleted && "bg-xp",
                 isCurrent && "bg-brand-blue ring-2 ring-brand-blue/30",
                 isLocked && "bg-border"
               )}
@@ -179,7 +179,7 @@ export function PathProgressHorizontal({
               <div
                 className={cn(
                   "flex-1 h-0.5 min-w-[12px] max-w-[24px]",
-                  index < completedModules ? "bg-brand-teal" : "bg-border"
+                  index < completedModules ? "bg-xp" : "bg-border"
                 )}
               />
             )}

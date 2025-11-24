@@ -231,7 +231,7 @@ export const TrickPlayer: React.FC<TrickPlayerProps> = ({
           />
           <div className="flex items-center gap-2">
             {isWatched && (
-              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-500/20 text-emerald-400 text-sm">
+              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-fun-blue/20 text-fun-blue text-sm">
                 <Eye className="w-4 h-4" />
                 Watched
               </div>

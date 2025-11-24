@@ -23,9 +23,9 @@ const toastIcons = {
 
 const toastStyles = {
   success: {
-    bg: "bg-green-50 border-green-200",
-    icon: "text-green-600",
-    text: "text-green-800",
+    bg: "bg-fun-blue/10 border-fun-blue/30",
+    icon: "text-fun-blue",
+    text: "text-brand-black",
   },
   error: {
     bg: "bg-red-50 border-red-200",

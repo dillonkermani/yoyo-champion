@@ -51,18 +51,18 @@ const Slider = React.forwardRef<
                 "absolute h-full",
                 variant === "default" && "bg-gray-400",
                 variant === "brand" &&
-                  "bg-gradient-to-r from-brand-teal to-brand-blue"
+                  "bg-gradient-to-r from-fun-blue to-brand-blue"
               )}
             />
           </SliderPrimitive.Track>
           <SliderPrimitive.Thumb
             className={cn(
               "block h-5 w-5 rounded-full border-2 bg-white ring-offset-white transition-all duration-150",
-              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal focus-visible:ring-offset-2",
+              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fun-blue focus-visible:ring-offset-2",
               "disabled:pointer-events-none disabled:opacity-50",
               "hover:scale-110 active:scale-95",
               variant === "default" && "border-gray-400",
-              variant === "brand" && "border-brand-teal shadow-md shadow-brand-teal/25"
+              variant === "brand" && "border-fun-blue shadow-md shadow-fun-blue/25"
             )}
           />
         </SliderPrimitive.Root>
@@ -112,7 +112,7 @@ const PlaybackSpeedSlider = React.forwardRef<
           <span className="text-xs text-gray-500 font-medium">
             Playback Speed
           </span>
-          <span className="text-sm font-semibold text-brand-teal">
+          <span className="text-sm font-semibold text-fun-blue">
             {formatSpeed(value)}
           </span>
         </div>
@@ -134,7 +134,7 @@ const PlaybackSpeedSlider = React.forwardRef<
                 onClick={() => onValueChange(speed)}
                 className={cn(
                   "px-1.5 py-0.5 rounded transition-colors hover:text-gray-700",
-                  value === speed && "text-brand-teal font-medium"
+                  value === speed && "text-fun-blue font-medium"
                 )}
               >
                 {formatSpeed(speed)}
@@ -200,26 +200,26 @@ const RangeSlider = React.forwardRef<
                 "absolute h-full",
                 variant === "default" && "bg-gray-400",
                 variant === "brand" &&
-                  "bg-gradient-to-r from-brand-teal to-brand-blue"
+                  "bg-gradient-to-r from-fun-blue to-brand-blue"
               )}
             />
           </SliderPrimitive.Track>
           <SliderPrimitive.Thumb
             className={cn(
               "block h-5 w-5 rounded-full border-2 bg-white ring-offset-white transition-all duration-150",
-              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal focus-visible:ring-offset-2",
+              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fun-blue focus-visible:ring-offset-2",
               "disabled:pointer-events-none disabled:opacity-50",
               "hover:scale-110 active:scale-95",
-              variant === "brand" && "border-brand-teal shadow-md shadow-brand-teal/25"
+              variant === "brand" && "border-fun-blue shadow-md shadow-fun-blue/25"
             )}
           />
           <SliderPrimitive.Thumb
             className={cn(
               "block h-5 w-5 rounded-full border-2 bg-white ring-offset-white transition-all duration-150",
-              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal focus-visible:ring-offset-2",
+              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fun-blue focus-visible:ring-offset-2",
               "disabled:pointer-events-none disabled:opacity-50",
               "hover:scale-110 active:scale-95",
-              variant === "brand" && "border-brand-teal shadow-md shadow-brand-teal/25"
+              variant === "brand" && "border-fun-blue shadow-md shadow-fun-blue/25"
             )}
           />
         </SliderPrimitive.Root>

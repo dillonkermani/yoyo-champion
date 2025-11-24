@@ -132,7 +132,7 @@ const TrendIndicator: React.FC<{ trend: LeaderboardEntry["trend"]; amount?: numb
     <div
       className={cn(
         "flex items-center gap-0.5 text-xs font-medium",
-        trend === "up" ? "text-brand-green" : "text-red-500"
+        trend === "up" ? "text-fun-blue" : "text-red-500"
       )}
     >
       {trend === "up" ? (
@@ -157,7 +157,7 @@ const LeaderboardRow: React.FC<{
     className={cn(
       "flex items-center gap-3 p-3 rounded-lg transition-colors",
       entry.isCurrentUser
-        ? "bg-brand-teal/10 border border-brand-teal/30"
+        ? "bg-fun-blue/10 border border-fun-blue/30"
         : "hover:bg-surface-secondary"
     )}
   >
@@ -167,7 +167,7 @@ const LeaderboardRow: React.FC<{
       {entry.avatarUrl ? (
         <AvatarImage src={entry.avatarUrl} alt={entry.displayName} />
       ) : (
-        <AvatarFallback className={entry.isCurrentUser ? "bg-brand-teal text-white" : ""}>
+        <AvatarFallback className={entry.isCurrentUser ? "bg-xp text-white" : ""}>
           {entry.displayName.charAt(0).toUpperCase()}
         </AvatarFallback>
       )}
@@ -178,7 +178,7 @@ const LeaderboardRow: React.FC<{
         <p
           className={cn(
             "font-medium truncate",
-            entry.isCurrentUser ? "text-brand-teal" : "text-brand-black"
+            entry.isCurrentUser ? "text-fun-blue" : "text-brand-black"
           )}
         >
           {entry.displayName}

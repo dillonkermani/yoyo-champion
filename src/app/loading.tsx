@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { ThinkingMascot } from "@/components/fun";
 
@@ -40,14 +41,20 @@ export default function Loading() {
 
         {/* Loading Text */}
         <div className="text-center mt-2">
-          <motion.h2
-            className="text-lg font-semibold text-brand-black mb-2"
+          <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
+            className="mb-2"
           >
-            YoYo Champion
-          </motion.h2>
+            <Image
+              src="/images/logo.avif"
+              alt="YoYoChampion"
+              width={150}
+              height={40}
+              className="h-8 w-auto"
+            />
+          </motion.div>
 
           {/* Animated message switcher */}
           <div className="h-6 overflow-hidden">

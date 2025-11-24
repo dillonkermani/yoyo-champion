@@ -155,7 +155,7 @@ const ProgressOverview: React.FC = () => {
             <p className="text-xs text-muted-foreground">Total XP</p>
           </div>
           <div className="text-center">
-            <div className="flex items-center justify-center gap-1 text-brand-teal">
+            <div className="flex items-center justify-center gap-1 text-fun-blue">
               <Target className="w-4 h-4" />
               <span className="text-lg font-bold">{tricksMastered}</span>
             </div>
@@ -243,7 +243,7 @@ const NextBadgesToUnlock: React.FC = () => {
     <Card>
       <CardHeader className="pb-4">
         <CardTitle className="flex items-center gap-2 text-lg">
-          <Target className="w-5 h-5 text-brand-teal" />
+          <Target className="w-5 h-5 text-fun-blue" />
           Next Badges to Unlock
         </CardTitle>
       </CardHeader>

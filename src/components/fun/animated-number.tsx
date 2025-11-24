@@ -123,7 +123,7 @@ export function AnimatedXP({
       suffix=" XP"
       showSparkles={showSparkles}
       {...(className ? { className } : {})}
-      textClassName="font-bold text-brand-teal"
+      textClassName="font-bold text-fun-blue"
       springConfig={{ stiffness: 200, damping: 25 }}
     />
   );
