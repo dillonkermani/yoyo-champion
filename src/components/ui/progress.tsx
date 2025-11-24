@@ -17,11 +17,11 @@ export interface ProgressProps
 
 const progressVariants = {
   default: "bg-gray-400",
-  fun: "bg-gradient-to-r from-fun-green to-fun-green-light",
+  fun: "bg-gradient-to-r from-fun-blue to-fun-blue-light",
   xp: "bg-gradient-to-r from-xp to-xp-light",
   streak: "bg-gradient-to-r from-fun-red to-fun-orange",
   lesson: "bg-gradient-to-r from-fun-blue to-fun-blue-light",
-  rainbow: "bg-gradient-to-r from-fun-red via-fun-yellow via-fun-green to-fun-blue",
+  rainbow: "bg-gradient-to-r from-fun-red via-fun-yellow via-fun-blue to-brand-blue",
 };
 
 const sizeVariants = {
@@ -69,7 +69,7 @@ const Progress = React.forwardRef<
             <span className="text-muted-foreground">Progress</span>
             <motion.span
               className={cn(
-                isComplete ? "text-fun-green" : "text-brand-black"
+                isComplete ? "text-fun-blue" : "text-brand-black"
               )}
               animate={isComplete && celebrate ? { scale: [1, 1.2, 1] } : {}}
               transition={{ duration: 0.3 }}
@@ -155,7 +155,7 @@ const Progress = React.forwardRef<
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
             >
-              <span className="text-fun-green font-bold text-sm">Complete!</span>
+              <span className="text-fun-blue font-bold text-sm">Complete!</span>
             </motion.div>
           )}
         </AnimatePresence>
@@ -360,7 +360,7 @@ export interface CircularProgressProps {
 }
 
 const strokeColors: Record<string, string> = {
-  fun: "stroke-fun-green",
+  fun: "stroke-fun-blue",
   xp: "stroke-xp",
   streak: "stroke-fun-red",
   lesson: "stroke-fun-blue",
@@ -432,7 +432,7 @@ const CircularProgress = React.forwardRef<SVGSVGElement, CircularProgressProps>(
           <motion.span
             className={cn(
               "absolute text-lg font-bold",
-              isComplete ? "text-fun-green" : "text-brand-black"
+              isComplete ? "text-fun-blue" : "text-brand-black"
             )}
             animate={isComplete && celebrate ? { scale: [1, 1.2, 1] } : {}}
             transition={{ duration: 0.3 }}
@@ -444,7 +444,7 @@ const CircularProgress = React.forwardRef<SVGSVGElement, CircularProgressProps>(
         {/* Celebration ring */}
         {isComplete && celebrate && (
           <motion.div
-            className="absolute inset-0 rounded-full border-4 border-fun-green"
+            className="absolute inset-0 rounded-full border-4 border-fun-blue"
             initial={{ scale: 1, opacity: 0.8 }}
             animate={{ scale: 1.3, opacity: 0 }}
             transition={{ duration: 0.6, repeat: 2 }}
@@ -484,8 +484,8 @@ const LessonDots = React.forwardRef<HTMLDivElement, LessonDotsProps>(
               className={cn(
                 "rounded-full transition-all duration-200",
                 dotSizes[size],
-                isCompleted && "bg-fun-green",
-                isCurrent && "bg-fun-blue ring-2 ring-fun-blue/30",
+                isCompleted && "bg-fun-blue",
+                isCurrent && "bg-brand-teal ring-2 ring-brand-teal/30",
                 !isCompleted && !isCurrent && "bg-gray-300"
               )}
               initial={isCompleted ? { scale: 0 } : {}}

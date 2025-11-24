@@ -51,6 +51,9 @@ const badgeVariants = cva(
         // Brand variant
         brand:
           "border-transparent bg-brand-blue text-brand-black font-semibold",
+        // XP/reward variant
+        xp:
+          "border-transparent bg-gradient-to-r from-xp to-xp-light text-brand-black font-semibold shadow-sm",
       },
     },
     defaultVariants: {

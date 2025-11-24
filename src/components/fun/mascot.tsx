@@ -29,150 +29,152 @@ const sizeMap = {
   xl: { width: 160, height: 160, eyeSize: 18, pupilSize: 9 },
 };
 
+// Static by default - no continuous animations
+// Animations only trigger on specific interactions
 const containerVariants: Record<MascotState, Variants> = {
   happy: {
     animate: {
-      y: [0, -2, 0],
+      y: 0,
       transition: {
-        duration: 2,
-        repeat: Infinity,
+        duration: 0.3,
         ease: "easeInOut",
       },
     },
   },
   excited: {
     animate: {
-      y: [0, -12, 0],
-      scale: [1, 1.05, 1],
-      rotate: [-3, 3, -3],
+      y: 0,
+      scale: 1,
+      rotate: 0,
       transition: {
-        duration: 0.5,
-        repeat: Infinity,
+        duration: 0.3,
         ease: "easeInOut",
       },
     },
   },
   sad: {
     animate: {
-      y: [0, 2, 0],
-      rotate: [-2, 2, -2],
+      y: 0,
+      rotate: 0,
       transition: {
-        duration: 3,
-        repeat: Infinity,
+        duration: 0.3,
         ease: "easeInOut",
       },
     },
   },
   celebrating: {
+    // Only celebrating keeps animation (for achievements/celebrations)
     animate: {
       rotate: [-10, 10, -10],
       scale: [1, 1.1, 1],
       transition: {
         duration: 0.3,
-        repeat: Infinity,
+        repeat: 3, // Only repeat 3 times, not infinitely
         ease: "easeInOut",
       },
     },
   },
   thinking: {
     animate: {
-      rotate: [0, 5, 0, -5, 0],
+      rotate: 0,
       transition: {
-        duration: 2,
-        repeat: Infinity,
+        duration: 0.3,
         ease: "easeInOut",
       },
     },
   },
   encouraging: {
     animate: {
-      y: [0, -5, 0],
-      scale: [1, 1.03, 1],
+      y: 0,
+      scale: 1,
       transition: {
-        duration: 1,
-        repeat: Infinity,
+        duration: 0.3,
         ease: "easeInOut",
       },
     },
   },
 };
 
+// Static eye variants - no continuous animations
 const eyeVariants: Record<MascotState, Variants> = {
   happy: {
     animate: {
-      scaleY: [1, 0.9, 1],
-      transition: { duration: 3, repeat: Infinity },
+      scaleY: 1,
+      transition: { duration: 0.3 },
     },
   },
   excited: {
     animate: {
-      scale: [1, 1.3, 1],
-      transition: { duration: 0.4, repeat: Infinity },
+      scale: 1.1,
+      transition: { duration: 0.3 },
     },
   },
   sad: {
     animate: {
-      scaleY: [0.6, 0.5, 0.6],
-      y: [2, 3, 2],
-      transition: { duration: 2, repeat: Infinity },
+      scaleY: 0.6,
+      y: 2,
+      transition: { duration: 0.3 },
     },
   },
   celebrating: {
+    // Only celebrating has brief animation
     animate: {
       scaleY: [0.3, 0.8, 0.3],
-      transition: { duration: 0.2, repeat: Infinity },
+      transition: { duration: 0.2, repeat: 3 },
     },
   },
   thinking: {
     animate: {
-      x: [-2, 2, -2],
-      transition: { duration: 1.5, repeat: Infinity },
+      x: 0,
+      transition: { duration: 0.3 },
     },
   },
   encouraging: {
     animate: {
-      scale: [1, 1.1, 1],
-      transition: { duration: 0.8, repeat: Infinity },
+      scale: 1,
+      transition: { duration: 0.3 },
     },
   },
 };
 
+// Static pupil variants - no continuous animations
 const pupilVariants: Record<MascotState, Variants> = {
   happy: {
     animate: {
-      y: [0, -1, 0],
-      transition: { duration: 2, repeat: Infinity },
+      y: 0,
+      transition: { duration: 0.3 },
     },
   },
   excited: {
     animate: {
-      scale: [1, 0.8, 1],
-      transition: { duration: 0.3, repeat: Infinity },
+      scale: 1,
+      transition: { duration: 0.3 },
     },
   },
   sad: {
     animate: {
-      y: [1, 2, 1],
-      transition: { duration: 2, repeat: Infinity },
+      y: 1,
+      transition: { duration: 0.3 },
     },
   },
   celebrating: {
+    // Brief animation for celebrating only
     animate: {
       y: [-1, 1, -1],
-      transition: { duration: 0.15, repeat: Infinity },
+      transition: { duration: 0.15, repeat: 3 },
     },
   },
   thinking: {
     animate: {
-      x: [-2, 2, 2, -2, -2],
-      y: [-1, -1, 1, 1, -1],
-      transition: { duration: 3, repeat: Infinity },
+      x: 0,
+      y: 0,
+      transition: { duration: 0.3 },
     },
   },
   encouraging: {
     animate: {
-      y: [0, -1, 0],
-      transition: { duration: 0.5, repeat: Infinity },
+      y: 0,
+      transition: { duration: 0.3 },
     },
   },
 };
@@ -186,46 +188,48 @@ const mouthPaths: Record<MascotState, string> = {
   encouraging: "M -8 4 Q 0 12 8 4",
 };
 
+// Static string variants - no continuous animations
 const stringVariants: Record<MascotState, Variants> = {
   happy: {
     animate: {
-      d: ["M 0 0 Q 2 20 0 40", "M 0 0 Q -2 20 0 40", "M 0 0 Q 2 20 0 40"],
-      transition: { duration: 2, repeat: Infinity },
+      d: "M 0 0 Q 0 20 0 40",
+      transition: { duration: 0.3 },
     },
   },
   excited: {
     animate: {
-      d: ["M 0 0 Q 5 15 -3 40", "M 0 0 Q -5 15 3 40", "M 0 0 Q 5 15 -3 40"],
-      transition: { duration: 0.3, repeat: Infinity },
+      d: "M 0 0 Q 0 20 0 40",
+      transition: { duration: 0.3 },
     },
   },
   sad: {
     animate: {
-      d: ["M 0 0 Q 0 20 0 40"],
-      transition: { duration: 1 },
+      d: "M 0 0 Q 0 20 0 40",
+      transition: { duration: 0.3 },
     },
   },
   celebrating: {
+    // Brief animation for celebrating only
     animate: {
       d: ["M 0 0 Q 8 10 -5 40", "M 0 0 Q -8 10 5 40", "M 0 0 Q 8 10 -5 40"],
-      transition: { duration: 0.2, repeat: Infinity },
+      transition: { duration: 0.2, repeat: 3 },
     },
   },
   thinking: {
     animate: {
-      d: ["M 0 0 Q 1 20 1 40", "M 0 0 Q -1 20 -1 40", "M 0 0 Q 1 20 1 40"],
-      transition: { duration: 3, repeat: Infinity },
+      d: "M 0 0 Q 0 20 0 40",
+      transition: { duration: 0.3 },
     },
   },
   encouraging: {
     animate: {
-      d: ["M 0 0 Q 3 20 0 40", "M 0 0 Q -3 20 0 40", "M 0 0 Q 3 20 0 40"],
-      transition: { duration: 1, repeat: Infinity },
+      d: "M 0 0 Q 0 20 0 40",
+      transition: { duration: 0.3 },
     },
   },
 };
 
-// Confetti pieces for celebrating state
+// Confetti pieces for celebrating state - limited animation
 function CelebrationConfetti({ size }: { size: number }) {
   const confettiColors = ["#9bedff", "#91afa2", "#e3f2e6", "#FFD700", "#FF6B6B"];
 
@@ -250,7 +254,7 @@ function CelebrationConfetti({ size }: { size: number }) {
           }}
           transition={{
             duration: 0.8,
-            repeat: Infinity,
+            repeat: 2, // Only repeat twice, not infinitely
             delay: i * 0.1,
             ease: "easeOut",
           }}
@@ -260,12 +264,12 @@ function CelebrationConfetti({ size }: { size: number }) {
   );
 }
 
-// Thinking bubbles
+// Thinking bubbles - static, no animation
 function ThinkingBubbles({ size }: { size: number }) {
   return (
     <div className="absolute -right-2 -top-2">
       {[0, 1, 2].map((i) => (
-        <motion.div
+        <div
           key={i}
           className="absolute rounded-full bg-brand-teal/30"
           style={{
@@ -273,15 +277,7 @@ function ThinkingBubbles({ size }: { size: number }) {
             height: size * (0.1 - i * 0.02),
             right: i * 8,
             top: -i * 6,
-          }}
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.3, 0.6, 0.3],
-          }}
-          transition={{
-            duration: 1.5,
-            repeat: Infinity,
-            delay: i * 0.3,
+            opacity: 0.5 - i * 0.1,
           }}
         />
       ))}
@@ -289,38 +285,29 @@ function ThinkingBubbles({ size }: { size: number }) {
   );
 }
 
-// Encouraging sparkles
+// Encouraging sparkles - static, no animation
 function EncouragingSparkles({ size }: { size: number }) {
   return (
     <>
-      {[0, 1, 2, 3].map((i) => (
-        <motion.svg
+      {[0, 1].map((i) => (
+        <svg
           key={i}
           className="absolute"
           style={{
-            width: size * 0.15,
-            height: size * 0.15,
-            left: `${20 + i * 20}%`,
-            top: `${10 + (i % 2) * 10}%`,
+            width: size * 0.12,
+            height: size * 0.12,
+            left: i === 0 ? '10%' : '80%',
+            top: '5%',
+            opacity: 0.7,
           }}
           viewBox="0 0 24 24"
           fill="none"
-          animate={{
-            scale: [0, 1, 0],
-            opacity: [0, 1, 0],
-            rotate: [0, 180],
-          }}
-          transition={{
-            duration: 1,
-            repeat: Infinity,
-            delay: i * 0.2,
-          }}
         >
           <path
             d="M12 2L14 8L20 10L14 12L12 18L10 12L4 10L10 8L12 2Z"
             fill="#FFD700"
           />
-        </motion.svg>
+        </svg>
       ))}
     </>
   );
@@ -438,22 +425,15 @@ export const Mascot = React.forwardRef<HTMLDivElement, MascotProps>(
               transition={{ duration: 0.3 }}
             />
 
-            {/* Tear for sad mood */}
+            {/* Tear for sad mood - static */}
             {currentMood === "sad" && (
-              <motion.ellipse
+              <ellipse
                 cx={12}
-                cy={2}
+                cy={4}
                 rx={2}
                 ry={3}
                 fill="#9bedff"
-                animate={{
-                  y: [0, 8, 0],
-                  opacity: [1, 0, 1],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                }}
+                opacity={0.8}
               />
             )}
           </g>

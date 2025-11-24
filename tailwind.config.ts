@@ -24,12 +24,12 @@ const config: Config = {
           green: "#e3f2e6",
         },
 
-        // Duolingo-inspired Vibrant Colors
-        // Primary - Vibrant Success Green
+        // Primary Colors - Aqua Blue Theme
+        // Primary - Aqua Blue (brand color)
         "fun-primary": {
-          DEFAULT: "#58CC02",
-          light: "#7ED321",
-          dark: "#46A302",
+          DEFAULT: "#1CB0F6",
+          light: "#4DC4F9",
+          dark: "#0095DB",
         },
         // Secondary - Fun Purple
         "fun-secondary": {
@@ -351,7 +351,7 @@ const config: Config = {
           "linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent)",
         // Fun gradients
         "gradient-fun-primary":
-          "linear-gradient(135deg, #58CC02 0%, #7ED321 100%)",
+          "linear-gradient(135deg, #1CB0F6 0%, #4DC4F9 100%)",
         "gradient-fun-secondary":
           "linear-gradient(135deg, #CE82FF 0%, #A855F7 100%)",
         "gradient-fun-accent":
@@ -363,7 +363,7 @@ const config: Config = {
         "gradient-rainbow":
           "linear-gradient(90deg, #FF4B4B, #FF9600, #FFC800, #58CC02, #1CB0F6, #CE82FF)",
         "gradient-celebration":
-          "linear-gradient(135deg, #FF4B4B 0%, #FF9600 25%, #FFC800 50%, #58CC02 75%, #1CB0F6 100%)",
+          "linear-gradient(135deg, #FF4B4B 0%, #FF9600 25%, #FFC800 50%, #1CB0F6 75%, #9bedff 100%)",
       },
       boxShadow: {
         subtle: "0 1px 3px rgba(0, 0, 0, 0.08)",

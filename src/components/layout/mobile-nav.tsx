@@ -32,9 +32,9 @@ const navItems = [
     href: "/paths",
     label: "Paths",
     icon: Map,
-    activeColor: "text-fun-green",
-    activeBg: "bg-fun-green/10",
-    glowClass: "shadow-fun-green"
+    activeColor: "text-brand-teal",
+    activeBg: "bg-brand-teal/10",
+    glowClass: "shadow-fun-blue"
   },
   {
     href: "/dashboard",
@@ -220,7 +220,7 @@ export function MobileNav({ className }: MobileNavProps) {
                     "bg-gradient-to-r",
                     item.href === "/" && "from-fun-blue to-fun-blue-light",
                     item.href === "/library" && "from-fun-purple to-fun-purple-light",
-                    item.href === "/paths" && "from-fun-green to-fun-green-light",
+                    item.href === "/paths" && "from-brand-teal to-brand-teal/80",
                     item.href === "/dashboard" && "from-xp to-xp-light",
                     (item.href === "/profile" || item.href === "/login") && "from-fun-pink to-fun-pink-light"
                   )}

@@ -54,10 +54,10 @@
     /* Font */
     --font-jost: 'Jost', system-ui, sans-serif;
 
-    /* Fun colors as CSS variables */
-    --fun-green: #58CC02;
-    --fun-green-light: #7ED321;
-    --fun-green-dark: #46A302;
+    /* Fun colors as CSS variables - Aqua Blue Primary */
+    --fun-green: #91afa2;
+    --fun-green-light: #a8c4b7;
+    --fun-green-dark: #7a9a8c;
     --fun-blue: #1CB0F6;
     --fun-purple: #CE82FF;
     --fun-orange: #FF9600;
@@ -168,17 +168,17 @@
 
   ::-webkit-scrollbar-thumb {
     @apply rounded-full transition-colors;
-    background: linear-gradient(135deg, var(--fun-green) 0%, var(--fun-blue) 100%);
+    background: linear-gradient(135deg, var(--fun-blue) 0%, #9bedff 100%);
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(135deg, var(--fun-green-dark) 0%, var(--fun-blue) 100%);
+    background: linear-gradient(135deg, #0095DB 0%, var(--fun-blue) 100%);
   }
 
   /* Firefox scrollbar */
   * {
     scrollbar-width: thin;
-    scrollbar-color: var(--fun-green) hsl(var(--background));
+    scrollbar-color: var(--fun-blue) hsl(var(--background));
   }
 
   /* Focus styles - fun ring! */
@@ -199,7 +199,7 @@
   }
 
   .bg-fun-gradient-vibrant {
-    background: linear-gradient(135deg, var(--fun-green) 0%, var(--fun-blue) 100%);
+    background: linear-gradient(135deg, var(--fun-blue) 0%, #9bedff 100%);
   }
 
   .bg-fun-gradient-warm {
@@ -219,8 +219,8 @@
       var(--fun-red) 0%,
       var(--fun-orange) 25%,
       var(--fun-yellow) 50%,
-      var(--fun-green) 75%,
-      var(--fun-blue) 100%
+      var(--fun-blue) 75%,
+      #9bedff 100%
     );
   }
 
@@ -268,15 +268,15 @@
 
   /* Animated glow */
   .glow-pulse-green {
-    animation: glow-pulse-green 2s ease-in-out infinite;
+    animation: glow-pulse-blue 2s ease-in-out infinite;
   }
 
-  @keyframes glow-pulse-green {
+  @keyframes glow-pulse-blue {
     0%, 100% {
-      box-shadow: 0 0 10px rgba(88, 204, 2, 0.4), 0 0 20px rgba(88, 204, 2, 0.2);
+      box-shadow: 0 0 10px rgba(28, 176, 246, 0.4), 0 0 20px rgba(28, 176, 246, 0.2);
     }
     50% {
-      box-shadow: 0 0 25px rgba(88, 204, 2, 0.6), 0 0 50px rgba(88, 204, 2, 0.4);
+      box-shadow: 0 0 25px rgba(28, 176, 246, 0.6), 0 0 50px rgba(28, 176, 246, 0.4);
     }
   }
 
@@ -340,8 +340,8 @@
   }
 
   .btn-fun-green {
-    @apply btn-fun bg-fun-green shadow-fun-green;
-    @apply hover:bg-fun-green-light hover:shadow-fun-green-lg;
+    @apply btn-fun bg-fun-blue shadow-fun-blue;
+    @apply hover:bg-fun-blue-light hover:shadow-fun-blue-lg;
   }
 
   .btn-fun-blue {
@@ -556,7 +556,7 @@
   }
 
   .card-clean-hover:hover {
-    @apply shadow-elevated border-fun-green/30 -translate-y-1;
+    @apply shadow-elevated border-fun-blue/30 -translate-y-1;
   }
 
   /* Fun card variants */
@@ -569,7 +569,7 @@
   }
 
   .card-fun-green {
-    @apply card-fun border-fun-green/20 hover:border-fun-green hover:shadow-fun-green;
+    @apply card-fun border-fun-blue/20 hover:border-fun-blue hover:shadow-fun-blue;
   }
 
   .card-fun-blue {
@@ -592,7 +592,7 @@
   /* ===== ANNOUNCEMENT BAR ===== */
   .announcement-bar {
     @apply text-brand-black text-sm font-bold py-3 px-4 text-center;
-    background: linear-gradient(90deg, var(--fun-green) 0%, var(--fun-blue) 100%);
+    background: linear-gradient(90deg, var(--fun-blue) 0%, #9bedff 100%);
   }
 
   /* ===== BUTTON STYLES (Updated) ===== */
@@ -601,8 +601,8 @@
   }
 
   .btn-primary {
-    @apply btn-pill bg-fun-green text-white shadow-fun-green;
-    @apply hover:bg-fun-green-light hover:-translate-y-0.5;
+    @apply btn-pill bg-fun-blue text-white shadow-fun-blue;
+    @apply hover:bg-fun-blue-light hover:-translate-y-0.5;
     @apply active:translate-y-0 active:scale-95;
   }
 
@@ -634,7 +634,7 @@
   }
 
   .badge-green {
-    @apply bg-fun-green/20 text-fun-green-dark;
+    @apply bg-fun-blue/20 text-fun-blue-dark;
   }
 
   .badge-blue {
@@ -672,7 +672,7 @@
   }
 
   .badge-success {
-    @apply bg-fun-green text-white;
+    @apply bg-fun-blue text-white;
   }
 
   .badge-warning {
@@ -684,7 +684,7 @@
   }
 
   .badge-sale {
-    @apply bg-fun-green text-white font-bold animate-bounce-soft;
+    @apply bg-fun-blue text-white font-bold animate-bounce-soft;
   }
 
   /* ===== SHIMMER LOADING ===== */
@@ -774,7 +774,7 @@
 
   /* Fun text gradient */
   .text-gradient-fun {
-    background: linear-gradient(90deg, var(--fun-green), var(--fun-blue));
+    background: linear-gradient(90deg, var(--fun-blue), #9bedff);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;

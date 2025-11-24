@@ -145,6 +145,13 @@ export default function PathDetailPage() {
     }
   };
 
+  // Handle module navigation
+  const handleModuleNavigate = (moduleId: string) => {
+    if (path) {
+      router.push(`/paths/${path.slug}/${moduleId}`);
+    }
+  };
+
   // Simulate loading
   React.useEffect(() => {
     const timer = setTimeout(() => setIsLoading(false), 300);
@@ -324,7 +331,11 @@ export default function PathDetailPage() {
                 </button>
               ) : !isComplete ? (
                 <button
-                  onClick={() => nextModuleId && setExpandedModuleId(nextModuleId)}
+                  onClick={() => {
+                    if (nextModuleId) {
+                      router.push(`/paths/${path.slug}/${nextModuleId}`);
+                    }
+                  }}
                   className="w-full lg:w-auto px-8 py-3 rounded-full bg-brand-blue text-brand-black font-semibold hover:bg-brand-blue/80 transition-colors shadow-sm"
                 >
                   Continue Learning
@@ -362,8 +373,11 @@ export default function PathDetailPage() {
                   getTrickStatus={getTrickStatus}
                   isLocked={isModuleLocked(module, index)}
                   isExpanded={expandedModuleId === module.id}
+                  isCurrent={currentPathProgress?.currentModuleId === module.id || nextModuleId === module.id}
+                  pathSlug={path.slug}
                   onExpandToggle={() => handleModuleClick(module.id)}
                   onTrickClick={handleTrickClick}
+                  onModuleNavigate={handleModuleNavigate}
                 />
               </motion.div>
             ))}

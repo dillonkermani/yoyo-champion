@@ -11,9 +11,9 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        // Default - Fun Green (Duolingo style)
+        // Default - Aqua Blue (Primary)
         default:
-          "rounded-2xl bg-fun-green text-white shadow-fun-green hover:bg-fun-green-light hover:-translate-y-0.5 active:translate-y-0 active:scale-95",
+          "rounded-2xl bg-fun-blue text-white shadow-fun-blue hover:bg-fun-blue-light hover:-translate-y-0.5 active:translate-y-0 active:scale-95",
         // Secondary - Outlined style
         secondary:
           "rounded-2xl bg-white text-brand-black border-2 border-gray-200 hover:border-fun-blue hover:text-fun-blue hover:-translate-y-0.5 active:translate-y-0 active:scale-95",
@@ -36,9 +36,9 @@ const buttonVariants = cva(
           "rounded-2xl bg-brand-teal text-white font-bold hover:bg-brand-teal/90 hover:-translate-y-0.5 active:translate-y-0 active:scale-95",
 
         // === NEW FUN VARIANTS ===
-        // Success - Vibrant Green (like completing a lesson)
+        // Success - Brand Teal (like completing a lesson)
         success:
-          "rounded-2xl bg-fun-green text-white shadow-fun-green-lg hover:bg-fun-green-light hover:-translate-y-1 hover:shadow-glow-green active:translate-y-0 active:scale-95",
+          "rounded-2xl bg-brand-teal text-white shadow-fun-blue-lg hover:bg-brand-teal/90 hover:-translate-y-1 hover:shadow-glow-blue active:translate-y-0 active:scale-95",
         // Streak - Fire gradient for streaks
         streak:
           "rounded-2xl text-white shadow-fun-red hover:-translate-y-1 active:translate-y-0 active:scale-95 bg-gradient-to-r from-fun-red to-fun-orange hover:shadow-glow-red",
@@ -59,7 +59,7 @@ const buttonVariants = cva(
           "rounded-2xl bg-fun-pink text-white shadow-fun-pink-lg hover:bg-fun-pink-light hover:-translate-y-1 active:translate-y-0 active:scale-95",
         // Celebration - Rainbow gradient
         celebration:
-          "rounded-2xl text-white hover:-translate-y-1 active:translate-y-0 active:scale-95 bg-gradient-to-r from-fun-red via-fun-yellow to-fun-green animate-pulse",
+          "rounded-2xl text-white hover:-translate-y-1 active:translate-y-0 active:scale-95 bg-gradient-to-r from-fun-red via-fun-yellow to-fun-blue animate-pulse",
       },
       size: {
         sm: "h-10 px-4 text-sm",
@@ -212,9 +212,9 @@ export interface IconButtonProps
 }
 
 const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
-  ({ className, icon, color = "green", glow = false, ...props }, ref) => {
+  ({ className, icon, color = "blue", glow = false, ...props }, ref) => {
     const colorClasses = {
-      green: "bg-fun-green text-white hover:bg-fun-green-light shadow-fun-green",
+      green: "bg-brand-teal text-white hover:bg-brand-teal/90 shadow-fun-blue",
       blue: "bg-fun-blue text-white hover:bg-fun-blue-light shadow-fun-blue",
       purple: "bg-fun-purple text-white hover:bg-fun-purple-light shadow-fun-purple",
       orange: "bg-fun-orange text-white hover:bg-fun-orange-light shadow-fun-orange",
@@ -224,10 +224,10 @@ const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
     };
 
     const glowClasses = {
-      green: "hover:shadow-glow-green",
+      green: "hover:shadow-glow-blue",
       blue: "hover:shadow-glow-blue",
       purple: "hover:shadow-glow-purple",
-      orange: "hover:shadow-glow-green",
+      orange: "hover:shadow-glow-blue",
       yellow: "hover:shadow-glow-yellow",
       red: "hover:shadow-glow-red",
       pink: "hover:shadow-glow-purple",

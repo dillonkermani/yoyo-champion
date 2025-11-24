@@ -13,8 +13,11 @@ export interface ModuleCardProps {
   getTrickStatus: (trickId: string) => TrickStatus;
   isLocked?: boolean;
   isExpanded?: boolean;
+  isCurrent?: boolean;
+  pathSlug?: string;
   onExpandToggle?: () => void;
   onTrickClick?: (trickId: string) => void;
+  onModuleNavigate?: (moduleId: string) => void;
   className?: string;
 }
 
@@ -25,8 +28,11 @@ export function ModuleCard({
   getTrickStatus,
   isLocked = false,
   isExpanded = false,
+  isCurrent = false,
+  pathSlug,
   onExpandToggle,
   onTrickClick,
+  onModuleNavigate,
   className,
 }: ModuleCardProps) {
   // Calculate completion stats
@@ -45,6 +51,7 @@ export function ModuleCard({
         isLocked ? "border-border opacity-60" : "border-border hover:border-brand-teal/30",
         isComplete && "border-brand-green/50 bg-brand-green/5",
         isInProgress && !isComplete && "border-brand-blue/50",
+        isCurrent && !isComplete && "ring-2 ring-brand-blue/30",
         className
       )}
     >
@@ -92,8 +99,13 @@ export function ModuleCard({
             >
               {module.title}
             </h4>
-            {isInProgress && !isComplete && (
+            {isCurrent && !isComplete && (
               <span className="px-2 py-0.5 text-[10px] font-semibold rounded-full bg-brand-blue text-brand-black">
+                Current
+              </span>
+            )}
+            {isInProgress && !isComplete && !isCurrent && (
+              <span className="px-2 py-0.5 text-[10px] font-semibold rounded-full bg-brand-blue/70 text-brand-black">
                 In Progress
               </span>
             )}
@@ -224,6 +236,51 @@ export function ModuleCard({
                   );
                 })}
               </div>
+
+              {/* View Module Button */}
+              {(pathSlug || onModuleNavigate) && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.2, delay: 0.15 }}
+                  className="mt-4 pt-3 border-t border-border"
+                >
+                  <button
+                    onClick={() => onModuleNavigate?.(module.id)}
+                    className={cn(
+                      "w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg font-medium text-sm transition-colors",
+                      isComplete
+                        ? "bg-brand-green/10 text-brand-green hover:bg-brand-green/20"
+                        : isInProgress || isCurrent
+                        ? "bg-brand-blue text-brand-black hover:bg-brand-blue/80"
+                        : "bg-brand-teal/10 text-brand-teal hover:bg-brand-teal/20"
+                    )}
+                  >
+                    {isComplete ? (
+                      <>
+                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                        </svg>
+                        Review Module
+                      </>
+                    ) : isInProgress || isCurrent ? (
+                      <>
+                        Continue Module
+                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                        </svg>
+                      </>
+                    ) : (
+                      <>
+                        Start Module
+                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                        </svg>
+                      </>
+                    )}
+                  </button>
+                </motion.div>
+              )}
             </div>
           </motion.div>
         )}

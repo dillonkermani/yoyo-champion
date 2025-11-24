@@ -278,7 +278,7 @@ export function DailyGoal({ current, target, icon = "target", label = "Daily Goa
       className={cn(
         "p-4 rounded-2xl border-2",
         isComplete
-          ? "bg-fun-green/10 border-fun-green/30"
+          ? "bg-fun-blue/10 border-fun-blue/30"
           : "bg-white border-gray-200",
         className
       )}
@@ -296,7 +296,7 @@ export function DailyGoal({ current, target, icon = "target", label = "Daily Goa
           </motion.span>
           <span className="font-bold text-gray-900">{label}</span>
         </div>
-        <span className={cn("font-black", isComplete ? "text-fun-green" : "text-gray-600")}>
+        <span className={cn("font-black", isComplete ? "text-fun-blue" : "text-gray-600")}>
           {current}/{target}
         </span>
       </div>
@@ -305,7 +305,7 @@ export function DailyGoal({ current, target, icon = "target", label = "Daily Goa
           className={cn(
             "h-full rounded-full",
             isComplete
-              ? "bg-gradient-to-r from-fun-green to-fun-green-light"
+              ? "bg-gradient-to-r from-fun-blue to-brand-teal"
               : "bg-gradient-to-r from-fun-blue to-fun-blue-light"
           )}
           initial={{ width: 0 }}
@@ -315,7 +315,7 @@ export function DailyGoal({ current, target, icon = "target", label = "Daily Goa
       </div>
       {isComplete && (
         <motion.p
-          className="mt-2 text-sm text-fun-green font-bold text-center"
+          className="mt-2 text-sm text-fun-blue font-bold text-center"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
@@ -425,10 +425,10 @@ export interface StatCardProps {
 
 const statColorConfig = {
   primary: {
-    bg: "bg-fun-green/10",
-    border: "border-fun-green/20",
-    iconBg: "bg-fun-green/20",
-    text: "text-fun-green",
+    bg: "bg-fun-blue/10",
+    border: "border-fun-blue/20",
+    iconBg: "bg-fun-blue/20",
+    text: "text-fun-blue",
   },
   xp: {
     bg: "bg-fun-yellow/10",
@@ -657,7 +657,7 @@ export function MasteredBadge({ className }: MasteredBadgeProps) {
     <motion.div
       className={cn(
         "inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-black",
-        "bg-fun-green text-white",
+        "bg-fun-blue text-white",
         className
       )}
       initial={{ scale: 0 }}

@@ -70,3 +70,17 @@ export type {
   ProductCategory,
   SkillLevel,
 } from './mock-products';
+
+// Categories Data
+export {
+  categories,
+  getCategoryById,
+  getCategoryBySlug,
+  getAllCategories,
+  categoryColorConfig,
+  categoryIconMap,
+} from './categories';
+
+export type {
+  TrickCategory,
+} from './categories';

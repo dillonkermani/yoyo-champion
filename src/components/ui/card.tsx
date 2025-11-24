@@ -13,7 +13,7 @@ export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
 
 const variantStyles = {
   default: "border-gray-100",
-  fun: "border-fun-green/20 hover:border-fun-green",
+  fun: "border-fun-blue/20 hover:border-fun-blue",
   achievement: "border-xp/30 bg-gradient-to-br from-xp/5 to-xp-light/10",
   streak: "border-fun-red/30 bg-gradient-to-br from-fun-red/5 to-fun-orange/10",
   xp: "border-xp/30 bg-gradient-to-br from-xp/5 to-xp-light/10",
@@ -21,7 +21,7 @@ const variantStyles = {
 };
 
 const glowStyles = {
-  green: "hover:shadow-fun-green",
+  green: "hover:shadow-fun-blue",
   blue: "hover:shadow-fun-blue",
   purple: "hover:shadow-fun-purple",
   orange: "hover:shadow-fun-orange",
@@ -127,7 +127,7 @@ const LessonCard = React.forwardRef<HTMLDivElement, LessonCardProps>(
       className={cn(
         "rounded-3xl border-2 bg-white text-brand-black transition-all duration-200",
         "shadow-card hover:-translate-y-1",
-        completed && "border-fun-green bg-fun-green/5 hover:shadow-fun-green",
+        completed && "border-fun-blue bg-fun-blue/5 hover:shadow-fun-blue",
         current && "border-fun-blue bg-fun-blue/5 hover:shadow-fun-blue ring-2 ring-fun-blue/30",
         locked && "border-gray-200 bg-gray-50 opacity-60 cursor-not-allowed hover:translate-y-0",
         !completed && !locked && !current && "border-gray-200 hover:border-fun-blue hover:shadow-fun-blue",

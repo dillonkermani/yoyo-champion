@@ -249,7 +249,7 @@ export default function DashboardPage() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="relative overflow-hidden rounded-2xl sm:rounded-3xl bg-gradient-to-br from-fun-primary via-fun-primary-dark to-emerald-600 p-4 sm:p-6 lg:p-8 text-white"
+        className="relative overflow-hidden rounded-2xl sm:rounded-3xl bg-gradient-to-br from-fun-blue via-fun-blue-dark to-brand-teal p-4 sm:p-6 lg:p-8 text-white"
       >
         {/* Background decorations */}
         <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2" />
@@ -380,12 +380,12 @@ export default function DashboardPage() {
         </h2>
 
         {lastWatchedTrick && lastWatchedProgress ? (
-          <BounceCard className="overflow-hidden border-2 border-fun-primary/20 hover:border-fun-primary">
+          <BounceCard className="overflow-hidden border-2 border-fun-blue/20 hover:border-fun-blue">
             <Link href={`/trick/${lastWatchedTrick.slug}`} className="block min-h-[44px]">
               <div className="flex flex-col sm:flex-row">
-                <div className="sm:w-44 lg:w-48 h-28 sm:h-auto bg-gradient-to-br from-fun-primary/20 to-fun-blue/20 flex-shrink-0 relative flex items-center justify-center">
+                <div className="sm:w-44 lg:w-48 h-28 sm:h-auto bg-gradient-to-br from-fun-blue/20 to-brand-teal/20 flex-shrink-0 relative flex items-center justify-center">
                   <motion.div
-                    className="w-16 h-16 rounded-full bg-fun-primary flex items-center justify-center shadow-lg"
+                    className="w-16 h-16 rounded-full bg-fun-blue flex items-center justify-center shadow-lg"
                     whileHover={{ scale: 1.1 }}
                     animate={{ scale: [1, 1.05, 1] }}
                     transition={{ duration: 2, repeat: Infinity }}
@@ -399,7 +399,7 @@ export default function DashboardPage() {
                       cy="50"
                       r="45"
                       fill="none"
-                      stroke="rgba(88,204,2,0.2)"
+                      stroke="rgba(28,176,246,0.2)"
                       strokeWidth="4"
                     />
                     <motion.circle
@@ -407,7 +407,7 @@ export default function DashboardPage() {
                       cy="50"
                       r="45"
                       fill="none"
-                      stroke="#58CC02"
+                      stroke="#1CB0F6"
                       strokeWidth="4"
                       strokeLinecap="round"
                       strokeDasharray={283}
@@ -445,7 +445,7 @@ export default function DashboardPage() {
                       <XPBadge amount={lastWatchedTrick.xpReward} size="sm" showPlus={true} animate={false} />
                     </div>
                     <motion.div
-                      className="px-4 py-1.5 sm:px-6 sm:py-2 bg-fun-primary text-white font-bold rounded-full text-sm sm:text-base min-h-[44px] flex items-center"
+                      className="px-4 py-1.5 sm:px-6 sm:py-2 bg-fun-blue text-white font-bold rounded-full text-sm sm:text-base min-h-[44px] flex items-center"
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                     >
@@ -567,7 +567,7 @@ export default function DashboardPage() {
             </h2>
             <Link
               href="/paths"
-              className="text-fun-primary hover:text-fun-primary-dark font-bold flex items-center gap-1 text-sm sm:text-base min-h-[44px] min-w-[44px] justify-center"
+              className="text-fun-blue hover:text-fun-blue-dark font-bold flex items-center gap-1 text-sm sm:text-base min-h-[44px] min-w-[44px] justify-center"
             >
               View All <ArrowRightIcon className="w-4 h-4" />
             </Link>
@@ -594,13 +594,13 @@ export default function DashboardPage() {
                       <div className="space-y-3">
                         <div className="flex items-center justify-between text-sm">
                           <span className="text-gray-500">Progress</span>
-                          <span className="font-bold text-fun-primary">
+                          <span className="font-bold text-fun-blue">
                             {progress.completed}/{progress.total} tricks
                           </span>
                         </div>
                         <div className="h-3 bg-gray-100 rounded-full overflow-hidden">
                           <motion.div
-                            className="h-full bg-gradient-to-r from-fun-primary to-fun-primary-light rounded-full"
+                            className="h-full bg-gradient-to-r from-fun-blue to-fun-blue-light rounded-full"
                             initial={{ width: 0 }}
                             animate={{ width: `${progress.percentage}%` }}
                             transition={{ duration: 0.8, ease: "easeOut" }}
@@ -635,7 +635,7 @@ export default function DashboardPage() {
           <BounceCard>
             <div className="p-5">
               <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2 mb-4">
-                <ChartIcon className="w-5 h-5 text-fun-primary" />
+                <ChartIcon className="w-5 h-5 text-fun-blue" />
                 Skills Overview
               </h3>
               <div className="space-y-4">
@@ -659,7 +659,7 @@ export default function DashboardPage() {
                       </div>
                       <div className="h-2.5 bg-gray-100 rounded-full overflow-hidden">
                         <motion.div
-                          className="h-full bg-gradient-to-r from-fun-primary to-fun-primary-light rounded-full"
+                          className="h-full bg-gradient-to-r from-fun-blue to-fun-blue-light rounded-full"
                           initial={{ width: 0 }}
                           animate={{ width: `${percentage}%` }}
                           transition={{ duration: 0.8, ease: "easeOut" }}
@@ -720,7 +720,7 @@ export default function DashboardPage() {
             </h2>
             <Link
               href="/profile/achievements"
-              className="text-fun-primary hover:text-fun-primary-dark font-bold flex items-center gap-1 text-sm sm:text-base min-h-[44px] min-w-[44px] justify-center"
+              className="text-fun-blue hover:text-fun-blue-dark font-bold flex items-center gap-1 text-sm sm:text-base min-h-[44px] min-w-[44px] justify-center"
             >
               View All <ArrowRightIcon className="w-4 h-4" />
             </Link>
@@ -771,10 +771,10 @@ export default function DashboardPage() {
           <motion.div whileHover={{ scale: 1.02, y: -4 }} whileTap={{ scale: 0.98 }}>
             <Link
               href="/paths"
-              className="flex flex-col items-center gap-2 sm:gap-3 p-3 sm:p-6 rounded-xl sm:rounded-2xl bg-gradient-to-br from-fun-primary/10 to-fun-primary/5 border-2 border-fun-primary/20 hover:border-fun-primary transition-colors min-h-[100px] sm:min-h-[130px]"
+              className="flex flex-col items-center gap-2 sm:gap-3 p-3 sm:p-6 rounded-xl sm:rounded-2xl bg-gradient-to-br from-brand-teal/10 to-brand-teal/5 border-2 border-brand-teal/20 hover:border-brand-teal transition-colors min-h-[100px] sm:min-h-[130px]"
             >
-              <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-fun-primary/20 flex items-center justify-center">
-                <ChartIcon className="w-5 h-5 sm:w-7 sm:h-7 text-fun-primary" />
+              <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-brand-teal/20 flex items-center justify-center">
+                <ChartIcon className="w-5 h-5 sm:w-7 sm:h-7 text-brand-teal" />
               </div>
               <span className="font-bold text-gray-900 text-xs sm:text-base text-center">Learning Paths</span>
             </Link>

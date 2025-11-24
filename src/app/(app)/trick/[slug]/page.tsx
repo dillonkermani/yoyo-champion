@@ -9,12 +9,16 @@ import { getTrickBySlug, getTrickById, mockTricks } from "@/lib/data/mock-tricks
 import { useProgressStore, TrickStatus } from "@/stores/progress-store";
 import { TrickPlayer } from "@/components/video";
 import { Badge, DifficultyBadge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { Button, MotionButton } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import { Input } from "@/components/ui/input";
+import { Progress } from "@/components/ui/progress";
+import { LessonSteps, StepIndicator } from "@/components/curriculum/lesson-steps";
+import { TrickMasteryCelebration } from "@/components/fun/celebration";
+import { SuccessConfetti } from "@/components/fun/confetti";
 import type { Trick, TrickDifficulty } from "@/lib/data/types";
 import {
   ArrowLeft,
@@ -27,7 +31,6 @@ import {
   Lightbulb,
   Target,
   BookOpen,
-  ListOrdered,
   MessageSquare,
   Trash2,
   Plus,
@@ -35,6 +38,10 @@ import {
   Award,
   Lock,
   Sparkles,
+  GraduationCap,
+  Dumbbell,
+  Trophy,
+  Zap,
 } from "lucide-react";
 import { ProductRecommendation } from "@/components/products";
 
@@ -45,20 +52,6 @@ const difficultyMap: Record<TrickDifficulty, "beginner" | "intermediate" | "adva
   3: "advanced",
   4: "master",
   5: "legendary",
-};
-
-// Map genre to display label
-const genreLabels: Record<string, string> = {
-  basics: "Basics",
-  string: "String Tricks",
-  slack: "Slack",
-  tech: "Technical",
-  flow: "Flow",
-  horizontal: "Horizontal",
-  speed: "Speed",
-  grinds: "Grinds",
-  regens: "Regens",
-  hops: "Hops",
 };
 
 export default function TrickDetailPage() {
@@ -84,8 +77,13 @@ export default function TrickDetailPage() {
     canPerform: false,
     consistent: false,
   });
-  const [activeTab, setActiveTab] = React.useState("overview");
+  const [activeTab, setActiveTab] = React.useState("lesson");
   const [isMobileSheetOpen, setIsMobileSheetOpen] = React.useState(false);
+
+  // Lesson state
+  const [currentStepIndex, setCurrentStepIndex] = React.useState(0);
+  const [completedSteps, setCompletedSteps] = React.useState<number[]>([]);
+  const [showCelebration, setShowCelebration] = React.useState(false);
 
   // Hydrate store on mount
   React.useEffect(() => {
@@ -145,21 +143,14 @@ export default function TrickDetailPage() {
 
   // Handle watch completion
   const handleMarkWatched = () => {
-    const result = markTrickWatched(trick.id);
-    if (result.xpGained > 0) {
-      // Could trigger a toast notification here
-      console.log(`+${result.xpGained} XP`);
-    }
+    markTrickWatched(trick.id);
   };
 
   // Handle mastery
   const handleMarkMastered = () => {
     const allChecked = Object.values(masteryChecks).every(Boolean);
     if (allChecked) {
-      const result = markTrickMastered(trick.id);
-      if (result.xpGained > 0) {
-        console.log(`+${result.xpGained} XP - Trick Mastered!`);
-      }
+      markTrickMastered(trick.id);
       setShowMasteryForm(false);
     }
   };
@@ -177,68 +168,172 @@ export default function TrickDetailPage() {
     removeNote(trick.id, index);
   };
 
+  // Handle step completion
+  const handleStepComplete = (index: number) => {
+    if (!completedSteps.includes(index)) {
+      setCompletedSteps((prev) => [...prev, index]);
+    }
+  };
+
+  // Handle seek to timestamp
+  const handleSeekToTimestamp = (_timestamp: number) => {
+    // This would be connected to the video player in a full implementation
+    // For now, it's a placeholder for future video integration
+  };
+
+  // Calculate lesson progress
+  const lessonProgress = (completedSteps.length / trick.steps.length) * 100;
+  const allStepsComplete = completedSteps.length === trick.steps.length;
+
   return (
     <div className="min-h-screen bg-surface">
-      {/* Header */}
+      {/* Celebration */}
+      <TrickMasteryCelebration
+        active={showCelebration}
+        trickName={trick.name}
+        onComplete={() => setShowCelebration(false)}
+      />
+      <SuccessConfetti active={showCelebration} />
+
+      {/* Lesson Header - Enhanced */}
       <div className="border-b border-border bg-white sticky top-0 z-40">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center gap-4">
-            <Link href="/library">
-              <Button variant="ghost" size="icon" className="shrink-0">
-                <ArrowLeft className="w-5 h-5" />
+            {/* Back to Curriculum Button */}
+            <Link href="/paths">
+              <Button variant="ghost" size="sm" className="shrink-0 gap-1.5 text-muted-foreground hover:text-brand-black">
+                <ArrowLeft className="w-4 h-4" />
+                <span className="hidden sm:inline">Curriculum</span>
               </Button>
             </Link>
 
             <div className="flex-1 min-w-0">
-              <motion.h1
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="text-2xl md:text-3xl font-bold text-brand-black truncate"
-              >
-                {trick.name}
-              </motion.h1>
+              <div className="flex items-center gap-3">
+                <motion.h1
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="text-xl md:text-2xl font-bold text-brand-black truncate"
+                >
+                  {trick.name}
+                </motion.h1>
+
+                {/* Difficulty Stars */}
+                <div className="hidden sm:flex items-center gap-0.5">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <Star
+                      key={i}
+                      className={cn(
+                        "w-4 h-4",
+                        i < trick.difficulty
+                          ? "text-xp fill-xp"
+                          : "text-gray-300"
+                      )}
+                    />
+                  ))}
+                </div>
+              </div>
 
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.1 }}
-                className="flex flex-wrap items-center gap-2 mt-2"
+                className="flex flex-wrap items-center gap-2 mt-1.5"
               >
-                <DifficultyBadge level={difficultyMap[trick.difficulty]} />
-                <Badge variant="teal">{trick.style}</Badge>
-                <Badge variant="secondary">{genreLabels[trick.genre] || trick.genre}</Badge>
+                {/* XP Reward Badge */}
+                <Badge variant="xp" className="gap-1 font-bold">
+                  <Zap className="w-3 h-3" />
+                  +{trick.xpReward} XP
+                </Badge>
+
+                {/* Estimated Time */}
+                <Badge variant="secondary" className="gap-1">
+                  <Clock className="w-3 h-3" />
+                  {trick.estimatedMinutes} min
+                </Badge>
+
+                {/* Status Badge */}
+                {getStatusBadge()}
               </motion.div>
             </div>
 
-            <div className="hidden sm:flex flex-col items-end gap-1.5">
-              {getStatusBadge()}
-              <div className="flex items-center gap-3 text-sm text-muted-foreground">
-                <span className="flex items-center gap-1">
-                  <Star className="w-4 h-4 text-brand-blue" />
-                  <span className="font-medium text-brand-black">{trick.xpReward} XP</span>
-                </span>
-                <span className="flex items-center gap-1">
-                  <Clock className="w-4 h-4" />
-                  {trick.estimatedMinutes} min
-                </span>
-              </div>
+            {/* Right Side - Quick Actions */}
+            <div className="flex items-center gap-2">
+              {/* Prerequisites Quick View */}
+              {prerequisites.length > 0 && (
+                <div className="hidden md:flex items-center gap-1.5 px-3 py-1.5 bg-surface-secondary rounded-full">
+                  <Lock className="w-3.5 h-3.5 text-muted-foreground" />
+                  <span className="text-xs text-muted-foreground">
+                    {prerequisites.length} prereq{prerequisites.length > 1 ? "s" : ""}
+                  </span>
+                  <div className="flex -space-x-2">
+                    {prerequisites.slice(0, 2).map((prereq) => {
+                      const prereqProgress = getTrickProgress(prereq.id);
+                      const isMastered = prereqProgress?.status === "mastered";
+                      return (
+                        <Link
+                          key={prereq.id}
+                          href={`/trick/${prereq.slug}`}
+                          className={cn(
+                            "w-6 h-6 rounded-full border-2 border-white flex items-center justify-center text-xs font-bold",
+                            isMastered
+                              ? "bg-fun-blue text-white"
+                              : "bg-gray-200 text-gray-600"
+                          )}
+                          title={prereq.name}
+                        >
+                          {isMastered ? (
+                            <CheckCircle2 className="w-3.5 h-3.5" />
+                          ) : (
+                            prereq.name.charAt(0)
+                          )}
+                        </Link>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+
+              {/* Practice Mode Button */}
+              <Link href={`/trick/${slug}/practice`}>
+                <MotionButton variant="funPurple" size="sm" className="gap-1.5" bouncy>
+                  <Dumbbell className="w-4 h-4" />
+                  <span className="hidden sm:inline">Practice</span>
+                </MotionButton>
+              </Link>
             </div>
           </div>
 
-          {/* Mobile status/xp row */}
-          <div className="sm:hidden flex items-center justify-between mt-3 pt-3 border-t border-border">
-            {getStatusBadge()}
-            <div className="flex items-center gap-3 text-sm text-muted-foreground">
-              <span className="flex items-center gap-1">
-                <Star className="w-4 h-4 text-brand-blue" />
-                <span className="font-medium text-brand-black">{trick.xpReward} XP</span>
+          {/* Lesson Progress Bar */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="mt-4 pt-3 border-t border-border"
+          >
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-sm font-medium text-muted-foreground">
+                Lesson Progress
               </span>
-              <span className="flex items-center gap-1">
-                <Clock className="w-4 h-4" />
-                {trick.estimatedMinutes} min
+              <span className="text-sm font-bold text-brand-black">
+                {completedSteps.length}/{trick.steps.length} steps
               </span>
             </div>
-          </div>
+            <div className="flex items-center gap-3">
+              <Progress
+                value={lessonProgress}
+                variant="lesson"
+                size="sm"
+                className="flex-1"
+                sparkle
+              />
+              <StepIndicator
+                total={trick.steps.length}
+                completed={completedSteps.length}
+                current={currentStepIndex}
+                className="hidden sm:flex"
+              />
+            </div>
+          </motion.div>
         </div>
       </div>
 
@@ -271,13 +366,13 @@ export default function TrickDetailPage() {
             >
               <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
                 <TabsList className="w-full justify-start bg-surface-secondary rounded-lg p-1 mb-4 overflow-x-auto">
+                  <TabsTrigger value="lesson" className="gap-1.5 rounded-md">
+                    <GraduationCap className="w-4 h-4" />
+                    <span className="hidden sm:inline">Lesson</span>
+                  </TabsTrigger>
                   <TabsTrigger value="overview" className="gap-1.5 rounded-md">
                     <BookOpen className="w-4 h-4" />
                     <span className="hidden sm:inline">Overview</span>
-                  </TabsTrigger>
-                  <TabsTrigger value="steps" className="gap-1.5 rounded-md">
-                    <ListOrdered className="w-4 h-4" />
-                    <span className="hidden sm:inline">Steps</span>
                   </TabsTrigger>
                   <TabsTrigger value="tips" className="gap-1.5 rounded-md">
                     <Lightbulb className="w-4 h-4" />
@@ -285,11 +380,120 @@ export default function TrickDetailPage() {
                   </TabsTrigger>
                 </TabsList>
 
+                {/* Lesson Tab - Step by Step Learning */}
+                <TabsContent value="lesson" className="space-y-6">
+                  <LessonSteps
+                    steps={trick.steps}
+                    currentStepIndex={currentStepIndex}
+                    completedSteps={completedSteps}
+                    onStepSelect={setCurrentStepIndex}
+                    onStepComplete={handleStepComplete}
+                    onSeekToTimestamp={handleSeekToTimestamp}
+                    commonMistakes={trick.commonMistakes}
+                  />
+
+                  {/* Lesson Footer - Completion Actions */}
+                  <Card className={cn(
+                    "border-2 transition-all",
+                    allStepsComplete
+                      ? "border-fun-blue bg-fun-blue/5"
+                      : "border-gray-200"
+                  )}>
+                    <CardContent className="p-6">
+                      <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <div className="flex items-center gap-4">
+                          <div className={cn(
+                            "w-14 h-14 rounded-full flex items-center justify-center",
+                            allStepsComplete
+                              ? "bg-fun-blue/20"
+                              : "bg-gray-100"
+                          )}>
+                            {allStepsComplete ? (
+                              <Trophy className="w-7 h-7 text-fun-blue" />
+                            ) : (
+                              <GraduationCap className="w-7 h-7 text-gray-400" />
+                            )}
+                          </div>
+                          <div>
+                            <h3 className="font-bold text-brand-black">
+                              {allStepsComplete
+                                ? "Lesson Complete!"
+                                : `${trick.steps.length - completedSteps.length} steps remaining`}
+                            </h3>
+                            <p className="text-sm text-muted-foreground">
+                              {allStepsComplete
+                                ? "Ready to practice and master this trick?"
+                                : "Complete all steps to unlock mastery"}
+                            </p>
+                          </div>
+                        </div>
+
+                        <div className="flex gap-3 w-full sm:w-auto">
+                          {status !== "mastered" && (
+                            <MotionButton
+                              variant={allStepsComplete ? "success" : "secondary"}
+                              size="lg"
+                              onClick={() => {
+                                handleMarkWatched();
+                                if (allStepsComplete) {
+                                  // Trigger celebration briefly
+                                }
+                              }}
+                              disabled={status !== "not_started"}
+                              className="flex-1 sm:flex-initial gap-2"
+                              bouncy
+                            >
+                              <Eye className="w-5 h-5" />
+                              {status !== "not_started" ? "Watched" : "Mark as Learned"}
+                            </MotionButton>
+                          )}
+
+                          {allStepsComplete && status !== "mastered" && (
+                            <Link href={`/trick/${slug}/practice`} className="flex-1 sm:flex-initial">
+                              <MotionButton
+                                variant="xp"
+                                size="lg"
+                                className="w-full gap-2"
+                                bouncy
+                              >
+                                <Trophy className="w-5 h-5" />
+                                I Can Do This!
+                              </MotionButton>
+                            </Link>
+                          )}
+
+                          {status === "mastered" && (
+                            <Badge variant="success" className="text-lg py-2 px-4 gap-2">
+                              <CheckCircle2 className="w-5 h-5" />
+                              Mastered
+                            </Badge>
+                          )}
+                        </div>
+                      </div>
+
+                      {/* XP Preview */}
+                      {status !== "mastered" && (
+                        <motion.div
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          className="mt-4 pt-4 border-t border-gray-200 flex items-center justify-center gap-6 text-sm"
+                        >
+                          <span className="flex items-center gap-1.5 text-muted-foreground">
+                            <Star className="w-4 h-4 text-xp" />
+                            <span className="font-medium text-brand-black">+{trick.xpReward} XP</span>
+                            <span>for mastery</span>
+                          </span>
+                        </motion.div>
+                      )}
+                    </CardContent>
+                  </Card>
+                </TabsContent>
+
                 {/* Overview Tab */}
                 <TabsContent value="overview" className="space-y-6">
                   <Card>
                     <CardContent className="pt-6">
-                      <p className="text-brand-black leading-relaxed">
+                      <p className="text-brand-black leading-relaxed text-lg">
                         {trick.description}
                       </p>
                     </CardContent>
@@ -297,15 +501,15 @@ export default function TrickDetailPage() {
 
                   {/* Prerequisites */}
                   {prerequisites.length > 0 && (
-                    <Card>
+                    <Card className="border-2 border-fun-purple/20">
                       <CardHeader className="pb-3">
                         <CardTitle className="text-lg flex items-center gap-2">
-                          <Lock className="w-5 h-5 text-muted-foreground" />
+                          <Lock className="w-5 h-5 text-fun-purple" />
                           Prerequisites
                         </CardTitle>
                       </CardHeader>
                       <CardContent>
-                        <div className="space-y-2">
+                        <div className="grid gap-2 sm:grid-cols-2">
                           {prerequisites.map((prereq) => {
                             const prereqProgress = getTrickProgress(prereq.id);
                             const isMastered = prereqProgress?.status === "mastered";
@@ -314,16 +518,31 @@ export default function TrickDetailPage() {
                               <Link
                                 key={prereq.id}
                                 href={`/trick/${prereq.slug}`}
-                                className="flex items-center justify-between p-3 rounded-lg bg-surface-secondary hover:bg-surface-tertiary transition-colors group"
+                                className={cn(
+                                  "flex items-center gap-3 p-3 rounded-xl border-2 transition-all group",
+                                  isMastered
+                                    ? "bg-fun-blue/10 border-fun-blue"
+                                    : "bg-surface-secondary border-transparent hover:border-fun-purple/50"
+                                )}
                               >
-                                <div className="flex items-center gap-3">
+                                <div className={cn(
+                                  "w-8 h-8 rounded-full flex items-center justify-center",
+                                  isMastered ? "bg-fun-blue text-white" : "bg-gray-200"
+                                )}>
                                   {isMastered ? (
-                                    <CheckCircle2 className="w-5 h-5 text-brand-green" />
+                                    <CheckCircle2 className="w-5 h-5" />
                                   ) : (
-                                    <div className="w-5 h-5 rounded-full border-2 border-muted-foreground" />
+                                    <span className="text-sm font-bold text-gray-500">
+                                      {prereq.difficulty}
+                                    </span>
                                   )}
-                                  <span className="font-medium text-brand-black">
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                  <span className="font-medium text-brand-black block truncate">
                                     {prereq.name}
+                                  </span>
+                                  <span className="text-xs text-muted-foreground">
+                                    {isMastered ? "Completed" : "Required"}
                                   </span>
                                 </div>
                                 <ChevronRight className="w-5 h-5 text-muted-foreground group-hover:text-brand-black transition-colors" />
@@ -339,66 +558,36 @@ export default function TrickDetailPage() {
                   <Card>
                     <CardHeader className="pb-3">
                       <CardTitle className="text-lg flex items-center gap-2">
-                        <Target className="w-5 h-5 text-brand-teal" />
+                        <Target className="w-5 h-5 text-fun-blue" />
                         What You&apos;ll Learn
                       </CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <ul className="space-y-2">
-                        {trick.steps.map((step) => (
-                          <li
+                      <ul className="space-y-3">
+                        {trick.steps.map((step, index) => (
+                          <motion.li
                             key={step.id}
+                            initial={{ opacity: 0, x: -10 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: index * 0.05 }}
                             className="flex items-start gap-3 text-brand-black"
                           >
-                            <CheckCircle2 className="w-5 h-5 text-brand-green shrink-0 mt-0.5" />
-                            <span>{step.title}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </CardContent>
-                  </Card>
-                </TabsContent>
-
-                {/* Steps Tab */}
-                <TabsContent value="steps" className="space-y-4">
-                  <Card>
-                    <CardContent className="pt-6">
-                      <div className="space-y-4">
-                        {trick.steps.map((step, index) => (
-                          <motion.div
-                            key={step.id}
-                            initial={{ opacity: 0, x: -20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: index * 0.1 }}
-                            className="flex gap-4 p-4 rounded-xl bg-surface-secondary hover:bg-surface-tertiary transition-colors cursor-pointer group"
-                          >
-                            <div className="flex-shrink-0 w-10 h-10 rounded-full bg-brand-teal flex items-center justify-center text-white font-bold">
-                              {step.order}
-                            </div>
-                            <div className="flex-1 min-w-0">
-                              <div className="flex items-center justify-between gap-2">
-                                <h4 className="font-semibold text-brand-black">
-                                  {step.title}
-                                </h4>
-                                <span className="text-xs text-muted-foreground shrink-0">
-                                  {Math.floor(step.timestamp / 60)}:{String(step.timestamp % 60).padStart(2, "0")}
-                                </span>
-                              </div>
-                              <p className="text-sm text-muted-foreground mt-1">
-                                {step.description}
-                              </p>
-                              {step.tipText && (
-                                <div className="mt-2 p-2.5 rounded-lg bg-brand-blue/10 border border-brand-blue/20">
-                                  <p className="text-sm text-brand-black flex items-start gap-2">
-                                    <Lightbulb className="w-4 h-4 text-brand-blue shrink-0 mt-0.5" />
-                                    {step.tipText}
-                                  </p>
-                                </div>
+                            <div className={cn(
+                              "w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0",
+                              completedSteps.includes(index)
+                                ? "bg-fun-blue text-white"
+                                : "bg-fun-blue/20 text-fun-blue"
+                            )}>
+                              {completedSteps.includes(index) ? (
+                                <CheckCircle2 className="w-4 h-4" />
+                              ) : (
+                                <span className="text-xs font-bold">{step.order}</span>
                               )}
                             </div>
-                          </motion.div>
+                            <span>{step.title}</span>
+                          </motion.li>
                         ))}
-                      </div>
+                      </ul>
                     </CardContent>
                   </Card>
                 </TabsContent>
