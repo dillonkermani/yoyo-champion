@@ -1,7 +1,7 @@
 {
   "hosting": {
     "site": "yoyochampion-671fe",
-    "public": "out",
+    "public": "apps/next/out",
     "ignore": [
       "firebase.json",
       "**/.*",

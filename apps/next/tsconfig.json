@@ -1,0 +1,42 @@
+{
+  "extends": "../../packages/config/tsconfig/nextjs.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ],
+      "@yoyo/data": [
+        "../../packages/data/src/index.ts"
+      ],
+      "@yoyo/store": [
+        "../../packages/store/src/index.ts"
+      ],
+      "@yoyo/store/storage": [
+        "../../packages/store/src/storage.ts"
+      ],
+      "@yoyo/api": [
+        "../../packages/api/src/index.ts"
+      ],
+      "@yoyo/api/server": [
+        "../../packages/api/src/server/index.ts"
+      ],
+      "@yoyo/api/client": [
+        "../../packages/api/src/client.ts"
+      ],
+      "@yoyo/ui": [
+        "../../packages/ui/src/index.ts"
+      ]
+    },
+    "target": "ES2017"
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

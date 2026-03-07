@@ -1,0 +1,46 @@
+"use client";
+
+import * as React from "react";
+import { useState } from "react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { httpBatchLink } from "@trpc/client";
+import superjson from "superjson";
+import { trpc } from "@yoyo/api/client";
+import { setStorage } from "@yoyo/store/storage";
+import { hydrateAllStores } from "@yoyo/store";
+import { ToastContainer } from "@/components/toast-container";
+
+interface ProvidersProps {
+  children: React.ReactNode;
+}
+
+export function Providers({ children }: ProvidersProps) {
+  const [queryClient] = useState(() => new QueryClient());
+  const [trpcClient] = useState(() =>
+    trpc.createClient({
+      links: [
+        httpBatchLink({
+          url: `${process.env['NEXT_PUBLIC_API_URL'] ?? "/api/trpc"}`,
+          transformer: superjson,
+        }),
+      ],
+    })
+  );
+
+  // Hydrate Zustand stores with localStorage on client mount
+  React.useEffect(() => {
+    setStorage(localStorage);
+    hydrateAllStores();
+  }, []);
+
+  return (
+    <trpc.Provider client={trpcClient} queryClient={queryClient}>
+      <QueryClientProvider client={queryClient}>
+        {children}
+        <ToastContainer />
+      </QueryClientProvider>
+    </trpc.Provider>
+  );
+}
+
+export default Providers;
