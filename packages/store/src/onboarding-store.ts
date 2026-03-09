@@ -23,10 +23,12 @@ export interface OnboardingState {
   recommendedPathId: string | null;
   completedAt: string | null;
   startedAt: string | null;
-  // Future quiz fields (placeholders for feature phase)
+  // Extended quiz fields
   handedness?: 'left' | 'right' | null;
   location?: string | null;
   favoriteYoyo?: string | null;
+  country?: string | null;
+  region?: string | null;
 }
 
 export interface OnboardingActions {
@@ -39,6 +41,10 @@ export interface OnboardingActions {
   setPreferredStyles: (styles: PreferredStyle[]) => void;
   togglePreferredStyle: (style: PreferredStyle) => void;
   setRecommendedPath: (pathId: string) => void;
+  setHandedness: (handedness: 'left' | 'right') => void;
+  setCountry: (country: string) => void;
+  setRegion: (region: string) => void;
+  setFavoriteYoyo: (yoyo: string) => void;
   completeOnboarding: () => void;
   resetOnboarding: () => void;
   skipOnboarding: () => void;
@@ -78,7 +84,8 @@ export const SKILL_LEVEL_METADATA: Record<SkillLevel, { label: string; descripti
 
 const initialState: OnboardingState = {
   currentStep: 'welcome', skillLevel: null, goals: [], preferredStyles: [], isComplete: false,
-  recommendedPathId: null, completedAt: null, startedAt: null, handedness: null, location: null, favoriteYoyo: null,
+  recommendedPathId: null, completedAt: null, startedAt: null,
+  handedness: null, location: null, favoriteYoyo: null, country: null, region: null,
 };
 
 export const useOnboardingStore = create<OnboardingStore>()(
@@ -121,6 +128,10 @@ export const useOnboardingStore = create<OnboardingStore>()(
         set({ preferredStyles: state.preferredStyles.includes(style) ? state.preferredStyles.filter((s) => s !== style) : [...state.preferredStyles, style] });
       },
       setRecommendedPath: (pathId: string) => { set({ recommendedPathId: pathId }); },
+      setHandedness: (handedness: 'left' | 'right') => { set({ handedness }); },
+      setCountry: (country: string) => { set({ country }); },
+      setRegion: (region: string) => { set({ region }); },
+      setFavoriteYoyo: (favoriteYoyo: string) => { set({ favoriteYoyo }); },
       completeOnboarding: () => { set({ isComplete: true, currentStep: 'complete', completedAt: new Date().toISOString() }); },
       resetOnboarding: () => { set({ ...initialState, startedAt: new Date().toISOString() }); },
       skipOnboarding: () => {
@@ -134,6 +145,7 @@ export const useOnboardingStore = create<OnboardingStore>()(
         isComplete: state.isComplete, completedAt: state.completedAt, skillLevel: state.skillLevel,
         goals: state.goals, preferredStyles: state.preferredStyles, recommendedPathId: state.recommendedPathId,
         handedness: state.handedness, location: state.location, favoriteYoyo: state.favoriteYoyo,
+        country: state.country, region: state.region,
       }),
       skipHydration: true,
     }

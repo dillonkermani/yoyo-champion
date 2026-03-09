@@ -24,17 +24,12 @@
       },
       "package": "com.yoyochampion.app"
     },
+    "newArchEnabled": true,
     "experiments": {
       "typedRoutes": true
     },
     "plugins": [
-      "expo-router",
-      [
-        "@react-native-async-storage/async-storage",
-        {
-          "exclude": []
-        }
-      ]
+      "expo-router"
     ]
   }
 }

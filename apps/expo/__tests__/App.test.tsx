@@ -5,9 +5,9 @@ describe('Expo app', () => {
     expect(true).toBe(true);
   });
 
-  it('workspace packages are importable', async () => {
-    // Dynamic imports to avoid RN environment requirements at test time
-    const data = await import('@yoyo/data');
+  it('workspace packages are importable', () => {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const data = require('@yoyo/data');
     expect(data).toBeDefined();
     expect(typeof data.calculateLevel).toBe('function');
   });

@@ -6,7 +6,6 @@ import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import {
   LayoutDashboard,
-  Library,
   Route,
   Trophy,
   BarChart3,
@@ -15,6 +14,8 @@ import {
   ChevronLeft,
   ChevronRight,
   Zap,
+  Play,
+  ShoppingBag,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
@@ -30,9 +31,10 @@ const navSections = [
   {
     title: "Learn",
     items: [
-      { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
-      { href: "/paths", label: "My Paths", icon: Route },
-      { href: "/library", label: "Trick Library", icon: Library },
+      { href: "/dashboard", label: "Home", icon: LayoutDashboard },
+      { href: "/library", label: "Champion Path", icon: Route },
+      { href: "/shop", label: "Shop", icon: ShoppingBag },
+      { href: "/for-you", label: "For You", icon: Play },
     ],
   },
   {

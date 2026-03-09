@@ -9,13 +9,13 @@ const config = getDefaultConfig(projectRoot);
 // Watch all files in the monorepo
 config.watchFolders = [workspaceRoot];
 
-// Resolve modules from workspace root first
+// Resolve modules from the expo app first, then workspace root.
+// Do NOT set disableHierarchicalLookup — pnpm stores transitive deps
+// inside .pnpm/<pkg>/node_modules, so metro needs hierarchical lookup.
 config.resolver.nodeModulesPaths = [
   path.resolve(projectRoot, 'node_modules'),
   path.resolve(workspaceRoot, 'node_modules'),
 ];
 
-// Resolve workspace packages
-config.resolver.disableHierarchicalLookup = true;
 
 module.exports = config;

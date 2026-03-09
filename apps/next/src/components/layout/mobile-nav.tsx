@@ -4,7 +4,7 @@ import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Home, Library, Map, Trophy, User, Flame } from "lucide-react";
+import { Home, Map, ShoppingBag, User, Play, Flame } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useUserStore, selectIsAuthenticated } from "@yoyo/store";
 import { useProgressStore, selectCurrentStreak } from "@yoyo/store";
@@ -22,27 +22,19 @@ const navItems = [
   },
   {
     href: "/library",
-    label: "Library",
-    icon: Library,
+    label: "Champion Path",
+    icon: Map,
     activeColor: "text-fun-purple",
     activeBg: "bg-fun-purple/10",
     glowClass: "shadow-fun-purple"
   },
   {
-    href: "/paths",
-    label: "Paths",
-    icon: Map,
-    activeColor: "text-fun-blue",
-    activeBg: "bg-fun-blue/10",
-    glowClass: "shadow-fun-blue"
-  },
-  {
-    href: "/dashboard",
-    label: "Progress",
-    icon: Trophy,
-    activeColor: "text-xp",
-    activeBg: "bg-xp/10",
-    glowClass: "shadow-fun-yellow"
+    href: "/shop",
+    label: "Shop",
+    icon: ShoppingBag,
+    activeColor: "text-fun-orange",
+    activeBg: "bg-fun-orange/10",
+    glowClass: "shadow-fun-orange"
   },
   {
     href: "/profile",
@@ -51,6 +43,14 @@ const navItems = [
     activeColor: "text-fun-pink",
     activeBg: "bg-fun-pink/10",
     glowClass: "shadow-fun-pink"
+  },
+  {
+    href: "/for-you",
+    label: "For You",
+    icon: Play,
+    activeColor: "text-xp",
+    activeBg: "bg-xp/10",
+    glowClass: "shadow-fun-yellow"
   },
 ];
 
@@ -220,9 +220,9 @@ export function MobileNav({ className }: MobileNavProps) {
                     "bg-gradient-to-r",
                     item.href === "/" && "from-fun-blue to-fun-blue-light",
                     item.href === "/library" && "from-fun-purple to-fun-purple-light",
-                    item.href === "/paths" && "from-fun-blue to-fun-purple/80",
-                    item.href === "/dashboard" && "from-xp to-xp-light",
-                    (item.href === "/profile" || item.href === "/login") && "from-fun-pink to-fun-pink-light"
+                    item.href === "/shop" && "from-fun-orange to-fun-orange/80",
+                    (item.href === "/profile" || item.href === "/login") && "from-fun-pink to-fun-pink-light",
+                    item.href === "/for-you" && "from-xp to-xp-light"
                   )}
                   transition={{ type: "spring", bounce: 0.25, duration: 0.4 }}
                 />

@@ -3,16 +3,39 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"],
-      "@yoyo/data": ["../../packages/data/src/index.ts"],
-      "@yoyo/store": ["../../packages/store/src/index.ts"],
-      "@yoyo/store/storage": ["../../packages/store/src/storage.ts"],
-      "@yoyo/api": ["../../packages/api/src/index.ts"],
-      "@yoyo/api/server": ["../../packages/api/src/server/index.ts"],
-      "@yoyo/api/client": ["../../packages/api/src/client.ts"],
-      "@yoyo/ui": ["../../packages/ui/src/index.ts"]
+      "@/*": [
+        "./*"
+      ],
+      "@yoyo/data": [
+        "../../packages/data/src/index.ts"
+      ],
+      "@yoyo/store": [
+        "../../packages/store/src/index.ts"
+      ],
+      "@yoyo/store/storage": [
+        "../../packages/store/src/storage.ts"
+      ],
+      "@yoyo/api": [
+        "../../packages/api/src/index.ts"
+      ],
+      "@yoyo/api/server": [
+        "../../packages/api/src/server/index.ts"
+      ],
+      "@yoyo/api/client": [
+        "../../packages/api/src/client.ts"
+      ],
+      "@yoyo/ui": [
+        "../../packages/ui/src/index.ts"
+      ]
     }
   },
-  "include": ["**/*.ts", "**/*.tsx", ".expo/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    ".expo/types/**/*.ts",
+    "expo-env.d.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

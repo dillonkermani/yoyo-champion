@@ -6,12 +6,11 @@ module.exports = function (api) {
       [
         '@tamagui/babel-plugin',
         {
-          components: ['tamagui', '@yoyo/ui'],
-          config: '../../packages/ui/src/tamagui.config.ts',
+          components: ['tamagui'],
+          config: './tamagui.config.ts',
           logTimings: true,
         },
       ],
-      require.resolve('expo-router/babel'),
     ],
   };
 };

@@ -9,6 +9,15 @@ const noopStorage: StateStorage = {
   removeItem: () => undefined,
 };
 
+// Lazy proxy so createJSONStorage captures this singleton once but always
+// delegates to whatever _storage is currently set to. This ensures stores
+// can be hydrated after setStorage() is called on app startup.
+const lazyStorage: StateStorage = {
+  getItem: (name) => (_storage ?? noopStorage).getItem(name),
+  setItem: (name, value) => (_storage ?? noopStorage).setItem(name, value),
+  removeItem: (name) => (_storage ?? noopStorage).removeItem(name),
+};
+
 /**
  * Set the storage adapter. Call this once on app startup:
  * - Web: setStorage(localStorage)
@@ -19,5 +28,5 @@ export const setStorage = (storage: StateStorage): void => {
 };
 
 export const getStorage = (): StateStorage => {
-  return _storage ?? noopStorage;
+  return lazyStorage;
 };

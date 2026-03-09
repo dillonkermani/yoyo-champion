@@ -1,3 +1,12 @@
 export { Button } from './Button';
 export { Text } from './Text';
 export { tamaguiConfig, type TamaguiConfig } from './tamagui.config';
+export { StatsBar } from './StatsBar';
+export type { StatItem, StatsBarProps } from './StatsBar';
+export { TrickCard } from './TrickCard';
+export type { TrickCardProps } from './TrickCard';
+export { YoyoCase } from './YoyoCase';
+export type { YoyoSlot, YoyoCaseProps } from './YoyoCase';
+export { AvatarDisplay } from './AvatarDisplay';
+export type { AvatarDisplayProps } from './AvatarDisplay';
+export { getDifficultyLabel, getDifficultyColor, formatXP, DIFFICULTY_LABELS, DIFFICULTY_COLORS } from './utils';
