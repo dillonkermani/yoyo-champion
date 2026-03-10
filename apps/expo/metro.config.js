@@ -9,13 +9,25 @@ const config = getDefaultConfig(projectRoot);
 // Watch all files in the monorepo
 config.watchFolders = [workspaceRoot];
 
-// Resolve modules from the expo app first, then workspace root.
-// Do NOT set disableHierarchicalLookup — pnpm stores transitive deps
-// inside .pnpm/<pkg>/node_modules, so metro needs hierarchical lookup.
+// Resolve modules: workspace root first (hoisted singletons), then app.
+// public-hoist-pattern in .npmrc ensures tamagui/react/zustand land in
+// workspaceRoot/node_modules as single instances.
 config.resolver.nodeModulesPaths = [
-  path.resolve(projectRoot, 'node_modules'),
   path.resolve(workspaceRoot, 'node_modules'),
+  path.resolve(projectRoot, 'node_modules'),
 ];
 
+// Force singleton modules to the hoisted workspace-root copies.
+// This prevents "Cannot read property 'useId' of null" crashes caused by
+// pnpm installing separate compiled instances per package.
+const workspaceModules = path.resolve(workspaceRoot, 'node_modules');
+config.resolver.extraNodeModules = {
+  'react': path.resolve(workspaceModules, 'react'),
+  'react-native': path.resolve(workspaceModules, 'react-native'),
+  'tamagui': path.resolve(workspaceModules, 'tamagui'),
+  '@tamagui/core': path.resolve(workspaceModules, '@tamagui/core'),
+  '@tamagui/config': path.resolve(workspaceModules, '@tamagui/config'),
+  'zustand': path.resolve(workspaceModules, 'zustand'),
+};
 
 module.exports = config;

@@ -10,12 +10,15 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run"
   },
-  "dependencies": {
+  "peerDependencies": {
     "@tamagui/config": "^1.110.2",
     "@tamagui/core": "^1.110.2",
     "tamagui": "^1.110.2"
   },
   "devDependencies": {
+    "@tamagui/config": "^1.110.2",
+    "@tamagui/core": "^1.110.2",
+    "tamagui": "^1.110.2",
     "@vitest/coverage-v8": "^1.6.1",
     "typescript": "^5.4.2",
     "vitest": "^1.4.0"
