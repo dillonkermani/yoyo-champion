@@ -1,4 +1,6 @@
 /** @type {import('next').NextConfig} */
+const { withTamagui } = require('@tamagui/next-plugin');
+
 const nextConfig = {
   reactStrictMode: true,
   transpilePackages: [
@@ -22,10 +24,14 @@ const nextConfig = {
     formats: ["image/avif", "image/webp"],
   },
   experimental: {
-    optimizePackageImports: ["lucide-react", "framer-motion", "date-fns"],
+    optimizePackageImports: ["date-fns"],
   },
   poweredByHeader: false,
   compress: true,
 };
 
-module.exports = nextConfig;
+module.exports = withTamagui({
+  config: '../../packages/ui/src/tamagui.config.ts',
+  components: ['@yoyo/ui'],
+  appDir: true,
+})(nextConfig);

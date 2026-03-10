@@ -8,7 +8,7 @@ export interface TrickCardProps {
   genre: string;
   completed?: boolean;
   xpReward?: number;
-  onPress?: () => void;
+  onPress?: (() => void) | undefined;
 }
 
 export function TrickCard({ name, difficulty, genre, completed, xpReward, onPress }: TrickCardProps) {

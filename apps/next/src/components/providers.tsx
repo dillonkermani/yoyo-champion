@@ -8,7 +8,8 @@ import superjson from "superjson";
 import { trpc } from "@yoyo/api/client";
 import { setStorage } from "@yoyo/store/storage";
 import { hydrateAllStores } from "@yoyo/store";
-import { ToastContainer } from "@/components/toast-container";
+import { TamaguiProvider } from "tamagui";
+import { tamaguiConfig } from "@yoyo/ui";
 
 interface ProvidersProps {
   children: React.ReactNode;
@@ -27,7 +28,6 @@ export function Providers({ children }: ProvidersProps) {
     })
   );
 
-  // Hydrate Zustand stores with localStorage on client mount
   React.useEffect(() => {
     setStorage(localStorage);
     hydrateAllStores();
@@ -36,8 +36,9 @@ export function Providers({ children }: ProvidersProps) {
   return (
     <trpc.Provider client={trpcClient} queryClient={queryClient}>
       <QueryClientProvider client={queryClient}>
-        {children}
-        <ToastContainer />
+        <TamaguiProvider config={tamaguiConfig} defaultTheme="light">
+          {children}
+        </TamaguiProvider>
       </QueryClientProvider>
     </trpc.Provider>
   );
