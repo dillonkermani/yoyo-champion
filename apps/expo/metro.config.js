@@ -9,25 +9,57 @@ const config = getDefaultConfig(projectRoot);
 // Watch all files in the monorepo
 config.watchFolders = [workspaceRoot];
 
-// Resolve modules: workspace root first (hoisted singletons), then app.
-// public-hoist-pattern in .npmrc ensures tamagui/react/zustand land in
-// workspaceRoot/node_modules as single instances.
+// Resolve modules: app first, then workspace root.
 config.resolver.nodeModulesPaths = [
-  path.resolve(workspaceRoot, 'node_modules'),
   path.resolve(projectRoot, 'node_modules'),
+  path.resolve(workspaceRoot, 'node_modules'),
 ];
 
-// Force singleton modules to the hoisted workspace-root copies.
-// This prevents "Cannot read property 'useId' of null" crashes caused by
-// pnpm installing separate compiled instances per package.
-const workspaceModules = path.resolve(workspaceRoot, 'node_modules');
-config.resolver.extraNodeModules = {
-  'react': path.resolve(workspaceModules, 'react'),
-  'react-native': path.resolve(workspaceModules, 'react-native'),
-  'tamagui': path.resolve(workspaceModules, 'tamagui'),
-  '@tamagui/core': path.resolve(workspaceModules, '@tamagui/core'),
-  '@tamagui/config': path.resolve(workspaceModules, '@tamagui/config'),
-  'zustand': path.resolve(workspaceModules, 'zustand'),
+// Force singleton modules — intercepts ALL resolution (including transitive
+// deps inside .pnpm store) to prevent duplicate React/Tamagui instances.
+const SINGLETON_PACKAGES = [
+  'react',
+  'react-native',
+  'tamagui',
+  '@tamagui/core',
+  '@tamagui/config',
+  '@tamagui/web',
+  'zustand',
+];
+
+const singletonPaths = {};
+for (const pkg of SINGLETON_PACKAGES) {
+  try {
+    // Resolve from the expo app's node_modules (definitive copy)
+    singletonPaths[pkg] = path.dirname(
+      require.resolve(pkg + '/package.json', { paths: [projectRoot] })
+    );
+  } catch {
+    // Package not installed — skip
+  }
+}
+
+const originalResolveRequest = config.resolver.resolveRequest;
+config.resolver.resolveRequest = (context, moduleName, platform) => {
+  // Check if this is a singleton package (exact match or scoped subpath)
+  for (const [pkg, pkgPath] of Object.entries(singletonPaths)) {
+    if (moduleName === pkg || moduleName.startsWith(pkg + '/')) {
+      // Rewrite the origin to resolve from the app's node_modules
+      const newContext = {
+        ...context,
+        originModulePath: path.join(projectRoot, 'package.json'),
+      };
+      if (originalResolveRequest) {
+        return originalResolveRequest(newContext, moduleName, platform);
+      }
+      return context.resolveRequest(newContext, moduleName, platform);
+    }
+  }
+
+  if (originalResolveRequest) {
+    return originalResolveRequest(context, moduleName, platform);
+  }
+  return context.resolveRequest(context, moduleName, platform);
 };
 
 module.exports = config;
