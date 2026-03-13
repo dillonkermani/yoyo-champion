@@ -42,3 +42,5 @@ export { ProfileScreen } from './screens/ProfileScreen';
 export type { ProfileScreenProps, ProfileBadge, ProfileYoyo, ProfileStat } from './screens/ProfileScreen';
 export { OnboardingScreen } from './screens/OnboardingScreen';
 export type { OnboardingScreenProps, OnboardingChoice } from './screens/OnboardingScreen';
+export { ShopScreen } from './screens/ShopScreen';
+export type { ShopScreenProps, ShopProduct } from './screens/ShopScreen';

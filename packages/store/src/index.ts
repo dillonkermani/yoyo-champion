@@ -123,6 +123,10 @@ export {
   type OnboardingStore,
 } from './onboarding-store';
 
+// Onboarding flow (shared config + hook)
+export { useOnboardingFlow, ONBOARDING_STEPS } from './onboarding-flow';
+export type { OnboardingStepConfig } from './onboarding-flow';
+
 // Storage abstraction
 export { setStorage, getStorage } from './storage';
 

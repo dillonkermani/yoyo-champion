@@ -22,8 +22,8 @@ export function YoyoCase({ yoyos }: YoyoCaseProps) {
           height={88}
           borderRadius={12}
           borderWidth={2}
-          borderColor={yoyo.owned ? (yoyo.color ?? '#1CB0F6') : '#E5E7EB'}
-          backgroundColor={yoyo.owned ? '#EBF8FF' : '#F9FAFB'}
+          borderColor={yoyo.owned ? (yoyo.color ?? '#1CB0F6') : '$borderColor'}
+          backgroundColor={yoyo.owned ? '#EBF8FF' : '$backgroundHover'}
           alignItems="center"
           justifyContent="center"
           padding={8}

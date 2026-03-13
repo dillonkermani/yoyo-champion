@@ -17,12 +17,12 @@ export function TrickCard({ name, difficulty, genre, completed, xpReward, onPres
 
   return (
     <XStack
-      backgroundColor={completed ? '#F0FFF4' : 'white'}
+      backgroundColor={completed ? '#F0FFF4' : '$background'}
       borderRadius={12}
       padding={12}
       marginBottom={8}
       borderWidth={1}
-      borderColor={completed ? '#58CC02' : '#E5E7EB'}
+      borderColor={completed ? '#58CC02' : '$borderColor'}
       alignItems="center"
       onPress={onPress}
       pressStyle={{ opacity: 0.85 }}
