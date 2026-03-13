@@ -6,6 +6,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export default function ProfileTab() {
   const insets = useSafeAreaInsets();
+  const logout = useUserStore((s) => s.logout);
   const displayName = useUserStore((s) => s.user?.displayName ?? 'Champion');
   const level = useGamificationStore(selectLevel);
   const xp = useGamificationStore(selectXp);
@@ -39,6 +40,7 @@ export default function ProfileTab() {
       stats={stats}
       badges={badges}
       yoyos={yoyos}
+      onLogout={logout}
       paddingTop={insets.top}
     />
   );

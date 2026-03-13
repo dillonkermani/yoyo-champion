@@ -51,7 +51,8 @@ export function ShopScreen({ yoyos, featured, onProductPress, paddingTop = 0 }: 
             marginBottom={12}
             alignItems="center"
             onPress={onProductPress ? () => onProductPress(product.id) : undefined}
-            pressStyle={{ scale: 0.985, backgroundColor: '$neuSurfacePressed', ...NEU.pressed }}
+            animation="quick"
+            pressStyle={{ scaleY: 0.97, scaleX: 1.005, opacity: 0.92, backgroundColor: '$neuSurfacePressed', ...NEU.pressed }}
             cursor="pointer"
             {...NEU.card}
           >
@@ -78,7 +79,8 @@ export function ShopScreen({ yoyos, featured, onProductPress, paddingTop = 0 }: 
               marginBottom={12}
               alignItems="center"
               onPress={onProductPress ? () => onProductPress(product.id) : undefined}
-              pressStyle={{ scale: 0.985, backgroundColor: '$neuSurfacePressed', ...NEU.pressed }}
+              animation="quick"
+              pressStyle={{ scaleY: 0.97, scaleX: 1.005, opacity: 0.92, backgroundColor: '$neuSurfacePressed', ...NEU.pressed }}
               cursor="pointer"
               {...NEU.card}
             >

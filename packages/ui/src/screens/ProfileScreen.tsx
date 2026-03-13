@@ -36,6 +36,7 @@ export interface ProfileScreenProps {
   badges: ProfileBadge[];
   yoyos: ProfileYoyo[];
   onEditProfile?: () => void;
+  onLogout?: () => void;
   paddingTop?: number;
 }
 
@@ -48,6 +49,7 @@ export function ProfileScreen({
   badges,
   yoyos,
   onEditProfile,
+  onLogout,
   paddingTop = 0,
 }: ProfileScreenProps) {
   return (
@@ -123,6 +125,13 @@ export function ProfileScreen({
               owned: true,
             }))}
           />
+        </YStack>
+      )}
+
+      {/* Logout */}
+      {onLogout && (
+        <YStack padding={20} paddingTop={0}>
+          <Button onPress={onLogout} variant="outline" size="md">Log Out</Button>
         </YStack>
       )}
 

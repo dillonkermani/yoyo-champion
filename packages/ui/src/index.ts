@@ -44,3 +44,5 @@ export { OnboardingScreen } from './screens/OnboardingScreen';
 export type { OnboardingScreenProps, OnboardingChoice } from './screens/OnboardingScreen';
 export { ShopScreen } from './screens/ShopScreen';
 export type { ShopScreenProps, ShopProduct } from './screens/ShopScreen';
+export { AuthScreen } from './screens/AuthScreen';
+export type { AuthScreenProps } from './screens/AuthScreen';

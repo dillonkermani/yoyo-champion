@@ -21,7 +21,8 @@ export function PathCard({ title, difficulty, progressPercent, totalXp, onPress 
       padding={18}
       marginBottom={14}
       onPress={onPress}
-      pressStyle={{ scale: 0.985, backgroundColor: '$neuSurfacePressed', ...NEU.pressed }}
+      animation="quick"
+      pressStyle={{ scaleY: 0.97, scaleX: 1.005, opacity: 0.92, backgroundColor: '$neuSurfacePressed', ...NEU.pressed }}
       cursor="pointer"
       {...NEU.card}
     >

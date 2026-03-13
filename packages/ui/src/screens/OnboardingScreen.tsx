@@ -70,11 +70,12 @@ export function OnboardingScreen({
           return (
             <XStack
               key={choice.id}
-              backgroundColor={isSelected ? '$brandAqua' : '$neuSurface'}
+              backgroundColor={isSelected ? '$brandAqua' : '$neuSurfaceLight'}
               borderRadius={18}
               padding={16}
               onPress={() => onChoicePress(choice.id)}
-              pressStyle={{ scale: 0.985, ...NEU.pressed }}
+              animation="quick"
+              pressStyle={{ scaleY: 0.97, scaleX: 1.005, opacity: 0.92, ...NEU.pressed }}
               cursor="pointer"
               gap={12}
               alignItems="center"

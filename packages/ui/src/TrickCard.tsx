@@ -24,7 +24,8 @@ export function TrickCard({ name, difficulty, genre, completed, xpReward, onPres
       marginBottom={12}
       alignItems="center"
       onPress={onPress}
-      pressStyle={{ scale: 0.985, backgroundColor: '$neuSurfacePressed', ...NEU.pressed }}
+      animation="quick"
+      pressStyle={{ scaleY: 0.97, scaleX: 1.005, opacity: 0.92, backgroundColor: '$neuSurfacePressed', ...NEU.pressed }}
       cursor="pointer"
       {...(completed ? { ...NEU.card, shadowColor: '#58CC02', shadowOpacity: 0.25 } : NEU.card)}
     >

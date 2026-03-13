@@ -1,17 +1,20 @@
 "use client";
 import * as React from "react";
 import { useRouter } from "next/navigation";
-import { useOnboardingStore, selectIsComplete } from "@yoyo/store";
+import { useOnboardingStore, selectIsComplete, useUserStore, selectIsAuthenticated } from "@yoyo/store";
 
 export default function AppRootLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
-  const isComplete = useOnboardingStore(selectIsComplete);
+  const isAuthenticated = useUserStore(selectIsAuthenticated);
+  const isOnboardingComplete = useOnboardingStore(selectIsComplete);
 
   React.useEffect(() => {
-    if (!isComplete) {
+    if (!isAuthenticated) {
+      router.replace('/login');
+    } else if (!isOnboardingComplete) {
       router.replace('/onboarding');
     }
-  }, [isComplete, router]);
+  }, [isAuthenticated, isOnboardingComplete, router]);
 
   return <>{children}</>;
 }

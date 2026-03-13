@@ -26,7 +26,8 @@ export function YoyoCase({ yoyos }: YoyoCaseProps) {
           alignItems="center"
           justifyContent="center"
           padding={8}
-          pressStyle={{ scale: 0.95, ...NEU.pressed }}
+          animation="quick"
+          pressStyle={{ scaleY: 0.97, scaleX: 1.005, opacity: 0.92, ...NEU.pressed }}
           cursor="pointer"
           {...(yoyo.owned
             ? { shadowColor: yoyo.color ?? '#1CB0F6', shadowOffset: { width: 0, height: 2 }, shadowRadius: 10, shadowOpacity: 0.3, elevation: 3 }

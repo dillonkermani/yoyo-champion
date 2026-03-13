@@ -17,7 +17,8 @@ export function FilterChip({ label, selected = false, onPress }: FilterChipProps
       paddingHorizontal={16}
       paddingVertical={8}
       onPress={onPress}
-      pressStyle={{ opacity: 0.9, scale: 0.97, ...NEU.pressed }}
+      animation="quick"
+      pressStyle={{ scaleY: 0.97, scaleX: 1.005, opacity: 0.92, ...NEU.pressed }}
       cursor="pointer"
       {...(selected ? NEU.glowAqua : NEU.button)}
     >

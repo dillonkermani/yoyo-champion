@@ -3,8 +3,11 @@ import { ProfileScreen } from '@yoyo/ui';
 import { useUserStore, useGamificationStore } from '@yoyo/store';
 import { selectLevel, selectXp, selectBadges } from '@yoyo/store';
 import { getYoyos } from '@yoyo/data';
+import { useRouter } from 'next/navigation';
 
 export default function ProfilePage() {
+  const router = useRouter();
+  const logout = useUserStore((s) => s.logout);
   const displayName = useUserStore((s) => s.user?.displayName ?? 'Champion');
   const level = useGamificationStore(selectLevel);
   const xp = useGamificationStore(selectXp);
@@ -38,6 +41,7 @@ export default function ProfilePage() {
       stats={stats}
       badges={badges}
       yoyos={yoyos}
+      onLogout={() => { logout(); router.replace('/login'); }}
     />
   );
 }

@@ -9,7 +9,8 @@ export const Button = styled(TamaguiButton, {
   letterSpacing: 0.3,
   borderWidth: 0,
   ...NEU.button,
-  pressStyle: { opacity: 0.95, scale: 0.975, backgroundColor: '$neuSurfacePressed', ...NEU.pressed },
+  animation: 'quick',
+  pressStyle: { opacity: 0.92, scaleY: 0.97, scaleX: 1.005, backgroundColor: '$neuSurfacePressed', ...NEU.pressed },
 
   variants: {
     variant: {
