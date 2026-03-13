@@ -30,6 +30,7 @@ var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: tru
 // ../../packages/ui/src/tamagui.config.ts
 var tamagui_config_exports = {};
 __export(tamagui_config_exports, {
+  NEU: () => NEU,
   default: () => tamagui_config_default,
   tamaguiConfig: () => tamaguiConfig
 });
@@ -1565,6 +1566,26 @@ var config = {
 };
 
 // ../../packages/ui/src/tamagui.config.ts
+var NEU = {
+  surface: "#e8ecf1",
+  surfaceLight: "#eef1f5",
+  surfacePressed: "#dfe3e9",
+  shadowDark: "#b8c0cc",
+  shadowLight: "#ffffff",
+  highlight: "rgba(255,255,255,0.6)",
+  // inner top-left edge glow
+  highlightSubtle: "rgba(255,255,255,0.35)",
+  // Shadow presets (dark shadow only — RN limitation)
+  card: { shadowColor: "#b8c0cc", shadowOffset: { width: 4, height: 4 }, shadowRadius: 10, shadowOpacity: 0.6, elevation: 4 },
+  cardLifted: { shadowColor: "#b8c0cc", shadowOffset: { width: 6, height: 6 }, shadowRadius: 16, shadowOpacity: 0.7, elevation: 6 },
+  button: { shadowColor: "#b8c0cc", shadowOffset: { width: 3, height: 3 }, shadowRadius: 8, shadowOpacity: 0.5, elevation: 3 },
+  pressed: { shadowColor: "#b8c0cc", shadowOffset: { width: 1, height: 1 }, shadowRadius: 3, shadowOpacity: 0.3, elevation: 1 },
+  inset: { shadowColor: "#b8c0cc", shadowOffset: { width: 2, height: 2 }, shadowRadius: 4, shadowOpacity: 0.4, elevation: 1 },
+  // Glow presets for accent colors
+  glowAqua: { shadowColor: "#1CB0F6", shadowOffset: { width: 0, height: 2 }, shadowRadius: 12, shadowOpacity: 0.35, elevation: 4 },
+  glowPurple: { shadowColor: "#CE82FF", shadowOffset: { width: 0, height: 2 }, shadowRadius: 12, shadowOpacity: 0.35, elevation: 4 },
+  glowGold: { shadowColor: "#FFC800", shadowOffset: { width: 0, height: 2 }, shadowRadius: 10, shadowOpacity: 0.4, elevation: 3 }
+};
 var tamaguiConfig = (0, import_core3.createTamagui)({
   ...config,
   tokens: {
@@ -1583,12 +1604,19 @@ var tamaguiConfig = (0, import_core3.createTamagui)({
       brandOrangeDark: "#E68600",
       xpGold: "#FFC800",
       xpGoldLight: "#FFD700",
-      streakRed: "#FF4B4B"
+      streakRed: "#FF4B4B",
+      // Neumorphic surface system
+      neuSurface: "#e8ecf1",
+      neuSurfaceLight: "#eef1f5",
+      neuSurfacePressed: "#dfe3e9",
+      neuHighlight: "rgba(255,255,255,0.6)",
+      neuHighlightSubtle: "rgba(255,255,255,0.35)"
     }
   }
 });
 var tamagui_config_default = tamaguiConfig;
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
+  NEU,
   tamaguiConfig
 });

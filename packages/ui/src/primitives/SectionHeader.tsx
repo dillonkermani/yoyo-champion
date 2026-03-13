@@ -9,10 +9,10 @@ export interface SectionHeaderProps {
 
 export function SectionHeader({ title, onSeeAll }: SectionHeaderProps) {
   return (
-    <XStack justifyContent="space-between" alignItems="center" marginBottom={12}>
-      <Text fontSize={18} fontWeight="800" color="$color">{title}</Text>
+    <XStack justifyContent="space-between" alignItems="center" marginBottom={16}>
+      <Text fontSize={18} fontWeight="700" letterSpacing={-0.3} color="#2d3436">{title}</Text>
       {onSeeAll && (
-        <Text fontSize={13} fontWeight="700" color="$brandAqua" onPress={onSeeAll} cursor="pointer">
+        <Text fontSize={13} fontWeight="600" color="$brandAqua" onPress={onSeeAll} cursor="pointer">
           See all
         </Text>
       )}

@@ -36,9 +36,9 @@ export function LearnScreen({
   paddingTop = 0,
 }: LearnScreenProps) {
   return (
-    <ScreenContainer scrollable paddingTop={paddingTop} backgroundColor="$backgroundStrong">
-      <YStack padding={16} gap={12}>
-        <Text fontSize={22} fontWeight="900" color="$color">Trick Library</Text>
+    <ScreenContainer scrollable paddingTop={paddingTop}>
+      <YStack padding={20} gap={12}>
+        <Text fontSize={22} fontWeight="800" letterSpacing={-0.5} color="#2d3436">Trick Library</Text>
         <SearchInput value={searchQuery} onChangeText={onSearchChange} placeholder="Search tricks..." />
         <XStack gap={8} flexWrap="wrap">
           {FILTERS.map((filter) => (
@@ -50,9 +50,9 @@ export function LearnScreen({
             />
           ))}
         </XStack>
-        <Text fontSize={13} color="$colorSubtitle">{tricks.length} tricks</Text>
+        <Text fontSize={12} letterSpacing={0.3} color="#636e72">{tricks.length} tricks</Text>
       </YStack>
-      <YStack padding={16} paddingTop={0}>
+      <YStack padding={20} paddingTop={0}>
         {tricks.map((trick) => (
           <TrickCard
             key={trick.id}

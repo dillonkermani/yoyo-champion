@@ -12,13 +12,13 @@ export function DifficultyTag({ difficulty }: DifficultyTagProps) {
   const color = getDifficultyColor(difficulty);
   return (
     <XStack
-      backgroundColor={color + '22'}
+      backgroundColor={color + '18'}
       borderRadius={100}
-      paddingHorizontal={10}
-      paddingVertical={3}
+      paddingHorizontal={12}
+      paddingVertical={4}
       alignSelf="flex-start"
     >
-      <Text fontSize={11} fontWeight="700" color={color}>{label}</Text>
+      <Text fontSize={11} fontWeight="600" color={color}>{label}</Text>
     </XStack>
   );
 }

@@ -1,6 +1,6 @@
 export { Button } from './Button';
 export { Text } from './Text';
-export { tamaguiConfig, type TamaguiConfig } from './tamagui.config';
+export { tamaguiConfig, type TamaguiConfig, NEU } from './tamagui.config';
 export { StatsBar } from './StatsBar';
 export type { StatItem, StatsBarProps } from './StatsBar';
 export { TrickCard } from './TrickCard';

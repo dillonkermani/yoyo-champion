@@ -6,6 +6,7 @@ import { StatsBar } from '../StatsBar';
 import { YoyoCase } from '../YoyoCase';
 import { ScreenContainer } from '../primitives/ScreenContainer';
 import { Button } from '../Button';
+import { NEU } from '../tamagui.config';
 
 export interface ProfileBadge {
   id: string;
@@ -51,20 +52,29 @@ export function ProfileScreen({
 }: ProfileScreenProps) {
   return (
     <ScreenContainer scrollable paddingTop={paddingTop}>
-      {/* Profile Header */}
-      <YStack backgroundColor="$background" padding={20} alignItems="center" gap={12} borderBottomWidth={1} borderBottomColor="$borderColor">
+      {/* Profile Header — raised neumorphic panel */}
+      <YStack
+        backgroundColor="$neuSurfaceLight"
+        padding={20}
+        alignItems="center"
+        gap={12}
+        borderBottomLeftRadius={24}
+        borderBottomRightRadius={24}
+        {...NEU.cardLifted}
+      >
         <AvatarDisplay displayName={displayName} color={avatarColor} size={80} />
         <YStack alignItems="center" gap={2}>
-          <Text fontSize={20} fontWeight="900" color="$color">{displayName}</Text>
-          {handle && <Text fontSize={14} color="$colorSubtitle">@{handle}</Text>}
+          <Text fontSize={20} fontWeight="800" color="#2d3436">{displayName}</Text>
+          {handle && <Text fontSize={14} color="#636e72">@{handle}</Text>}
           <XStack
-            backgroundColor="$brandAqua"
+            backgroundColor="$neuSurface"
             borderRadius={100}
             paddingHorizontal={12}
             paddingVertical={4}
             marginTop={4}
+            {...NEU.button}
           >
-            <Text fontSize={12} fontWeight="700" color="white">Level {level}</Text>
+            <Text fontSize={12} fontWeight="600" color="$brandAqua">Level {level}</Text>
           </XStack>
         </YStack>
         {onEditProfile && (
@@ -73,29 +83,28 @@ export function ProfileScreen({
       </YStack>
 
       {/* Stats */}
-      <YStack padding={16}>
+      <YStack padding={20}>
         <StatsBar stats={stats} />
       </YStack>
 
       {/* Badges */}
       {badges.length > 0 && (
-        <YStack padding={16} paddingTop={0} gap={12}>
-          <Text fontSize={18} fontWeight="800" color="$color">Badges</Text>
+        <YStack padding={20} paddingTop={0} gap={12}>
+          <Text fontSize={18} fontWeight="700" letterSpacing={-0.3} color="#2d3436">Badges</Text>
           <XStack flexWrap="wrap" gap={10}>
             {badges.map((badge) => (
               <YStack
                 key={badge.id}
-                backgroundColor="$background"
-                borderRadius={12}
+                backgroundColor="$neuSurface"
+                borderRadius={16}
                 padding={12}
                 alignItems="center"
                 gap={4}
-                borderWidth={1}
-                borderColor="$borderColor"
                 width={80}
+                {...NEU.card}
               >
                 <Text fontSize={24}>{badge.icon}</Text>
-                <Text fontSize={10} fontWeight="600" color="$colorSubtitle" textAlign="center" numberOfLines={2}>{badge.name}</Text>
+                <Text fontSize={10} fontWeight="600" color="#636e72" textAlign="center" numberOfLines={2}>{badge.name}</Text>
               </YStack>
             ))}
           </XStack>
@@ -104,8 +113,8 @@ export function ProfileScreen({
 
       {/* YoYo Collection */}
       {yoyos.length > 0 && (
-        <YStack padding={16} paddingTop={0} gap={12}>
-          <Text fontSize={18} fontWeight="800" color="$color">My Yo-Yos</Text>
+        <YStack padding={20} paddingTop={0} gap={12}>
+          <Text fontSize={18} fontWeight="700" letterSpacing={-0.3} color="#2d3436">My Yo-Yos</Text>
           <YoyoCase
             yoyos={yoyos.map((y) => ({
               id: y.id,

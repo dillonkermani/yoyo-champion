@@ -7,6 +7,7 @@ import { ProgressBar } from '../primitives/ProgressBar';
 import { SectionHeader } from '../primitives/SectionHeader';
 import { PathCard } from '../cards/PathCard';
 import { ScreenContainer } from '../primitives/ScreenContainer';
+import { NEU } from '../tamagui.config';
 
 export interface FeaturedTrick {
   id: string;
@@ -52,23 +53,23 @@ export function HomeScreen({
   paddingTop = 0,
 }: HomeScreenProps) {
   return (
-    <ScreenContainer scrollable paddingTop={paddingTop} backgroundColor="$backgroundStrong">
-      {/* Header */}
-      <YStack backgroundColor="$background" padding={20} paddingTop={16} borderBottomWidth={1} borderBottomColor="$borderColor">
-        <Text fontSize={22} fontWeight="900" color="$brandAqua" marginBottom={4}>YoYo Champion</Text>
-        <Text fontSize={15} color="$colorSubtitle">Welcome back, {displayName}</Text>
+    <ScreenContainer scrollable paddingTop={paddingTop}>
+      {/* Header — raised neumorphic panel */}
+      <YStack backgroundColor="$neuSurfaceLight" padding={20} paddingTop={16} {...NEU.card}>
+        <Text fontSize={22} fontWeight="800" color="$brandAqua" marginBottom={4}>YoYo Champion</Text>
+        <Text fontSize={15} color="#636e72">Welcome back, {displayName}</Text>
       </YStack>
 
       {/* Stats */}
-      <YStack padding={16}>
+      <YStack padding={20}>
         <StatsBar stats={[
           { label: 'Level', value: String(level) },
           { label: 'XP', value: String(xp) },
           { label: 'Streak', value: `${streak}d` },
         ]} />
-        <YStack marginTop={10} gap={4}>
+        <YStack marginTop={12} gap={4}>
           <XStack justifyContent="space-between">
-            <Text fontSize={12} color="$colorSubtitle">XP Progress to next level</Text>
+            <Text fontSize={12} color="#636e72">XP Progress to next level</Text>
             <Text fontSize={12} fontWeight="700" color="$brandAqua">{Math.round(xpProgressPercent)}%</Text>
           </XStack>
           <ProgressBar value={xpProgressPercent} color="#1CB0F6" />
@@ -76,7 +77,7 @@ export function HomeScreen({
       </YStack>
 
       {/* Featured Tricks */}
-      <YStack padding={16} paddingTop={0}>
+      <YStack padding={20} paddingTop={0}>
         <SectionHeader title="Featured Tricks" onSeeAll={onSeeAllTricks} />
         {featuredTricks.map((trick) => (
           <TrickCard
@@ -92,7 +93,7 @@ export function HomeScreen({
 
       {/* Active Paths */}
       {activePaths.length > 0 && (
-        <YStack padding={16} paddingTop={0}>
+        <YStack padding={20} paddingTop={0}>
           <SectionHeader title="Your Paths" />
           {activePaths.map((path) => (
             <PathCard

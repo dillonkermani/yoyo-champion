@@ -3,6 +3,7 @@ import { YStack, XStack } from 'tamagui';
 import { Text } from '../Text';
 import { Button } from '../Button';
 import { ProgressBar } from '../primitives/ProgressBar';
+import { NEU } from '../tamagui.config';
 
 export interface OnboardingChoice {
   id: string;
@@ -41,13 +42,13 @@ export function OnboardingScreen({
   const progressValue = ((stepIndex + 1) / totalSteps) * 100;
 
   return (
-    <YStack flex={1} backgroundColor="$background" padding={24} gap={24}>
+    <YStack flex={1} backgroundColor="$neuSurface" padding={28} gap={28}>
       {/* Progress */}
       <YStack gap={6}>
         <XStack justifyContent="space-between">
-          <Text fontSize={13} color="$colorSubtitle">Step {stepIndex + 1} of {totalSteps}</Text>
+          <Text fontSize={13} color="#636e72">Step {stepIndex + 1} of {totalSteps}</Text>
           {onSkip && (
-            <Text fontSize={13} color="$colorSubtitle" onPress={onSkip} cursor="pointer">Skip</Text>
+            <Text fontSize={13} color="#636e72" onPress={onSkip} cursor="pointer">Skip</Text>
           )}
         </XStack>
         <ProgressBar value={progressValue} color="#1CB0F6" />
@@ -56,35 +57,34 @@ export function OnboardingScreen({
       {/* Question */}
       <YStack gap={8}>
         {questionEmoji && <Text fontSize={40}>{questionEmoji}</Text>}
-        <Text fontSize={24} fontWeight="900" color="$color">{questionTitle}</Text>
+        <Text fontSize={24} fontWeight="800" color="#2d3436">{questionTitle}</Text>
         {questionSubtitle && (
-          <Text fontSize={15} color="$colorSubtitle" lineHeight={22}>{questionSubtitle}</Text>
+          <Text fontSize={15} color="#636e72" lineHeight={22}>{questionSubtitle}</Text>
         )}
       </YStack>
 
       {/* Choices */}
-      <YStack gap={10} flex={1}>
+      <YStack gap={12} flex={1}>
         {choices.map((choice) => {
           const isSelected = selectedChoiceIds.includes(choice.id);
           return (
             <XStack
               key={choice.id}
-              backgroundColor={isSelected ? '$brandAqua' : '$background'}
-              borderRadius={16}
+              backgroundColor={isSelected ? '$brandAqua' : '$neuSurface'}
+              borderRadius={18}
               padding={16}
-              borderWidth={2}
-              borderColor={isSelected ? '$brandAqua' : '$borderColor'}
               onPress={() => onChoicePress(choice.id)}
-              pressStyle={{ opacity: 0.85 }}
+              pressStyle={{ scale: 0.985, ...NEU.pressed }}
               cursor="pointer"
               gap={12}
               alignItems="center"
+              {...(isSelected ? NEU.glowAqua : NEU.card)}
             >
               {choice.emoji && <Text fontSize={24}>{choice.emoji}</Text>}
               <YStack flex={1} gap={2}>
-                <Text fontSize={15} fontWeight="700" color={isSelected ? 'white' : '$color'}>{choice.label}</Text>
+                <Text fontSize={15} fontWeight="600" color={isSelected ? 'white' : '#2d3436'}>{choice.label}</Text>
                 {choice.description && (
-                  <Text fontSize={12} color={isSelected ? 'rgba(255,255,255,0.8)' : '$colorSubtitle'}>{choice.description}</Text>
+                  <Text fontSize={12} color={isSelected ? 'rgba(255,255,255,0.8)' : '#636e72'}>{choice.description}</Text>
                 )}
               </YStack>
             </XStack>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { YStack, Text } from 'tamagui';
+import { NEU } from './tamagui.config';
 
 export interface AvatarDisplayProps {
   displayName?: string;
@@ -31,20 +32,25 @@ export function AvatarDisplay({
         backgroundColor={color}
         alignItems="center"
         justifyContent="center"
-        borderWidth={3}
-        borderColor="white"
+        // Colored glow shadow matching avatar color
+        shadowColor={color}
+        shadowOffset={{ width: 0, height: 4 }}
+        shadowRadius={16}
+        shadowOpacity={0.4}
+        elevation={6}
       >
-        <Text fontSize={size * 0.35} fontWeight="800" color="white">
+        <Text fontSize={size * 0.35} fontWeight="700" color="white">
           {initials}
         </Text>
       </YStack>
       <YStack
-        backgroundColor="#FFC800"
-        paddingHorizontal={10}
-        paddingVertical={3}
+        backgroundColor="$neuSurface"
+        paddingHorizontal={12}
+        paddingVertical={4}
         borderRadius={20}
+        {...NEU.button}
       >
-        <Text fontSize={12} fontWeight="700" color="white">
+        <Text fontSize={12} fontWeight="600" color="#FFC800">
           LV.{level}
         </Text>
       </YStack>

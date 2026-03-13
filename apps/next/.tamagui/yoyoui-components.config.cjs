@@ -20872,6 +20872,7 @@ __export(src_exports, {
   FilterChip: () => FilterChip,
   HomeScreen: () => HomeScreen,
   LearnScreen: () => LearnScreen,
+  NEU: () => NEU,
   OnboardingScreen: () => OnboardingScreen,
   PathCard: () => PathCard,
   ProfileScreen: () => ProfileScreen,
@@ -20879,6 +20880,7 @@ __export(src_exports, {
   ScreenContainer: () => ScreenContainer,
   SearchInput: () => SearchInput,
   SectionHeader: () => SectionHeader,
+  ShopScreen: () => ShopScreen,
   StatsBar: () => StatsBar,
   Text: () => Text4,
   TrickCard: () => TrickCard,
@@ -20893,7 +20895,7 @@ __export(src_exports, {
 module.exports = __toCommonJS(src_exports);
 
 // ../../packages/ui/src/Button.tsx
-var import_core8 = require("@tamagui/core");
+var import_core11 = require("@tamagui/core");
 
 // ../../node_modules/.pnpm/@tamagui+constants@1.144.4_react-native@0.76.3_@babel+core@7.29.0_@babel+preset-env@7.2_61bb3d4b867375176dbefaa172e3222b/node_modules/@tamagui/constants/dist/esm/constants.mjs
 var import_react = __toESM(require("react"), 1);
@@ -21787,97 +21789,8 @@ var Text3 = (0, import_core7.styled)(import_core7.Text, {
   }
 });
 
-// ../../packages/ui/src/Button.tsx
-var Button = (0, import_core8.styled)(Button2, {
-  name: "YoyoButton",
-  borderRadius: 12,
-  fontWeight: "700",
-  pressStyle: { opacity: 0.8, scale: 0.97 },
-  variants: {
-    variant: {
-      primary: {
-        backgroundColor: "$brandAqua",
-        color: "white",
-        hoverStyle: { backgroundColor: "$brandAquaDark" }
-      },
-      secondary: {
-        backgroundColor: "$brandPurple",
-        color: "white",
-        hoverStyle: { backgroundColor: "$brandPurpleDark" }
-      },
-      accent: {
-        backgroundColor: "$brandOrange",
-        color: "white",
-        hoverStyle: { backgroundColor: "$brandOrangeDark" }
-      },
-      outline: {
-        backgroundColor: "transparent",
-        borderWidth: 2,
-        borderColor: "$brandAqua",
-        color: "$brandAqua"
-      },
-      ghost: {
-        backgroundColor: "transparent",
-        color: "$brandAqua"
-      }
-    },
-    size: {
-      sm: { paddingHorizontal: 12, paddingVertical: 6, fontSize: 14 },
-      md: { paddingHorizontal: 16, paddingVertical: 10, fontSize: 16 },
-      lg: { paddingHorizontal: 24, paddingVertical: 14, fontSize: 18 }
-    }
-  },
-  defaultVariants: {
-    variant: "primary",
-    size: "md"
-  }
-});
-
-// ../../packages/ui/src/Text.tsx
-var import_core9 = require("@tamagui/core");
-var Text4 = (0, import_core9.styled)(Text3, {
-  name: "YoyoText",
-  variants: {
-    variant: {
-      heading: {
-        fontSize: 28,
-        fontWeight: "800",
-        lineHeight: 34,
-        color: "$color"
-      },
-      subheading: {
-        fontSize: 20,
-        fontWeight: "700",
-        lineHeight: 26,
-        color: "$color"
-      },
-      body: {
-        fontSize: 16,
-        fontWeight: "400",
-        lineHeight: 22,
-        color: "$color"
-      },
-      caption: {
-        fontSize: 12,
-        fontWeight: "400",
-        lineHeight: 16,
-        color: "$colorSubtle"
-      },
-      label: {
-        fontSize: 14,
-        fontWeight: "600",
-        lineHeight: 18,
-        color: "$color"
-      }
-    }
-  },
-  defaultVariants: {
-    variant: "body"
-  }
-});
-
 // ../../packages/ui/src/tamagui.config.ts
-var import_core12 = require("@tamagui/core");
+var import_core10 = require("@tamagui/core");
 
 // ../../node_modules/.pnpm/@tamagui+shorthands@1.144.4_react-dom@19.2.4_react@19.2.4__react-native@0.76.3_@babel+c_04655ce6aab457774558712556ff7dfe/node_modules/@tamagui/shorthands/dist/esm/v2.mjs
 var shorthands = {
@@ -23090,7 +23003,7 @@ var animationsCSS = createAnimations({
 });
 
 // ../../node_modules/.pnpm/@tamagui+font-inter@1.144.4_react-dom@19.2.4_react@19.2.4__react-native@0.76.3_@babel+c_2ac8f81b753bfd0c6cb2a94f7489d453/node_modules/@tamagui/font-inter/dist/esm/index.mjs
-var import_core10 = require("@tamagui/core");
+var import_core8 = require("@tamagui/core");
 var createInterFont = /* @__PURE__ */ __name((font = {}, {
   sizeLineHeight = /* @__PURE__ */ __name((size3) => size3 + 10, "sizeLineHeight"),
   sizeSize = /* @__PURE__ */ __name((size3) => size3 * 1, "sizeSize")
@@ -23099,9 +23012,9 @@ var createInterFont = /* @__PURE__ */ __name((font = {}, {
     ...defaultSizes,
     ...font.size
   }).map(([k, v]) => [k, sizeSize(+v)]));
-  return (0, import_core10.createFont)({
-    family: import_core10.isWeb ? 'Inter, -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif' : "Inter",
-    lineHeight: Object.fromEntries(Object.entries(size3).map(([k, v]) => [k, sizeLineHeight((0, import_core10.getVariableValue)(v))])),
+  return (0, import_core8.createFont)({
+    family: import_core8.isWeb ? 'Inter, -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif' : "Inter",
+    lineHeight: Object.fromEntries(Object.entries(size3).map(([k, v]) => [k, sizeLineHeight((0, import_core8.getVariableValue)(v))])),
     weight: {
       4: "300"
     },
@@ -23133,9 +23046,9 @@ var defaultSizes = {
 };
 
 // ../../node_modules/.pnpm/@tamagui+font-silkscreen@1.144.4_react-dom@19.2.4_react@19.2.4__react-native@0.76.3_@ba_85c378c904e4c5cdfecb5edb17e904d2/node_modules/@tamagui/font-silkscreen/dist/esm/index.mjs
-var import_core11 = require("@tamagui/core");
-var createSilkscreenFont = /* @__PURE__ */ __name((font = {}) => (0, import_core11.createFont)({
-  family: import_core11.isWeb ? "Silkscreen, Fira Code, Monaco, Consolas, Ubuntu Mono, monospace" : "Silkscreen",
+var import_core9 = require("@tamagui/core");
+var createSilkscreenFont = /* @__PURE__ */ __name((font = {}) => (0, import_core9.createFont)({
+  family: import_core9.isWeb ? "Silkscreen, Fira Code, Monaco, Consolas, Ubuntu Mono, monospace" : "Silkscreen",
   size: size2,
   lineHeight: Object.fromEntries(Object.entries(font.size || size2).map(([k, v]) => [k, typeof v == "number" ? Math.round(v * 1.2 + 6) : v])),
   weight: {
@@ -23369,7 +23282,27 @@ var config = {
 };
 
 // ../../packages/ui/src/tamagui.config.ts
-var tamaguiConfig = (0, import_core12.createTamagui)({
+var NEU = {
+  surface: "#e8ecf1",
+  surfaceLight: "#eef1f5",
+  surfacePressed: "#dfe3e9",
+  shadowDark: "#b8c0cc",
+  shadowLight: "#ffffff",
+  highlight: "rgba(255,255,255,0.6)",
+  // inner top-left edge glow
+  highlightSubtle: "rgba(255,255,255,0.35)",
+  // Shadow presets (dark shadow only — RN limitation)
+  card: { shadowColor: "#b8c0cc", shadowOffset: { width: 4, height: 4 }, shadowRadius: 10, shadowOpacity: 0.6, elevation: 4 },
+  cardLifted: { shadowColor: "#b8c0cc", shadowOffset: { width: 6, height: 6 }, shadowRadius: 16, shadowOpacity: 0.7, elevation: 6 },
+  button: { shadowColor: "#b8c0cc", shadowOffset: { width: 3, height: 3 }, shadowRadius: 8, shadowOpacity: 0.5, elevation: 3 },
+  pressed: { shadowColor: "#b8c0cc", shadowOffset: { width: 1, height: 1 }, shadowRadius: 3, shadowOpacity: 0.3, elevation: 1 },
+  inset: { shadowColor: "#b8c0cc", shadowOffset: { width: 2, height: 2 }, shadowRadius: 4, shadowOpacity: 0.4, elevation: 1 },
+  // Glow presets for accent colors
+  glowAqua: { shadowColor: "#1CB0F6", shadowOffset: { width: 0, height: 2 }, shadowRadius: 12, shadowOpacity: 0.35, elevation: 4 },
+  glowPurple: { shadowColor: "#CE82FF", shadowOffset: { width: 0, height: 2 }, shadowRadius: 12, shadowOpacity: 0.35, elevation: 4 },
+  glowGold: { shadowColor: "#FFC800", shadowOffset: { width: 0, height: 2 }, shadowRadius: 10, shadowOpacity: 0.4, elevation: 3 }
+};
+var tamaguiConfig = (0, import_core10.createTamagui)({
   ...config,
   tokens: {
     ...config.tokens,
@@ -23387,18 +23320,155 @@ var tamaguiConfig = (0, import_core12.createTamagui)({
       brandOrangeDark: "#E68600",
       xpGold: "#FFC800",
       xpGoldLight: "#FFD700",
-      streakRed: "#FF4B4B"
+      streakRed: "#FF4B4B",
+      // Neumorphic surface system
+      neuSurface: "#e8ecf1",
+      neuSurfaceLight: "#eef1f5",
+      neuSurfacePressed: "#dfe3e9",
+      neuHighlight: "rgba(255,255,255,0.6)",
+      neuHighlightSubtle: "rgba(255,255,255,0.35)"
     }
+  }
+});
+
+// ../../packages/ui/src/Button.tsx
+var Button = (0, import_core11.styled)(Button2, {
+  name: "YoyoButton",
+  borderRadius: 14,
+  fontWeight: "600",
+  letterSpacing: 0.3,
+  borderWidth: 0,
+  ...NEU.button,
+  pressStyle: { opacity: 0.95, scale: 0.975, backgroundColor: "$neuSurfacePressed", ...NEU.pressed },
+  variants: {
+    variant: {
+      primary: {
+        backgroundColor: "$brandAqua",
+        color: "white",
+        ...NEU.glowAqua,
+        hoverStyle: { backgroundColor: "$brandAquaDark" },
+        pressStyle: { backgroundColor: "$brandAquaDark", ...NEU.pressed }
+      },
+      secondary: {
+        backgroundColor: "$brandPurple",
+        color: "white",
+        ...NEU.glowPurple,
+        hoverStyle: { backgroundColor: "$brandPurpleDark" },
+        pressStyle: { backgroundColor: "$brandPurpleDark", ...NEU.pressed }
+      },
+      accent: {
+        backgroundColor: "$brandOrange",
+        color: "white",
+        shadowColor: "#FF9600",
+        shadowOffset: { width: 0, height: 2 },
+        shadowRadius: 12,
+        shadowOpacity: 0.35,
+        elevation: 4,
+        hoverStyle: { backgroundColor: "$brandOrangeDark" },
+        pressStyle: { backgroundColor: "$brandOrangeDark", ...NEU.pressed }
+      },
+      outline: {
+        backgroundColor: "$neuSurface",
+        borderWidth: 1,
+        borderColor: "$neuHighlightSubtle",
+        color: "$brandAqua",
+        ...NEU.button,
+        pressStyle: { backgroundColor: "$neuSurfacePressed", ...NEU.pressed }
+      },
+      ghost: {
+        backgroundColor: "transparent",
+        color: "$brandAqua",
+        shadowOpacity: 0,
+        elevation: 0
+      },
+      glass: {
+        backgroundColor: "$neuSurface",
+        borderWidth: 0,
+        color: "#2d3436",
+        ...NEU.button,
+        pressStyle: { backgroundColor: "$neuSurfacePressed", ...NEU.pressed }
+      }
+    },
+    size: {
+      sm: { paddingHorizontal: 14, paddingVertical: 8, fontSize: 14 },
+      md: { paddingHorizontal: 18, paddingVertical: 12, fontSize: 16 },
+      lg: { paddingHorizontal: 26, paddingVertical: 16, fontSize: 18 }
+    }
+  },
+  defaultVariants: {
+    variant: "primary",
+    size: "md"
+  }
+});
+
+// ../../packages/ui/src/Text.tsx
+var import_core12 = require("@tamagui/core");
+var Text4 = (0, import_core12.styled)(Text3, {
+  name: "YoyoText",
+  variants: {
+    variant: {
+      heading: {
+        fontSize: 28,
+        fontWeight: "700",
+        lineHeight: 34,
+        letterSpacing: -0.5,
+        color: "#2d3436"
+      },
+      subheading: {
+        fontSize: 20,
+        fontWeight: "600",
+        lineHeight: 26,
+        letterSpacing: -0.3,
+        color: "#2d3436"
+      },
+      body: {
+        fontSize: 16,
+        fontWeight: "400",
+        lineHeight: 22,
+        letterSpacing: 0.1,
+        color: "#2d3436"
+      },
+      caption: {
+        fontSize: 12,
+        fontWeight: "400",
+        lineHeight: 16,
+        letterSpacing: 0.2,
+        color: "#636e72"
+      },
+      label: {
+        fontSize: 14,
+        fontWeight: "500",
+        lineHeight: 18,
+        letterSpacing: 0.3,
+        color: "#2d3436"
+      }
+    }
+  },
+  defaultVariants: {
+    variant: "body"
   }
 });
 
 // ../../packages/ui/src/StatsBar.tsx
 var import_jsx_runtime5 = require("react/jsx-runtime");
 function StatsBar({ stats }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(XStack, { justifyContent: "space-around", paddingVertical: 8, paddingHorizontal: 12, children: stats.map((stat, i) => /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)(YStack, { alignItems: "center", flex: 1, children: [
-    /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(Text3, { fontSize: 18, fontWeight: "800", color: stat.color ?? "#1CB0F6", children: stat.value }),
-    /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(Text3, { fontSize: 11, color: "$colorSubtle", textAlign: "center", numberOfLines: 1, children: stat.label })
-  ] }, i)) });
+  return /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(XStack, { justifyContent: "space-around", paddingVertical: 8, paddingHorizontal: 4, gap: 10, children: stats.map((stat, i) => /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)(
+    YStack,
+    {
+      alignItems: "center",
+      flex: 1,
+      backgroundColor: "$neuSurface",
+      borderRadius: 14,
+      paddingVertical: 12,
+      paddingHorizontal: 8,
+      ...NEU.card,
+      children: [
+        /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(Text3, { fontSize: 20, fontWeight: "700", color: stat.color ?? "#1CB0F6", children: stat.value }),
+        /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(Text3, { fontSize: 10, color: "#636e72", textAlign: "center", numberOfLines: 1, textTransform: "uppercase", letterSpacing: 0.5, marginTop: 2, children: stat.label })
+      ]
+    },
+    i
+  )) });
 }
 __name(StatsBar, "StatsBar");
 
@@ -23439,19 +23509,18 @@ function TrickCard({ name, difficulty, genre, completed, xpReward, onPress }) {
   return /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(
     XStack,
     {
-      backgroundColor: completed ? "#F0FFF4" : "white",
-      borderRadius: 12,
-      padding: 12,
-      marginBottom: 8,
-      borderWidth: 1,
-      borderColor: completed ? "#58CC02" : "#E5E7EB",
+      backgroundColor: completed ? "#e6f5e8" : "$neuSurface",
+      borderRadius: 16,
+      padding: 14,
+      marginBottom: 12,
       alignItems: "center",
       onPress,
-      pressStyle: { opacity: 0.85 },
+      pressStyle: { scale: 0.985, backgroundColor: "$neuSurfacePressed", ...NEU.pressed },
       cursor: "pointer",
+      ...completed ? { ...NEU.card, shadowColor: "#58CC02", shadowOpacity: 0.25 } : NEU.card,
       children: [
         /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(YStack, { flex: 1, children: [
-          /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(Text3, { fontWeight: "700", fontSize: 15, children: name }),
+          /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(Text3, { fontWeight: "600", fontSize: 15, color: "#2d3436", children: name }),
           /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(XStack, { marginTop: 4, gap: 8, alignItems: "center", children: [
             /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(
               Text3,
@@ -23465,7 +23534,7 @@ function TrickCard({ name, difficulty, genre, completed, xpReward, onPress }) {
                 children: label
               }
             ),
-            /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(Text3, { fontSize: 11, color: "$colorSubtle", children: genre })
+            /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(Text3, { fontSize: 11, color: "#636e72", children: genre })
           ] })
         ] }),
         xpReward !== void 0 && /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(Text3, { fontWeight: "700", color: "#FFC800", fontSize: 13, children: [
@@ -23483,29 +23552,28 @@ __name(TrickCard, "TrickCard");
 // ../../packages/ui/src/YoyoCase.tsx
 var import_jsx_runtime7 = require("react/jsx-runtime");
 function YoyoCase({ yoyos }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(XStack, { flexWrap: "wrap", gap: 8, paddingHorizontal: 8, children: yoyos.map((yoyo) => /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)(
+  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(XStack, { flexWrap: "wrap", gap: 10, paddingHorizontal: 4, children: yoyos.map((yoyo) => /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)(
     YStack,
     {
-      width: 88,
-      height: 88,
-      borderRadius: 12,
-      borderWidth: 2,
-      borderColor: yoyo.owned ? yoyo.color ?? "#1CB0F6" : "#E5E7EB",
-      backgroundColor: yoyo.owned ? "#EBF8FF" : "#F9FAFB",
+      width: 90,
+      height: 90,
+      borderRadius: 16,
+      backgroundColor: yoyo.owned ? "$neuSurface" : "$neuSurfacePressed",
       alignItems: "center",
       justifyContent: "center",
       padding: 8,
-      pressStyle: { opacity: 0.8 },
+      pressStyle: { scale: 0.95, ...NEU.pressed },
       cursor: "pointer",
+      ...yoyo.owned ? { shadowColor: yoyo.color ?? "#1CB0F6", shadowOffset: { width: 0, height: 2 }, shadowRadius: 10, shadowOpacity: 0.3, elevation: 3 } : NEU.inset,
       children: [
-        /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(Text3, { fontSize: 28, children: yoyo.owned ? "\u{1FA80}" : "\u{1F512}" }),
+        /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(Text3, { fontSize: 28, opacity: yoyo.owned ? 1 : 0.4, children: yoyo.owned ? "\u{1FA80}" : "\u{1F512}" }),
         /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
           Text3,
           {
             fontSize: 10,
             textAlign: "center",
             numberOfLines: 1,
-            color: yoyo.owned ? "$color" : "$colorSubtle",
+            color: yoyo.owned ? "#2d3436" : "#a0a8b0",
             children: yoyo.name
           }
         )
@@ -23535,19 +23603,23 @@ function AvatarDisplay({
         backgroundColor: color2,
         alignItems: "center",
         justifyContent: "center",
-        borderWidth: 3,
-        borderColor: "white",
-        children: /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(Text3, { fontSize: size3 * 0.35, fontWeight: "800", color: "white", children: initials })
+        shadowColor: color2,
+        shadowOffset: { width: 0, height: 4 },
+        shadowRadius: 16,
+        shadowOpacity: 0.4,
+        elevation: 6,
+        children: /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(Text3, { fontSize: size3 * 0.35, fontWeight: "700", color: "white", children: initials })
       }
     ),
     /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
       YStack,
       {
-        backgroundColor: "#FFC800",
-        paddingHorizontal: 10,
-        paddingVertical: 3,
+        backgroundColor: "$neuSurface",
+        paddingHorizontal: 12,
+        paddingVertical: 4,
         borderRadius: 20,
-        children: /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)(Text3, { fontSize: 12, fontWeight: "700", color: "white", children: [
+        ...NEU.button,
+        children: /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)(Text3, { fontSize: 12, fontWeight: "600", color: "#FFC800", children: [
           "LV.",
           level
         ] })
@@ -23559,27 +23631,57 @@ __name(AvatarDisplay, "AvatarDisplay");
 
 // ../../packages/ui/src/primitives/ScreenContainer.tsx
 var import_jsx_runtime9 = require("react/jsx-runtime");
-function ScreenContainer({ children, scrollable = false, paddingTop = 0, backgroundColor = "$background" }) {
+function ScreenContainer({ children, scrollable = false, paddingTop = 0, backgroundColor }) {
+  const bg = backgroundColor ?? "$neuSurface";
   if (scrollable) {
-    return /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(YStack, { flex: 1, backgroundColor, children: /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(ScrollView, { flex: 1, showsVerticalScrollIndicator: false, contentContainerStyle: { paddingTop }, children }) });
+    return /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(YStack, { flex: 1, backgroundColor: bg, children: /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(ScrollView, { flex: 1, showsVerticalScrollIndicator: false, contentContainerStyle: { paddingTop }, children }) });
   }
-  return /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(YStack, { flex: 1, backgroundColor, paddingTop, children });
+  return /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(YStack, { flex: 1, backgroundColor: bg, paddingTop, children });
 }
 __name(ScreenContainer, "ScreenContainer");
 
 // ../../packages/ui/src/primitives/ProgressBar.tsx
 var import_jsx_runtime10 = require("react/jsx-runtime");
-function ProgressBar({ value, color: color2 = "#1CB0F6", height = 8, backgroundColor = "#E5E7EB" }) {
+function ProgressBar({ value, color: color2 = "#1CB0F6", height = 10, backgroundColor = "#dde1e7" }) {
   const clampedValue = Math.min(100, Math.max(0, value));
-  return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(XStack, { height, backgroundColor, borderRadius: height / 2, overflow: "hidden", children: /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
-    YStack,
+  return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
+    XStack,
     {
       height,
-      width: `${clampedValue}%`,
-      backgroundColor: color2,
-      borderRadius: height / 2
+      backgroundColor,
+      borderRadius: height / 2,
+      overflow: "hidden",
+      shadowColor: "#b8c0cc",
+      shadowOffset: { width: 2, height: 2 },
+      shadowRadius: 4,
+      shadowOpacity: 0.4,
+      elevation: 1,
+      children: /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
+        YStack,
+        {
+          height,
+          width: `${clampedValue}%`,
+          backgroundColor: color2,
+          borderRadius: height / 2,
+          position: "relative",
+          overflow: "hidden",
+          children: /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
+            YStack,
+            {
+              position: "absolute",
+              top: 0,
+              left: 0,
+              right: 0,
+              height: "40%",
+              backgroundColor: "rgba(255,255,255,0.35)",
+              borderTopLeftRadius: height / 2,
+              borderTopRightRadius: height / 2
+            }
+          )
+        }
+      )
     }
-  ) });
+  );
 }
 __name(ProgressBar, "ProgressBar");
 
@@ -23591,12 +23693,12 @@ function DifficultyTag({ difficulty }) {
   return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
     XStack,
     {
-      backgroundColor: color2 + "22",
+      backgroundColor: color2 + "18",
       borderRadius: 100,
-      paddingHorizontal: 10,
-      paddingVertical: 3,
+      paddingHorizontal: 12,
+      paddingVertical: 4,
       alignSelf: "flex-start",
-      children: /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(Text4, { fontSize: 11, fontWeight: "700", color: color2, children: label })
+      children: /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(Text4, { fontSize: 11, fontWeight: "600", color: color2, children: label })
     }
   );
 }
@@ -23608,14 +23710,15 @@ function FilterChip({ label, selected = false, onPress }) {
   return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
     XStack,
     {
-      backgroundColor: selected ? "$brandAqua" : "$backgroundHover",
+      backgroundColor: selected ? "$brandAqua" : "$neuSurface",
       borderRadius: 100,
-      paddingHorizontal: 14,
-      paddingVertical: 6,
+      paddingHorizontal: 16,
+      paddingVertical: 8,
       onPress,
-      pressStyle: { opacity: 0.8 },
+      pressStyle: { opacity: 0.9, scale: 0.97, ...NEU.pressed },
       cursor: "pointer",
-      children: /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(Text4, { fontSize: 13, fontWeight: "700", color: selected ? "white" : "$color", children: label })
+      ...selected ? NEU.glowAqua : NEU.button,
+      children: /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(Text4, { fontSize: 13, fontWeight: "600", color: selected ? "white" : "#2d3436", children: label })
     }
   );
 }
@@ -23630,11 +23733,14 @@ function SearchInput({ value, onChangeText, placeholder = "Search tricks..." }) 
       value,
       onChangeText,
       placeholder,
-      borderRadius: 12,
-      borderColor: "$borderColor",
-      backgroundColor: "$background",
-      paddingHorizontal: 14,
-      size: "$4"
+      borderRadius: 14,
+      borderWidth: 0,
+      backgroundColor: "$neuSurfacePressed",
+      paddingHorizontal: 16,
+      size: "$4",
+      color: "#2d3436",
+      placeholderTextColor: "#a0a8b0",
+      ...NEU.inset
     }
   );
 }
@@ -23643,9 +23749,9 @@ __name(SearchInput, "SearchInput");
 // ../../packages/ui/src/primitives/SectionHeader.tsx
 var import_jsx_runtime14 = require("react/jsx-runtime");
 function SectionHeader({ title, onSeeAll }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)(XStack, { justifyContent: "space-between", alignItems: "center", marginBottom: 12, children: [
-    /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(Text4, { fontSize: 18, fontWeight: "800", color: "$color", children: title }),
-    onSeeAll && /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(Text4, { fontSize: 13, fontWeight: "700", color: "$brandAqua", onPress: onSeeAll, cursor: "pointer", children: "See all" })
+  return /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)(XStack, { justifyContent: "space-between", alignItems: "center", marginBottom: 16, children: [
+    /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(Text4, { fontSize: 18, fontWeight: "700", letterSpacing: -0.3, color: "#2d3436", children: title }),
+    onSeeAll && /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(Text4, { fontSize: 13, fontWeight: "600", color: "$brandAqua", onPress: onSeeAll, cursor: "pointer", children: "See all" })
   ] });
 }
 __name(SectionHeader, "SectionHeader");
@@ -23656,19 +23762,18 @@ function PathCard({ title, difficulty, progressPercent, totalXp, onPress }) {
   return /* @__PURE__ */ (0, import_jsx_runtime15.jsxs)(
     YStack,
     {
-      backgroundColor: "$background",
-      borderRadius: 16,
-      padding: 16,
-      marginBottom: 10,
-      borderWidth: 1,
-      borderColor: "$borderColor",
+      backgroundColor: "$neuSurface",
+      borderRadius: 20,
+      padding: 18,
+      marginBottom: 14,
       onPress,
-      pressStyle: { opacity: 0.85 },
+      pressStyle: { scale: 0.985, backgroundColor: "$neuSurfacePressed", ...NEU.pressed },
       cursor: "pointer",
+      ...NEU.card,
       children: [
         /* @__PURE__ */ (0, import_jsx_runtime15.jsxs)(XStack, { justifyContent: "space-between", alignItems: "center", marginBottom: 8, children: [
-          /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(Text4, { fontSize: 15, fontWeight: "700", color: "$color", flex: 1, marginRight: 8, children: title }),
-          /* @__PURE__ */ (0, import_jsx_runtime15.jsxs)(Text4, { fontSize: 13, fontWeight: "700", color: "$xpGold", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(Text4, { fontSize: 15, fontWeight: "600", color: "#2d3436", flex: 1, marginRight: 8, children: title }),
+          /* @__PURE__ */ (0, import_jsx_runtime15.jsxs)(Text4, { fontSize: 13, fontWeight: "700", color: "#FFC800", children: [
             "+",
             totalXp,
             " XP"
@@ -23676,7 +23781,7 @@ function PathCard({ title, difficulty, progressPercent, totalXp, onPress }) {
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime15.jsxs)(XStack, { alignItems: "center", gap: 8, marginBottom: 10, children: [
           /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(DifficultyTag, { difficulty }),
-          /* @__PURE__ */ (0, import_jsx_runtime15.jsxs)(Text4, { fontSize: 12, color: "$colorSubtitle", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime15.jsxs)(Text4, { fontSize: 12, color: "#636e72", children: [
             Math.round(progressPercent),
             "% complete"
           ] })
@@ -23691,22 +23796,25 @@ __name(PathCard, "PathCard");
 // ../../packages/ui/src/cards/TrickDetailHero.tsx
 var import_jsx_runtime16 = require("react/jsx-runtime");
 function TrickDetailHero({ name, difficulty, genre, style, xpReward }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime16.jsxs)(YStack, { padding: 20, gap: 12, children: [
-    /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(Text4, { fontSize: 26, fontWeight: "900", color: "$color", children: name }),
+  return /* @__PURE__ */ (0, import_jsx_runtime16.jsxs)(YStack, { padding: 24, gap: 14, children: [
+    /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(Text4, { fontSize: 26, fontWeight: "800", letterSpacing: -0.5, color: "#2d3436", children: name }),
     /* @__PURE__ */ (0, import_jsx_runtime16.jsxs)(XStack, { gap: 8, alignItems: "center", flexWrap: "wrap", children: [
       /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(DifficultyTag, { difficulty }),
-      /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(XStack, { backgroundColor: "$backgroundHover", borderRadius: 100, paddingHorizontal: 10, paddingVertical: 3, children: /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(Text4, { fontSize: 11, fontWeight: "600", color: "$colorSubtitle", children: genre }) }),
-      /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(XStack, { backgroundColor: "$backgroundHover", borderRadius: 100, paddingHorizontal: 10, paddingVertical: 3, children: /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(Text4, { fontSize: 11, fontWeight: "600", color: "$colorSubtitle", children: style }) })
+      /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(XStack, { backgroundColor: "$neuSurfacePressed", borderRadius: 100, paddingHorizontal: 10, paddingVertical: 3, children: /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(Text4, { fontSize: 11, fontWeight: "600", color: "#636e72", children: genre }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(XStack, { backgroundColor: "$neuSurfacePressed", borderRadius: 100, paddingHorizontal: 10, paddingVertical: 3, children: /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(Text4, { fontSize: 11, fontWeight: "600", color: "#636e72", children: style }) })
     ] }),
     /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(
       XStack,
       {
-        backgroundColor: "#FFC80022",
+        backgroundColor: "$neuSurface",
         borderRadius: 12,
         paddingHorizontal: 14,
         paddingVertical: 8,
         alignSelf: "flex-start",
-        children: /* @__PURE__ */ (0, import_jsx_runtime16.jsxs)(Text4, { fontSize: 15, fontWeight: "800", color: "#FFC800", children: [
+        ...NEU.button,
+        shadowColor: "#FFC800",
+        shadowOpacity: 0.3,
+        children: /* @__PURE__ */ (0, import_jsx_runtime16.jsxs)(Text4, { fontSize: 15, fontWeight: "700", color: "#FFC800", children: [
           "+",
           xpReward,
           " XP"
@@ -23732,23 +23840,23 @@ function HomeScreen({
   onSeeAllTricks,
   paddingTop = 0
 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)(ScreenContainer, { scrollable: true, paddingTop, backgroundColor: "$backgroundStrong", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)(YStack, { backgroundColor: "$background", padding: 20, paddingTop: 16, borderBottomWidth: 1, borderBottomColor: "$borderColor", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(Text4, { fontSize: 22, fontWeight: "900", color: "$brandAqua", marginBottom: 4, children: "YoYo Champion" }),
-      /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)(Text4, { fontSize: 15, color: "$colorSubtitle", children: [
+  return /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)(ScreenContainer, { scrollable: true, paddingTop, children: [
+    /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)(YStack, { backgroundColor: "$neuSurfaceLight", padding: 20, paddingTop: 16, ...NEU.card, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(Text4, { fontSize: 22, fontWeight: "800", color: "$brandAqua", marginBottom: 4, children: "YoYo Champion" }),
+      /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)(Text4, { fontSize: 15, color: "#636e72", children: [
         "Welcome back, ",
         displayName
       ] })
     ] }),
-    /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)(YStack, { padding: 16, children: [
+    /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)(YStack, { padding: 20, children: [
       /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(StatsBar, { stats: [
         { label: "Level", value: String(level) },
         { label: "XP", value: String(xp) },
         { label: "Streak", value: `${streak}d` }
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)(YStack, { marginTop: 10, gap: 4, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)(YStack, { marginTop: 12, gap: 4, children: [
         /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)(XStack, { justifyContent: "space-between", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(Text4, { fontSize: 12, color: "$colorSubtitle", children: "XP Progress to next level" }),
+          /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(Text4, { fontSize: 12, color: "#636e72", children: "XP Progress to next level" }),
           /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)(Text4, { fontSize: 12, fontWeight: "700", color: "$brandAqua", children: [
             Math.round(xpProgressPercent),
             "%"
@@ -23757,7 +23865,7 @@ function HomeScreen({
         /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(ProgressBar, { value: xpProgressPercent, color: "#1CB0F6" })
       ] })
     ] }),
-    /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)(YStack, { padding: 16, paddingTop: 0, children: [
+    /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)(YStack, { padding: 20, paddingTop: 0, children: [
       /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(SectionHeader, { title: "Featured Tricks", onSeeAll: onSeeAllTricks }),
       featuredTricks.map((trick) => /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(
         TrickCard,
@@ -23771,7 +23879,7 @@ function HomeScreen({
         trick.id
       ))
     ] }),
-    activePaths.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)(YStack, { padding: 16, paddingTop: 0, children: [
+    activePaths.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)(YStack, { padding: 20, paddingTop: 0, children: [
       /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(SectionHeader, { title: "Your Paths" }),
       activePaths.map((path) => /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(
         PathCard,
@@ -23802,9 +23910,9 @@ function LearnScreen({
   onTrickPress,
   paddingTop = 0
 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)(ScreenContainer, { scrollable: true, paddingTop, backgroundColor: "$backgroundStrong", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)(YStack, { padding: 16, gap: 12, children: [
-      /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(Text4, { fontSize: 22, fontWeight: "900", color: "$color", children: "Trick Library" }),
+  return /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)(ScreenContainer, { scrollable: true, paddingTop, children: [
+    /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)(YStack, { padding: 20, gap: 12, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(Text4, { fontSize: 22, fontWeight: "800", letterSpacing: -0.5, color: "#2d3436", children: "Trick Library" }),
       /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(SearchInput, { value: searchQuery, onChangeText: onSearchChange, placeholder: "Search tricks..." }),
       /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(XStack, { gap: 8, flexWrap: "wrap", children: FILTERS.map((filter) => /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(
         FilterChip,
@@ -23815,12 +23923,12 @@ function LearnScreen({
         },
         filter
       )) }),
-      /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)(Text4, { fontSize: 13, color: "$colorSubtitle", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)(Text4, { fontSize: 12, letterSpacing: 0.3, color: "#636e72", children: [
         tricks.length,
         " tricks"
       ] })
     ] }),
-    /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(YStack, { padding: 16, paddingTop: 0, children: tricks.map((trick) => /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(
+    /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(YStack, { padding: 20, paddingTop: 0, children: tricks.map((trick) => /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(
       TrickCard,
       {
         name: trick.name,
@@ -23854,43 +23962,45 @@ function TrickDetailScreen({
 }) {
   return /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)(ScreenContainer, { scrollable: true, paddingTop, children: [
     /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(TrickDetailHero, { name, difficulty, genre, style, xpReward }),
-    /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)(YStack, { padding: 20, gap: 16, children: [
+    /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)(YStack, { padding: 24, gap: 18, children: [
       /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)(XStack, { gap: 8, alignItems: "center", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)(Text4, { fontSize: 13, color: "$colorSubtitle", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)(Text4, { fontSize: 13, color: "#636e72", children: [
           "Est. ",
           estimatedMinutes,
           " min"
         ] }),
-        completed && /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(XStack, { backgroundColor: "#58CC0222", borderRadius: 100, paddingHorizontal: 10, paddingVertical: 3, children: /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(Text4, { fontSize: 12, fontWeight: "700", color: "#58CC02", children: "Mastered" }) })
+        completed && /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(XStack, { backgroundColor: "#e6f5e8", borderRadius: 100, paddingHorizontal: 10, paddingVertical: 3, children: /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(Text4, { fontSize: 12, fontWeight: "600", color: "#58CC02", children: "Mastered" }) })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(Text4, { fontSize: 15, color: "$color", lineHeight: 22, children: description }),
-      /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(Text4, { fontSize: 18, fontWeight: "800", color: "$color", children: "Steps" }),
+      /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(Text4, { fontSize: 15, color: "#2d3436", lineHeight: 22, children: description }),
+      /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(Text4, { fontSize: 18, fontWeight: "700", letterSpacing: -0.3, color: "#2d3436", children: "Steps" }),
       steps.map((step) => /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)(
         YStack,
         {
-          backgroundColor: "$background",
-          borderRadius: 12,
+          backgroundColor: "$neuSurface",
+          borderRadius: 16,
           padding: 14,
-          borderWidth: 1,
-          borderColor: "$borderColor",
           gap: 6,
+          ...NEU.card,
           children: [
             /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)(XStack, { gap: 10, alignItems: "center", children: [
               /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(
                 YStack,
                 {
-                  width: 26,
-                  height: 26,
-                  borderRadius: 13,
+                  width: 28,
+                  height: 28,
+                  borderRadius: 14,
                   backgroundColor: "$brandAqua",
                   alignItems: "center",
                   justifyContent: "center",
-                  children: /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(Text4, { fontSize: 12, fontWeight: "800", color: "white", children: step.order })
+                  ...NEU.glowAqua,
+                  shadowRadius: 6,
+                  shadowOpacity: 0.25,
+                  children: /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(Text4, { fontSize: 12, fontWeight: "700", color: "white", children: step.order })
                 }
               ),
-              /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(Text4, { fontSize: 15, fontWeight: "700", color: "$color", flex: 1, children: step.title })
+              /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(Text4, { fontSize: 15, fontWeight: "600", color: "#2d3436", flex: 1, children: step.title })
             ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(Text4, { fontSize: 13, color: "$colorSubtitle", lineHeight: 20, paddingLeft: 36, children: step.description })
+            /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(Text4, { fontSize: 13, color: "#636e72", lineHeight: 20, paddingLeft: 38, children: step.description })
           ]
         },
         step.id
@@ -23919,55 +24029,67 @@ function ProfileScreen({
   paddingTop = 0
 }) {
   return /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)(ScreenContainer, { scrollable: true, paddingTop, children: [
-    /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)(YStack, { backgroundColor: "$background", padding: 20, alignItems: "center", gap: 12, borderBottomWidth: 1, borderBottomColor: "$borderColor", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(AvatarDisplay, { displayName, color: avatarColor, size: 80 }),
-      /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)(YStack, { alignItems: "center", gap: 2, children: [
-        /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(Text4, { fontSize: 20, fontWeight: "900", color: "$color", children: displayName }),
-        handle && /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)(Text4, { fontSize: 14, color: "$colorSubtitle", children: [
-          "@",
-          handle
-        ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(
-          XStack,
-          {
-            backgroundColor: "$brandAqua",
-            borderRadius: 100,
-            paddingHorizontal: 12,
-            paddingVertical: 4,
-            marginTop: 4,
-            children: /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)(Text4, { fontSize: 12, fontWeight: "700", color: "white", children: [
-              "Level ",
-              level
-            ] })
-          }
-        )
-      ] }),
-      onEditProfile && /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(Button, { onPress: onEditProfile, variant: "outline", size: "sm", children: "Edit Profile" })
-    ] }),
-    /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(YStack, { padding: 16, children: /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(StatsBar, { stats }) }),
-    badges.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)(YStack, { padding: 16, paddingTop: 0, gap: 12, children: [
-      /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(Text4, { fontSize: 18, fontWeight: "800", color: "$color", children: "Badges" }),
+    /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)(
+      YStack,
+      {
+        backgroundColor: "$neuSurfaceLight",
+        padding: 20,
+        alignItems: "center",
+        gap: 12,
+        borderBottomLeftRadius: 24,
+        borderBottomRightRadius: 24,
+        ...NEU.cardLifted,
+        children: [
+          /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(AvatarDisplay, { displayName, color: avatarColor, size: 80 }),
+          /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)(YStack, { alignItems: "center", gap: 2, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(Text4, { fontSize: 20, fontWeight: "800", color: "#2d3436", children: displayName }),
+            handle && /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)(Text4, { fontSize: 14, color: "#636e72", children: [
+              "@",
+              handle
+            ] }),
+            /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(
+              XStack,
+              {
+                backgroundColor: "$neuSurface",
+                borderRadius: 100,
+                paddingHorizontal: 12,
+                paddingVertical: 4,
+                marginTop: 4,
+                ...NEU.button,
+                children: /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)(Text4, { fontSize: 12, fontWeight: "600", color: "$brandAqua", children: [
+                  "Level ",
+                  level
+                ] })
+              }
+            )
+          ] }),
+          onEditProfile && /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(Button, { onPress: onEditProfile, variant: "outline", size: "sm", children: "Edit Profile" })
+        ]
+      }
+    ),
+    /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(YStack, { padding: 20, children: /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(StatsBar, { stats }) }),
+    badges.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)(YStack, { padding: 20, paddingTop: 0, gap: 12, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(Text4, { fontSize: 18, fontWeight: "700", letterSpacing: -0.3, color: "#2d3436", children: "Badges" }),
       /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(XStack, { flexWrap: "wrap", gap: 10, children: badges.map((badge) => /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)(
         YStack,
         {
-          backgroundColor: "$background",
-          borderRadius: 12,
+          backgroundColor: "$neuSurface",
+          borderRadius: 16,
           padding: 12,
           alignItems: "center",
           gap: 4,
-          borderWidth: 1,
-          borderColor: "$borderColor",
           width: 80,
+          ...NEU.card,
           children: [
             /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(Text4, { fontSize: 24, children: badge.icon }),
-            /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(Text4, { fontSize: 10, fontWeight: "600", color: "$colorSubtitle", textAlign: "center", numberOfLines: 2, children: badge.name })
+            /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(Text4, { fontSize: 10, fontWeight: "600", color: "#636e72", textAlign: "center", numberOfLines: 2, children: badge.name })
           ]
         },
         badge.id
       )) })
     ] }),
-    yoyos.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)(YStack, { padding: 16, paddingTop: 0, gap: 12, children: [
-      /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(Text4, { fontSize: 18, fontWeight: "800", color: "$color", children: "My Yo-Yos" }),
+    yoyos.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)(YStack, { padding: 20, paddingTop: 0, gap: 12, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(Text4, { fontSize: 18, fontWeight: "700", letterSpacing: -0.3, color: "#2d3436", children: "My Yo-Yos" }),
       /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(
         YoyoCase,
         {
@@ -24001,44 +24123,43 @@ function OnboardingScreen({
   onSkip
 }) {
   const progressValue = (stepIndex + 1) / totalSteps * 100;
-  return /* @__PURE__ */ (0, import_jsx_runtime21.jsxs)(YStack, { flex: 1, backgroundColor: "$background", padding: 24, gap: 24, children: [
+  return /* @__PURE__ */ (0, import_jsx_runtime21.jsxs)(YStack, { flex: 1, backgroundColor: "$neuSurface", padding: 28, gap: 28, children: [
     /* @__PURE__ */ (0, import_jsx_runtime21.jsxs)(YStack, { gap: 6, children: [
       /* @__PURE__ */ (0, import_jsx_runtime21.jsxs)(XStack, { justifyContent: "space-between", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime21.jsxs)(Text4, { fontSize: 13, color: "$colorSubtitle", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime21.jsxs)(Text4, { fontSize: 13, color: "#636e72", children: [
           "Step ",
           stepIndex + 1,
           " of ",
           totalSteps
         ] }),
-        onSkip && /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(Text4, { fontSize: 13, color: "$colorSubtitle", onPress: onSkip, cursor: "pointer", children: "Skip" })
+        onSkip && /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(Text4, { fontSize: 13, color: "#636e72", onPress: onSkip, cursor: "pointer", children: "Skip" })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(ProgressBar, { value: progressValue, color: "#1CB0F6" })
     ] }),
     /* @__PURE__ */ (0, import_jsx_runtime21.jsxs)(YStack, { gap: 8, children: [
       questionEmoji && /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(Text4, { fontSize: 40, children: questionEmoji }),
-      /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(Text4, { fontSize: 24, fontWeight: "900", color: "$color", children: questionTitle }),
-      questionSubtitle && /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(Text4, { fontSize: 15, color: "$colorSubtitle", lineHeight: 22, children: questionSubtitle })
+      /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(Text4, { fontSize: 24, fontWeight: "800", color: "#2d3436", children: questionTitle }),
+      questionSubtitle && /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(Text4, { fontSize: 15, color: "#636e72", lineHeight: 22, children: questionSubtitle })
     ] }),
-    /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(YStack, { gap: 10, flex: 1, children: choices.map((choice) => {
+    /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(YStack, { gap: 12, flex: 1, children: choices.map((choice) => {
       const isSelected = selectedChoiceIds.includes(choice.id);
       return /* @__PURE__ */ (0, import_jsx_runtime21.jsxs)(
         XStack,
         {
-          backgroundColor: isSelected ? "$brandAqua" : "$background",
-          borderRadius: 16,
+          backgroundColor: isSelected ? "$brandAqua" : "$neuSurface",
+          borderRadius: 18,
           padding: 16,
-          borderWidth: 2,
-          borderColor: isSelected ? "$brandAqua" : "$borderColor",
           onPress: () => onChoicePress(choice.id),
-          pressStyle: { opacity: 0.85 },
+          pressStyle: { scale: 0.985, ...NEU.pressed },
           cursor: "pointer",
           gap: 12,
           alignItems: "center",
+          ...isSelected ? NEU.glowAqua : NEU.card,
           children: [
             choice.emoji && /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(Text4, { fontSize: 24, children: choice.emoji }),
             /* @__PURE__ */ (0, import_jsx_runtime21.jsxs)(YStack, { flex: 1, gap: 2, children: [
-              /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(Text4, { fontSize: 15, fontWeight: "700", color: isSelected ? "white" : "$color", children: choice.label }),
-              choice.description && /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(Text4, { fontSize: 12, color: isSelected ? "rgba(255,255,255,0.8)" : "$colorSubtitle", children: choice.description })
+              /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(Text4, { fontSize: 15, fontWeight: "600", color: isSelected ? "white" : "#2d3436", children: choice.label }),
+              choice.description && /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(Text4, { fontSize: 12, color: isSelected ? "rgba(255,255,255,0.8)" : "#636e72", children: choice.description })
             ] })
           ]
         },
@@ -24056,6 +24177,90 @@ function OnboardingScreen({
   ] });
 }
 __name(OnboardingScreen, "OnboardingScreen");
+
+// ../../packages/ui/src/screens/ShopScreen.tsx
+var import_jsx_runtime22 = require("react/jsx-runtime");
+function ShopScreen({ yoyos, featured, onProductPress, paddingTop = 0 }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)(ScreenContainer, { scrollable: true, paddingTop, children: [
+    /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)(
+      YStack,
+      {
+        backgroundColor: "$brandAqua",
+        padding: 24,
+        paddingTop: 16,
+        paddingBottom: 28,
+        borderBottomLeftRadius: 24,
+        borderBottomRightRadius: 24,
+        ...NEU.glowAqua,
+        shadowRadius: 20,
+        shadowOpacity: 0.5,
+        children: [
+          /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(Text4, { fontSize: 28, fontWeight: "800", color: "white", letterSpacing: -0.5, children: "Shop" }),
+          /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(Text4, { fontSize: 15, color: "rgba(255,255,255,0.85)", marginTop: 4, children: "Gear up for your yo-yo journey" })
+        ]
+      }
+    ),
+    /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)(YStack, { padding: 20, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(SectionHeader, { title: "Yo-Yos" }),
+      yoyos.map((product) => /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)(
+        XStack,
+        {
+          backgroundColor: "$neuSurface",
+          borderRadius: 16,
+          padding: 16,
+          marginBottom: 12,
+          alignItems: "center",
+          onPress: onProductPress ? () => onProductPress(product.id) : void 0,
+          pressStyle: { scale: 0.985, backgroundColor: "$neuSurfacePressed", ...NEU.pressed },
+          cursor: "pointer",
+          ...NEU.card,
+          children: [
+            /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(Text4, { fontSize: 28, marginRight: 12, children: product.emoji ?? "\u{1FA80}" }),
+            /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)(YStack, { flex: 1, children: [
+              /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(Text4, { fontSize: 15, fontWeight: "600", color: "#2d3436", children: product.name }),
+              /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(Text4, { fontSize: 13, color: "#636e72", marginTop: 2, children: product.brand })
+            ] }),
+            /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)(Text4, { fontSize: 16, fontWeight: "700", color: "$brandAqua", children: [
+              "$",
+              product.price.toFixed(2)
+            ] })
+          ]
+        },
+        product.id
+      ))
+    ] }),
+    featured.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)(YStack, { padding: 20, paddingTop: 0, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(SectionHeader, { title: "Featured Items" }),
+      featured.map((product) => /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)(
+        XStack,
+        {
+          backgroundColor: "$neuSurface",
+          borderRadius: 16,
+          padding: 16,
+          marginBottom: 12,
+          alignItems: "center",
+          onPress: onProductPress ? () => onProductPress(product.id) : void 0,
+          pressStyle: { scale: 0.985, backgroundColor: "$neuSurfacePressed", ...NEU.pressed },
+          cursor: "pointer",
+          ...NEU.card,
+          children: [
+            /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)(YStack, { flex: 1, children: [
+              /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(Text4, { fontSize: 15, fontWeight: "600", color: "#2d3436", children: product.name }),
+              /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(Text4, { fontSize: 13, color: "#636e72", marginTop: 2, children: product.brand })
+            ] }),
+            /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)(Text4, { fontSize: 16, fontWeight: "700", color: "$brandAqua", children: [
+              "$",
+              product.price.toFixed(2)
+            ] })
+          ]
+        },
+        product.id
+      ))
+    ] }),
+    /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(YStack, { height: 100 })
+  ] });
+}
+__name(ShopScreen, "ShopScreen");
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
   AvatarDisplay,
@@ -24066,6 +24271,7 @@ __name(OnboardingScreen, "OnboardingScreen");
   FilterChip,
   HomeScreen,
   LearnScreen,
+  NEU,
   OnboardingScreen,
   PathCard,
   ProfileScreen,
@@ -24073,6 +24279,7 @@ __name(OnboardingScreen, "OnboardingScreen");
   ScreenContainer,
   SearchInput,
   SectionHeader,
+  ShopScreen,
   StatsBar,
   Text,
   TrickCard,
