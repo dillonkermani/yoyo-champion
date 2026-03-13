@@ -71,6 +71,26 @@ export type {
   SkillLevel,
 } from './mock-products';
 
+// Videos Data
+export {
+  mockVideos,
+  getVideoById,
+  getVideosByUserId,
+  getVideosByTrickId,
+  getApprovedVideos,
+  getVideosByTag,
+  getTopVideos,
+  getRecentVideos,
+} from './mock-videos';
+
+// News Data
+export {
+  mockNews,
+  getNewsById,
+  getNewsByType,
+  getRecentNews,
+} from './mock-news';
+
 // Categories Data
 export {
   categories,

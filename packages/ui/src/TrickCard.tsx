@@ -46,7 +46,7 @@ export function TrickCard({ name, difficulty, genre, completed, xpReward, onPres
         </XStack>
       </YStack>
       {xpReward !== undefined && (
-        <Text fontWeight="700" color="#FFC800" fontSize={13}>+{xpReward} XP</Text>
+        <Text fontWeight="700" color="$xpGoldDark" fontSize={13}>+{xpReward} XP</Text>
       )}
       {completed && <Text fontSize={16} marginLeft={8}>✓</Text>}
     </XStack>

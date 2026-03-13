@@ -7,13 +7,15 @@ export interface YoyoSlot {
   name: string;
   color?: string;
   owned: boolean;
+  isWishlisted?: boolean;
 }
 
 export interface YoyoCaseProps {
   yoyos: YoyoSlot[];
+  onToggleWishlist?: (id: string) => void;
 }
 
-export function YoyoCase({ yoyos }: YoyoCaseProps) {
+export function YoyoCase({ yoyos, onToggleWishlist }: YoyoCaseProps) {
   return (
     <XStack flexWrap="wrap" gap={10} paddingHorizontal={4}>
       {yoyos.map((yoyo) => (
@@ -29,6 +31,7 @@ export function YoyoCase({ yoyos }: YoyoCaseProps) {
           animation="quick"
           pressStyle={{ scaleY: 0.97, scaleX: 1.005, opacity: 0.92, ...NEU.pressed }}
           cursor="pointer"
+          position="relative"
           {...(yoyo.owned
             ? { shadowColor: yoyo.color ?? '#1CB0F6', shadowOffset: { width: 0, height: 2 }, shadowRadius: 10, shadowOpacity: 0.3, elevation: 3 }
             : NEU.inset
@@ -43,6 +46,23 @@ export function YoyoCase({ yoyos }: YoyoCaseProps) {
           >
             {yoyo.name}
           </Text>
+
+          {/* Wishlist heart overlay */}
+          {yoyo.isWishlisted && (
+            <YStack
+              position="absolute"
+              top={4}
+              right={4}
+              onPress={onToggleWishlist ? (e: any) => {
+                e?.stopPropagation?.();
+                onToggleWishlist(yoyo.id);
+              } : undefined}
+              hitSlop={8}
+              cursor="pointer"
+            >
+              <Text fontSize={14}>❤️</Text>
+            </YStack>
+          )}
         </YStack>
       ))}
     </XStack>

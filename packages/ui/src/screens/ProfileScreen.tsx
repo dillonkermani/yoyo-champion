@@ -27,6 +27,12 @@ export interface ProfileStat {
   value: string;
 }
 
+export interface WishlistItem {
+  id: string;
+  name: string;
+  price: number;
+}
+
 export interface ProfileScreenProps {
   displayName: string;
   handle?: string;
@@ -35,6 +41,8 @@ export interface ProfileScreenProps {
   stats: ProfileStat[];
   badges: ProfileBadge[];
   yoyos: ProfileYoyo[];
+  wishlistItems?: WishlistItem[];
+  onRemoveFromWishlist?: (id: string) => void;
   onEditProfile?: () => void;
   onLogout?: () => void;
   paddingTop?: number;
@@ -48,6 +56,8 @@ export function ProfileScreen({
   stats,
   badges,
   yoyos,
+  wishlistItems,
+  onRemoveFromWishlist,
   onEditProfile,
   onLogout,
   paddingTop = 0,
@@ -125,6 +135,39 @@ export function ProfileScreen({
               owned: true,
             }))}
           />
+        </YStack>
+      )}
+
+      {/* Wishlist */}
+      {wishlistItems && wishlistItems.length > 0 && (
+        <YStack padding={20} paddingTop={0} gap={12}>
+          <Text fontSize={18} fontWeight="700" letterSpacing={-0.3} color="#2d3436">Wishlist</Text>
+          {wishlistItems.map((item) => (
+            <XStack
+              key={item.id}
+              backgroundColor="$neuSurface"
+              borderRadius={16}
+              padding={14}
+              alignItems="center"
+              {...NEU.card}
+            >
+              <Text fontSize={18} marginRight={10}>❤️</Text>
+              <YStack flex={1}>
+                <Text fontSize={14} fontWeight="600" color="#2d3436">{item.name}</Text>
+                <Text fontSize={13} color="$brandAqua" marginTop={2}>${item.price.toFixed(2)}</Text>
+              </YStack>
+              {onRemoveFromWishlist && (
+                <XStack
+                  onPress={() => onRemoveFromWishlist(item.id)}
+                  padding={8}
+                  cursor="pointer"
+                  hitSlop={8}
+                >
+                  <Text fontSize={16} color="#636e72">✕</Text>
+                </XStack>
+              )}
+            </XStack>
+          ))}
         </YStack>
       )}
 

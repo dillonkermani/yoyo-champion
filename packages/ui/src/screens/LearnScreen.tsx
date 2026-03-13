@@ -5,6 +5,7 @@ import { SearchInput } from '../primitives/SearchInput';
 import { FilterChip } from '../primitives/FilterChip';
 import { ScreenContainer } from '../primitives/ScreenContainer';
 import { Text } from '../Text';
+import { NEU } from '../tamagui.config';
 
 export interface LearnTrick {
   id: string;
@@ -21,6 +22,9 @@ export interface LearnScreenProps {
   activeFilter: string;
   onFilterChange: (filter: string) => void;
   onTrickPress?: (id: string) => void;
+  onBack?: () => void;
+  categoryId?: string;
+  categoryName?: string;
   paddingTop?: number;
 }
 
@@ -33,12 +37,37 @@ export function LearnScreen({
   activeFilter,
   onFilterChange,
   onTrickPress,
+  onBack,
+  categoryName,
   paddingTop = 0,
 }: LearnScreenProps) {
+  const title = categoryName ?? 'Trick Library';
+
   return (
     <ScreenContainer scrollable paddingTop={paddingTop}>
       <YStack padding={20} gap={12}>
-        <Text fontSize={22} fontWeight="800" letterSpacing={-0.5} color="#2d3436">Trick Library</Text>
+        {onBack ? (
+          <XStack alignItems="center" gap={10}>
+            <XStack
+              onPress={onBack}
+              backgroundColor="$neuSurface"
+              borderRadius={12}
+              width={36}
+              height={36}
+              alignItems="center"
+              justifyContent="center"
+              cursor="pointer"
+              animation="quick"
+              pressStyle={{ opacity: 0.7, ...NEU.pressed }}
+              {...NEU.button}
+            >
+              <Text fontSize={18} color="#2d3436">{'<'}</Text>
+            </XStack>
+            <Text fontSize={22} fontWeight="800" letterSpacing={-0.5} color="#2d3436">{title}</Text>
+          </XStack>
+        ) : (
+          <Text fontSize={22} fontWeight="800" letterSpacing={-0.5} color="#2d3436">{title}</Text>
+        )}
         <SearchInput value={searchQuery} onChangeText={onSearchChange} placeholder="Search tricks..." />
         <XStack gap={8} flexWrap="wrap">
           {FILTERS.map((filter) => (

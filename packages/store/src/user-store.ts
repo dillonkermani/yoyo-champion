@@ -10,6 +10,9 @@ export interface User {
   displayName: string;
   avatarUrl?: string;
   bio?: string;
+  handedness?: 'left' | 'right';
+  wishlist: string[];
+  introVideoWatched: boolean;
   createdAt: string;
   updatedAt: string;
 }
@@ -27,6 +30,10 @@ export interface UserActions {
   logout: () => void;
   updateProfile: (updates: Partial<Pick<User, 'displayName' | 'bio' | 'username'>>) => void;
   updateAvatar: (avatarUrl: string) => void;
+  setHandedness: (handedness: 'left' | 'right') => void;
+  toggleWishlistItem: (productId: string) => void;
+  isInWishlist: (productId: string) => boolean;
+  markIntroVideoWatched: () => void;
   setLoading: (isLoading: boolean) => void;
 }
 
@@ -64,6 +71,8 @@ export const useUserStore = create<UserStore>()(
             email,
             username,
             displayName: username,
+            wishlist: [],
+            introVideoWatched: false,
             createdAt: new Date().toISOString(),
             updatedAt: new Date().toISOString(),
           };
@@ -86,6 +95,8 @@ export const useUserStore = create<UserStore>()(
             email,
             username: email.split('@')[0] ?? 'user',
             displayName: name,
+            wishlist: [],
+            introVideoWatched: false,
             createdAt: new Date().toISOString(),
             updatedAt: new Date().toISOString(),
           };
@@ -112,6 +123,33 @@ export const useUserStore = create<UserStore>()(
         const currentUser = get().user;
         if (!currentUser) return;
         set({ user: { ...currentUser, avatarUrl, updatedAt: new Date().toISOString() } });
+      },
+
+      setHandedness: (handedness: 'left' | 'right') => {
+        const currentUser = get().user;
+        if (!currentUser) return;
+        set({ user: { ...currentUser, handedness, updatedAt: new Date().toISOString() } });
+      },
+
+      toggleWishlistItem: (productId: string) => {
+        const currentUser = get().user;
+        if (!currentUser) return;
+        const wishlist = currentUser.wishlist ?? [];
+        const newWishlist = wishlist.includes(productId)
+          ? wishlist.filter((id) => id !== productId)
+          : [...wishlist, productId];
+        set({ user: { ...currentUser, wishlist: newWishlist, updatedAt: new Date().toISOString() } });
+      },
+
+      isInWishlist: (productId: string) => {
+        const currentUser = get().user;
+        return (currentUser?.wishlist ?? []).includes(productId);
+      },
+
+      markIntroVideoWatched: () => {
+        const currentUser = get().user;
+        if (!currentUser) return;
+        set({ user: { ...currentUser, introVideoWatched: true, updatedAt: new Date().toISOString() } });
       },
 
       setLoading: (isLoading: boolean) => {

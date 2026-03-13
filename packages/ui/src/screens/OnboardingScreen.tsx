@@ -24,6 +24,7 @@ export interface OnboardingScreenProps {
   onChoicePress: (id: string) => void;
   onNext?: () => void;
   onSkip?: () => void;
+  paddingTop?: number;
 }
 
 export function OnboardingScreen({
@@ -38,11 +39,12 @@ export function OnboardingScreen({
   onChoicePress,
   onNext,
   onSkip,
+  paddingTop = 0,
 }: OnboardingScreenProps) {
   const progressValue = ((stepIndex + 1) / totalSteps) * 100;
 
   return (
-    <YStack flex={1} backgroundColor="$neuSurface" padding={28} gap={28}>
+    <YStack flex={1} backgroundColor="$neuSurface" padding={28} paddingTop={paddingTop + 28} gap={28}>
       {/* Progress */}
       <YStack gap={6}>
         <XStack justifyContent="space-between">
@@ -99,7 +101,7 @@ export function OnboardingScreen({
           onPress={onNext}
           disabled={selectedChoiceIds.length === 0}
         >
-          {stepIndex === totalSteps - 1 ? "Get Started" : "Next"}
+          {stepIndex === totalSteps - 1 ? "Create your account to start your journey" : "Next"}
         </Button>
       )}
     </YStack>

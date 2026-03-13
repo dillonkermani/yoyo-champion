@@ -12,7 +12,7 @@ export type Goal =
 export type PreferredStyle = '1A' | '2A' | '3A' | '4A' | '5A' | 'responsive';
 
 export type OnboardingStep =
-  | 'welcome' | 'skill_level' | 'goals' | 'preferred_styles' | 'recommended_path' | 'complete';
+  | 'welcome' | 'skill_level' | 'yoyo_experience' | 'goals' | 'favorite_yoyo' | 'preferred_styles' | 'handedness' | 'complete';
 
 export interface OnboardingState {
   currentStep: OnboardingStep;
@@ -52,7 +52,7 @@ export interface OnboardingActions {
 
 export type OnboardingStore = OnboardingState & OnboardingActions;
 
-const STEP_ORDER: OnboardingStep[] = ['welcome', 'skill_level', 'goals', 'preferred_styles', 'recommended_path', 'complete'];
+const STEP_ORDER: OnboardingStep[] = ['welcome', 'skill_level', 'yoyo_experience', 'goals', 'favorite_yoyo', 'preferred_styles', 'handedness', 'complete'];
 
 export const GOAL_METADATA: Record<Goal, { label: string; description: string; icon: string }> = {
   learn_basics: { label: 'Learn the Basics', description: 'Start from scratch and build a solid foundation', icon: 'book-open' },
@@ -169,9 +169,11 @@ export const selectCanProceed = (state: OnboardingStore): boolean => {
   switch (state.currentStep) {
     case 'welcome': return true;
     case 'skill_level': return state.skillLevel !== null;
+    case 'yoyo_experience': return state.favoriteYoyo !== null;
     case 'goals': return state.goals.length > 0;
+    case 'favorite_yoyo': return state.favoriteYoyo !== null;
     case 'preferred_styles': return state.preferredStyles.length > 0;
-    case 'recommended_path': return true;
+    case 'handedness': return state.handedness !== null && state.handedness !== undefined;
     case 'complete': return true;
     default: return false;
   }
@@ -180,9 +182,11 @@ export const selectCanProceedForStep = (step: OnboardingStep) => (state: Onboard
   switch (step) {
     case 'welcome': return true;
     case 'skill_level': return state.skillLevel !== null;
+    case 'yoyo_experience': return state.favoriteYoyo !== null;
     case 'goals': return state.goals.length > 0;
+    case 'favorite_yoyo': return state.favoriteYoyo !== null;
     case 'preferred_styles': return state.preferredStyles.length > 0;
-    case 'recommended_path': return true;
+    case 'handedness': return state.handedness !== null && state.handedness !== undefined;
     case 'complete': return true;
     default: return false;
   }

@@ -3,10 +3,10 @@ import { YStack, XStack } from 'tamagui';
 import { Text } from '../Text';
 import { TrickCard } from '../TrickCard';
 import { StatsBar } from '../StatsBar';
-import { ProgressBar } from '../primitives/ProgressBar';
 import { SectionHeader } from '../primitives/SectionHeader';
 import { PathCard } from '../cards/PathCard';
 import { ScreenContainer } from '../primitives/ScreenContainer';
+import { UploadsGrid, type UploadThumbnail } from '../UploadsGrid';
 import { NEU } from '../tamagui.config';
 
 export interface FeaturedTrick {
@@ -27,29 +27,35 @@ export interface ActivePath {
 
 export interface HomeScreenProps {
   displayName: string;
-  xp: number;
-  level: number;
-  streak: number;
-  xpProgressPercent: number;
+  trickProgress: number;
+  uploadReputation: number;
+  trainerStatus: string;
+  collectorLevel: string;
+  followersCount: number;
+  uploads: UploadThumbnail[];
   featuredTricks: FeaturedTrick[];
   activePaths: ActivePath[];
   onTrickPress?: (id: string) => void;
   onPathPress?: (id: string) => void;
   onSeeAllTricks?: () => void;
+  onUploadPress?: (id: string) => void;
   paddingTop?: number;
 }
 
 export function HomeScreen({
   displayName,
-  xp,
-  level,
-  streak,
-  xpProgressPercent,
+  trickProgress,
+  uploadReputation,
+  trainerStatus,
+  collectorLevel,
+  followersCount,
+  uploads,
   featuredTricks,
   activePaths,
   onTrickPress,
   onPathPress,
   onSeeAllTricks,
+  onUploadPress,
   paddingTop = 0,
 }: HomeScreenProps) {
   return (
@@ -58,22 +64,20 @@ export function HomeScreen({
       <YStack backgroundColor="$neuSurfaceLight" padding={20} paddingTop={16} {...NEU.card}>
         <Text fontSize={22} fontWeight="800" color="$brandAqua" marginBottom={4}>YoYo Champion</Text>
         <Text fontSize={15} color="#636e72">Welcome back, {displayName}</Text>
+        <XStack marginTop={8} alignItems="center" gap={6}>
+          <Text fontSize={13} fontWeight="600" color="$brandPurple">{followersCount}</Text>
+          <Text fontSize={12} color="#636e72">followers</Text>
+        </XStack>
       </YStack>
 
-      {/* Stats */}
+      {/* Stats — 4-stat layout */}
       <YStack padding={20}>
         <StatsBar stats={[
-          { label: 'Level', value: String(level) },
-          { label: 'XP', value: String(xp) },
-          { label: 'Streak', value: `${streak}d` },
+          { label: 'Trick Progress', value: String(trickProgress), color: '#1CB0F6' },
+          { label: 'Upload Rep', value: String(uploadReputation), color: '#CE82FF' },
+          { label: 'Trainer', value: formatTrainerStatus(trainerStatus), color: '#FF9600' },
+          { label: 'Collector', value: collectorLevel, color: '#FFC800' },
         ]} />
-        <YStack marginTop={12} gap={4}>
-          <XStack justifyContent="space-between">
-            <Text fontSize={12} color="#636e72">XP Progress to next level</Text>
-            <Text fontSize={12} fontWeight="700" color="$brandAqua">{Math.round(xpProgressPercent)}%</Text>
-          </XStack>
-          <ProgressBar value={xpProgressPercent} color="#1CB0F6" />
-        </YStack>
       </YStack>
 
       {/* Featured Tricks */}
@@ -108,7 +112,22 @@ export function HomeScreen({
         </YStack>
       )}
 
+      {/* All Uploads */}
+      <YStack padding={20} paddingTop={0}>
+        <SectionHeader title="All Uploads" />
+        <UploadsGrid uploads={uploads} onUploadPress={onUploadPress} />
+      </YStack>
+
       <YStack height={100} />
     </ScreenContainer>
   );
+}
+
+function formatTrainerStatus(status: string): string {
+  switch (status) {
+    case 'master_trainer': return 'Master';
+    case 'intermediate_trainer': return 'Inter.';
+    case 'beginner_trainer': return 'Beginner';
+    default: return 'None';
+  }
 }

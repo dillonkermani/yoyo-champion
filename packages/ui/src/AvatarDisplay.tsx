@@ -50,7 +50,7 @@ export function AvatarDisplay({
         borderRadius={20}
         {...NEU.button}
       >
-        <Text fontSize={12} fontWeight="600" color="#FFC800">
+        <Text fontSize={12} fontWeight="600" color="$xpGoldDark">
           LV.{level}
         </Text>
       </YStack>

@@ -59,6 +59,9 @@ export {
   type GamificationState,
   type GamificationActions,
   type GamificationStore,
+  type ReputationBadgeId,
+  type PerkId,
+  PERK_UNLOCK_LEVELS,
 } from './gamification-store';
 
 // UI Store
@@ -123,9 +126,41 @@ export {
   type OnboardingStore,
 } from './onboarding-store';
 
+// Social Store
+export {
+  useSocialStore,
+  hydrateSocialStore,
+  selectFollowedUserIds,
+  selectLikedVideoIds,
+  selectUploadReputation,
+  selectTrainerStatus,
+  selectApprovedVideoCount,
+  selectFollowerCount,
+  type SocialState,
+  type SocialActions,
+  type SocialStore,
+} from './social-store';
+
+// Video Store
+export {
+  useVideoStore,
+  hydrateVideoStore,
+  selectFeedTab,
+  selectMyUploads,
+  selectIsFeedLoading,
+  selectApprovedUploads,
+  selectPendingUploads,
+  selectUploadCount,
+  type FeedTab,
+  type VideoUpload,
+  type VideoState,
+  type VideoActions,
+  type VideoStore,
+} from './video-store';
+
 // Onboarding flow (shared config + hook)
 export { useOnboardingFlow, ONBOARDING_STEPS } from './onboarding-flow';
-export type { OnboardingStepConfig } from './onboarding-flow';
+export type { OnboardingStepConfig, OnboardingStepId } from './onboarding-flow';
 
 // Storage abstraction
 export { setStorage, getStorage } from './storage';
@@ -136,6 +171,8 @@ import { hydrateProgressStore as _hydrateProgressStore } from './progress-store'
 import { hydrateGamificationStore as _hydrateGamificationStore } from './gamification-store';
 import { hydrateUIStore as _hydrateUIStore } from './ui-store';
 import { hydrateOnboardingStore as _hydrateOnboardingStore } from './onboarding-store';
+import { hydrateSocialStore as _hydrateSocialStore } from './social-store';
+import { hydrateVideoStore as _hydrateVideoStore } from './video-store';
 
 export const hydrateAllStores = () => {
   _hydrateUserStore();
@@ -143,4 +180,6 @@ export const hydrateAllStores = () => {
   _hydrateGamificationStore();
   _hydrateUIStore();
   _hydrateOnboardingStore();
+  _hydrateSocialStore();
+  _hydrateVideoStore();
 };

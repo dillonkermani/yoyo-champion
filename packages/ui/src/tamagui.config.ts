@@ -45,6 +45,7 @@ export const tamaguiConfig = createTamagui({
       brandOrangeLight: '#FFB84D',
       brandOrangeDark: '#E68600',
       xpGold: '#FFC800',
+      xpGoldDark: '#A07800',
       xpGoldLight: '#FFD700',
       streakRed: '#FF4B4B',
       // Neumorphic surface system

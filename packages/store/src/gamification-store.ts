@@ -44,6 +44,7 @@ export interface GamificationActions {
   getXpForLevel: (level: number) => number;
   getXpProgress: () => { current: number; required: number; percentage: number };
   hasBadge: (badgeId: string) => boolean;
+  isPerkUnlocked: (perkId: PerkId) => boolean;
   reset: () => void;
 }
 
@@ -54,7 +55,21 @@ export interface AchievementContext {
   pathsCompleted?: number;
   totalWatchTime?: number;
   totalXp?: number;
+  approvedUploads?: number;
+  trainerUploads?: number;
 }
+
+// Reputation badge IDs
+export type ReputationBadgeId = 'upload_1' | 'upload_10' | 'upload_25' | 'trainer_first' | 'trainer_10';
+
+// Perk unlock IDs
+export type PerkId = 'private_videos' | 'coupon_codes' | 'early_access';
+
+export const PERK_UNLOCK_LEVELS: Record<PerkId, number> = {
+  private_videos: 5,
+  coupon_codes: 10,
+  early_access: 15,
+};
 
 export type GamificationStore = GamificationState & GamificationActions;
 
@@ -84,6 +99,11 @@ const BADGE_DEFINITIONS = {
   xp_1000: { id: 'xp_1000', name: 'Rising Star', description: 'Earn 1,000 XP', icon: 'zap', category: 'milestone' as BadgeCategory, rarity: 'common' as const, condition: (ctx: AchievementContext) => (ctx.totalXp ?? 0) >= 1000 },
   xp_10000: { id: 'xp_10000', name: 'XP Hunter', description: 'Earn 10,000 XP', icon: 'zap', category: 'milestone' as BadgeCategory, rarity: 'rare' as const, condition: (ctx: AchievementContext) => (ctx.totalXp ?? 0) >= 10000 },
   xp_50000: { id: 'xp_50000', name: 'XP Legend', description: 'Earn 50,000 XP', icon: 'crown', category: 'milestone' as BadgeCategory, rarity: 'legendary' as const, condition: (ctx: AchievementContext) => (ctx.totalXp ?? 0) >= 50000 },
+  upload_1: { id: 'upload_1', name: 'First Upload', description: 'Upload your first video', icon: 'video', category: 'social' as BadgeCategory, rarity: 'common' as const, condition: (ctx: AchievementContext) => (ctx.approvedUploads ?? 0) >= 1 },
+  upload_10: { id: 'upload_10', name: 'Content Creator', description: 'Upload 10 approved videos', icon: 'video', category: 'social' as BadgeCategory, rarity: 'uncommon' as const, condition: (ctx: AchievementContext) => (ctx.approvedUploads ?? 0) >= 10 },
+  upload_25: { id: 'upload_25', name: 'Video Star', description: 'Upload 25 approved videos', icon: 'video', category: 'social' as BadgeCategory, rarity: 'rare' as const, condition: (ctx: AchievementContext) => (ctx.approvedUploads ?? 0) >= 25 },
+  trainer_first: { id: 'trainer_first', name: 'First Tutorial', description: 'Upload your first tutorial video', icon: 'school', category: 'social' as BadgeCategory, rarity: 'uncommon' as const, condition: (ctx: AchievementContext) => (ctx.trainerUploads ?? 0) >= 1 },
+  trainer_10: { id: 'trainer_10', name: 'Master Trainer', description: 'Upload 10 tutorial videos', icon: 'school', category: 'social' as BadgeCategory, rarity: 'rare' as const, condition: (ctx: AchievementContext) => (ctx.trainerUploads ?? 0) >= 10 },
 } as const;
 
 const BADGE_XP_REWARDS: Record<Badge['rarity'], number> = {
@@ -165,6 +185,10 @@ export const useGamificationStore = create<GamificationStore>()(
       },
 
       hasBadge: (badgeId: string) => get().badges.some((b) => b.id === badgeId),
+
+      isPerkUnlocked: (perkId: PerkId) => {
+        return get().level >= PERK_UNLOCK_LEVELS[perkId];
+      },
 
       reset: () => { set(initialState); },
     }),

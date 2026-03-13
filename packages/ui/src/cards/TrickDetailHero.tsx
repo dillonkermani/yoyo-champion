@@ -35,7 +35,7 @@ export function TrickDetailHero({ name, difficulty, genre, style, xpReward }: Tr
         shadowColor="#FFC800"
         shadowOpacity={0.3}
       >
-        <Text fontSize={15} fontWeight="700" color="#FFC800">+{xpReward} XP</Text>
+        <Text fontSize={15} fontWeight="700" color="$xpGoldDark">+{xpReward} XP</Text>
       </XStack>
     </YStack>
   );

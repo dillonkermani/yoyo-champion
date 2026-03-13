@@ -129,6 +129,45 @@ export interface Challenge {
   requirements?: string[];
 }
 
+// User-uploaded video
+export interface UserVideo {
+  id: string;
+  userId: string;
+  trickId: string;
+  videoUrl: string;
+  thumbnailUrl: string;
+  likes: number;
+  comments: number;
+  tags: string[];
+  createdAt: Date;
+  isApproved: boolean;
+  usesYoyoChampionYoyo: boolean;
+}
+
+// News/announcement item
+export interface NewsItem {
+  id: string;
+  title: string;
+  body: string;
+  imageUrl: string;
+  type: 'update' | 'announcement' | 'new_video';
+  createdAt: Date;
+}
+
+// Extended user fields (social/profile)
+export type Handedness = 'left' | 'right';
+export type TrainerStatus = 'none' | 'beginner_trainer' | 'intermediate_trainer' | 'master_trainer';
+export type CollectorLevel = 'starter' | 'collector' | 'enthusiast' | 'connoisseur' | 'legend';
+
+export interface UserSocialProfile {
+  followersCount: number;
+  followingCount: number;
+  uploadReputation: number;
+  trainerStatus: TrainerStatus;
+  collectorLevel: CollectorLevel;
+  handedness: Handedness;
+}
+
 // Utility types for API responses
 export interface PaginatedResponse<T> {
   data: T[];

@@ -23,6 +23,7 @@ export interface TrickDetailScreenProps {
   description: string;
   steps: TrickStep[];
   completed?: boolean;
+  mirrorVideo?: boolean;
   onStartPracticing?: () => void;
   onMarkComplete?: () => void;
   paddingTop?: number;
@@ -38,6 +39,7 @@ export function TrickDetailScreen({
   description,
   steps,
   completed = false,
+  mirrorVideo = false,
   onStartPracticing,
   onMarkComplete,
   paddingTop = 0,
@@ -47,6 +49,19 @@ export function TrickDetailScreen({
       <TrickDetailHero name={name} difficulty={difficulty} genre={genre} style={style} xpReward={xpReward} />
 
       <YStack padding={24} gap={18}>
+        {mirrorVideo && (
+          <XStack
+            backgroundColor="rgba(206, 130, 255, 0.12)"
+            borderRadius={100}
+            paddingHorizontal={14}
+            paddingVertical={6}
+            alignSelf="flex-start"
+            gap={6}
+            alignItems="center"
+          >
+            <Text fontSize={13} fontWeight="700" color="$brandPurple">Left-hand view</Text>
+          </XStack>
+        )}
         <XStack gap={8} alignItems="center">
           <Text fontSize={13} color="#636e72">Est. {estimatedMinutes} min</Text>
           {completed && (

@@ -28,7 +28,7 @@ export function PathCard({ title, difficulty, progressPercent, totalXp, onPress 
     >
       <XStack justifyContent="space-between" alignItems="center" marginBottom={8}>
         <Text fontSize={15} fontWeight="600" color="#2d3436" flex={1} marginRight={8}>{title}</Text>
-        <Text fontSize={13} fontWeight="700" color="#FFC800">+{totalXp} XP</Text>
+        <Text fontSize={13} fontWeight="700" color="$xpGoldDark">+{totalXp} XP</Text>
       </XStack>
       <XStack alignItems="center" gap={8} marginBottom={10}>
         <DifficultyTag difficulty={difficulty} />

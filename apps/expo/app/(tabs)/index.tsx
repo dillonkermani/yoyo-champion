@@ -1,6 +1,6 @@
 import { HomeScreen } from '@yoyo/ui';
-import { useUserStore, useGamificationStore } from '@yoyo/store';
-import { selectXp, selectLevel, selectLevelProgress } from '@yoyo/store';
+import { useProgressStore, useSocialStore, useVideoStore } from '@yoyo/store';
+import { selectTotalTricksMastered, selectUploadReputation, selectTrainerStatus, selectFollowerCount, selectMyUploads } from '@yoyo/store';
 import { mockTricks, mockPaths } from '@yoyo/data';
 import { useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -8,11 +8,21 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 export default function HomeTab() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
-  const displayName = useUserStore((s) => s.user?.displayName ?? 'Champion');
-  const streak = useUserStore((s) => s.user?.currentStreak ?? 0);
-  const xp = useGamificationStore(selectXp);
-  const level = useGamificationStore(selectLevel);
-  const xpProgressPercent = useGamificationStore(selectLevelProgress);
+
+  // Progress store
+  const trickProgress = useProgressStore(selectTotalTricksMastered);
+
+  // Social store
+  const uploadReputation = useSocialStore(selectUploadReputation);
+  const trainerStatus = useSocialStore(selectTrainerStatus);
+  const followersCount = useSocialStore(selectFollowerCount);
+
+  // Video store
+  const myUploads = useVideoStore(selectMyUploads);
+  const uploads = myUploads.map((u) => ({
+    id: u.id,
+    thumbnailUrl: u.videoUri,
+  }));
 
   const featuredTricks = mockTricks.slice(0, 5).map((t) => ({
     id: t.id,
@@ -32,11 +42,13 @@ export default function HomeTab() {
 
   return (
     <HomeScreen
-      displayName={displayName}
-      xp={xp}
-      level={level}
-      streak={streak}
-      xpProgressPercent={xpProgressPercent}
+      displayName="Champion"
+      trickProgress={trickProgress}
+      uploadReputation={uploadReputation}
+      trainerStatus={trainerStatus}
+      collectorLevel="Collector"
+      followersCount={followersCount}
+      uploads={uploads}
       featuredTricks={featuredTricks}
       activePaths={activePaths}
       paddingTop={insets.top}

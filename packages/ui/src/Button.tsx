@@ -41,8 +41,8 @@ export const Button = styled(TamaguiButton, {
       },
       outline: {
         backgroundColor: '$neuSurface',
-        borderWidth: 1,
-        borderColor: '$neuHighlightSubtle',
+        borderWidth: 1.5,
+        borderColor: '$brandAqua',
         color: '$brandAqua',
         ...NEU.button,
         pressStyle: { backgroundColor: '$neuSurfacePressed', ...NEU.pressed },
@@ -54,8 +54,9 @@ export const Button = styled(TamaguiButton, {
         elevation: 0,
       },
       glass: {
-        backgroundColor: '$neuSurface',
-        borderWidth: 0,
+        backgroundColor: '$neuSurfaceLight',
+        borderWidth: 1,
+        borderColor: '#c5cad1',
         color: '#2d3436',
         ...NEU.button,
         pressStyle: { backgroundColor: '$neuSurfacePressed', ...NEU.pressed },

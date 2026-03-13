@@ -10,9 +10,12 @@ export interface AuthScreenProps {
   onToggleMode: () => void;
   isLoading?: boolean;
   error?: string | null;
+  paddingTop?: number;
+  /** When true, shows funnel-oriented copy (post-onboarding context). */
+  funnelMode?: boolean;
 }
 
-export function AuthScreen({ mode, onSubmit, onToggleMode, isLoading = false, error }: AuthScreenProps) {
+export function AuthScreen({ mode, onSubmit, onToggleMode, isLoading = false, error, paddingTop = 0, funnelMode = false }: AuthScreenProps) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -26,13 +29,19 @@ export function AuthScreen({ mode, onSubmit, onToggleMode, isLoading = false, er
     : email.length > 0 && password.length >= 6;
 
   return (
-    <YStack flex={1} backgroundColor="$neuSurface" padding={28} justifyContent="center" gap={28}>
+    <YStack flex={1} backgroundColor="$neuSurface" padding={28} paddingTop={paddingTop + 28} justifyContent="center" gap={28}>
       {/* Logo / Header */}
       <YStack alignItems="center" gap={8}>
-        <Text fontSize={48}>🪀</Text>
-        <Text fontSize={28} fontWeight="800" color="#2d3436" letterSpacing={-0.5}>YoYo Champion</Text>
+        {!funnelMode && <Text fontSize={48}>🪀</Text>}
+        <Text fontSize={28} fontWeight="800" color="#2d3436" letterSpacing={-0.5}>
+          {funnelMode ? "You're all set!" : 'YoYo Champion'}
+        </Text>
         <Text fontSize={15} color="#636e72">
-          {mode === 'login' ? 'Welcome back!' : 'Start your yo-yo journey'}
+          {funnelMode
+            ? 'Create your account to save your progress'
+            : mode === 'login'
+            ? 'Welcome back!'
+            : 'Start your yo-yo journey'}
         </Text>
       </YStack>
 
@@ -95,7 +104,9 @@ export function AuthScreen({ mode, onSubmit, onToggleMode, isLoading = false, er
       {/* Toggle */}
       <XStack justifyContent="center" gap={4}>
         <Text fontSize={14} color="#636e72">
-          {mode === 'login' ? "Don't have an account?" : 'Already have an account?'}
+          {funnelMode
+            ? (mode === 'login' ? 'New here? Create an account' : 'Already have an account?')
+            : (mode === 'login' ? "Don't have an account?" : 'Already have an account?')}
         </Text>
         <Text
           fontSize={14}

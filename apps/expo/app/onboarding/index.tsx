@@ -1,13 +1,16 @@
 import { OnboardingScreen } from '@yoyo/ui';
 import { useOnboardingFlow } from '@yoyo/store';
 import { useRouter } from 'expo-router';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export default function OnboardingIndex() {
   const router = useRouter();
-  const flow = useOnboardingFlow(() => router.replace('/(tabs)'));
+  const insets = useSafeAreaInsets();
+  const flow = useOnboardingFlow(() => router.replace('/auth'));
 
   return (
     <OnboardingScreen
+      paddingTop={insets.top}
       stepIndex={flow.stepIndex}
       totalSteps={flow.totalSteps}
       questionTitle={flow.config.questionTitle}
