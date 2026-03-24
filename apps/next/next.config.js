@@ -2,6 +2,7 @@
 const { withTamagui } = require('@tamagui/next-plugin');
 
 const nextConfig = {
+  output: 'export',
   reactStrictMode: true,
   transpilePackages: [
     "@yoyo/ui",
@@ -13,6 +14,7 @@ const nextConfig = {
     "@tamagui/config",
   ],
   images: {
+    unoptimized: true,
     remotePatterns: [
       { protocol: "https", hostname: "images.unsplash.com", port: "", pathname: "/**" },
       { protocol: "https", hostname: "avatars.githubusercontent.com", port: "", pathname: "/**" },
