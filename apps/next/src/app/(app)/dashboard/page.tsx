@@ -1,14 +1,14 @@
 "use client";
 import { HomeScreen } from '@yoyo/ui';
-import { useUserStore, useGamificationStore } from '@yoyo/store';
-import { selectXp, selectLevel, selectLevelProgress } from '@yoyo/store';
+import { useUserStore, useGamificationStore, useProgressStore } from '@yoyo/store';
+import { selectXp, selectLevel, selectLevelProgress, selectCurrentStreak } from '@yoyo/store';
 import { mockTricks, mockPaths } from '@yoyo/data';
 import { useRouter } from 'next/navigation';
 
 export default function DashboardPage() {
   const router = useRouter();
   const displayName = useUserStore((s) => s.user?.displayName ?? 'Champion');
-  const streak = useUserStore((s) => s.user?.currentStreak ?? 0);
+  const streak = useProgressStore(selectCurrentStreak);
   const xp = useGamificationStore(selectXp);
   const level = useGamificationStore(selectLevel);
   const xpProgressPercent = useGamificationStore(selectLevelProgress);

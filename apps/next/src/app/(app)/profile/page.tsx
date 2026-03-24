@@ -1,7 +1,7 @@
 "use client";
 import { ProfileScreen } from '@yoyo/ui';
-import { useUserStore, useGamificationStore } from '@yoyo/store';
-import { selectLevel, selectXp, selectBadges } from '@yoyo/store';
+import { useUserStore, useGamificationStore, useProgressStore } from '@yoyo/store';
+import { selectLevel, selectXp, selectBadges, selectCurrentStreak } from '@yoyo/store';
 import { getYoyos } from '@yoyo/data';
 import { useRouter } from 'next/navigation';
 
@@ -11,7 +11,7 @@ export default function ProfilePage() {
   const displayName = useUserStore((s) => s.user?.displayName ?? 'Champion');
   const level = useGamificationStore(selectLevel);
   const xp = useGamificationStore(selectXp);
-  const streak = useUserStore((s) => s.user?.currentStreak ?? 0);
+  const streak = useProgressStore(selectCurrentStreak);
   const storeBadges = useGamificationStore(selectBadges);
 
   const stats = [
