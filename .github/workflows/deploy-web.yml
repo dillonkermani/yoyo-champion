@@ -26,7 +26,7 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
-      - run: turbo run build --filter=@yoyo/next
+      - run: pnpm turbo run build --filter=@yoyo/next
         env:
           NEXT_PUBLIC_API_URL: ${{ vars.NEXT_PUBLIC_API_URL }}
           NEXT_PUBLIC_FIREBASE_API_KEY: ${{ vars.NEXT_PUBLIC_FIREBASE_API_KEY }}
