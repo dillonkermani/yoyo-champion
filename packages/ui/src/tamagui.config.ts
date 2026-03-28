@@ -26,6 +26,11 @@ export const NEU = {
   glowAqua: { shadowColor: '#1CB0F6', shadowOffset: { width: 0, height: 2 }, shadowRadius: 12, shadowOpacity: 0.35, elevation: 4 },
   glowPurple: { shadowColor: '#CE82FF', shadowOffset: { width: 0, height: 2 }, shadowRadius: 12, shadowOpacity: 0.35, elevation: 4 },
   glowGold: { shadowColor: '#FFC800', shadowOffset: { width: 0, height: 2 }, shadowRadius: 10, shadowOpacity: 0.4, elevation: 3 },
+  glowRed: { shadowColor: '#FF4B4B', shadowOffset: { width: 0, height: 2 }, shadowRadius: 12, shadowOpacity: 0.35, elevation: 4 },
+  glowRare: { shadowColor: '#3B82F6', shadowOffset: { width: 0, height: 2 }, shadowRadius: 12, shadowOpacity: 0.35, elevation: 4 },
+  glowEpic: { shadowColor: '#9333EA', shadowOffset: { width: 0, height: 2 }, shadowRadius: 12, shadowOpacity: 0.35, elevation: 4 },
+  glowLegendary: { shadowColor: '#FBBF24', shadowOffset: { width: 0, height: 4 }, shadowRadius: 16, shadowOpacity: 0.5, elevation: 6 },
+  glowGreen: { shadowColor: '#58CC02', shadowOffset: { width: 0, height: 2 }, shadowRadius: 10, shadowOpacity: 0.35, elevation: 3 },
 } as const;
 
 export const tamaguiConfig = createTamagui({
@@ -48,6 +53,13 @@ export const tamaguiConfig = createTamagui({
       xpGoldDark: '#A07800',
       xpGoldLight: '#FFD700',
       streakRed: '#FF4B4B',
+      successGreen: '#58CC02',
+      // Rarity colors
+      rarityCommon: '#6B7280',
+      rarityUncommon: '#1CB0F6',
+      rarityRare: '#3B82F6',
+      rarityEpic: '#9333EA',
+      rarityLegendary: '#FBBF24',
       // Neumorphic surface system
       neuSurface: '#e8ecf1',
       neuSurfaceLight: '#eef1f5',

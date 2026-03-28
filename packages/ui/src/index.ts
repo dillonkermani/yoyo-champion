@@ -60,3 +60,30 @@ export { UploadScreen } from './screens/UploadScreen';
 export type { UploadScreenProps } from './screens/UploadScreen';
 export { VideoComments } from './VideoComments';
 export type { VideoComment, VideoCommentsProps } from './VideoComments';
+
+// Primitives — new
+export { AnimatedTabPicker } from './primitives/AnimatedTabPicker';
+export type { TabItem, AnimatedTabPickerProps } from './primitives/AnimatedTabPicker';
+
+// Assets
+export { Logo } from './assets/Logo';
+export type { LogoProps } from './assets/Logo';
+export { Mascot, HappyMascot, ExcitedMascot, SadMascot, CelebratingMascot, ThinkingMascot, EncouragingMascot } from './assets/Mascot';
+export type { MascotMood, MascotProps } from './assets/Mascot';
+
+// Screens — new
+export { OnboardingWizard } from './screens/OnboardingWizard';
+export type { OnboardingWizardProps } from './screens/OnboardingWizard';
+
+// Gamification
+export { BadgeCard, MiniBadge } from './gamification/BadgeCard';
+export type { BadgeRarity, BadgeCategory, BadgeData, BadgeCardProps, MiniBadgeProps } from './gamification/BadgeCard';
+export { StreakDisplay, AnimatedFlame } from './gamification/StreakDisplay';
+export { XPDisplay, LevelBadge, XPProgressBar } from './gamification/XPDisplay';
+export {
+  ENCOURAGING_MESSAGES, getRandomMessage,
+  StreakFire, XPBadge, DailyGoal, AchievementBadge,
+  StatCard, BounceCard, StarRating, NewBadge, MasteredBadge,
+} from './gamification/DuolingoComponents';
+export { SkillTree, SkillNode, CheckpointNode, SectionHeader as SkillTreeSectionHeader } from './gamification/SkillTree';
+export type { NodeState, SkillTreeCategory, SkillTreeSection, TrickInfo, SkillTreeProps, SkillNodeProps, SectionHeaderProps as SkillTreeSectionHeaderProps, CheckpointNodeProps } from './gamification/SkillTree';

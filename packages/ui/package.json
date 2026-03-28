@@ -13,7 +13,10 @@
   "peerDependencies": {
     "@tamagui/config": "^1.110.2",
     "@tamagui/core": "^1.110.2",
-    "tamagui": "^1.110.2"
+    "@tamagui/animate-presence": "^1.110.2",
+    "@tamagui/lucide-icons": "^1.110.2",
+    "tamagui": "^1.110.2",
+    "react-native-svg": ">=13.0.0"
   },
   "devDependencies": {
     "@tamagui/config": "^1.110.2",
