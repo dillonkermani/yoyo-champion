@@ -53,7 +53,7 @@ export function HomeScreen({
   return (
     <ScrollView
       flex={1}
-      backgroundColor="#FFFFFF"
+      backgroundColor="#F7F8FA"
       showsVerticalScrollIndicator={false}
       contentContainerStyle={{ paddingBottom: 60 }}
     >

@@ -12,7 +12,7 @@ export interface IntroVideoProps {
 export function IntroVideo({ uri, posterUri }: IntroVideoProps) {
   return (
     <YStack paddingHorizontal={20} gap={10}>
-      <Text fontSize={13} fontWeight="600" color="#636e72" letterSpacing={0.5} textTransform="uppercase">
+      <Text fontSize={13} fontWeight="600" color="#536471" letterSpacing={0.5} textTransform="uppercase">
         Getting Started
       </Text>
       <YStack

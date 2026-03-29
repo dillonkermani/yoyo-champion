@@ -14,10 +14,10 @@ export interface AuthScreenProps {
 
 const T = {
   bg: '#FFFFFF',
-  text: '#1A1A2E',
-  textSub: '#6B7280',
-  muted: '#9CA3AF',
-  border: '#E8ECF1',
+  text: '#0F1419',
+  textSub: '#536471',
+  muted: '#8899A6',
+  border: '#E1E8ED',
   accent: '#1CB0F6',
   accentDark: '#0095DB',
   accentLight: '#E8F7FE',

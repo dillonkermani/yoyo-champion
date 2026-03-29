@@ -66,7 +66,7 @@ export function ProfileScreen({
     <ScreenContainer scrollable paddingTop={paddingTop}>
       {/* Profile Header — raised neumorphic panel */}
       <YStack
-        backgroundColor="$neuSurfaceLight"
+        backgroundColor="#F7F8FA"
         padding={20}
         alignItems="center"
         gap={12}
@@ -76,10 +76,10 @@ export function ProfileScreen({
       >
         <AvatarDisplay displayName={displayName} color={avatarColor} size={80} />
         <YStack alignItems="center" gap={2}>
-          <Text fontSize={20} fontWeight="800" color="#2d3436">{displayName}</Text>
-          {handle && <Text fontSize={14} color="#636e72">@{handle}</Text>}
+          <Text fontSize={20} fontWeight="800" color="#0F1419">{displayName}</Text>
+          {handle && <Text fontSize={14} color="#536471">@{handle}</Text>}
           <XStack
-            backgroundColor="$neuSurface"
+            backgroundColor="white"
             borderRadius={100}
             paddingHorizontal={12}
             paddingVertical={4}
@@ -102,12 +102,12 @@ export function ProfileScreen({
       {/* Badges */}
       {badges.length > 0 && (
         <YStack padding={20} paddingTop={0} gap={12}>
-          <Text fontSize={18} fontWeight="700" letterSpacing={-0.3} color="#2d3436">Badges</Text>
+          <Text fontSize={18} fontWeight="700" letterSpacing={-0.3} color="#0F1419">Badges</Text>
           <XStack flexWrap="wrap" gap={10}>
             {badges.map((badge) => (
               <YStack
                 key={badge.id}
-                backgroundColor="$neuSurface"
+                backgroundColor="white"
                 borderRadius={16}
                 padding={12}
                 alignItems="center"
@@ -116,7 +116,7 @@ export function ProfileScreen({
                 {...NEU.card}
               >
                 <Text fontSize={24}>{badge.icon}</Text>
-                <Text fontSize={10} fontWeight="600" color="#636e72" textAlign="center" numberOfLines={2}>{badge.name}</Text>
+                <Text fontSize={10} fontWeight="600" color="#536471" textAlign="center" numberOfLines={2}>{badge.name}</Text>
               </YStack>
             ))}
           </XStack>
@@ -126,7 +126,7 @@ export function ProfileScreen({
       {/* YoYo Collection */}
       {yoyos.length > 0 && (
         <YStack padding={20} paddingTop={0} gap={12}>
-          <Text fontSize={18} fontWeight="700" letterSpacing={-0.3} color="#2d3436">My Yo-Yos</Text>
+          <Text fontSize={18} fontWeight="700" letterSpacing={-0.3} color="#0F1419">My Yo-Yos</Text>
           <YoyoCase
             yoyos={yoyos.map((y) => ({
               id: y.id,
@@ -141,11 +141,11 @@ export function ProfileScreen({
       {/* Wishlist */}
       {wishlistItems && wishlistItems.length > 0 && (
         <YStack padding={20} paddingTop={0} gap={12}>
-          <Text fontSize={18} fontWeight="700" letterSpacing={-0.3} color="#2d3436">Wishlist</Text>
+          <Text fontSize={18} fontWeight="700" letterSpacing={-0.3} color="#0F1419">Wishlist</Text>
           {wishlistItems.map((item) => (
             <XStack
               key={item.id}
-              backgroundColor="$neuSurface"
+              backgroundColor="white"
               borderRadius={16}
               padding={14}
               alignItems="center"
@@ -153,7 +153,7 @@ export function ProfileScreen({
             >
               <Text fontSize={18} marginRight={10}>❤️</Text>
               <YStack flex={1}>
-                <Text fontSize={14} fontWeight="600" color="#2d3436">{item.name}</Text>
+                <Text fontSize={14} fontWeight="600" color="#0F1419">{item.name}</Text>
                 <Text fontSize={13} color="$brandAqua" marginTop={2}>${item.price.toFixed(2)}</Text>
               </YStack>
               {onRemoveFromWishlist && (
@@ -163,7 +163,7 @@ export function ProfileScreen({
                   cursor="pointer"
                   hitSlop={8}
                 >
-                  <Text fontSize={16} color="#636e72">✕</Text>
+                  <Text fontSize={16} color="#536471">✕</Text>
                 </XStack>
               )}
             </XStack>

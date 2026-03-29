@@ -138,7 +138,7 @@ const SectionBar = styled(XStack, {
   borderRadius: 12,
   backgroundColor: '#FFFFFF',
   borderWidth: 1,
-  borderColor: '#E8ECF0',
+  borderColor: '#E1E8ED',
   alignItems: 'center',
   gap: 12,
   animation: 'quick',

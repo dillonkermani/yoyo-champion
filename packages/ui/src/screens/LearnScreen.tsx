@@ -50,7 +50,7 @@ export function LearnScreen({
           <XStack alignItems="center" gap={10}>
             <XStack
               onPress={onBack}
-              backgroundColor="$neuSurface"
+              backgroundColor="white"
               borderRadius={12}
               width={36}
               height={36}
@@ -58,15 +58,15 @@ export function LearnScreen({
               justifyContent="center"
               cursor="pointer"
               animation="quick"
-              pressStyle={{ opacity: 0.7, ...NEU.pressed }}
+              pressStyle={{ opacity: 0.9, scale: 0.97 }}
               {...NEU.button}
             >
-              <Text fontSize={18} color="#2d3436">{'<'}</Text>
+              <Text fontSize={18} color="#0F1419">{'<'}</Text>
             </XStack>
-            <Text fontSize={22} fontWeight="800" letterSpacing={-0.5} color="#2d3436">{title}</Text>
+            <Text fontSize={22} fontWeight="800" letterSpacing={-0.5} color="#0F1419">{title}</Text>
           </XStack>
         ) : (
-          <Text fontSize={22} fontWeight="800" letterSpacing={-0.5} color="#2d3436">{title}</Text>
+          <Text fontSize={22} fontWeight="800" letterSpacing={-0.5} color="#0F1419">{title}</Text>
         )}
         <SearchInput value={searchQuery} onChangeText={onSearchChange} placeholder="Search tricks..." />
         <XStack gap={8} flexWrap="wrap">
@@ -79,7 +79,7 @@ export function LearnScreen({
             />
           ))}
         </XStack>
-        <Text fontSize={12} letterSpacing={0.3} color="#636e72">{tricks.length} tricks</Text>
+        <Text fontSize={12} letterSpacing={0.3} color="#536471">{tricks.length} tricks</Text>
       </YStack>
       <YStack padding={20} paddingTop={0}>
         {tricks.map((trick) => (

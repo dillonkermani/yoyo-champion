@@ -10,8 +10,8 @@ export interface ScreenContainerProps {
 }
 
 export function ScreenContainer({ children, scrollable = false, paddingTop = 0, backgroundColor }: ScreenContainerProps) {
-  // Neumorphic surface as default background
-  const bg = (backgroundColor ?? '$neuSurface') as YStackProps['backgroundColor'];
+  // Clean off-white default background
+  const bg = (backgroundColor ?? '#F7F8FA') as YStackProps['backgroundColor'];
 
   if (scrollable) {
     return (

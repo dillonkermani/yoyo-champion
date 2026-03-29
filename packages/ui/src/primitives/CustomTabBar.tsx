@@ -49,7 +49,7 @@ const TAB_CONFIG: Record<string, TabConfig> = {
   },
 };
 
-const INACTIVE_COLOR = '#a0a8b0';
+const INACTIVE_COLOR = '#8899A6';
 
 // Route names in display order — used by web wrapper to build state
 export const TAB_ROUTE_NAMES = ['index', 'champion-path', 'shop', 'profile', 'for-you'] as const;
@@ -281,11 +281,11 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 24,
     borderTopRightRadius: 24,
     // Shadow
-    shadowColor: '#b8c0cc',
-    shadowOffset: { width: 0, height: -4 },
-    shadowRadius: 16,
-    shadowOpacity: 0.5,
-    elevation: 12,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: -2 },
+    shadowRadius: 8,
+    shadowOpacity: 0.06,
+    elevation: 8,
     // Border
     borderTopWidth: StyleSheet.hairlineWidth,
     borderTopColor: 'rgba(0,0,0,0.05)',

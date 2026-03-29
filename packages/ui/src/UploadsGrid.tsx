@@ -20,11 +20,11 @@ export function UploadsGrid({ uploads = [], onUploadPress }: UploadsGridProps) {
         alignItems="center"
         justifyContent="center"
         padding={24}
-        backgroundColor="$neuSurface"
+        backgroundColor="white"
         borderRadius={14}
         {...NEU.card}
       >
-        <Text fontSize={13} color="#636e72" textAlign="center">
+        <Text fontSize={13} color="#536471" textAlign="center">
           No uploads yet. Record your first trick!
         </Text>
       </YStack>

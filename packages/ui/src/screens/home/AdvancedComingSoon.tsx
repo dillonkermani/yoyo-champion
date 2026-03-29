@@ -30,7 +30,7 @@ export function AdvancedComingSoon({ categories }: AdvancedComingSoonProps) {
               width={150}
               height={170}
               borderRadius={16}
-              backgroundColor="$neuSurface"
+              backgroundColor="white"
               padding={16}
               paddingBottom={40}
               opacity={0.65}
@@ -38,10 +38,10 @@ export function AdvancedComingSoon({ categories }: AdvancedComingSoonProps) {
               {...NEU.card}
             >
               <Text fontSize={28} marginBottom={8}>{cat.icon}</Text>
-              <Text fontSize={14} fontWeight="700" color="#2d3436" numberOfLines={2}>
+              <Text fontSize={14} fontWeight="700" color="#0F1419" numberOfLines={2}>
                 {cat.name}
               </Text>
-              <Text fontSize={11} color="#636e72" numberOfLines={2} marginTop={4}>
+              <Text fontSize={11} color="#536471" numberOfLines={2} marginTop={4}>
                 {cat.description}
               </Text>
               <XStack

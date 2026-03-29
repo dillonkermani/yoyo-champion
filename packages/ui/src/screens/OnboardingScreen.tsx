@@ -2,7 +2,6 @@ import React from 'react';
 import { YStack, XStack, Input, ScrollView, Stack } from 'tamagui';
 import { Switch as RNSwitch } from 'react-native';
 import { Text } from '../Text';
-import { NEU } from '../tamagui.config';
 
 export interface OnboardingChoice {
   id: string;
@@ -50,12 +49,12 @@ export interface OnboardingScreenProps {
 
 // ── Design Tokens ──────────────────────────────────────────────────────
 const T = {
-  bg: '#FFFFFF',
+  bg: '#F7F8FA',
   cardBg: '#FFFFFF',
-  text: '#1A1A2E',
-  textSub: '#6B7280',
-  muted: '#9CA3AF',
-  border: '#E8ECF1',
+  text: '#0F1419',
+  textSub: '#536471',
+  muted: '#8899A6',
+  border: '#E1E8ED',
   accent: '#1CB0F6',
   accentDark: '#0095DB',
   accentLight: '#E8F7FE',
@@ -63,7 +62,7 @@ const T = {
   gold: '#FFC800',
   green: '#58CC02',
   white: '#FFFFFF',
-  black: '#1A1A2E',
+  black: '#0F1419',
   warningBg: '#FEF3C7',
   warningText: '#92400E',
 } as const;
@@ -167,7 +166,13 @@ function CTAButton({
       pressStyle={disabled ? {} : { scale: 0.97, opacity: 0.9, backgroundColor: T.accentDark }}
       cursor={disabled ? 'default' : 'pointer'}
       opacity={disabled ? 0.5 : 1}
-      {...(disabled ? {} : NEU.glowAqua)}
+      {...(disabled ? {} : {
+        shadowColor: '#1CB0F6',
+        shadowOffset: { width: 0, height: 2 },
+        shadowRadius: 14,
+        shadowOpacity: 0.35,
+        elevation: 4,
+      })}
       marginTop={16}
     >
       <Text fontSize={18} fontWeight="800" color={T.white} letterSpacing={0.3}>
@@ -198,18 +203,30 @@ function ChoiceCard({
       onPress={onPress}
       animation="quick"
       pressStyle={{ scale: 0.97, opacity: 0.9 }}
-      hoverStyle={{ borderColor: isSelected ? T.accent : '#C5CAD1', scale: 1.01 }}
+      hoverStyle={{ borderColor: isSelected ? T.accent : '#C4CDD5', scale: 1.01 }}
       cursor="pointer"
       gap={14}
       alignItems="center"
-      {...(isSelected ? NEU.glowAqua : NEU.card)}
+      {...(isSelected ? {
+        shadowColor: '#1CB0F6',
+        shadowOffset: { width: 0, height: 2 },
+        shadowRadius: 14,
+        shadowOpacity: 0.35,
+        elevation: 4,
+      } : {
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 1 },
+        shadowRadius: 4,
+        shadowOpacity: 0.06,
+        elevation: 2,
+      })}
     >
       {choice.emoji && (
         <Stack
           width={52}
           height={52}
           borderRadius={16}
-          backgroundColor={isSelected ? T.accent : '#F3F4F6'}
+          backgroundColor={isSelected ? T.accent : '#EEF0F3'}
           justifyContent="center"
           alignItems="center"
         >
@@ -269,10 +286,16 @@ function PillButton({
       onPress={onPress}
       animation="quick"
       pressStyle={{ scale: 0.96, opacity: 0.9 }}
-      hoverStyle={{ borderColor: isSelected ? T.accent : '#C5CAD1' }}
+      hoverStyle={{ borderColor: isSelected ? T.accent : '#C4CDD5' }}
       cursor="pointer"
       alignItems="center"
-      {...(isSelected ? NEU.glowAqua : {})}
+      {...(isSelected ? {
+        shadowColor: '#1CB0F6',
+        shadowOffset: { width: 0, height: 2 },
+        shadowRadius: 14,
+        shadowOpacity: 0.35,
+        elevation: 4,
+      } : {})}
     >
       <Text
         fontSize={16}
@@ -356,7 +379,11 @@ function WelcomeContent({
         backgroundColor={T.accentLight}
         justifyContent="center"
         alignItems="center"
-        {...NEU.glowAqua}
+        shadowColor="#1CB0F6"
+        shadowOffset={{ width: 0, height: 2 }}
+        shadowRadius={14}
+        shadowOpacity={0.35}
+        elevation={4}
       >
         <Text fontSize={48} lineHeight={56}>{questionEmoji || '\uD83E\uDE80'}</Text>
       </Stack>
@@ -547,7 +574,11 @@ function QuickInfoContent({
         padding={18}
         borderWidth={2}
         borderColor={T.border}
-        {...NEU.card}
+        shadowColor="#000"
+        shadowOffset={{ width: 0, height: 1 }}
+        shadowRadius={4}
+        shadowOpacity={0.06}
+        elevation={2}
       >
         <YStack flex={1} gap={4}>
           <Text fontSize={16} fontWeight="700" color={T.text}>
@@ -630,13 +661,17 @@ function VideoContent({
       <QuestionHeader emoji={questionEmoji} title={questionTitle} subtitle={questionSubtitle} />
 
       <YStack
-        backgroundColor="#F0F4F8"
+        backgroundColor="#EEF0F3"
         borderRadius={20}
         aspectRatio={16 / 9}
         width="100%"
         justifyContent="center"
         alignItems="center"
-        {...NEU.card}
+        shadowColor="#000"
+        shadowOffset={{ width: 0, height: 1 }}
+        shadowRadius={4}
+        shadowOpacity={0.06}
+        elevation={2}
         overflow="hidden"
       >
         <Stack
@@ -646,7 +681,11 @@ function VideoContent({
           backgroundColor="rgba(28,176,246,0.9)"
           justifyContent="center"
           alignItems="center"
-          {...NEU.glowAqua}
+          shadowColor="#1CB0F6"
+          shadowOffset={{ width: 0, height: 2 }}
+          shadowRadius={14}
+          shadowOpacity={0.35}
+          elevation={4}
         >
           <Text fontSize={32} color={T.white} marginLeft={4}>
             {'\u25B6'}

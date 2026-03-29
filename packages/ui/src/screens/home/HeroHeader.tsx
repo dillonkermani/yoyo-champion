@@ -13,11 +13,11 @@ export function HeroHeader({ displayName, level, streak }: HeroHeaderProps) {
   return (
     <XStack justifyContent="space-between" alignItems="center" paddingHorizontal={20} paddingVertical={16}>
       <YStack flex={1} gap={4}>
-        <Text fontSize={24} fontWeight="800" letterSpacing={-0.5} color="#2d3436">
+        <Text fontSize={24} fontWeight="800" letterSpacing={-0.5} color="#0F1419">
           Welcome back,
         </Text>
         <XStack alignItems="center" gap={10}>
-          <Text fontSize={20} fontWeight="700" color="#2d3436">
+          <Text fontSize={20} fontWeight="700" color="#0F1419">
             {displayName}
           </Text>
           {streak > 0 && (

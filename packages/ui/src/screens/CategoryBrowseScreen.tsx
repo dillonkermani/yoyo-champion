@@ -28,10 +28,10 @@ export function CategoryBrowseScreen({
   return (
     <ScreenContainer scrollable paddingTop={paddingTop}>
       <YStack padding={20} gap={4}>
-        <Text fontSize={24} fontWeight="800" letterSpacing={-0.5} color="#2d3436">
+        <Text fontSize={24} fontWeight="800" letterSpacing={-0.5} color="#0F1419">
           Champion Path
         </Text>
-        <Text fontSize={14} color="#636e72" marginBottom={12}>
+        <Text fontSize={14} color="#536471" marginBottom={12}>
           Choose a category to begin
         </Text>
       </YStack>

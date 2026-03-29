@@ -72,7 +72,7 @@ function CategoryCell({
   return (
     <YStack
       width="48%"
-      backgroundColor={selected ? `${hex}15` : '$neuSurface'}
+      backgroundColor={selected ? `${hex}15` : 'white'}
       borderRadius={14}
       padding={12}
       marginBottom={10}
@@ -95,10 +95,10 @@ function CategoryCell({
           <Text fontSize={18}>{emoji}</Text>
         </YStack>
         <YStack flex={1}>
-          <Text fontSize={13} fontWeight="700" color="#2d3436" numberOfLines={1}>
+          <Text fontSize={13} fontWeight="700" color="#0F1419" numberOfLines={1}>
             {category.name}
           </Text>
-          <Text fontSize={11} color="#a0a8b0">
+          <Text fontSize={11} color="#8899A6">
             {category.trickCount} tricks
           </Text>
         </YStack>
@@ -152,14 +152,18 @@ export function BrowseTricksSection({
           ))}
           {(hasMore || onViewAllTricks) && (
             <YStack
-              backgroundColor="$neuSurface"
+              backgroundColor="white"
               borderRadius={14}
               padding={14}
               alignItems="center"
               onPress={onViewAllTricks}
               pressStyle={{ opacity: 0.7 }}
               cursor="pointer"
-              {...NEU.card}
+              shadowColor="#000"
+              shadowOffset={{ width: 0, height: 2 }}
+              shadowRadius={8}
+              shadowOpacity={0.08}
+              elevation={3}
             >
               <Text fontSize={14} fontWeight="700" color="$brandAqua">
                 View All{tricks.length > PREVIEW_COUNT ? ` (${tricks.length})` : ''}
@@ -169,7 +173,7 @@ export function BrowseTricksSection({
         </YStack>
       ) : searchQuery.trim() ? (
         <YStack alignItems="center" paddingVertical={24}>
-          <Text fontSize={14} color="#a0a8b0">No tricks found for &ldquo;{searchQuery}&rdquo;</Text>
+          <Text fontSize={14} color="#8899A6">No tricks found for &ldquo;{searchQuery}&rdquo;</Text>
         </YStack>
       ) : null}
     </YStack>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { styled, Stack } from '@tamagui/core';
 import { XStack, YStack, Text } from 'tamagui';
-import { NEU } from '../tamagui.config';
+import { NEU } from '../tamagui.config'; // kept for glow effects only
 
 // ---------------------------------------------------------------------------
 // Types
@@ -186,7 +186,7 @@ export function StreakDisplay({
         <Text fontSize={18} fontWeight="700" color="$streakRed">
           {streakCount}
         </Text>
-        <Text fontSize={13} color="#636e72" marginTop={1}>
+        <Text fontSize={13} color="#536471" marginTop={1}>
           days
         </Text>
       </XStack>
@@ -201,7 +201,11 @@ export function StreakDisplay({
       backgroundColor="rgba(255,150,0,0.06)"
       onPress={onPress}
       cursor={onPress ? 'pointer' : undefined}
-      {...NEU.card}
+      shadowColor="#000"
+      shadowOffset={{ width: 0, height: 2 }}
+      shadowRadius={8}
+      shadowOpacity={0.08}
+      elevation={3}
     >
       {/* Header row */}
       <XStack alignItems="center" gap={12}>
@@ -211,7 +215,7 @@ export function StreakDisplay({
             <Text fontSize={32} fontWeight="800" color="$streakRed">
               {streakCount}
             </Text>
-            <Text fontSize={15} fontWeight="600" color="#636e72">
+            <Text fontSize={15} fontWeight="600" color="#536471">
               day streak
             </Text>
           </XStack>
@@ -219,7 +223,7 @@ export function StreakDisplay({
           {/* Longest streak */}
           <XStack alignItems="center" gap={4} marginTop={2}>
             <Text fontSize={13}>{'\uD83C\uDFC6'}</Text>
-            <Text fontSize={12} color="#636e72">
+            <Text fontSize={12} color="#536471">
               Longest: {longestStreak} days
             </Text>
           </XStack>
@@ -268,12 +272,12 @@ export function StreakDisplay({
           const active = activeDays[i];
           return (
             <YStack key={i} alignItems="center" gap={4}>
-              <Text fontSize={10} color="#636e72" fontWeight="500">
+              <Text fontSize={10} color="#536471" fontWeight="500">
                 {label}
               </Text>
               <DayDot
-                backgroundColor={active ? '$brandOrange' : '$neuSurface'}
-                {...(active ? NEU.glowGold : NEU.inset)}
+                backgroundColor={active ? '$brandOrange' : '#EEF0F3'}
+                {...(active ? NEU.glowGold : {})}
               >
                 {active && (
                   <Text fontSize={12} color="white" fontWeight="700">
