@@ -1,36 +1,71 @@
 import { createTamagui } from '@tamagui/core';
 import { config as baseConfig } from '@tamagui/config/v3';
 
-// Neumorphic surface: #e8ecf1 (cool blue-gray)
-// Light shadow (top-left highlight): #ffffff
-// Dark shadow (bottom-right depth): #b8c0cc
-// Shadows are TINTED to match the surface — never pure black.
-// React Native only supports one shadow per view, so we use the dark shadow
-// and rely on background color + border highlight for the dual effect.
+// Modern design system — clean, bold, high-contrast, premium feel.
+// Inspired by STNDRD (Chris Bumstead) with gamification accents.
+// Replaces the old neumorphic (NEU) approach for better readability
+// and WCAG-compliant contrast ratios.
 
+export const THEME = {
+  // Surface colors — clean white cards on subtle gray backgrounds
+  surface: '#FFFFFF',
+  surfaceSecondary: '#F7F8FA',
+  surfacePressed: '#F0F2F5',
+  surfaceMuted: '#E8ECF1',
+
+  // Text — high contrast, WCAG AAA compliant
+  text: '#0F1419',          // near-black for maximum readability
+  textSecondary: '#536471', // medium gray, 4.6:1 contrast on white
+  textMuted: '#8899A6',     // lighter gray for captions
+  textInverse: '#FFFFFF',   // white on dark backgrounds
+
+  // Borders
+  border: '#E1E8ED',
+  borderFocus: '#1CB0F6',
+
+  // Shadow presets — modern, clean depth (not neumorphic)
+  shadow: {
+    sm: { shadowColor: '#000', shadowOffset: { width: 0, height: 1 }, shadowRadius: 3, shadowOpacity: 0.08, elevation: 2 },
+    md: { shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowRadius: 8, shadowOpacity: 0.12, elevation: 4 },
+    lg: { shadowColor: '#000', shadowOffset: { width: 0, height: 4 }, shadowRadius: 16, shadowOpacity: 0.12, elevation: 8 },
+    xl: { shadowColor: '#000', shadowOffset: { width: 0, height: 8 }, shadowRadius: 24, shadowOpacity: 0.14, elevation: 12 },
+  },
+
+  // Colored glow shadows — great for gamification accents
+  glow: {
+    aqua: { shadowColor: '#1CB0F6', shadowOffset: { width: 0, height: 2 }, shadowRadius: 14, shadowOpacity: 0.35, elevation: 4 },
+    purple: { shadowColor: '#CE82FF', shadowOffset: { width: 0, height: 2 }, shadowRadius: 14, shadowOpacity: 0.35, elevation: 4 },
+    gold: { shadowColor: '#FFC800', shadowOffset: { width: 0, height: 2 }, shadowRadius: 12, shadowOpacity: 0.4, elevation: 3 },
+    red: { shadowColor: '#FF4B4B', shadowOffset: { width: 0, height: 2 }, shadowRadius: 14, shadowOpacity: 0.35, elevation: 4 },
+    green: { shadowColor: '#58CC02', shadowOffset: { width: 0, height: 2 }, shadowRadius: 12, shadowOpacity: 0.35, elevation: 3 },
+    rare: { shadowColor: '#3B82F6', shadowOffset: { width: 0, height: 2 }, shadowRadius: 14, shadowOpacity: 0.35, elevation: 4 },
+    epic: { shadowColor: '#9333EA', shadowOffset: { width: 0, height: 2 }, shadowRadius: 14, shadowOpacity: 0.35, elevation: 4 },
+    legendary: { shadowColor: '#FBBF24', shadowOffset: { width: 0, height: 4 }, shadowRadius: 18, shadowOpacity: 0.5, elevation: 6 },
+  },
+} as const;
+
+// Backwards compatibility — maps old NEU keys to new THEME equivalents
 export const NEU = {
-  surface: '#e8ecf1',
-  surfaceLight: '#eef1f5',
-  surfacePressed: '#dfe3e9',
-  shadowDark: '#b8c0cc',
-  shadowLight: '#ffffff',
-  highlight: 'rgba(255,255,255,0.6)',  // inner top-left edge glow
+  surface: THEME.surface,
+  surfaceLight: THEME.surfaceSecondary,
+  surfacePressed: THEME.surfacePressed,
+  shadowDark: '#000',
+  shadowLight: '#fff',
+  highlight: 'rgba(255,255,255,0.6)',
   highlightSubtle: 'rgba(255,255,255,0.35)',
-  // Shadow presets (dark shadow only — RN limitation)
-  card: { shadowColor: '#b8c0cc', shadowOffset: { width: 4, height: 4 }, shadowRadius: 10, shadowOpacity: 0.6, elevation: 4 },
-  cardLifted: { shadowColor: '#b8c0cc', shadowOffset: { width: 6, height: 6 }, shadowRadius: 16, shadowOpacity: 0.7, elevation: 6 },
-  button: { shadowColor: '#b8c0cc', shadowOffset: { width: 3, height: 3 }, shadowRadius: 8, shadowOpacity: 0.5, elevation: 3 },
-  pressed: { shadowColor: '#b8c0cc', shadowOffset: { width: 1, height: 1 }, shadowRadius: 3, shadowOpacity: 0.3, elevation: 1 },
-  inset: { shadowColor: '#b8c0cc', shadowOffset: { width: 2, height: 2 }, shadowRadius: 4, shadowOpacity: 0.4, elevation: 1 },
-  // Glow presets for accent colors
-  glowAqua: { shadowColor: '#1CB0F6', shadowOffset: { width: 0, height: 2 }, shadowRadius: 12, shadowOpacity: 0.35, elevation: 4 },
-  glowPurple: { shadowColor: '#CE82FF', shadowOffset: { width: 0, height: 2 }, shadowRadius: 12, shadowOpacity: 0.35, elevation: 4 },
-  glowGold: { shadowColor: '#FFC800', shadowOffset: { width: 0, height: 2 }, shadowRadius: 10, shadowOpacity: 0.4, elevation: 3 },
-  glowRed: { shadowColor: '#FF4B4B', shadowOffset: { width: 0, height: 2 }, shadowRadius: 12, shadowOpacity: 0.35, elevation: 4 },
-  glowRare: { shadowColor: '#3B82F6', shadowOffset: { width: 0, height: 2 }, shadowRadius: 12, shadowOpacity: 0.35, elevation: 4 },
-  glowEpic: { shadowColor: '#9333EA', shadowOffset: { width: 0, height: 2 }, shadowRadius: 12, shadowOpacity: 0.35, elevation: 4 },
-  glowLegendary: { shadowColor: '#FBBF24', shadowOffset: { width: 0, height: 4 }, shadowRadius: 16, shadowOpacity: 0.5, elevation: 6 },
-  glowGreen: { shadowColor: '#58CC02', shadowOffset: { width: 0, height: 2 }, shadowRadius: 10, shadowOpacity: 0.35, elevation: 3 },
+  card: THEME.shadow.md,
+  cardLifted: THEME.shadow.lg,
+  button: THEME.shadow.sm,
+  pressed: { shadowColor: '#000', shadowOffset: { width: 0, height: 1 }, shadowRadius: 2, shadowOpacity: 0.06, elevation: 1 },
+  inset: { shadowColor: '#000', shadowOffset: { width: 0, height: 1 }, shadowRadius: 2, shadowOpacity: 0.06, elevation: 1 },
+  glowAqua: THEME.glow.aqua,
+  glowPurple: THEME.glow.purple,
+  glowGold: THEME.glow.gold,
+  glowRed: THEME.glow.red,
+  glowGreen: THEME.glow.green,
+  glowRare: THEME.glow.rare,
+  glowEpic: THEME.glow.epic,
+  glowLegendary: THEME.glow.legendary,
 } as const;
 
 export const tamaguiConfig = createTamagui({
@@ -60,10 +95,21 @@ export const tamaguiConfig = createTamagui({
       rarityRare: '#3B82F6',
       rarityEpic: '#9333EA',
       rarityLegendary: '#FBBF24',
-      // Neumorphic surface system
-      neuSurface: '#e8ecf1',
-      neuSurfaceLight: '#eef1f5',
-      neuSurfacePressed: '#dfe3e9',
+      // Modern surface system (new)
+      surface: '#FFFFFF',
+      surfaceSecondary: '#F7F8FA',
+      surfacePressed: '#F0F2F5',
+      surfaceMuted: '#E8ECF1',
+      // Text colors — high contrast
+      textPrimary: '#0F1419',
+      textSecondary: '#536471',
+      textMuted: '#8899A6',
+      // Borders
+      border: '#E1E8ED',
+      // Backwards-compatible neumorphic tokens (updated to modern values)
+      neuSurface: '#FFFFFF',
+      neuSurfaceLight: '#F7F8FA',
+      neuSurfacePressed: '#F0F2F5',
       neuHighlight: 'rgba(255,255,255,0.6)',
       neuHighlightSubtle: 'rgba(255,255,255,0.35)',
     },

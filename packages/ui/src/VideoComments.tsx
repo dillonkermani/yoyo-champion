@@ -29,12 +29,12 @@ export function VideoComments({ comments, onAddComment }: VideoCommentsProps) {
 
   return (
     <YStack gap={12}>
-      <Text fontSize={16} fontWeight="700" color="#2d3436">
+      <Text fontSize={16} fontWeight="700" color="#0F1419">
         Comments ({comments.length})
       </Text>
 
       {comments.length === 0 && (
-        <Text fontSize={14} color="#b2bec3">
+        <Text fontSize={14} color="#8899A6">
           No comments yet. Be the first!
         </Text>
       )}
@@ -42,7 +42,7 @@ export function VideoComments({ comments, onAddComment }: VideoCommentsProps) {
       {comments.map((comment) => (
         <YStack
           key={comment.id}
-          backgroundColor="$neuSurfaceLight"
+          backgroundColor="#F7F8FA"
           borderRadius={14}
           padding={12}
           gap={4}
@@ -54,11 +54,11 @@ export function VideoComments({ comments, onAddComment }: VideoCommentsProps) {
             <Text fontSize={14} fontWeight="700" color="$brandAqua">
               {comment.userName}
             </Text>
-            <Text fontSize={11} color="#b2bec3">
+            <Text fontSize={11} color="#8899A6">
               {formatDate(comment.createdAt)}
             </Text>
           </XStack>
-          <Text fontSize={14} color="#2d3436" lineHeight={20}>
+          <Text fontSize={14} color="#0F1419" lineHeight={20}>
             {comment.text}
           </Text>
         </YStack>
@@ -71,15 +71,14 @@ export function VideoComments({ comments, onAddComment }: VideoCommentsProps) {
             value={newComment}
             onChangeText={setNewComment}
             placeholder="Add a comment..."
-            backgroundColor="$neuSurface"
+            backgroundColor="white"
             borderRadius={14}
             borderWidth={0}
             paddingHorizontal={14}
             paddingVertical={10}
             fontSize={14}
-            color="#2d3436"
-            placeholderTextColor="#b2bec3"
-            {...NEU.inset}
+            color="#0F1419"
+            placeholderTextColor="#8899A6"
           />
           <Button
             onPress={handleSubmit}

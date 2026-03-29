@@ -2,7 +2,6 @@ import React from 'react';
 import { YStack, XStack, Stack, ScrollView } from 'tamagui';
 import { Text } from '../Text';
 import { ProgressBar } from '../primitives/ProgressBar';
-import { NEU } from '../tamagui.config';
 
 export interface FeaturedTrick {
   id: string;
@@ -36,14 +35,16 @@ export interface HomeScreenProps {
 }
 
 const T = {
-  bg: '#FFFFFF',
-  text: '#1A1A2E',
-  textSub: '#6B7280',
-  muted: '#9CA3AF',
-  border: '#E8ECF1',
+  bg: '#F7F8FA',
+  cardBg: '#FFFFFF',
+  text: '#0F1419',
+  textSub: '#536471',
+  muted: '#8899A6',
+  border: '#E1E8ED',
   accent: '#1CB0F6',
   accentDark: '#0095DB',
   accentLight: '#E8F7FE',
+  accentDisabled: '#B8E4FA',
   gold: '#FFC800',
   goldLight: '#FFF8E1',
   purple: '#CE82FF',
@@ -67,7 +68,7 @@ function StatPill({ emoji, label, value, color }: { emoji: string; label: string
   return (
     <YStack
       flex={1}
-      backgroundColor={T.white}
+      backgroundColor={T.cardBg}
       borderRadius={18}
       padding={14}
       alignItems="center"
@@ -77,6 +78,11 @@ function StatPill({ emoji, label, value, color }: { emoji: string; label: string
       animation="quick"
       hoverStyle={{ borderColor: color, scale: 1.02 }}
       pressStyle={{ scale: 0.97 }}
+      shadowColor="#000"
+      shadowOffset={{ width: 0, height: 1 }}
+      shadowRadius={4}
+      shadowOpacity={0.06}
+      elevation={2}
     >
       <Stack
         width={40}
@@ -102,7 +108,7 @@ function TrickRow({ trick, onPress }: { trick: FeaturedTrick; onPress?: () => vo
 
   return (
     <XStack
-      backgroundColor={T.white}
+      backgroundColor={T.cardBg}
       borderRadius={18}
       padding={16}
       borderWidth={1.5}
@@ -114,6 +120,11 @@ function TrickRow({ trick, onPress }: { trick: FeaturedTrick; onPress?: () => vo
       animation="quick"
       pressStyle={onPress ? { scale: 0.98, opacity: 0.9 } : {}}
       hoverStyle={onPress ? { borderColor: color, scale: 1.01 } : {}}
+      shadowColor="#000"
+      shadowOffset={{ width: 0, height: 1 }}
+      shadowRadius={4}
+      shadowOpacity={0.06}
+      elevation={2}
     >
       <Stack
         width={48}
@@ -161,7 +172,7 @@ function PathRow({ path, onPress }: { path: ActivePath; onPress?: () => void }) 
 
   return (
     <YStack
-      backgroundColor={T.white}
+      backgroundColor={T.cardBg}
       borderRadius={18}
       padding={18}
       borderWidth={1.5}
@@ -172,6 +183,11 @@ function PathRow({ path, onPress }: { path: ActivePath; onPress?: () => void }) 
       animation="quick"
       pressStyle={onPress ? { scale: 0.98, opacity: 0.9 } : {}}
       hoverStyle={onPress ? { borderColor: color, scale: 1.01 } : {}}
+      shadowColor="#000"
+      shadowOffset={{ width: 0, height: 1 }}
+      shadowRadius={4}
+      shadowOpacity={0.06}
+      elevation={2}
     >
       <XStack justifyContent="space-between" alignItems="flex-start">
         <YStack flex={1} gap={4}>
@@ -268,7 +284,11 @@ export function HomeScreen({
               backgroundColor={T.gold}
               justifyContent="center"
               alignItems="center"
-              {...NEU.glowGold}
+              shadowColor="#FFC800"
+              shadowOffset={{ width: 0, height: 2 }}
+              shadowRadius={12}
+              shadowOpacity={0.4}
+              elevation={3}
             >
               <Text fontSize={10} fontWeight="700" color={T.white} marginTop={-2}>{'\uD83D\uDC51'}</Text>
               <Text fontSize={16} fontWeight="900" color={T.white} marginTop={-4}>{level}</Text>

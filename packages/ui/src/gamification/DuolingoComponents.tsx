@@ -1,6 +1,6 @@
 import { styled, Stack, type StackProps } from '@tamagui/core'
 import { YStack, XStack, Text } from 'tamagui'
-import { NEU } from '../tamagui.config'
+import { NEU } from '../tamagui.config' // kept for reference only
 
 // ---------------------------------------------------------------------------
 // 1. Encouraging messages
@@ -132,7 +132,7 @@ export function DailyGoal({ current, target, icon = 'target', label = 'Daily Goa
           {current}/{target}
         </Text>
       </XStack>
-      <Stack height={8} borderRadius={4} backgroundColor="$neuSurface" overflow="hidden">
+      <Stack height={8} borderRadius={4} backgroundColor="#EEF0F3" overflow="hidden">
         <Stack
           height={8}
           borderRadius={4}
@@ -165,7 +165,7 @@ export interface AchievementBadgeProps {
 }
 
 const RARITY_BG: Record<Rarity, string> = {
-  common: '#6B7280',
+  common: '#536471',
   uncommon: '#1CB0F6',
   rare: '#3B82F6',
   epic: '#9333EA',
@@ -185,8 +185,12 @@ export function AchievementBadge({
       gap={6}
       padding={12}
       borderRadius={16}
-      backgroundColor={NEU.surfaceLight}
-      {...NEU.card}
+      backgroundColor="#F7F8FA"
+      shadowColor="#000"
+      shadowOffset={{ width: 0, height: 2 }}
+      shadowRadius={8}
+      shadowOpacity={0.08}
+      elevation={3}
       animation="quick"
       hoverStyle={{ scale: 1.05, y: -4 }}
       pressStyle={{ scale: 0.97 }}
@@ -258,8 +262,12 @@ export function StatCard({ icon, label, value, color = 'primary' }: StatCardProp
       gap={10}
       padding={12}
       borderRadius={14}
-      backgroundColor={NEU.surfaceLight}
-      {...NEU.card}
+      backgroundColor="#F7F8FA"
+      shadowColor="#000"
+      shadowOffset={{ width: 0, height: 2 }}
+      shadowRadius={8}
+      shadowOpacity={0.08}
+      elevation={3}
       animation="quick"
       hoverStyle={{ y: -2 }}
     >
@@ -295,8 +303,12 @@ export function BounceCard({ children, delay = 0, ...rest }: BounceCardProps) {
     <YStack
       padding={16}
       borderRadius={16}
-      backgroundColor={NEU.surfaceLight}
-      {...NEU.card}
+      backgroundColor="#F7F8FA"
+      shadowColor="#000"
+      shadowOffset={{ width: 0, height: 2 }}
+      shadowRadius={8}
+      shadowOpacity={0.08}
+      elevation={3}
       animation="bouncy"
       enterStyle={{ opacity: 0, y: 20 }}
       hoverStyle={{ y: -4 }}

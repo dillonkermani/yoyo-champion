@@ -1,8 +1,6 @@
 import { styled } from '@tamagui/core';
 import { Stack, Text, XStack } from 'tamagui';
 
-import { NEU } from '../tamagui.config';
-
 // --- Types ---
 
 export interface TabItem {
@@ -57,7 +55,7 @@ const TabLabel = styled(Text, {
       },
       false: {
         fontWeight: '400',
-        color: '$gray10',
+        color: '#536471',
       },
     },
   } as const,
@@ -75,10 +73,12 @@ export function AnimatedTabPicker({
 
   return (
     <XStack
-      backgroundColor={isPill ? NEU.surface : 'transparent'}
-      borderRadius={isPill ? '$5' : 0}
-      borderBottomWidth={isPill ? 0 : 1}
-      borderBottomColor={isPill ? 'transparent' : '$gray5'}
+      backgroundColor={isPill ? 'white' : 'transparent'}
+      borderRadius={isPill ? 16 : 0}
+      borderWidth={isPill ? 1.5 : 0}
+      borderColor={isPill ? '#E1E8ED' : 'transparent'}
+      borderBottomWidth={isPill ? 1.5 : 1}
+      borderBottomColor={isPill ? '#E1E8ED' : '$gray5'}
       padding={isPill ? '$1' : 0}
       gap={isPill ? '$1' : '$4'}
     >
@@ -91,13 +91,17 @@ export function AnimatedTabPicker({
             active={isActive}
             variant={variant}
             flex={isPill ? 1 : undefined}
-            backgroundColor={isPill && isActive ? '#fff' : 'transparent'}
+            backgroundColor={isPill && isActive ? '$brandAqua' : 'transparent'}
             borderBottomWidth={!isPill && isActive ? 2 : 0}
             borderBottomColor={!isPill && isActive ? '$brandAqua' : 'transparent'}
-            {...(isPill && isActive ? NEU.button : {})}
             onPress={() => onTabChange(tab.key)}
           >
-            <TabLabel active={isActive}>{tab.label}</TabLabel>
+            <TabLabel
+              active={isActive}
+              {...(isPill && isActive ? { color: 'white' } : {})}
+            >
+              {tab.label}
+            </TabLabel>
           </TabTrigger>
         );
       })}

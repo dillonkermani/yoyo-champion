@@ -5,14 +5,15 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: '#1CB0F6',
-        tabBarInactiveTintColor: '#a0a8b0',
+        tabBarInactiveTintColor: '#8899A6',
         tabBarStyle: {
-          backgroundColor: '#e8ecf1',
-          borderTopWidth: 0,
-          shadowColor: '#b8c0cc',
-          shadowOffset: { width: 0, height: -4 },
-          shadowRadius: 12,
-          shadowOpacity: 0.5,
+          backgroundColor: '#FFFFFF',
+          borderTopWidth: 1,
+          borderTopColor: '#E1E8ED',
+          shadowColor: '#000',
+          shadowOffset: { width: 0, height: -2 },
+          shadowRadius: 8,
+          shadowOpacity: 0.06,
           elevation: 8,
         },
       }}

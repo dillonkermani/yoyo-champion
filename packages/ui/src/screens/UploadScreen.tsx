@@ -34,33 +34,32 @@ export function UploadScreen({
   return (
     <ScreenContainer scrollable paddingTop={paddingTop}>
       <YStack padding={24} gap={20}>
-        <Text fontSize={28} fontWeight="800" letterSpacing={-0.5} color="#2d3436">
+        <Text fontSize={28} fontWeight="800" letterSpacing={-0.5} color="#0F1419">
           Upload Your Trick
         </Text>
 
         {/* Trick selector */}
         <YStack gap={8}>
-          <Text fontSize={15} fontWeight="600" color="#636e72">
+          <Text fontSize={15} fontWeight="600" color="#536471">
             Select a trick
           </Text>
           <YStack
-            backgroundColor="$neuSurface"
+            backgroundColor="#EEF0F3"
             borderRadius={16}
             padding={8}
             gap={6}
             maxHeight={220}
-            {...NEU.inset}
           >
             {tricks.map((trick) => {
               const isSelected = trick.id === selectedTrickId;
               return (
                 <YStack
                   key={trick.id}
-                  backgroundColor={isSelected ? '$brandAqua' : '$neuSurfaceLight'}
+                  backgroundColor={isSelected ? '$brandAqua' : '#F7F8FA'}
                   borderRadius={12}
                   paddingVertical={12}
                   paddingHorizontal={16}
-                  pressStyle={{ backgroundColor: isSelected ? '$brandAquaDark' : '$neuSurfacePressed' }}
+                  pressStyle={{ backgroundColor: isSelected ? '$brandAquaDark' : '#F0F2F5' }}
                   onPress={() => setSelectedTrickId(trick.id)}
                   cursor="pointer"
                   {...(isSelected ? NEU.glowAqua : NEU.card)}
@@ -70,7 +69,7 @@ export function UploadScreen({
                   <Text
                     fontSize={15}
                     fontWeight={isSelected ? '700' : '500'}
-                    color={isSelected ? 'white' : '#2d3436'}
+                    color={isSelected ? 'white' : '#0F1419'}
                   >
                     {trick.name}
                   </Text>
@@ -82,38 +81,37 @@ export function UploadScreen({
 
         {/* Tags input */}
         <YStack gap={8}>
-          <Text fontSize={15} fontWeight="600" color="#636e72">
+          <Text fontSize={15} fontWeight="600" color="#536471">
             Tags (comma-separated)
           </Text>
           <Input
             value={tagsInput}
             onChangeText={setTagsInput}
             placeholder="e.g. smooth, beginner, tutorial"
-            backgroundColor="$neuSurface"
+            backgroundColor="white"
             borderRadius={14}
             borderWidth={0}
             paddingHorizontal={16}
             paddingVertical={12}
             fontSize={15}
-            color="#2d3436"
-            placeholderTextColor="#b2bec3"
-            {...NEU.inset}
+            color="#0F1419"
+            placeholderTextColor="#8899A6"
           />
         </YStack>
 
         {/* YoYo Champion Yoyo toggle */}
         <YStack gap={8}>
-          <Text fontSize={15} fontWeight="600" color="#636e72">
+          <Text fontSize={15} fontWeight="600" color="#536471">
             Uses YoYo Champion Yoyo?
           </Text>
           <XStack gap={10}>
             <YStack
               flex={1}
-              backgroundColor={usesYoyoChampionYoyo ? '$brandAqua' : '$neuSurfaceLight'}
+              backgroundColor={usesYoyoChampionYoyo ? '$brandAqua' : '#F7F8FA'}
               borderRadius={14}
               paddingVertical={12}
               alignItems="center"
-              pressStyle={{ backgroundColor: usesYoyoChampionYoyo ? '$brandAquaDark' : '$neuSurfacePressed' }}
+              pressStyle={{ backgroundColor: usesYoyoChampionYoyo ? '$brandAquaDark' : '#F0F2F5' }}
               onPress={() => setUsesYoyoChampionYoyo(true)}
               cursor="pointer"
               {...(usesYoyoChampionYoyo ? NEU.glowAqua : NEU.card)}
@@ -121,18 +119,18 @@ export function UploadScreen({
               <Text
                 fontSize={15}
                 fontWeight="700"
-                color={usesYoyoChampionYoyo ? 'white' : '#636e72'}
+                color={usesYoyoChampionYoyo ? 'white' : '#536471'}
               >
                 Yes
               </Text>
             </YStack>
             <YStack
               flex={1}
-              backgroundColor={!usesYoyoChampionYoyo ? '$brandAqua' : '$neuSurfaceLight'}
+              backgroundColor={!usesYoyoChampionYoyo ? '$brandAqua' : '#F7F8FA'}
               borderRadius={14}
               paddingVertical={12}
               alignItems="center"
-              pressStyle={{ backgroundColor: !usesYoyoChampionYoyo ? '$brandAquaDark' : '$neuSurfacePressed' }}
+              pressStyle={{ backgroundColor: !usesYoyoChampionYoyo ? '$brandAquaDark' : '#F0F2F5' }}
               onPress={() => setUsesYoyoChampionYoyo(false)}
               cursor="pointer"
               {...(!usesYoyoChampionYoyo ? NEU.glowAqua : NEU.card)}
@@ -140,7 +138,7 @@ export function UploadScreen({
               <Text
                 fontSize={15}
                 fontWeight="700"
-                color={!usesYoyoChampionYoyo ? 'white' : '#636e72'}
+                color={!usesYoyoChampionYoyo ? 'white' : '#536471'}
               >
                 No
               </Text>
