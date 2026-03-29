@@ -104,3 +104,12 @@ export {
 export type {
   TrickCategory,
 } from './categories';
+
+// Advanced Categories Data
+export {
+  advancedCategories,
+} from './advanced-categories';
+
+export type {
+  AdvancedCategory,
+} from './advanced-categories';

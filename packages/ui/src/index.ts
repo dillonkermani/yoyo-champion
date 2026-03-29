@@ -35,7 +35,9 @@ export type { CategoryCardProps } from './cards/CategoryCard';
 
 // Screens
 export { HomeScreen } from './screens/HomeScreen';
-export type { HomeScreenProps, FeaturedTrick, ActivePath } from './screens/HomeScreen';
+export type { HomeScreenProps, BrowseCategory, BrowseTrick, AdvancedCategory, NewsDisplayItem } from './screens/HomeScreen';
+export { NewsCard } from './cards/NewsCard';
+export type { NewsCardProps } from './cards/NewsCard';
 export { UploadsGrid } from './UploadsGrid';
 export type { UploadsGridProps, UploadThumbnail } from './UploadsGrid';
 export { LearnScreen } from './screens/LearnScreen';
