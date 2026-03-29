@@ -64,6 +64,8 @@ export type { VideoComment, VideoCommentsProps } from './VideoComments';
 // Primitives — new
 export { AnimatedTabPicker } from './primitives/AnimatedTabPicker';
 export type { TabItem, AnimatedTabPickerProps } from './primitives/AnimatedTabPicker';
+export { CustomTabBar, WebTabBar, TAB_ROUTE_NAMES } from './primitives/CustomTabBar';
+export type { TabRouteName } from './primitives/CustomTabBar';
 
 // Assets
 export { Logo } from './assets/Logo';
