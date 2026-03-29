@@ -24,6 +24,7 @@ export default function LoginPage() {
   };
 
   return (
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'stretch', minHeight: '100vh' }}>
     <AuthScreen
       mode={mode}
       onSubmit={handleSubmit}
@@ -31,5 +32,6 @@ export default function LoginPage() {
       isLoading={isLoading}
       error={error}
     />
+    </div>
   );
 }

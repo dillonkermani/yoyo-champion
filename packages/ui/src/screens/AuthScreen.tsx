@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { YStack, XStack, Input } from 'tamagui';
+import { YStack, XStack, Input, Stack } from 'tamagui';
 import { Text } from '../Text';
-import { Button } from '../Button';
 import { NEU } from '../tamagui.config';
 
 export interface AuthScreenProps {
@@ -11,9 +10,22 @@ export interface AuthScreenProps {
   isLoading?: boolean;
   error?: string | null;
   paddingTop?: number;
-  /** When true, shows funnel-oriented copy (post-onboarding context). */
   funnelMode?: boolean;
 }
+
+const T = {
+  bg: '#FFFFFF',
+  text: '#1A1A2E',
+  textSub: '#6B7280',
+  muted: '#9CA3AF',
+  border: '#E8ECF1',
+  accent: '#1CB0F6',
+  accentDark: '#0095DB',
+  accentLight: '#E8F7FE',
+  accentDisabled: '#B8E4FA',
+  white: '#FFFFFF',
+  error: '#FF4B4B',
+} as const;
 
 export function AuthScreen({ mode, onSubmit, onToggleMode, isLoading = false, error, paddingTop = 0, funnelMode = false }: AuthScreenProps) {
   const [name, setName] = useState('');
@@ -29,14 +41,37 @@ export function AuthScreen({ mode, onSubmit, onToggleMode, isLoading = false, er
     : email.length > 0 && password.length >= 6;
 
   return (
-    <YStack flex={1} backgroundColor="$neuSurface" padding={28} paddingTop={paddingTop + 28} justifyContent="center" gap={28}>
+    <YStack
+      flex={1}
+      backgroundColor={T.bg}
+      padding={28}
+      paddingTop={paddingTop + 28}
+      justifyContent="center"
+      gap={28}
+      maxWidth={520}
+      alignSelf="center"
+      width="100%"
+    >
       {/* Logo / Header */}
-      <YStack alignItems="center" gap={8}>
-        {!funnelMode && <Text fontSize={48}>🪀</Text>}
-        <Text fontSize={28} fontWeight="800" color="#2d3436" letterSpacing={-0.5}>
+      <YStack alignItems="center" gap={10}>
+        {!funnelMode && (
+          <Stack
+            width={80}
+            height={80}
+            borderRadius={40}
+            backgroundColor={T.accentLight}
+            justifyContent="center"
+            alignItems="center"
+            marginBottom={8}
+            {...NEU.glowAqua}
+          >
+            <Text fontSize={44}>{'\uD83E\uDE80'}</Text>
+          </Stack>
+        )}
+        <Text fontSize={30} fontWeight="900" color={T.text} letterSpacing={-0.8}>
           {funnelMode ? "You're all set!" : 'YoYo Champion'}
         </Text>
-        <Text fontSize={15} color="#636e72">
+        <Text fontSize={16} color={T.textSub}>
           {funnelMode
             ? 'Create your account to save your progress'
             : mode === 'login'
@@ -49,61 +84,81 @@ export function AuthScreen({ mode, onSubmit, onToggleMode, isLoading = false, er
       <YStack gap={14}>
         {mode === 'signup' && (
           <Input
-            backgroundColor="$neuSurfaceLight"
-            borderRadius={14}
-            padding={14}
+            backgroundColor={T.bg}
+            borderRadius={16}
+            borderWidth={2}
+            borderColor={T.border}
+            padding={16}
             fontSize={15}
             placeholder="Display name"
-            placeholderTextColor="#a0a8b0"
+            placeholderTextColor={T.muted}
+            color={T.text}
             value={name}
             onChangeText={setName}
             autoCapitalize="words"
-            {...NEU.inset}
+            focusStyle={{ borderColor: T.accent }}
           />
         )}
         <Input
-          backgroundColor="$neuSurfaceLight"
-          borderRadius={14}
-          padding={14}
+          backgroundColor={T.bg}
+          borderRadius={16}
+          borderWidth={2}
+          borderColor={T.border}
+          padding={16}
           fontSize={15}
           placeholder="Email"
-          placeholderTextColor="#a0a8b0"
+          placeholderTextColor={T.muted}
+          color={T.text}
           value={email}
           onChangeText={setEmail}
           autoCapitalize="none"
           keyboardType="email-address"
-          {...NEU.inset}
+          focusStyle={{ borderColor: T.accent }}
         />
         <Input
-          backgroundColor="$neuSurfaceLight"
-          borderRadius={14}
-          padding={14}
+          backgroundColor={T.bg}
+          borderRadius={16}
+          borderWidth={2}
+          borderColor={T.border}
+          padding={16}
           fontSize={15}
           placeholder="Password"
-          placeholderTextColor="#a0a8b0"
+          placeholderTextColor={T.muted}
+          color={T.text}
           value={password}
           onChangeText={setPassword}
           secureTextEntry
-          {...NEU.inset}
+          focusStyle={{ borderColor: T.accent }}
         />
 
         {error && (
-          <Text fontSize={13} color="$streakRed" textAlign="center">{error}</Text>
+          <Text fontSize={13} color={T.error} textAlign="center">{error}</Text>
         )}
 
-        <Button
-          onPress={handleSubmit}
-          disabled={!canSubmit || isLoading}
+        {/* Submit button */}
+        <YStack
+          backgroundColor={canSubmit && !isLoading ? T.accent : T.accentDisabled}
+          borderRadius={18}
+          height={58}
+          justifyContent="center"
+          alignItems="center"
+          onPress={canSubmit && !isLoading ? handleSubmit : undefined}
+          animation="quick"
+          pressStyle={canSubmit && !isLoading ? { scale: 0.97, opacity: 0.9, backgroundColor: T.accentDark } : {}}
+          cursor={canSubmit && !isLoading ? 'pointer' : 'default'}
           opacity={canSubmit && !isLoading ? 1 : 0.5}
           marginTop={4}
+          {...(canSubmit && !isLoading ? NEU.glowAqua : {})}
         >
-          {isLoading ? 'Loading...' : mode === 'login' ? 'Log In' : 'Create Account'}
-        </Button>
+          <Text fontSize={18} fontWeight="800" color={T.white} letterSpacing={0.3}>
+            {isLoading ? 'Loading...' : mode === 'login' ? 'Log In' : 'Create Account'}
+          </Text>
+        </YStack>
       </YStack>
 
       {/* Toggle */}
       <XStack justifyContent="center" gap={4}>
-        <Text fontSize={14} color="#636e72">
+        <Text fontSize={14} color={T.textSub}>
           {funnelMode
             ? (mode === 'login' ? 'New here? Create an account' : 'Already have an account?')
             : (mode === 'login' ? "Don't have an account?" : 'Already have an account?')}
@@ -111,7 +166,7 @@ export function AuthScreen({ mode, onSubmit, onToggleMode, isLoading = false, er
         <Text
           fontSize={14}
           fontWeight="700"
-          color="$brandAqua"
+          color={T.accent}
           onPress={onToggleMode}
           cursor="pointer"
           animation="quick"
@@ -121,10 +176,10 @@ export function AuthScreen({ mode, onSubmit, onToggleMode, isLoading = false, er
         </Text>
       </XStack>
 
-      {/* Skip for now */}
+      {/* Skip */}
       <Text
         fontSize={13}
-        color="#a0a8b0"
+        color={T.muted}
         textAlign="center"
         onPress={() => onSubmit({ email: 'guest@yoyochampion.app', password: 'guest123' })}
         cursor="pointer"
