@@ -3,48 +3,62 @@ import { persist, createJSONStorage } from 'zustand/middleware';
 import { getStorage } from './storage';
 
 // Types
-export type SkillLevel = 'never' | 'beginner' | 'intermediate' | 'advanced' | 'expert';
+export type SkillLevel = 'brand_new' | 'beginner_tricks' | 'can_bind' | 'advanced';
 
-export type Goal =
-  | 'learn_basics' | 'master_string_tricks' | 'compete' | 'perform'
-  | 'teach_others' | 'just_fun' | 'fitness' | 'stress_relief';
+export type Goal = 'learn_first' | 'level_up' | 'compete' | 'other';
 
-export type PreferredStyle = '1A' | '2A' | '3A' | '4A' | '5A' | 'responsive';
+export type AccountUser = 'self' | 'child' | 'other';
+
+export type CurrentYoyoType = 'none' | 'responsive' | 'unresponsive' | 'other';
 
 export type OnboardingStep =
-  | 'welcome' | 'skill_level' | 'yoyo_experience' | 'goals' | 'favorite_yoyo' | 'preferred_styles' | 'handedness' | 'complete';
+  | 'welcome' | 'account_user' | 'experience' | 'quick_info'
+  | 'current_yoyo' | 'goal' | 'account_creation' | 'intro_video';
 
 export interface OnboardingState {
   currentStep: OnboardingStep;
+  // Step 2: Account user
+  accountUser: AccountUser | null;
+  isChildUnder13: boolean | null;
+  parentEmail: string | null;
+  // Step 3: Experience
   skillLevel: SkillLevel | null;
-  goals: Goal[];
-  preferredStyles: PreferredStyle[];
+  // Step 4: Quick info
+  handedness: 'left' | 'right' | null;
+  videoMirror: boolean;
+  country: string | null;
+  region: string | null;
+  // Step 5: Current yoyo
+  currentYoyoType: CurrentYoyoType | null;
+  currentYoyoOther: string | null;
+  shouldRecommendMasterPack: boolean;
+  // Step 6: Goal
+  goal: Goal | null;
+  goalText: string | null;
+  // Completion
   isComplete: boolean;
   recommendedPathId: string | null;
   completedAt: string | null;
   startedAt: string | null;
-  // Extended quiz fields
-  handedness?: 'left' | 'right' | null;
-  location?: string | null;
-  favoriteYoyo?: string | null;
-  country?: string | null;
-  region?: string | null;
 }
 
 export interface OnboardingActions {
   nextStep: () => void;
   prevStep: () => void;
   goToStep: (step: OnboardingStep) => void;
+  setAccountUser: (user: AccountUser) => void;
+  setIsChildUnder13: (value: boolean) => void;
+  setParentEmail: (email: string) => void;
   setSkillLevel: (level: SkillLevel) => void;
-  setGoals: (goals: Goal[]) => void;
-  toggleGoal: (goal: Goal) => void;
-  setPreferredStyles: (styles: PreferredStyle[]) => void;
-  togglePreferredStyle: (style: PreferredStyle) => void;
-  setRecommendedPath: (pathId: string) => void;
   setHandedness: (handedness: 'left' | 'right') => void;
+  setVideoMirror: (mirror: boolean) => void;
   setCountry: (country: string) => void;
   setRegion: (region: string) => void;
-  setFavoriteYoyo: (yoyo: string) => void;
+  setCurrentYoyoType: (type: CurrentYoyoType) => void;
+  setCurrentYoyoOther: (text: string) => void;
+  setGoal: (goal: Goal) => void;
+  setGoalText: (text: string) => void;
+  setRecommendedPath: (pathId: string) => void;
   completeOnboarding: () => void;
   resetOnboarding: () => void;
   skipOnboarding: () => void;
@@ -52,40 +66,37 @@ export interface OnboardingActions {
 
 export type OnboardingStore = OnboardingState & OnboardingActions;
 
-const STEP_ORDER: OnboardingStep[] = ['welcome', 'skill_level', 'yoyo_experience', 'goals', 'favorite_yoyo', 'preferred_styles', 'handedness', 'complete'];
-
-export const GOAL_METADATA: Record<Goal, { label: string; description: string; icon: string }> = {
-  learn_basics: { label: 'Learn the Basics', description: 'Start from scratch and build a solid foundation', icon: 'book-open' },
-  master_string_tricks: { label: 'Master String Tricks', description: 'Learn advanced 1A string manipulation', icon: 'target' },
-  compete: { label: 'Compete', description: 'Prepare for yo-yo competitions', icon: 'trophy' },
-  perform: { label: 'Perform', description: 'Create routines for shows and events', icon: 'star' },
-  teach_others: { label: 'Teach Others', description: 'Learn to instruct and mentor', icon: 'users' },
-  just_fun: { label: 'Just for Fun', description: 'Casual learning at your own pace', icon: 'smile' },
-  fitness: { label: 'Fitness & Coordination', description: 'Improve dexterity and hand-eye coordination', icon: 'activity' },
-  stress_relief: { label: 'Stress Relief', description: 'Relax and unwind with yo-yo', icon: 'coffee' },
-};
-
-export const STYLE_METADATA: Record<PreferredStyle, { label: string; description: string }> = {
-  '1A': { label: '1A - Single String', description: 'Classic yo-yo play with string tricks' },
-  '2A': { label: '2A - Double Looping', description: 'Two yo-yos doing looping tricks' },
-  '3A': { label: '3A - Double String', description: 'Two yo-yos doing string tricks' },
-  '4A': { label: '4A - Offstring', description: 'Yo-yo detached from string' },
-  '5A': { label: '5A - Counterweight', description: 'Dice or weight on string end' },
-  responsive: { label: 'Responsive', description: 'Traditional yo-yo that returns easily' },
-};
+const STEP_ORDER: OnboardingStep[] = [
+  'welcome', 'account_user', 'experience', 'quick_info',
+  'current_yoyo', 'goal', 'account_creation', 'intro_video',
+];
 
 export const SKILL_LEVEL_METADATA: Record<SkillLevel, { label: string; description: string }> = {
-  never: { label: 'Never Played', description: "I've never used a yo-yo before" },
-  beginner: { label: 'Beginner', description: 'I can do basic throws and catches' },
-  intermediate: { label: 'Intermediate', description: 'I know some string tricks like Trapeze' },
-  advanced: { label: 'Advanced', description: 'I can do complex combos and advanced tricks' },
-  expert: { label: 'Expert', description: 'I compete or have extensive experience' },
+  brand_new: { label: "I'm brand new", description: "Never used a yo-yo before" },
+  beginner_tricks: { label: 'I know a few beginner tricks', description: 'Can do basic throws and sleepers' },
+  can_bind: { label: 'I can bind consistently', description: 'Comfortable with unresponsive play' },
+  advanced: { label: 'I am an advanced player', description: 'Can do complex combos and tricks' },
 };
 
 const initialState: OnboardingState = {
-  currentStep: 'welcome', skillLevel: null, goals: [], preferredStyles: [], isComplete: false,
-  recommendedPathId: null, completedAt: null, startedAt: null,
-  handedness: null, location: null, favoriteYoyo: null, country: null, region: null,
+  currentStep: 'welcome',
+  accountUser: null,
+  isChildUnder13: null,
+  parentEmail: null,
+  skillLevel: null,
+  handedness: null,
+  videoMirror: false,
+  country: null,
+  region: null,
+  currentYoyoType: null,
+  currentYoyoOther: null,
+  shouldRecommendMasterPack: false,
+  goal: null,
+  goalText: null,
+  isComplete: false,
+  recommendedPathId: null,
+  completedAt: null,
+  startedAt: null,
 };
 
 export const useOnboardingStore = create<OnboardingStore>()(
@@ -116,36 +127,61 @@ export const useOnboardingStore = create<OnboardingStore>()(
         set({ currentStep: step, startedAt: state.startedAt || new Date().toISOString() });
       },
 
+      setAccountUser: (user: AccountUser) => { set({ accountUser: user }); },
+      setIsChildUnder13: (value: boolean) => { set({ isChildUnder13: value }); },
+      setParentEmail: (email: string) => { set({ parentEmail: email }); },
       setSkillLevel: (level: SkillLevel) => { set({ skillLevel: level }); },
-      setGoals: (goals: Goal[]) => { set({ goals }); },
-      toggleGoal: (goal: Goal) => {
-        const state = get();
-        set({ goals: state.goals.includes(goal) ? state.goals.filter((g) => g !== goal) : [...state.goals, goal] });
-      },
-      setPreferredStyles: (styles: PreferredStyle[]) => { set({ preferredStyles: styles }); },
-      togglePreferredStyle: (style: PreferredStyle) => {
-        const state = get();
-        set({ preferredStyles: state.preferredStyles.includes(style) ? state.preferredStyles.filter((s) => s !== style) : [...state.preferredStyles, style] });
-      },
-      setRecommendedPath: (pathId: string) => { set({ recommendedPathId: pathId }); },
       setHandedness: (handedness: 'left' | 'right') => { set({ handedness }); },
+      setVideoMirror: (mirror: boolean) => { set({ videoMirror: mirror }); },
       setCountry: (country: string) => { set({ country }); },
       setRegion: (region: string) => { set({ region }); },
-      setFavoriteYoyo: (favoriteYoyo: string) => { set({ favoriteYoyo }); },
-      completeOnboarding: () => { set({ isComplete: true, currentStep: 'complete', completedAt: new Date().toISOString() }); },
-      resetOnboarding: () => { set({ ...initialState, startedAt: new Date().toISOString() }); },
+      setCurrentYoyoType: (type: CurrentYoyoType) => {
+        const shouldRecommend = type === 'none' || type === 'other';
+        set({ currentYoyoType: type, shouldRecommendMasterPack: shouldRecommend });
+      },
+      setCurrentYoyoOther: (text: string) => { set({ currentYoyoOther: text }); },
+      setGoal: (goal: Goal) => { set({ goal }); },
+      setGoalText: (text: string) => { set({ goalText: text }); },
+      setRecommendedPath: (pathId: string) => { set({ recommendedPathId: pathId }); },
+
+      completeOnboarding: () => {
+        set({ isComplete: true, currentStep: 'intro_video', completedAt: new Date().toISOString() });
+      },
+
+      resetOnboarding: () => {
+        set({ ...initialState, startedAt: new Date().toISOString() });
+      },
+
       skipOnboarding: () => {
-        set({ isComplete: true, currentStep: 'complete', completedAt: new Date().toISOString(), skillLevel: 'beginner', goals: ['learn_basics'], preferredStyles: ['1A'] });
+        set({
+          isComplete: true,
+          currentStep: 'intro_video',
+          completedAt: new Date().toISOString(),
+          skillLevel: 'brand_new',
+          goal: 'learn_first',
+        });
       },
     }),
     {
       name: 'yoyo-onboarding-storage',
       storage: createJSONStorage(() => getStorage()),
       partialize: (state) => ({
-        isComplete: state.isComplete, completedAt: state.completedAt, skillLevel: state.skillLevel,
-        goals: state.goals, preferredStyles: state.preferredStyles, recommendedPathId: state.recommendedPathId,
-        handedness: state.handedness, location: state.location, favoriteYoyo: state.favoriteYoyo,
-        country: state.country, region: state.region,
+        isComplete: state.isComplete,
+        completedAt: state.completedAt,
+        skillLevel: state.skillLevel,
+        accountUser: state.accountUser,
+        isChildUnder13: state.isChildUnder13,
+        parentEmail: state.parentEmail,
+        goal: state.goal,
+        goalText: state.goalText,
+        currentYoyoType: state.currentYoyoType,
+        currentYoyoOther: state.currentYoyoOther,
+        shouldRecommendMasterPack: state.shouldRecommendMasterPack,
+        videoMirror: state.videoMirror,
+        handedness: state.handedness,
+        country: state.country,
+        region: state.region,
+        recommendedPathId: state.recommendedPathId,
       }),
       skipHydration: true,
     }
@@ -155,8 +191,7 @@ export const useOnboardingStore = create<OnboardingStore>()(
 // Selectors
 export const selectCurrentStep = (state: OnboardingStore) => state.currentStep;
 export const selectSkillLevel = (state: OnboardingStore) => state.skillLevel;
-export const selectGoals = (state: OnboardingStore) => state.goals;
-export const selectPreferredStyles = (state: OnboardingStore) => state.preferredStyles;
+export const selectGoal = (state: OnboardingStore) => state.goal;
 export const selectIsComplete = (state: OnboardingStore) => state.isComplete;
 export const selectRecommendedPathId = (state: OnboardingStore) => state.recommendedPathId;
 export const selectStepIndex = (state: OnboardingStore) => STEP_ORDER.indexOf(state.currentStep);
@@ -168,45 +203,26 @@ export const selectStepProgress = (state: OnboardingStore) => {
 export const selectCanProceed = (state: OnboardingStore): boolean => {
   switch (state.currentStep) {
     case 'welcome': return true;
-    case 'skill_level': return state.skillLevel !== null;
-    case 'yoyo_experience': return state.favoriteYoyo !== null;
-    case 'goals': return state.goals.length > 0;
-    case 'favorite_yoyo': return state.favoriteYoyo !== null;
-    case 'preferred_styles': return state.preferredStyles.length > 0;
-    case 'handedness': return state.handedness !== null && state.handedness !== undefined;
-    case 'complete': return true;
-    default: return false;
-  }
-};
-export const selectCanProceedForStep = (step: OnboardingStep) => (state: OnboardingStore): boolean => {
-  switch (step) {
-    case 'welcome': return true;
-    case 'skill_level': return state.skillLevel !== null;
-    case 'yoyo_experience': return state.favoriteYoyo !== null;
-    case 'goals': return state.goals.length > 0;
-    case 'favorite_yoyo': return state.favoriteYoyo !== null;
-    case 'preferred_styles': return state.preferredStyles.length > 0;
-    case 'handedness': return state.handedness !== null && state.handedness !== undefined;
-    case 'complete': return true;
+    case 'account_user': return state.accountUser !== null;
+    case 'experience': return state.skillLevel !== null;
+    case 'quick_info': return true; // all fields optional (have defaults or "rather not say")
+    case 'current_yoyo': return state.currentYoyoType !== null;
+    case 'goal': return state.goal !== null;
+    case 'account_creation': return true; // placeholder
+    case 'intro_video': return true;
     default: return false;
   }
 };
 export const selectIsFirstStep = (state: OnboardingStore) => state.currentStep === STEP_ORDER[0];
 export const selectIsLastStep = (state: OnboardingStore) => state.currentStep === STEP_ORDER[STEP_ORDER.length - 1];
-export const selectHasGoal = (goal: Goal) => (state: OnboardingStore) => state.goals.includes(goal);
-export const selectHasStyle = (style: PreferredStyle) => (state: OnboardingStore) => state.preferredStyles.includes(style);
+
 export const selectRecommendedPaths = (state: OnboardingStore): string[] => {
-  const { skillLevel, goals, preferredStyles } = state;
+  const { skillLevel, goal } = state;
   const recommendations: string[] = [];
-  if (skillLevel === 'never' || skillLevel === 'beginner') recommendations.push('absolute-beginner-path');
-  if (goals.includes('master_string_tricks') || preferredStyles.includes('1A')) {
-    if (skillLevel === 'intermediate') recommendations.push('intermediate-1a-path');
-    else if (skillLevel === 'advanced' || skillLevel === 'expert') recommendations.push('advanced-1a-path');
-  }
-  if (preferredStyles.includes('2A')) recommendations.push('looping-fundamentals-path');
-  if (preferredStyles.includes('4A')) recommendations.push('offstring-basics-path');
-  if (preferredStyles.includes('5A')) recommendations.push('counterweight-intro-path');
-  if (goals.includes('compete')) recommendations.push('competition-prep-path');
+  if (skillLevel === 'brand_new' || skillLevel === 'beginner_tricks') recommendations.push('absolute-beginner-path');
+  if (skillLevel === 'can_bind') recommendations.push('intermediate-1a-path');
+  if (skillLevel === 'advanced') recommendations.push('advanced-1a-path');
+  if (goal === 'compete') recommendations.push('competition-prep-path');
   if (recommendations.length === 0) recommendations.push('getting-started-path');
   return recommendations;
 };

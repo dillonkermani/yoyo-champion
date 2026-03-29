@@ -1,109 +1,109 @@
-import { useOnboardingStore, STEP_ORDER, SKILL_LEVEL_METADATA, GOAL_METADATA, STYLE_METADATA } from './onboarding-store';
-import type { SkillLevel, Goal, PreferredStyle } from './onboarding-store';
+import { useOnboardingStore, STEP_ORDER } from './onboarding-store';
+import type { OnboardingStep, SkillLevel, Goal, AccountUser, CurrentYoyoType } from './onboarding-store';
 
-export type OnboardingStepId =
-  | 'intro_video'
-  | 'skill-level'
-  | 'yoyo_experience'
-  | 'goals'
-  | 'favorite_yoyo'
-  | 'styles'
-  | 'handedness';
+export interface OnboardingChoice {
+  id: string;
+  label: string;
+  emoji: string;
+  description?: string;
+}
+
+export type OnboardingScreenType = 'welcome' | 'choices' | 'quick_info' | 'auth' | 'video';
 
 export interface OnboardingStepConfig {
-  id: OnboardingStepId;
+  key: OnboardingStep;
   questionTitle: string;
   questionEmoji: string;
   questionSubtitle: string;
-  multiSelect: boolean;
-  getChoices: () => { id: string; label: string; description: string }[];
+  type: OnboardingScreenType;
+  choices?: OnboardingChoice[];
+  multiSelect?: boolean;
+  hasTextInput?: boolean;
+  hasSubQuestion?: boolean;
 }
 
 export const ONBOARDING_STEPS: OnboardingStepConfig[] = [
   {
-    id: 'intro_video',
-    questionTitle: 'Welcome to YoYo Champion',
+    key: 'welcome',
+    questionTitle: 'Learn Yoyo the Right Way',
     questionEmoji: '🪀',
-    questionSubtitle: 'Watch our intro to get started',
-    multiSelect: false,
-    getChoices: () => [
-      { id: 'continue', label: 'Continue', description: '' },
-    ],
+    questionSubtitle: 'Built by a 2x World Champion.',
+    type: 'welcome',
   },
   {
-    id: 'skill-level',
-    questionTitle: "What's your yo-yo skill level?",
+    key: 'account_user',
+    questionTitle: 'Who will be using this account?',
+    questionEmoji: '👤',
+    questionSubtitle: 'Help us set up the right experience.',
+    type: 'choices',
+    choices: [
+      { id: 'self', label: 'I will be using it', emoji: '👤' },
+      { id: 'child', label: 'My child will be using it', emoji: '👶' },
+      { id: 'other', label: "I'm setting this up for someone else", emoji: '🎁' },
+    ],
+    hasSubQuestion: true,
+  },
+  {
+    key: 'experience',
+    questionTitle: 'What is your yoyo experience level?',
     questionEmoji: '🎯',
     questionSubtitle: 'This helps us tailor your learning path.',
-    multiSelect: false,
-    getChoices: () => Object.entries(SKILL_LEVEL_METADATA).map(([id, meta]) => ({
-      id,
-      label: meta.label,
-      description: meta.description,
-    })),
-  },
-  {
-    id: 'yoyo_experience',
-    questionTitle: 'How long have you been yo-yoing?',
-    questionEmoji: '⏳',
-    questionSubtitle: 'This helps us find the right content for you.',
-    multiSelect: false,
-    getChoices: () => [
-      { id: 'just_starting', label: 'Just starting', description: '' },
-      { id: 'few_months', label: 'A few months', description: '' },
-      { id: '1_2_years', label: '1-2 years', description: '' },
-      { id: '3_plus_years', label: '3+ years', description: '' },
-      { id: '5_plus_years', label: '5+ years', description: '' },
+    type: 'choices',
+    choices: [
+      { id: 'brand_new', label: "I'm brand new", emoji: '🌱' },
+      { id: 'beginner_tricks', label: 'I know a few beginner tricks', emoji: '🎈' },
+      { id: 'can_bind', label: 'I can bind consistently', emoji: '🔄' },
+      { id: 'advanced', label: 'I am an advanced player', emoji: '🏆' },
     ],
   },
   {
-    id: 'goals',
-    questionTitle: 'What are your goals?',
-    questionEmoji: '🏆',
-    questionSubtitle: 'Select all that apply.',
-    multiSelect: true,
-    getChoices: () => Object.entries(GOAL_METADATA).map(([id, meta]) => ({
-      id,
-      label: meta.label,
-      description: meta.description,
-    })),
+    key: 'quick_info',
+    questionTitle: 'A few quick questions',
+    questionEmoji: '📋',
+    questionSubtitle: 'Help us personalize your experience.',
+    type: 'quick_info',
   },
   {
-    id: 'favorite_yoyo',
-    questionTitle: "What's your favorite YoYo Champion yoyo?",
+    key: 'current_yoyo',
+    questionTitle: 'What kind of yoyo are you using?',
     questionEmoji: '🪀',
-    questionSubtitle: 'Help us learn about your preferences.',
-    multiSelect: false,
-    getChoices: () => [
-      { id: 'none_yet', label: "Haven't tried one yet", description: '' },
-      { id: 'shutter', label: 'Shutter', description: '' },
-      { id: 'replay_pro', label: 'Replay Pro', description: '' },
-      { id: 'edge', label: 'Edge', description: '' },
-      { id: 'other', label: 'Other', description: '' },
+    questionSubtitle: 'This helps us recommend the right gear.',
+    type: 'choices',
+    choices: [
+      { id: 'none', label: "I don't have a yoyo yet", emoji: '🛒' },
+      { id: 'responsive', label: 'Responsive beginner yoyo', emoji: '🟢' },
+      { id: 'unresponsive', label: 'Unresponsive yoyo', emoji: '🔵' },
+      { id: 'other', label: 'Other', emoji: '🤔' },
     ],
+    hasTextInput: true,
   },
   {
-    id: 'styles',
-    questionTitle: 'Which yo-yo styles interest you?',
-    questionEmoji: '✨',
-    questionSubtitle: 'Select all that apply.',
-    multiSelect: true,
-    getChoices: () => Object.entries(STYLE_METADATA).map(([id, meta]) => ({
-      id,
-      label: meta.label,
-      description: meta.description,
-    })),
+    key: 'goal',
+    questionTitle: 'What do you want to achieve?',
+    questionEmoji: '🎯',
+    questionSubtitle: 'Pick the one that fits you best.',
+    type: 'choices',
+    choices: [
+      { id: 'learn_first', label: 'Learn my first tricks', emoji: '🌟' },
+      { id: 'level_up', label: 'Level up to advanced tricks', emoji: '📈' },
+      { id: 'compete', label: 'Compete or perform', emoji: '🏅' },
+      { id: 'other', label: 'Other', emoji: '💭' },
+    ],
+    hasTextInput: true,
   },
   {
-    id: 'handedness',
-    questionTitle: 'Which hand do you throw with?',
-    questionEmoji: '🤚',
-    questionSubtitle: "We'll mirror tutorial videos for left-handers",
-    multiSelect: false,
-    getChoices: () => [
-      { id: 'right', label: 'Right hand', description: '' },
-      { id: 'left', label: 'Left hand', description: '' },
-    ],
+    key: 'account_creation',
+    questionTitle: 'Create Your Account',
+    questionEmoji: '🔐',
+    questionSubtitle: 'Sign up to save your progress.',
+    type: 'auth',
+  },
+  {
+    key: 'intro_video',
+    questionTitle: 'One Last Thing...',
+    questionEmoji: '🎬',
+    questionSubtitle: 'Watch this quick intro to unlock the full app.',
+    type: 'video',
   },
 ];
 
@@ -117,23 +117,17 @@ export function useOnboardingFlow(onComplete: () => void) {
   const clampedIndex = Math.min(Math.max(stepIndex, 0), ONBOARDING_STEPS.length - 1);
   const config = ONBOARDING_STEPS[clampedIndex]!;
 
+  // Map store state to selected choice IDs for the current step
   const getSelectedChoiceIds = (): string[] => {
-    switch (config.id) {
-      case 'intro_video':
-        return ['continue']; // Always "selected" so Next is enabled
-      case 'skill-level':
+    switch (config.key) {
+      case 'account_user':
+        return store.accountUser ? [store.accountUser] : [];
+      case 'experience':
         return store.skillLevel ? [store.skillLevel] : [];
-      case 'yoyo_experience':
-        // Store experience in favoriteYoyo temporarily (reused field)
-        return store.favoriteYoyo ? [store.favoriteYoyo] : [];
-      case 'goals':
-        return store.goals ?? [];
-      case 'favorite_yoyo':
-        return store.favoriteYoyo ? [store.favoriteYoyo] : [];
-      case 'styles':
-        return store.preferredStyles ?? [];
-      case 'handedness':
-        return store.handedness ? [store.handedness] : [];
+      case 'current_yoyo':
+        return store.currentYoyoType ? [store.currentYoyoType] : [];
+      case 'goal':
+        return store.goal ? [store.goal] : [];
       default:
         return [];
     }
@@ -141,30 +135,108 @@ export function useOnboardingFlow(onComplete: () => void) {
 
   const selectedChoiceIds = getSelectedChoiceIds();
 
+  // Handle choice selection for the current step
   const handleChoicePress = (id: string) => {
-    switch (config.id) {
-      case 'intro_video':
-        // No-op, just proceed
+    switch (config.key) {
+      case 'account_user':
+        store.setAccountUser(id as AccountUser);
+        // Reset sub-question when changing main selection
+        if (id === 'self') {
+          store.setIsChildUnder13(false);
+        }
         break;
-      case 'skill-level':
+      case 'experience':
         store.setSkillLevel(id as SkillLevel);
         break;
-      case 'yoyo_experience':
-        store.setFavoriteYoyo(id);
+      case 'current_yoyo':
+        store.setCurrentYoyoType(id as CurrentYoyoType);
+        if (id !== 'other') {
+          store.setCurrentYoyoOther('');
+        }
         break;
-      case 'goals':
-        store.toggleGoal(id as Goal);
-        break;
-      case 'favorite_yoyo':
-        store.setFavoriteYoyo(id);
-        break;
-      case 'styles':
-        store.togglePreferredStyle(id as PreferredStyle);
-        break;
-      case 'handedness':
-        store.setHandedness(id as 'left' | 'right');
+      case 'goal':
+        store.setGoal(id as Goal);
+        if (id !== 'other') {
+          store.setGoalText('');
+        }
         break;
     }
+  };
+
+  // Sub-question for account_user step (under-13 check)
+  const showSubQuestion = config.key === 'account_user' &&
+    (store.accountUser === 'child' || store.accountUser === 'other');
+
+  const subQuestionTitle = store.accountUser === 'child'
+    ? 'Is your child under 13?'
+    : 'Is the person under 13?';
+
+  const subQuestionChoices = [
+    { id: 'yes', label: 'Yes' },
+    { id: 'no', label: 'No' },
+  ];
+
+  const selectedSubChoiceId = store.isChildUnder13 === null
+    ? null
+    : store.isChildUnder13 ? 'yes' : 'no';
+
+  const handleSubChoicePress = (id: string) => {
+    store.setIsChildUnder13(id === 'yes');
+  };
+
+  // Text input state for "Other" options
+  const getTextInputValue = (): string => {
+    if (config.key === 'current_yoyo') return store.currentYoyoOther ?? '';
+    if (config.key === 'goal') return store.goalText ?? '';
+    return '';
+  };
+
+  const handleTextInputChange = (text: string) => {
+    if (config.key === 'current_yoyo') store.setCurrentYoyoOther(text);
+    if (config.key === 'goal') store.setGoalText(text);
+  };
+
+  const getTextInputPlaceholder = (): string => {
+    if (config.key === 'current_yoyo') return 'What yoyo do you have?';
+    if (config.key === 'goal') return 'What is your goal?';
+    return '';
+  };
+
+  // Show text input only when "other" is selected
+  const shouldShowTextInput = config.hasTextInput === true && selectedChoiceIds.includes('other');
+
+  // Determine if next is disabled
+  const getIsNextDisabled = (): boolean => {
+    switch (config.key) {
+      case 'welcome':
+        return false;
+      case 'account_user':
+        if (!store.accountUser) return true;
+        if (showSubQuestion && store.isChildUnder13 === null) return true;
+        return false;
+      case 'experience':
+        return store.skillLevel === null;
+      case 'quick_info':
+        return false; // all optional
+      case 'current_yoyo':
+        return store.currentYoyoType === null;
+      case 'goal':
+        return store.goal === null;
+      case 'account_creation':
+        return false; // placeholder
+      case 'intro_video':
+        return false;
+      default:
+        return true;
+    }
+  };
+
+  // Get appropriate button text
+  const getNextButtonText = (): string => {
+    if (config.key === 'welcome') return 'Start';
+    if (config.key === 'intro_video') return 'Continue';
+    if (config.key === 'account_creation') return 'Continue';
+    return 'Next';
   };
 
   const handleNext = () => {
@@ -176,8 +248,14 @@ export function useOnboardingFlow(onComplete: () => void) {
     }
   };
 
+  const handleBack = () => {
+    if (clampedIndex > 0) {
+      store.prevStep();
+    }
+  };
+
   const handleSkip = () => {
-    store.completeOnboarding();
+    store.skipOnboarding();
     onComplete();
   };
 
@@ -188,6 +266,32 @@ export function useOnboardingFlow(onComplete: () => void) {
     selectedChoiceIds,
     handleChoicePress,
     handleNext,
+    handleBack,
     handleSkip,
+    // Sub-question
+    showSubQuestion,
+    subQuestionTitle,
+    subQuestionChoices,
+    selectedSubChoiceId,
+    handleSubChoicePress,
+    // Text input
+    shouldShowTextInput,
+    textInputValue: getTextInputValue(),
+    handleTextInputChange,
+    textInputPlaceholder: getTextInputPlaceholder(),
+    // Quick info
+    handedness: store.handedness,
+    handleHandednessChange: store.setHandedness,
+    videoMirror: store.videoMirror,
+    handleVideoMirrorToggle: () => store.setVideoMirror(!store.videoMirror),
+    country: store.country,
+    handleCountryChange: store.setCountry,
+    region: store.region,
+    handleRegionChange: store.setRegion,
+    // Auth
+    isChildUnder13: store.isChildUnder13,
+    // Navigation state
+    isNextDisabled: getIsNextDisabled(),
+    nextButtonText: getNextButtonText(),
   };
 }

@@ -13,7 +13,7 @@ export interface UploadsGridProps {
   onUploadPress?: (id: string) => void;
 }
 
-export function UploadsGrid({ uploads, onUploadPress }: UploadsGridProps) {
+export function UploadsGrid({ uploads = [], onUploadPress }: UploadsGridProps) {
   if (uploads.length === 0) {
     return (
       <YStack
