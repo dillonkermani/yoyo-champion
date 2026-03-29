@@ -1,6 +1,6 @@
 import { HomeScreen } from '@yoyo/ui';
-import { useProgressStore, useSocialStore, useVideoStore } from '@yoyo/store';
-import { selectTotalTricksMastered, selectUploadReputation, selectTrainerStatus, selectFollowerCount, selectMyUploads } from '@yoyo/store';
+import { useProgressStore, useSocialStore, useVideoStore, useGamificationStore } from '@yoyo/store';
+import { selectTotalTricksMastered, selectUploadReputation, selectTrainerStatus, selectFollowerCount, selectMyUploads, selectXp, selectLevel, selectLevelProgress, selectCurrentStreak } from '@yoyo/store';
 import { mockTricks, mockPaths } from '@yoyo/data';
 import { useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -11,6 +11,15 @@ export default function HomeTab() {
 
   // Progress store
   const trickProgress = useProgressStore(selectTotalTricksMastered);
+  const streak = useProgressStore(selectCurrentStreak);
+
+  // Gamification store
+  const xp = useGamificationStore(selectXp);
+  const level = useGamificationStore(selectLevel);
+  const levelProgress = useGamificationStore(selectLevelProgress);
+  const xpProgressPercent = levelProgress.required > 0
+    ? Math.round((levelProgress.current / levelProgress.required) * 100)
+    : 100;
 
   // Social store
   const uploadReputation = useSocialStore(selectUploadReputation);
@@ -43,6 +52,10 @@ export default function HomeTab() {
   return (
     <HomeScreen
       displayName="Champion"
+      level={level}
+      xp={xp}
+      streak={streak}
+      xpProgressPercent={xpProgressPercent}
       trickProgress={trickProgress}
       uploadReputation={uploadReputation}
       trainerStatus={trainerStatus}

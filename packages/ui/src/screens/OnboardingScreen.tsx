@@ -205,14 +205,14 @@ function ChoiceCard({
     >
       {choice.emoji && (
         <Stack
-          width={48}
-          height={48}
-          borderRadius={14}
+          width={52}
+          height={52}
+          borderRadius={16}
           backgroundColor={isSelected ? T.accent : '#F3F4F6'}
           justifyContent="center"
           alignItems="center"
         >
-          <Text fontSize={24}>{choice.emoji}</Text>
+          <Text fontSize={24} lineHeight={28}>{choice.emoji}</Text>
         </Stack>
       )}
       <YStack flex={1} gap={2}>
@@ -300,15 +300,15 @@ function QuestionHeader({
     <YStack gap={10} alignItems={centered ? 'center' : 'flex-start'}>
       {emoji && (
         <Stack
-          width={64}
-          height={64}
-          borderRadius={20}
+          width={72}
+          height={72}
+          borderRadius={22}
           backgroundColor={T.accentLight}
           justifyContent="center"
           alignItems="center"
           marginBottom={4}
         >
-          <Text fontSize={36}>{emoji}</Text>
+          <Text fontSize={30} lineHeight={36}>{emoji}</Text>
         </Stack>
       )}
       <Text
@@ -349,15 +349,15 @@ function WelcomeContent({
     <YStack flex={1} justifyContent="center" alignItems="center" gap={24} paddingHorizontal={16}>
       {/* Mascot circle */}
       <Stack
-        width={100}
-        height={100}
-        borderRadius={50}
+        width={120}
+        height={120}
+        borderRadius={60}
         backgroundColor={T.accentLight}
         justifyContent="center"
         alignItems="center"
         {...NEU.glowAqua}
       >
-        <Text fontSize={56}>{questionEmoji || '\uD83E\uDE80'}</Text>
+        <Text fontSize={48} lineHeight={56}>{questionEmoji || '\uD83E\uDE80'}</Text>
       </Stack>
 
       <YStack gap={12} alignItems="center">
@@ -399,7 +399,7 @@ function WelcomeContent({
             gap={6}
             alignItems="center"
           >
-            <Text fontSize={16}>{f.emoji}</Text>
+            <Text fontSize={16} lineHeight={20}>{f.emoji}</Text>
             <Text fontSize={13} fontWeight="600" color={T.accentDark}>{f.label}</Text>
           </XStack>
         ))}
@@ -465,7 +465,8 @@ function ChoicesContent({
           borderRadius={16}
           borderWidth={2}
           borderColor={T.border}
-          padding={16}
+          height={52}
+          paddingHorizontal={16}
           fontSize={15}
           color={T.text}
           placeholderTextColor={T.muted}
@@ -531,8 +532,8 @@ function QuickInfoContent({
           Are you right or left handed?
         </Text>
         <XStack gap={12}>
-          <PillButton label={'\u270B Right'} isSelected={handedness === 'right'} onPress={() => onHandednessChange?.('right')} />
           <PillButton label={'\u270B Left'} isSelected={handedness === 'left'} onPress={() => onHandednessChange?.('left')} />
+          <PillButton label={'\u270B Right'} isSelected={handedness === 'right'} onPress={() => onHandednessChange?.('right')} />
         </XStack>
       </YStack>
 
@@ -587,7 +588,8 @@ function QuickInfoContent({
           borderRadius={16}
           borderWidth={2}
           borderColor={T.border}
-          padding={16}
+          height={52}
+          paddingHorizontal={16}
           fontSize={15}
           color={T.text}
           placeholderTextColor={T.muted}
@@ -601,7 +603,8 @@ function QuickInfoContent({
           borderRadius={16}
           borderWidth={2}
           borderColor={T.border}
-          padding={16}
+          height={52}
+          paddingHorizontal={16}
           fontSize={15}
           color={T.text}
           placeholderTextColor={T.muted}

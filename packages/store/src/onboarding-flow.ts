@@ -107,6 +107,11 @@ export const ONBOARDING_STEPS: OnboardingStepConfig[] = [
   },
 ];
 
+// Module-level guard to prevent double-advance when Tamagui animation
+// pressStyle fires onPress twice before React can re-render.
+let _lastAdvanceTime = 0;
+const ADVANCE_DEBOUNCE_MS = 300;
+
 /**
  * Shared onboarding flow logic — returns everything the OnboardingScreen needs.
  * Caller provides `onComplete` callback to handle platform-specific navigation.
@@ -240,7 +245,16 @@ export function useOnboardingFlow(onComplete: () => void) {
   };
 
   const handleNext = () => {
-    if (clampedIndex < ONBOARDING_STEPS.length - 1) {
+    // Guard against double-advances caused by Tamagui animation pressStyle
+    // firing onPress twice before React can re-render the component.
+    const now = Date.now();
+    if (now - _lastAdvanceTime < ADVANCE_DEBOUNCE_MS) return;
+    _lastAdvanceTime = now;
+
+    // Read the current step directly from the store to avoid stale closures
+    const currentStep = useOnboardingStore.getState().currentStep;
+    const currentIndex = STEP_ORDER.indexOf(currentStep);
+    if (currentIndex < ONBOARDING_STEPS.length - 1) {
       store.nextStep();
     } else {
       store.completeOnboarding();
@@ -249,7 +263,13 @@ export function useOnboardingFlow(onComplete: () => void) {
   };
 
   const handleBack = () => {
-    if (clampedIndex > 0) {
+    const now = Date.now();
+    if (now - _lastAdvanceTime < ADVANCE_DEBOUNCE_MS) return;
+    _lastAdvanceTime = now;
+
+    const currentStep = useOnboardingStore.getState().currentStep;
+    const currentIndex = STEP_ORDER.indexOf(currentStep);
+    if (currentIndex > 0) {
       store.prevStep();
     }
   };
