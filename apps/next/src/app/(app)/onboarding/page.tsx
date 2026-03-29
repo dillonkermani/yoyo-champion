@@ -15,6 +15,7 @@ export default function OnboardingPage() {
   const flow = useOnboardingFlow(() => router.replace('/dashboard'));
 
   return (
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'stretch', minHeight: '100vh' }}>
     <OnboardingScreen
       stepIndex={flow.stepIndex}
       totalSteps={flow.totalSteps}
@@ -50,5 +51,6 @@ export default function OnboardingPage() {
       isNextDisabled={flow.isNextDisabled}
       nextButtonText={flow.nextButtonText}
     />
+    </div>
   );
 }
