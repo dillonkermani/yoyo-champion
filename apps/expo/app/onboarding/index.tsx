@@ -16,7 +16,7 @@ export default function OnboardingIndex() {
       questionTitle={flow.config.questionTitle}
       questionEmoji={flow.config.questionEmoji}
       questionSubtitle={flow.config.questionSubtitle}
-      choices={flow.config.getChoices()}
+      choices={flow.config.choices ?? []}
       selectedChoiceIds={flow.selectedChoiceIds}
       multiSelect={flow.config.multiSelect}
       onChoicePress={flow.handleChoicePress}
