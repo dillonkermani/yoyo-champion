@@ -1,34 +1,36 @@
 "use client";
 import { useState } from 'react';
 import { AuthScreen } from '@yoyo/ui';
-import { useUserStore } from '@yoyo/store';
+import { useUserStore, useOnboardingStore } from '@yoyo/store';
 import { useRouter } from 'next/navigation';
 
 export default function LoginPage() {
   const router = useRouter();
-  const { loginWithCredentials, signup, isLoading } = useUserStore();
-  const [mode, setMode] = useState<'login' | 'signup'>('login');
+  const { loginWithCredentials, isLoading } = useUserStore();
   const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = async ({ name, email, password }: { name?: string; email: string; password: string }) => {
+  const handleSubmit = async ({ email, password }: { name?: string; email: string; password: string }) => {
     setError(null);
-    const success = mode === 'signup'
-      ? await signup(name ?? '', email, password)
-      : await loginWithCredentials(email, password);
+    const success = await loginWithCredentials(email, password);
 
     if (success) {
-      router.replace('/onboarding');
+      router.replace('/');
     } else {
-      setError(mode === 'login' ? 'Invalid email or password' : 'Could not create account');
+      setError('Invalid email or password');
     }
+  };
+
+  const handleToggleMode = () => {
+    useOnboardingStore.getState().resetOnboarding();
+    router.push('/onboarding');
   };
 
   return (
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'stretch', minHeight: '100vh' }}>
     <AuthScreen
-      mode={mode}
+      mode="login"
       onSubmit={handleSubmit}
-      onToggleMode={() => { setMode(mode === 'login' ? 'signup' : 'login'); setError(null); }}
+      onToggleMode={handleToggleMode}
       isLoading={isLoading}
       error={error}
     />
