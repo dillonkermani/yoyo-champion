@@ -33,7 +33,6 @@ export default function AuthIndex() {
       isLoading={isLoading}
       error={error}
       paddingTop={insets.top}
-      funnelMode={true}
     />
   );
 }

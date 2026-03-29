@@ -10,7 +10,6 @@ export interface AuthScreenProps {
   isLoading?: boolean;
   error?: string | null;
   paddingTop?: number;
-  funnelMode?: boolean;
 }
 
 const T = {
@@ -27,7 +26,7 @@ const T = {
   error: '#FF4B4B',
 } as const;
 
-export function AuthScreen({ mode, onSubmit, onToggleMode, isLoading = false, error, paddingTop = 0, funnelMode = false }: AuthScreenProps) {
+export function AuthScreen({ mode, onSubmit, onToggleMode, isLoading = false, error, paddingTop = 0 }: AuthScreenProps) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -54,27 +53,23 @@ export function AuthScreen({ mode, onSubmit, onToggleMode, isLoading = false, er
     >
       {/* Logo / Header */}
       <YStack alignItems="center" gap={10}>
-        {!funnelMode && (
-          <Stack
-            width={80}
-            height={80}
-            borderRadius={40}
-            backgroundColor={T.accentLight}
-            justifyContent="center"
-            alignItems="center"
-            marginBottom={8}
-            {...NEU.glowAqua}
-          >
-            <Text fontSize={44}>{'\uD83E\uDE80'}</Text>
-          </Stack>
-        )}
+        <Stack
+          width={80}
+          height={80}
+          borderRadius={40}
+          backgroundColor={T.accentLight}
+          justifyContent="center"
+          alignItems="center"
+          marginBottom={8}
+          {...NEU.glowAqua}
+        >
+          <Text fontSize={44}>{'\uD83E\uDE80'}</Text>
+        </Stack>
         <Text fontSize={30} fontWeight="900" color={T.text} letterSpacing={-0.8}>
-          {funnelMode ? "You're all set!" : 'YoYo Champion'}
+          YoYo Champion
         </Text>
         <Text fontSize={16} color={T.textSub}>
-          {funnelMode
-            ? 'Create your account to save your progress'
-            : mode === 'login'
+          {mode === 'login'
             ? 'Welcome back!'
             : 'Start your yo-yo journey'}
         </Text>
@@ -159,9 +154,7 @@ export function AuthScreen({ mode, onSubmit, onToggleMode, isLoading = false, er
       {/* Toggle */}
       <XStack justifyContent="center" gap={4}>
         <Text fontSize={14} color={T.textSub}>
-          {funnelMode
-            ? (mode === 'login' ? 'New here? Create an account' : 'Already have an account?')
-            : (mode === 'login' ? "Don't have an account?" : 'Already have an account?')}
+          {mode === 'login' ? "Don't have an account?" : 'Already have an account?'}
         </Text>
         <Text
           fontSize={14}

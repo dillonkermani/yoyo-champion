@@ -13,7 +13,7 @@ export type CurrentYoyoType = 'none' | 'responsive' | 'unresponsive' | 'other';
 
 export type OnboardingStep =
   | 'welcome' | 'account_user' | 'experience' | 'quick_info'
-  | 'current_yoyo' | 'goal' | 'account_creation' | 'intro_video';
+  | 'current_yoyo' | 'goal' | 'intro_video';
 
 export interface OnboardingState {
   currentStep: OnboardingStep;
@@ -68,7 +68,7 @@ export type OnboardingStore = OnboardingState & OnboardingActions;
 
 const STEP_ORDER: OnboardingStep[] = [
   'welcome', 'account_user', 'experience', 'quick_info',
-  'current_yoyo', 'goal', 'account_creation', 'intro_video',
+  'current_yoyo', 'goal', 'intro_video',
 ];
 
 export const SKILL_LEVEL_METADATA: Record<SkillLevel, { label: string; description: string }> = {
@@ -208,7 +208,6 @@ export const selectCanProceed = (state: OnboardingStore): boolean => {
     case 'quick_info': return true; // all fields optional (have defaults or "rather not say")
     case 'current_yoyo': return state.currentYoyoType !== null;
     case 'goal': return state.goal !== null;
-    case 'account_creation': return true; // placeholder
     case 'intro_video': return true;
     default: return false;
   }

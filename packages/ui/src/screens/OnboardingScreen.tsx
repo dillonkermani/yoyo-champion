@@ -1,5 +1,6 @@
 import React from 'react';
-import { YStack, XStack, Input, Switch, ScrollView, Stack } from 'tamagui';
+import { YStack, XStack, Input, ScrollView, Stack } from 'tamagui';
+import { Switch as RNSwitch } from 'react-native';
 import { Text } from '../Text';
 import { NEU } from '../tamagui.config';
 
@@ -16,7 +17,7 @@ export interface OnboardingScreenProps {
   questionTitle: string;
   questionEmoji?: string;
   questionSubtitle?: string;
-  screenType: 'welcome' | 'choices' | 'quick_info' | 'auth' | 'video';
+  screenType: 'welcome' | 'choices' | 'quick_info' | 'video';
   choices?: OnboardingChoice[];
   selectedChoiceIds?: string[];
   multiSelect?: boolean;
@@ -556,14 +557,12 @@ function QuickInfoContent({
             Flip videos for left-handed viewing
           </Text>
         </YStack>
-        <Switch
-          size="$4"
-          checked={videoMirror ?? false}
-          onCheckedChange={() => onVideoMirrorToggle?.()}
-          backgroundColor={videoMirror ? T.accent : T.border}
-        >
-          <Switch.Thumb animation="quick" backgroundColor={T.white} />
-        </Switch>
+        <RNSwitch
+          value={videoMirror ?? false}
+          onValueChange={() => onVideoMirrorToggle?.()}
+          trackColor={{ false: T.border, true: T.accent }}
+          thumbColor={T.white}
+        />
       </XStack>
 
       {/* Location */}
@@ -612,116 +611,6 @@ function QuickInfoContent({
           focusStyle={{ borderColor: T.accent }}
         />
       </YStack>
-    </YStack>
-  );
-}
-
-// ── Auth Screen ────────────────────────────────────────────────────────
-function AuthContent({
-  questionEmoji,
-  questionTitle,
-  questionSubtitle,
-  isChildUnder13,
-  onNext,
-}: {
-  questionEmoji?: string;
-  questionTitle: string;
-  questionSubtitle?: string;
-  isChildUnder13?: boolean | null;
-  onNext: () => void;
-}) {
-  return (
-    <YStack gap={28} flex={1}>
-      <QuestionHeader emoji={questionEmoji} title={questionTitle} subtitle={questionSubtitle} centered />
-
-      {isChildUnder13 && (
-        <XStack
-          backgroundColor={T.warningBg}
-          borderRadius={14}
-          padding={16}
-          gap={10}
-          alignItems="center"
-        >
-          <Text fontSize={20}>{'\u26A0\uFE0F'}</Text>
-          <Text fontSize={14} fontWeight="600" color={T.warningText} flex={1}>
-            Parent email required for accounts under 13
-          </Text>
-        </XStack>
-      )}
-
-      <YStack gap={14}>
-        {/* Google */}
-        <XStack
-          backgroundColor={T.cardBg}
-          borderRadius={18}
-          height={58}
-          justifyContent="center"
-          alignItems="center"
-          borderWidth={2}
-          borderColor={T.border}
-          onPress={onNext}
-          animation="quick"
-          pressStyle={{ scale: 0.97, opacity: 0.9 }}
-          hoverStyle={{ borderColor: '#C5CAD1' }}
-          cursor="pointer"
-          gap={10}
-          {...NEU.card}
-        >
-          <Text fontSize={22} fontWeight="700" color="#4285F4">G</Text>
-          <Text fontSize={16} fontWeight="700" color={T.text}>
-            Continue with Google
-          </Text>
-        </XStack>
-
-        {/* Apple */}
-        <XStack
-          backgroundColor={T.black}
-          borderRadius={18}
-          height={58}
-          justifyContent="center"
-          alignItems="center"
-          onPress={onNext}
-          animation="quick"
-          pressStyle={{ scale: 0.97, opacity: 0.9 }}
-          cursor="pointer"
-          gap={10}
-          shadowColor="#000"
-          shadowOffset={{ width: 0, height: 2 }}
-          shadowRadius={8}
-          shadowOpacity={0.3}
-          elevation={4}
-        >
-          <Text fontSize={22} color={T.white}>{'\uF8FF'}</Text>
-          <Text fontSize={16} fontWeight="700" color={T.white}>
-            Continue with Apple
-          </Text>
-        </XStack>
-
-        {/* Email */}
-        <XStack
-          backgroundColor={T.cardBg}
-          borderRadius={18}
-          height={58}
-          justifyContent="center"
-          alignItems="center"
-          borderWidth={2.5}
-          borderColor={T.accent}
-          onPress={onNext}
-          animation="quick"
-          pressStyle={{ scale: 0.97, opacity: 0.9 }}
-          cursor="pointer"
-          gap={10}
-        >
-          <Text fontSize={16}>{'\u2709\uFE0F'}</Text>
-          <Text fontSize={16} fontWeight="700" color={T.accent}>
-            Continue with Email
-          </Text>
-        </XStack>
-      </YStack>
-
-      <Text fontSize={12} color={T.muted} textAlign="center" lineHeight={18}>
-        By continuing, you agree to our Terms of Service and Privacy Policy.
-      </Text>
     </YStack>
   );
 }
@@ -878,16 +767,6 @@ export function OnboardingScreen({
           />
         )}
 
-        {screenType === 'auth' && (
-          <AuthContent
-            questionEmoji={questionEmoji}
-            questionTitle={questionTitle}
-            questionSubtitle={questionSubtitle}
-            isChildUnder13={isChildUnder13}
-            onNext={onNext}
-          />
-        )}
-
         {screenType === 'video' && (
           <VideoContent
             questionEmoji={questionEmoji}
@@ -897,14 +776,11 @@ export function OnboardingScreen({
         )}
       </ScrollView>
 
-      {/* CTA — auth handles its own buttons */}
-      {screenType !== 'auth' && (
-        <CTAButton
-          label={nextButtonText}
-          onPress={onNext}
-          disabled={isNextDisabled}
-        />
-      )}
+      <CTAButton
+        label={nextButtonText}
+        onPress={onNext}
+        disabled={isNextDisabled}
+      />
     </YStack>
   );
 }
