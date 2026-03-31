@@ -1,4 +1,4 @@
-import { createTamagui } from '@tamagui/core';
+import { createTamagui, type TamaguiInternalConfig } from '@tamagui/core';
 import { config as baseConfig } from '@tamagui/config/v3';
 
 // Modern design system — clean, bold, high-contrast, premium feel.
@@ -68,7 +68,7 @@ export const NEU = {
   glowLegendary: THEME.glow.legendary,
 } as const;
 
-export const tamaguiConfig = createTamagui({
+export const tamaguiConfig: TamaguiInternalConfig = createTamagui({
   ...baseConfig,
   tokens: {
     ...baseConfig.tokens,

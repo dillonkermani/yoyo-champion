@@ -1,5 +1,5 @@
 import React from 'react';
-import { YStack, XStack } from 'tamagui';
+import { YStack } from 'tamagui';
 import { Text } from '../Text';
 import { Button } from '../Button';
 import { ScreenContainer } from '../primitives/ScreenContainer';

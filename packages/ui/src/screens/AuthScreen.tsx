@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { YStack, XStack, Input, Stack } from 'tamagui';
 import { Text } from '../Text';
 import { THEME } from '../tamagui.config';
@@ -50,7 +50,7 @@ export function AuthScreen({
   const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = () => {
-    onSubmit({ name: mode === 'signup' ? name : undefined, email, password });
+    onSubmit({ ...(mode === 'signup' ? { name } : {}), email, password });
   };
 
   const canSubmit = mode === 'signup'

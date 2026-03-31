@@ -1,4 +1,3 @@
-import React from 'react';
 import { styled, Stack } from '@tamagui/core';
 import { XStack, YStack, Text } from 'tamagui';
 import { NEU } from '../tamagui.config'; // kept for glow effects only

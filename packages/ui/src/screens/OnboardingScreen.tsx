@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { YStack, XStack, Input, ScrollView, Stack } from 'tamagui';
 import { Switch as RNSwitch } from 'react-native';

@@ -202,7 +202,6 @@ export const selectStepProgress = (state: OnboardingStore) => {
 };
 export const selectCanProceed = (state: OnboardingStore): boolean => {
   switch (state.currentStep) {
-    case 'welcome': return true;
     case 'account_user': return state.accountUser !== null;
     case 'experience': return state.skillLevel !== null;
     case 'quick_info': return true; // all fields optional (have defaults or "rather not say")

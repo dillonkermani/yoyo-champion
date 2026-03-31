@@ -1,4 +1,3 @@
-import React from 'react';
 import { Stack, Image } from 'tamagui';
 
 export interface LogoProps {

@@ -1,4 +1,3 @@
-import React from 'react';
 import { YStack } from 'tamagui';
 import { SectionHeader } from '../../primitives/SectionHeader';
 import { NewsCard } from '../../cards/NewsCard';

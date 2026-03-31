@@ -1,4 +1,3 @@
-import React from 'react';
 import { styled, Stack, XStack, YStack, Text } from 'tamagui';
 import { NEU } from '../tamagui.config'; // kept for glow effects only
 
@@ -6,7 +5,6 @@ import { NEU } from '../tamagui.config'; // kept for glow effects only
 /*  LevelBadge                                                        */
 /* ------------------------------------------------------------------ */
 
-const BADGE_SIZES = { sm: 36, md: 52, lg: 72 } as const;
 const FONT_SIZES = { sm: 14, md: 20, lg: 30 } as const;
 const CROWN_SIZES = { sm: 10, md: 14, lg: 20 } as const;
 

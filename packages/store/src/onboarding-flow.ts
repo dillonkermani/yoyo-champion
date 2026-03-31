@@ -10,6 +10,8 @@ export interface OnboardingChoice {
 
 export type OnboardingScreenType = 'welcome' | 'choices' | 'quick_info' | 'video';
 
+export type OnboardingStepId = OnboardingStep;
+
 export interface OnboardingStepConfig {
   key: OnboardingStep;
   questionTitle: string;

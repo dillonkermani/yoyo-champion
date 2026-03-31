@@ -49,20 +49,20 @@ describe('setRegion', () => {
   });
 });
 
-describe('setFavoriteYoyo', () => {
-  it('sets favorite yoyo', () => {
-    useOnboardingStore.getState().setFavoriteYoyo('YoyoFactory Shutter');
-    expect(useOnboardingStore.getState().favoriteYoyo).toBe('YoyoFactory Shutter');
+describe('setGoal', () => {
+  it('sets goal', () => {
+    useOnboardingStore.getState().setGoal('learn_first');
+    expect(useOnboardingStore.getState().goal).toBe('learn_first');
   });
 
-  it('can overwrite favorite yoyo', () => {
-    useOnboardingStore.getState().setFavoriteYoyo('Shutter');
-    useOnboardingStore.getState().setFavoriteYoyo('Draupnir');
-    expect(useOnboardingStore.getState().favoriteYoyo).toBe('Draupnir');
+  it('can overwrite goal', () => {
+    useOnboardingStore.getState().setGoal('learn_first');
+    useOnboardingStore.getState().setGoal('compete');
+    expect(useOnboardingStore.getState().goal).toBe('compete');
   });
 });
 
-describe('resetOnboarding clears new fields', () => {
+describe('resetOnboarding clears fields', () => {
   it('resets country and region to null', () => {
     useOnboardingStore.getState().setCountry('US');
     useOnboardingStore.getState().setRegion('California');

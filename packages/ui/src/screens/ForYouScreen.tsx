@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { FlatList, Dimensions, ViewToken } from 'react-native';
 import { YStack, XStack } from 'tamagui';
 import { Text } from '../Text';

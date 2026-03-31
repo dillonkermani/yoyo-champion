@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { YStack, XStack, Input } from 'tamagui';
 import { Text } from './Text';
 import { Button } from './Button';

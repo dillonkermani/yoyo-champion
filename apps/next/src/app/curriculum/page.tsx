@@ -9,57 +9,56 @@ import type { TrickCategory } from "@yoyo/data";
 // ICONS
 // =============================================================================
 
-type IconProps = { className?: string };
-const Icons = {
-  Target: ({ className }: IconProps) => (
+const Icons: Record<string, React.FC<{ className?: string }>> = {
+  Target: ({ className }) => (
     <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
       <circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="6" /><circle cx="12" cy="12" r="2" />
     </svg>
   ),
-  Sparkles: ({ className }: IconProps) => (
+  Sparkles: ({ className }) => (
     <svg className={className} viewBox="0 0 24 24" fill="currentColor">
       <path d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z" />
     </svg>
   ),
-  Zap: ({ className }: IconProps) => (
+  Zap: ({ className }) => (
     <svg className={className} viewBox="0 0 24 24" fill="currentColor">
       <path d="M13 2L3 14h8l-1 8 10-12h-8l1-8z" />
     </svg>
   ),
-  Cpu: ({ className }: IconProps) => (
+  Cpu: ({ className }) => (
     <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
       <rect x="4" y="4" width="16" height="16" rx="2" /><rect x="9" y="9" width="6" height="6" />
       <path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3" />
     </svg>
   ),
-  Wind: ({ className }: IconProps) => (
+  Wind: ({ className }) => (
     <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
       <path strokeLinecap="round" strokeLinejoin="round" d="M9.59 4.59A2 2 0 1111 8H2m10.59 11.41A2 2 0 1014 16H2m15.73-8.27A2.5 2.5 0 1119.5 12H2" />
     </svg>
   ),
-  RotateCcw: ({ className }: IconProps) => (
+  RotateCcw: ({ className }) => (
     <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
       <path strokeLinecap="round" strokeLinejoin="round" d="M1 4v6h6M23 20v-6h-6" />
       <path strokeLinecap="round" strokeLinejoin="round" d="M20.49 9A9 9 0 005.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 013.51 15" />
     </svg>
   ),
-  Rocket: ({ className }: IconProps) => (
+  Rocket: ({ className }) => (
     <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
       <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 00-2.91-.09zM12 15l-3-3a22 22 0 012-3.95A12.88 12.88 0 0122 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 01-4 2z" />
     </svg>
   ),
-  Hand: ({ className }: IconProps) => (
+  Hand: ({ className }) => (
     <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
       <path strokeLinecap="round" strokeLinejoin="round" d="M18 11V6a2 2 0 00-2-2 2 2 0 00-2 2M14 10V4a2 2 0 00-2-2 2 2 0 00-2 2v6M10 10.5V6a2 2 0 00-2-2 2 2 0 00-2 2v8" />
       <path strokeLinecap="round" strokeLinejoin="round" d="M18 8a2 2 0 012 2v7a6 6 0 01-6 6H9a6 6 0 01-6-6v-2c0-1.1.9-2 2-2h0" />
     </svg>
   ),
-  ArrowRight: ({ className }: IconProps) => (
+  ArrowRight: ({ className }) => (
     <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
       <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
     </svg>
   ),
-  Check: ({ className }: IconProps) => (
+  Check: ({ className }) => (
     <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
       <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
     </svg>
@@ -70,7 +69,7 @@ const Icons = {
 // COLOR CONFIG
 // =============================================================================
 
-const colorMap = {
+const colorMap: Record<string, { bg: string; bgLight: string; text: string; border: string }> = {
   teal:   { bg: "bg-teal-500",   bgLight: "bg-teal-50",   text: "text-teal-600",   border: "border-teal-200" },
   blue:   { bg: "bg-[#1CB0F6]",  bgLight: "bg-[#1CB0F6]/10", text: "text-[#1CB0F6]", border: "border-[#1CB0F6]/30" },
   purple: { bg: "bg-[#CE82FF]",  bgLight: "bg-[#CE82FF]/10", text: "text-[#CE82FF]", border: "border-[#CE82FF]/30" },
@@ -98,10 +97,11 @@ function getCategoryStats(cat: TrickCategory) {
 // COMPONENTS
 // =============================================================================
 
-function CategoryCard({ cat }: { cat: TrickCategory }) {
-  const colors = colorMap[cat.color as keyof typeof colorMap] || colorMap.blue;
+function CategoryCard({ cat, index: _index }: { cat: TrickCategory; index: number }) {
+  const colors = (colorMap[cat.color] || colorMap['blue'])!;
   const stats = getCategoryStats(cat);
-  const IconComponent = Icons[cat.icon as keyof typeof Icons] || Icons.Target;
+  const IconComponent = (Icons[cat.icon] || Icons['Target'])!;
+  const CheckIcon = Icons['Check']!;
 
   return (
     <div
@@ -124,7 +124,7 @@ function CategoryCard({ cat }: { cat: TrickCategory }) {
           <div className="space-y-1.5">
             {stats.sampleTricks.map((trick) => (
               <div key={trick.id} className="flex items-center gap-2 text-sm text-gray-600">
-                <Icons.Check className="w-4 h-4 text-gray-300 flex-shrink-0" />
+                <CheckIcon className="w-4 h-4 text-gray-300 flex-shrink-0" />
                 <span>{trick.name}</span>
                 <span className="text-xs text-gray-400 ml-auto">+{trick.xpReward} XP</span>
               </div>
@@ -146,7 +146,8 @@ function CategoryCard({ cat }: { cat: TrickCategory }) {
   );
 }
 
-function PathCard({ path }: { path: typeof mockPaths[0] }) {
+function PathCard({ path, index: _index }: { path: (typeof mockPaths)[0]; index: number }) {
+  const ArrowRightIcon = Icons['ArrowRight']!;
   const difficultyLabel = ["", "Beginner", "Beginner", "Intermediate", "Advanced", "Expert"][path.difficulty] || "Beginner";
   const difficultyColor = path.difficulty <= 2 ? "text-teal-600 bg-teal-50" : path.difficulty <= 3 ? "text-[#1CB0F6] bg-[#1CB0F6]/10" : "text-[#CE82FF] bg-[#CE82FF]/10";
 
@@ -172,7 +173,7 @@ function PathCard({ path }: { path: typeof mockPaths[0] }) {
             <span className="text-xs text-gray-400">~{path.estimatedDays}d</span>
           </div>
         </div>
-        <Icons.ArrowRight className="w-5 h-5 text-gray-300 group-hover:text-[#9bedff] transition-colors flex-shrink-0 mt-1" />
+        <ArrowRightIcon className="w-5 h-5 text-gray-300 group-hover:text-[#9bedff] transition-colors flex-shrink-0 mt-1" />
       </div>
     </div>
   );
@@ -245,8 +246,8 @@ export default function CurriculumPage() {
             <p className="mt-2 text-gray-600">Master each category to unlock new skills and earn bonus XP</p>
           </div>
           <div className="grid sm:grid-cols-2 gap-5">
-            {categories.map((cat) => (
-              <CategoryCard key={cat.id} cat={cat} />
+            {categories.map((cat, i) => (
+              <CategoryCard key={cat.id} cat={cat} index={i} />
             ))}
           </div>
         </div>
@@ -260,8 +261,8 @@ export default function CurriculumPage() {
             <p className="mt-2 text-gray-600">Guided journeys that take you from beginner to advanced, step by step</p>
           </div>
           <div className="space-y-4">
-            {paths.map((path) => (
-              <PathCard key={path.id} path={path} />
+            {paths.map((path, i) => (
+              <PathCard key={path.id} path={path} index={i} />
             ))}
           </div>
         </div>

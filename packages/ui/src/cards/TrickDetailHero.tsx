@@ -1,4 +1,3 @@
-import React from 'react';
 import { YStack, XStack } from 'tamagui';
 import { Text } from '../Text';
 import { DifficultyTag } from '../primitives/DifficultyTag';

@@ -1,4 +1,4 @@
-import { Stack, Text, XStack, YStack } from 'tamagui';
+import { Stack, Text, YStack } from 'tamagui';
 
 export type MascotMood = 'happy' | 'excited' | 'sad' | 'celebrating' | 'thinking' | 'encouraging';
 

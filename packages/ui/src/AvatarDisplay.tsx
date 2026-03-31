@@ -1,4 +1,3 @@
-import React from 'react';
 import { YStack, Text } from 'tamagui';
 // Clean shadow design - NEU removed
 
