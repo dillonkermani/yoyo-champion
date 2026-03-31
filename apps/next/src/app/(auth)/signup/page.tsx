@@ -34,9 +34,12 @@ export default function SignupPage() {
     login({
       id: `user-${Date.now()}`,
       email,
+      username: email.split('@')[0],
       displayName: name,
-      avatarUrl: null,
+      wishlist: [],
+      introVideoWatched: false,
       createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
     });
     setIsLoading(false);
     router.replace("/dashboard");
