@@ -9,7 +9,7 @@ import type { TrickCategory } from "@yoyo/data";
 // ICONS
 // =============================================================================
 
-const Icons: Record<string, React.FC<{ className?: string }>> = {
+const Icons = {
   Target: ({ className }) => (
     <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
       <circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="6" /><circle cx="12" cy="12" r="2" />
@@ -69,7 +69,7 @@ const Icons: Record<string, React.FC<{ className?: string }>> = {
 // COLOR CONFIG
 // =============================================================================
 
-const colorMap: Record<string, { bg: string; bgLight: string; text: string; border: string }> = {
+const colorMap = {
   teal:   { bg: "bg-teal-500",   bgLight: "bg-teal-50",   text: "text-teal-600",   border: "border-teal-200" },
   blue:   { bg: "bg-[#1CB0F6]",  bgLight: "bg-[#1CB0F6]/10", text: "text-[#1CB0F6]", border: "border-[#1CB0F6]/30" },
   purple: { bg: "bg-[#CE82FF]",  bgLight: "bg-[#CE82FF]/10", text: "text-[#CE82FF]", border: "border-[#CE82FF]/30" },
@@ -98,9 +98,9 @@ function getCategoryStats(cat: TrickCategory) {
 // =============================================================================
 
 function CategoryCard({ cat }: { cat: TrickCategory }) {
-  const colors = colorMap[cat.color] || colorMap.blue;
+  const colors = colorMap[cat.color as keyof typeof colorMap] || colorMap.blue;
   const stats = getCategoryStats(cat);
-  const IconComponent = Icons[cat.icon] || Icons.Target;
+  const IconComponent = Icons[cat.icon as keyof typeof Icons] || Icons.Target;
 
   return (
     <div
