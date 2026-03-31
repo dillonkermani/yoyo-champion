@@ -55,7 +55,7 @@ export function HomeScreen({
       flex={1}
       backgroundColor="#F7F8FA"
       showsVerticalScrollIndicator={false}
-      contentContainerStyle={{ paddingBottom: 60 }}
+      contentContainerStyle={{ paddingBottom: 100 }}
     >
       <YStack
         maxWidth={640}

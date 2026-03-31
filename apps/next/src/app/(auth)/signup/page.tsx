@@ -3,7 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useUserStore } from "@yoyo/store";
+import { useUserStore, useOnboardingStore } from "@yoyo/store";
 
 export default function SignupPage() {
   const router = useRouter();
@@ -31,8 +31,6 @@ export default function SignupPage() {
     }
 
     setIsLoading(true);
-    // TODO: Replace with real signup API call
-    // For now, log the user in with mock data
     login({
       id: `user-${Date.now()}`,
       email,
@@ -45,32 +43,32 @@ export default function SignupPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 py-12 bg-gray-50">
-      <div className="w-full max-w-md">
+    <div className="min-h-screen flex items-center justify-center px-4 py-12 bg-[#F7F8FA]">
+      <div className="w-full max-w-[420px]">
         {/* Header */}
-        <div className="text-center mb-8">
-          <Link href="/" className="inline-block mb-6">
-            <span className="text-2xl font-bold tracking-tight text-gray-900">
+        <div className="text-center mb-6">
+          <Link href="/" className="inline-block mb-4">
+            <span className="text-[22px] font-extrabold tracking-tight text-gray-900">
               YoYo<span className="text-[#9bedff]">Champion</span>
             </span>
           </Link>
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">Create your account</h1>
-          <p className="text-gray-600">Start your yo-yo journey today</p>
+          <h1 className="text-[22px] font-extrabold text-gray-900 mb-1">Create your account</h1>
+          <p className="text-[15px] text-[#536471]">Start your yo-yo journey today</p>
         </div>
 
         {/* Form Card */}
-        <div className="bg-white rounded-2xl shadow-lg p-8 border border-gray-200">
-          <form onSubmit={handleSubmit} className="space-y-5">
+        <div className="bg-white rounded-[20px] shadow-lg p-7 border border-[#E1E8ED]">
+          <form onSubmit={handleSubmit} className="space-y-4">
             {/* Error */}
             {error && (
-              <div className="rounded-xl bg-red-50 border border-red-200 px-4 py-3 text-sm text-red-700">
+              <div className="rounded-[14px] bg-red-50/80 border border-red-200/50 px-4 py-3 text-[13px] text-red-500">
                 {error}
               </div>
             )}
 
             {/* Name */}
             <div className="space-y-1.5">
-              <label htmlFor="name" className="text-sm font-medium text-gray-900">
+              <label htmlFor="name" className="text-[13px] font-semibold text-gray-900">
                 Name
               </label>
               <input
@@ -79,13 +77,13 @@ export default function SignupPage() {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Your name"
-                className="w-full rounded-xl border border-gray-300 px-4 py-3 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#9bedff] focus:border-transparent transition-all"
+                className="w-full rounded-[14px] border border-[#E1E8ED] px-4 py-3.5 text-sm text-gray-900 placeholder-[#8899A6] focus:outline-none focus:ring-2 focus:ring-[#9bedff] focus:border-transparent transition-all"
               />
             </div>
 
             {/* Email */}
             <div className="space-y-1.5">
-              <label htmlFor="email" className="text-sm font-medium text-gray-900">
+              <label htmlFor="email" className="text-[13px] font-semibold text-gray-900">
                 Email
               </label>
               <input
@@ -94,39 +92,30 @@ export default function SignupPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="you@example.com"
-                className="w-full rounded-xl border border-gray-300 px-4 py-3 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#9bedff] focus:border-transparent transition-all"
+                className="w-full rounded-[14px] border border-[#E1E8ED] px-4 py-3.5 text-sm text-gray-900 placeholder-[#8899A6] focus:outline-none focus:ring-2 focus:ring-[#9bedff] focus:border-transparent transition-all"
               />
             </div>
 
             {/* Password */}
             <div className="space-y-1.5">
-              <label htmlFor="password" className="text-sm font-medium text-gray-900">
+              <label htmlFor="password" className="text-[13px] font-semibold text-gray-900">
                 Password
               </label>
-              <div className="relative">
+              <div className="relative flex items-center rounded-[14px] border border-[#E1E8ED] focus-within:ring-2 focus-within:ring-[#9bedff] focus-within:border-transparent transition-all">
                 <input
                   id="password"
                   type={showPassword ? "text" : "password"}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="At least 6 characters"
-                  className="w-full rounded-xl border border-gray-300 px-4 py-3 pr-12 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#9bedff] focus:border-transparent transition-all"
+                  className="flex-1 rounded-[14px] border-0 px-4 py-3.5 text-sm text-gray-900 placeholder-[#8899A6] focus:outline-none bg-transparent"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
+                  className="pr-4 text-[13px] font-semibold text-[#8899A6] hover:text-[#536471] transition-colors"
                 >
-                  {showPassword ? (
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L21 21" />
-                    </svg>
-                  ) : (
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                    </svg>
-                  )}
+                  {showPassword ? "Hide" : "Show"}
                 </button>
               </div>
             </div>
@@ -135,34 +124,46 @@ export default function SignupPage() {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full rounded-xl bg-[#9bedff] px-4 py-3 text-base font-semibold text-gray-900 hover:bg-[#7dd9f0] transition-all duration-200 shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full rounded-[14px] bg-[#9bedff] px-4 py-3 text-base font-bold text-gray-900 hover:bg-[#7dd9f0] active:scale-[0.98] transition-all duration-200 shadow-sm hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed mt-1"
             >
               {isLoading ? "Creating account..." : "Create Account"}
             </button>
           </form>
 
           {/* Divider */}
-          <div className="my-6 flex items-center gap-4">
-            <div className="flex-1 h-px bg-gray-200" />
-            <span className="text-xs text-gray-400 font-medium">OR</span>
-            <div className="flex-1 h-px bg-gray-200" />
+          <div className="my-5 flex items-center gap-4">
+            <div className="flex-1 h-px bg-[#E1E8ED]" />
+            <span className="text-xs font-semibold text-[#8899A6]">OR</span>
+            <div className="flex-1 h-px bg-[#E1E8ED]" />
           </div>
 
           {/* Login link */}
-          <p className="text-center text-sm text-gray-600">
+          <p className="text-center text-sm text-[#536471]">
             Already have an account?{" "}
-            <Link href="/login" className="font-semibold text-[#1CB0F6] hover:text-[#0e9ad8] transition-colors">
+            <Link href="/login" className="font-bold text-[#1CB0F6] hover:text-[#0e9ad8] transition-colors">
               Sign in
             </Link>
           </p>
         </div>
 
-        {/* Back to home */}
-        <p className="mt-6 text-center">
-          <Link href="/" className="text-sm text-gray-500 hover:text-gray-700 transition-colors">
-            &larr; Back to home
-          </Link>
-        </p>
+        {/* Dev skip */}
+        <div className="mt-6 text-center space-y-2">
+          <button
+            onClick={() => {
+              login({ id: 'dev-user', email: 'dev@yoyochampion.com', displayName: 'Dev User', avatarUrl: null, createdAt: new Date().toISOString() });
+              useOnboardingStore.getState().completeOnboarding();
+              router.replace('/dashboard');
+            }}
+            className="text-[13px] font-semibold text-[#FF9600] hover:text-orange-600 transition-colors"
+          >
+            Skip (dev mode)
+          </button>
+          <p>
+            <Link href="/" className="text-[13px] text-[#8899A6] hover:text-[#536471] transition-colors">
+              &larr; Back to home
+            </Link>
+          </p>
+        </div>
       </div>
     </div>
   );

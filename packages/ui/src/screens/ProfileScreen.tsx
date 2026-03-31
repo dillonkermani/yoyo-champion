@@ -176,7 +176,7 @@ export function ProfileScreen({
 
       {/* Logout */}
       {onLogout && (
-        <YStack padding={20} paddingBottom={40}>
+        <YStack padding={20} paddingBottom={100}>
           <Button onPress={onLogout} variant="outline" size="md">Log Out</Button>
         </YStack>
       )}

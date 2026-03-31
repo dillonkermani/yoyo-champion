@@ -231,7 +231,7 @@ export function CustomTabBar({ state, descriptors, navigation, bottomInset = 0 }
         {state.routes.map((route, index) => {
           const isActive = state.index === index;
           const config = TAB_CONFIG[route.name] || TAB_CONFIG.index;
-          const color = isActive ? config.activeColor : INACTIVE_COLOR;
+          const color = isActive ? '#000000' : INACTIVE_COLOR;
 
           return (
             <Pressable

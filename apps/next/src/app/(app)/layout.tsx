@@ -17,6 +17,13 @@ export default function AppRootLayout({ children }: { children: React.ReactNode 
     }
   }, [isAuthenticated, isOnboardingComplete, router]);
 
+  // Prefetch all tab routes so first navigation is instant
+  React.useEffect(() => {
+    ['/dashboard', '/library', '/shop', '/profile', '/for-you'].forEach((path) => {
+      router.prefetch(path);
+    });
+  }, [router]);
+
   return (
     <View style={styles.root}>
       <View style={styles.content}>
@@ -30,7 +37,7 @@ export default function AppRootLayout({ children }: { children: React.ReactNode 
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    minHeight: '100%' as any,
+    minHeight: '100vh' as any,
     position: 'relative',
   },
   content: {

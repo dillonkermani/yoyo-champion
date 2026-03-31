@@ -6,6 +6,7 @@ export const Button = styled(TamaguiButton, {
   name: 'YoyoButton',
   borderRadius: 9999,
   fontWeight: '700',
+  fontSize: 16,
   letterSpacing: 0.2,
   borderWidth: 0,
   ...NEU.button,
