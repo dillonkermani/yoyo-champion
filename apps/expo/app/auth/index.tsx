@@ -30,9 +30,12 @@ export default function AuthIndex() {
     login({
       id: 'dev-user',
       email: 'dev@yoyochampion.com',
+      username: 'devuser',
       displayName: 'Dev User',
-      avatarUrl: undefined,
+      wishlist: [],
+      introVideoWatched: false,
       createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
     });
     useOnboardingStore.getState().completeOnboarding();
     router.replace('/(tabs)' as never);
