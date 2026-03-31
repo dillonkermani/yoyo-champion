@@ -18,10 +18,10 @@ const T = {
   textSub: '#536471',
   muted: '#8899A6',
   border: '#E1E8ED',
-  accent: '#1CB0F6',
-  accentDark: '#0095DB',
-  accentLight: '#E8F7FE',
-  accentDisabled: '#B8E4FA',
+  accent: '#9bedff',
+  accentDark: '#7dd9f0',
+  accentLight: '#E8FBFF',
+  accentDisabled: '#c5f4ff',
   white: '#FFFFFF',
   error: '#FF4B4B',
 } as const;
@@ -133,7 +133,7 @@ export function AuthScreen({ mode, onSubmit, onToggleMode, isLoading = false, er
         {/* Submit button */}
         <YStack
           backgroundColor={canSubmit && !isLoading ? T.accent : T.accentDisabled}
-          borderRadius={18}
+          borderRadius={9999}
           height={58}
           justifyContent="center"
           alignItems="center"
@@ -145,7 +145,7 @@ export function AuthScreen({ mode, onSubmit, onToggleMode, isLoading = false, er
           marginTop={4}
           {...(canSubmit && !isLoading ? NEU.glowAqua : {})}
         >
-          <Text fontSize={18} fontWeight="800" color={T.white} letterSpacing={0.3}>
+          <Text fontSize={18} fontWeight="800" color="#0F1419" letterSpacing={0.3}>
             {isLoading ? 'Loading...' : mode === 'login' ? 'Log In' : 'Create Account'}
           </Text>
         </YStack>

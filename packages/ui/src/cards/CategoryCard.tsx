@@ -16,7 +16,7 @@ const ICON_EMOJI: Record<string, string> = {
 
 const COLOR_HEX: Record<string, string> = {
   teal: '#58CC02',
-  blue: '#1CB0F6',
+  blue: '#9bedff',
   purple: '#CE82FF',
   cyan: '#00BCD4',
   pink: '#FF6B9D',
@@ -44,7 +44,7 @@ export function CategoryCard({
   bonusXP,
   onPress,
 }: CategoryCardProps) {
-  const hex = COLOR_HEX[color] ?? '#1CB0F6';
+  const hex = COLOR_HEX[color] ?? '#9bedff';
   const emoji = ICON_EMOJI[icon] ?? '🪀';
 
   return (

@@ -19,8 +19,8 @@ interface TabConfig {
 const TAB_CONFIG: Record<string, TabConfig> = {
   index: {
     label: 'Home',
-    activeColor: '#1CB0F6',
-    bgColor: 'rgba(28,176,246,0.1)',
+    activeColor: '#9bedff',
+    bgColor: 'rgba(155,237,255,0.15)',
     emoji: '🏠',
   },
   'champion-path': {
@@ -31,8 +31,8 @@ const TAB_CONFIG: Record<string, TabConfig> = {
   },
   shop: {
     label: 'Shop',
-    activeColor: '#1CB0F6',
-    bgColor: 'rgba(28,176,246,0.1)',
+    activeColor: '#9bedff',
+    bgColor: 'rgba(155,237,255,0.15)',
     emoji: '🛍️',
   },
   profile: {

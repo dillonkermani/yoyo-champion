@@ -12,7 +12,7 @@ export type AccountUser = 'self' | 'child' | 'other';
 export type CurrentYoyoType = 'none' | 'responsive' | 'unresponsive' | 'other';
 
 export type OnboardingStep =
-  | 'welcome' | 'account_user' | 'experience' | 'quick_info'
+  | 'account_user' | 'experience' | 'quick_info'
   | 'current_yoyo' | 'goal' | 'intro_video';
 
 export interface OnboardingState {
@@ -67,7 +67,7 @@ export interface OnboardingActions {
 export type OnboardingStore = OnboardingState & OnboardingActions;
 
 const STEP_ORDER: OnboardingStep[] = [
-  'welcome', 'account_user', 'experience', 'quick_info',
+  'account_user', 'experience', 'quick_info',
   'current_yoyo', 'goal', 'intro_video',
 ];
 
@@ -79,7 +79,7 @@ export const SKILL_LEVEL_METADATA: Record<SkillLevel, { label: string; descripti
 };
 
 const initialState: OnboardingState = {
-  currentStep: 'welcome',
+  currentStep: 'account_user',
   accountUser: null,
   isChildUnder13: null,
   parentEmail: null,

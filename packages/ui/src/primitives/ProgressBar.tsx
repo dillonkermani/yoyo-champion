@@ -8,7 +8,7 @@ export interface ProgressBarProps {
   backgroundColor?: string;
 }
 
-export function ProgressBar({ value, color = '#1CB0F6', height = 10, backgroundColor = '#EEF0F3' }: ProgressBarProps) {
+export function ProgressBar({ value, color = '#9bedff', height = 10, backgroundColor = '#EEF0F3' }: ProgressBarProps) {
   const clampedValue = Math.min(100, Math.max(0, value));
   return (
     <XStack

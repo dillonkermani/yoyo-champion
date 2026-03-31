@@ -12,7 +12,7 @@ export interface AvatarDisplayProps {
 export function AvatarDisplay({
   displayName = 'Player',
   level = 1,
-  color = '#1CB0F6',
+  color = '#9bedff',
   size = 80,
 }: AvatarDisplayProps) {
   const initials =

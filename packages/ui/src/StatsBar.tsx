@@ -32,7 +32,7 @@ export function StatsBar({ stats }: StatsBarProps) {
           shadowOpacity={0.08}
           elevation={3}
         >
-          <Text fontSize={20} fontWeight="700" color={stat.color ?? '#1CB0F6'}>
+          <Text fontSize={20} fontWeight="700" color={stat.color ?? '#9bedff'}>
             {stat.value}
           </Text>
           <Text fontSize={10} color="#536471" textAlign="center" numberOfLines={1} textTransform="uppercase" letterSpacing={0.5} marginTop={2}>

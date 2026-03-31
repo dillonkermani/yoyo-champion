@@ -7,7 +7,7 @@ export const DIFFICULTY_LABELS: Record<number, string> = {
 };
 
 export const DIFFICULTY_COLORS: Record<number, string> = {
-  1: '#1CB0F6',
+  1: '#9bedff',
   2: '#58CC02',
   3: '#FF9600',
   4: '#CE82FF',

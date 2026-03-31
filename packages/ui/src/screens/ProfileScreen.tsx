@@ -52,7 +52,7 @@ export function ProfileScreen({
   displayName,
   handle,
   level,
-  avatarColor = '#1CB0F6',
+  avatarColor = '#9bedff',
   stats,
   badges,
   yoyos,

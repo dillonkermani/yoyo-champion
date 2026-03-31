@@ -3,33 +3,45 @@
 import * as React from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useUserStore, selectIsLoading } from "@yoyo/store";
+import { useUserStore } from "@yoyo/store";
 
-export default function LoginPage() {
+export default function SignupPage() {
   const router = useRouter();
+  const [name, setName] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [showPassword, setShowPassword] = React.useState(false);
   const [error, setError] = React.useState("");
+  const [isLoading, setIsLoading] = React.useState(false);
 
-  const isLoading = useUserStore(selectIsLoading);
-  const loginWithCredentials = useUserStore((s) => s.loginWithCredentials);
+  const login = useUserStore((s) => s.login);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
 
-    if (!email || !password) {
+    if (!name || !email || !password) {
       setError("Please fill in all fields");
       return;
     }
 
-    const success = await loginWithCredentials(email, password);
-    if (success) {
-      router.push("/dashboard");
-    } else {
-      setError("Invalid email or password");
+    if (password.length < 6) {
+      setError("Password must be at least 6 characters");
+      return;
     }
+
+    setIsLoading(true);
+    // TODO: Replace with real signup API call
+    // For now, log the user in with mock data
+    login({
+      id: `user-${Date.now()}`,
+      email,
+      displayName: name,
+      avatarUrl: null,
+      createdAt: new Date().toISOString(),
+    });
+    setIsLoading(false);
+    router.replace("/dashboard");
   };
 
   return (
@@ -42,8 +54,8 @@ export default function LoginPage() {
               YoYo<span className="text-[#9bedff]">Champion</span>
             </span>
           </Link>
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">Welcome back</h1>
-          <p className="text-gray-600">Sign in to continue your yo-yo journey</p>
+          <h1 className="text-2xl font-bold text-gray-900 mb-2">Create your account</h1>
+          <p className="text-gray-600">Start your yo-yo journey today</p>
         </div>
 
         {/* Form Card */}
@@ -55,6 +67,21 @@ export default function LoginPage() {
                 {error}
               </div>
             )}
+
+            {/* Name */}
+            <div className="space-y-1.5">
+              <label htmlFor="name" className="text-sm font-medium text-gray-900">
+                Name
+              </label>
+              <input
+                id="name"
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Your name"
+                className="w-full rounded-xl border border-gray-300 px-4 py-3 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#9bedff] focus:border-transparent transition-all"
+              />
+            </div>
 
             {/* Email */}
             <div className="space-y-1.5">
@@ -82,7 +109,7 @@ export default function LoginPage() {
                   type={showPassword ? "text" : "password"}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Enter your password"
+                  placeholder="At least 6 characters"
                   className="w-full rounded-xl border border-gray-300 px-4 py-3 pr-12 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#9bedff] focus:border-transparent transition-all"
                 />
                 <button
@@ -104,20 +131,13 @@ export default function LoginPage() {
               </div>
             </div>
 
-            {/* Forgot password */}
-            <div className="flex justify-end">
-              <button type="button" className="text-sm font-medium text-[#1CB0F6] hover:text-[#0e9ad8] transition-colors">
-                Forgot password?
-              </button>
-            </div>
-
             {/* Submit */}
             <button
               type="submit"
               disabled={isLoading}
               className="w-full rounded-xl bg-[#9bedff] px-4 py-3 text-base font-semibold text-gray-900 hover:bg-[#7dd9f0] transition-all duration-200 shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {isLoading ? "Signing in..." : "Sign In"}
+              {isLoading ? "Creating account..." : "Create Account"}
             </button>
           </form>
 
@@ -128,11 +148,11 @@ export default function LoginPage() {
             <div className="flex-1 h-px bg-gray-200" />
           </div>
 
-          {/* Sign up link */}
+          {/* Login link */}
           <p className="text-center text-sm text-gray-600">
-            Don&apos;t have an account?{" "}
-            <Link href="/onboarding?step=account_user" className="font-semibold text-[#1CB0F6] hover:text-[#0e9ad8] transition-colors">
-              Sign up free
+            Already have an account?{" "}
+            <Link href="/login" className="font-semibold text-[#1CB0F6] hover:text-[#0e9ad8] transition-colors">
+              Sign in
             </Link>
           </p>
         </div>

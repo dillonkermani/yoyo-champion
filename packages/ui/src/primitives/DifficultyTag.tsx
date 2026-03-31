@@ -10,6 +10,7 @@ export interface DifficultyTagProps {
 // Colors that need darker text for contrast on their tinted backgrounds
 const DARK_TEXT_OVERRIDES: Record<string, string> = {
   '#FFC800': '#946800', // Gold/yellow -> dark gold
+  '#9bedff': '#0891b2', // Light blue -> dark cyan for contrast
 };
 
 export function DifficultyTag({ difficulty }: DifficultyTagProps) {

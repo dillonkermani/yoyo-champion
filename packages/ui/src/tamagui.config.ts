@@ -21,7 +21,7 @@ export const THEME = {
 
   // Borders
   border: '#E1E8ED',
-  borderFocus: '#1CB0F6',
+  borderFocus: '#9bedff',
 
   // Shadow presets — modern, clean depth (not neumorphic)
   shadow: {
@@ -33,7 +33,7 @@ export const THEME = {
 
   // Colored glow shadows — great for gamification accents
   glow: {
-    aqua: { shadowColor: '#1CB0F6', shadowOffset: { width: 0, height: 2 }, shadowRadius: 14, shadowOpacity: 0.35, elevation: 4 },
+    aqua: { shadowColor: '#9bedff', shadowOffset: { width: 0, height: 2 }, shadowRadius: 14, shadowOpacity: 0.35, elevation: 4 },
     purple: { shadowColor: '#CE82FF', shadowOffset: { width: 0, height: 2 }, shadowRadius: 14, shadowOpacity: 0.35, elevation: 4 },
     gold: { shadowColor: '#FFC800', shadowOffset: { width: 0, height: 2 }, shadowRadius: 12, shadowOpacity: 0.4, elevation: 3 },
     red: { shadowColor: '#FF4B4B', shadowOffset: { width: 0, height: 2 }, shadowRadius: 14, shadowOpacity: 0.35, elevation: 4 },
@@ -75,9 +75,9 @@ export const tamaguiConfig = createTamagui({
     color: {
       ...baseConfig.tokens.color,
       // YoYoChampion brand colors
-      brandAqua: '#1CB0F6',
-      brandAquaLight: '#4DC4F9',
-      brandAquaDark: '#0095DB',
+      brandAqua: '#9bedff',
+      brandAquaLight: '#c5f4ff',
+      brandAquaDark: '#7dd9f0',
       brandPurple: '#CE82FF',
       brandPurpleLight: '#E5B8FF',
       brandPurpleDark: '#A855F7',
@@ -91,7 +91,7 @@ export const tamaguiConfig = createTamagui({
       successGreen: '#58CC02',
       // Rarity colors
       rarityCommon: '#6B7280',
-      rarityUncommon: '#1CB0F6',
+      rarityUncommon: '#9bedff',
       rarityRare: '#3B82F6',
       rarityEpic: '#9333EA',
       rarityLegendary: '#FBBF24',

@@ -40,7 +40,7 @@ export function PathCard({ title, difficulty, progressPercent, totalXp, onPress 
         <DifficultyTag difficulty={difficulty} />
         <Text fontSize={12} color="#536471">{Math.round(progressPercent)}% complete</Text>
       </XStack>
-      <ProgressBar value={progressPercent} color="#1CB0F6" height={6} />
+      <ProgressBar value={progressPercent} color="#9bedff" height={6} />
     </YStack>
   );
 }

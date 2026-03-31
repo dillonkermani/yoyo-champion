@@ -21,7 +21,7 @@ export function SearchInput({ value, onChangeText, placeholder = 'Search tricks.
       size="$4"
       color="#0F1419"
       placeholderTextColor="#8899A6"
-      focusStyle={{ borderColor: '#1CB0F6', borderWidth: 2 }}
+      focusStyle={{ borderColor: '#9bedff', borderWidth: 2 }}
     />
   );
 }

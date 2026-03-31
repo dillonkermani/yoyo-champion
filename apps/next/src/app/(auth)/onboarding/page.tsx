@@ -18,7 +18,7 @@ function OnboardingContent() {
   const searchParams = useSearchParams();
   const didSyncFromUrl = useRef(false);
 
-  const flow = useOnboardingFlow(() => router.replace('/dashboard'));
+  const flow = useOnboardingFlow(() => router.replace('/signup'));
 
   // On mount, restore step from URL if present
   useEffect(() => {
@@ -52,7 +52,7 @@ function OnboardingContent() {
       questionEmoji={flow.config.questionEmoji}
       questionSubtitle={flow.config.questionSubtitle}
       screenType={flow.config.type}
-      choices={flow.config.choices}
+      choices={flow.config.choices ?? []}
       selectedChoiceIds={flow.selectedChoiceIds}
       multiSelect={flow.config.multiSelect}
       onChoicePress={flow.handleChoicePress}

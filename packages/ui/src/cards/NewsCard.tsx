@@ -12,7 +12,7 @@ export interface NewsCardProps {
 }
 
 const TYPE_COLORS: Record<string, string> = {
-  update: '#1CB0F6',
+  update: '#9bedff',
   announcement: '#FF9600',
   new_video: '#CE82FF',
 };
@@ -36,7 +36,7 @@ function timeAgo(date: Date): string {
 }
 
 export function NewsCard({ title, body, type, createdAt, onPress }: NewsCardProps) {
-  const dotColor = TYPE_COLORS[type] ?? '#1CB0F6';
+  const dotColor = TYPE_COLORS[type] ?? '#9bedff';
   const label = TYPE_LABELS[type] ?? 'Update';
 
   return (

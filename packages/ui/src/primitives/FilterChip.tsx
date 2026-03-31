@@ -21,7 +21,7 @@ export function FilterChip({ label, selected = false, onPress }: FilterChipProps
       animation="quick"
       pressStyle={{ scale: 0.96, opacity: 0.9 }}
       cursor="pointer"
-      {...(selected ? { shadowColor: '#1CB0F6', shadowOffset: { width: 0, height: 2 }, shadowRadius: 14, shadowOpacity: 0.35, elevation: 4 } : {})}
+      {...(selected ? { shadowColor: '#9bedff', shadowOffset: { width: 0, height: 2 }, shadowRadius: 14, shadowOpacity: 0.35, elevation: 4 } : {})}
     >
       <Text fontSize={13} fontWeight="600" color={selected ? 'white' : '#0F1419'}>{label}</Text>
     </XStack>

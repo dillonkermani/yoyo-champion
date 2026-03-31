@@ -24,7 +24,7 @@ describe('getDifficultyLabel', () => {
 
 describe('getDifficultyColor', () => {
   it('returns correct color for each difficulty', () => {
-    expect(getDifficultyColor(1)).toBe('#1CB0F6');
+    expect(getDifficultyColor(1)).toBe('#9bedff');
     expect(getDifficultyColor(2)).toBe('#58CC02');
     expect(getDifficultyColor(3)).toBe('#FF9600');
     expect(getDifficultyColor(4)).toBe('#CE82FF');

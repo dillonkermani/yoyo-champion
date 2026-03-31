@@ -35,7 +35,7 @@ export function YoyoCase({ yoyos, onToggleWishlist }: YoyoCaseProps) {
           borderWidth={1}
           borderColor={yoyo.owned ? '#E1E8ED' : '#D5D9DD'}
           {...(yoyo.owned
-            ? { shadowColor: yoyo.color ?? '#1CB0F6', shadowOffset: { width: 0, height: 2 }, shadowRadius: 10, shadowOpacity: 0.3, elevation: 3 }
+            ? { shadowColor: yoyo.color ?? '#9bedff', shadowOffset: { width: 0, height: 2 }, shadowRadius: 10, shadowOpacity: 0.3, elevation: 3 }
             : {}
           )}
         >

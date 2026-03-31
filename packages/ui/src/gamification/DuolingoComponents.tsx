@@ -166,7 +166,7 @@ export interface AchievementBadgeProps {
 
 const RARITY_BG: Record<Rarity, string> = {
   common: '#536471',
-  uncommon: '#1CB0F6',
+  uncommon: '#9bedff',
   rare: '#3B82F6',
   epic: '#9333EA',
   legendary: '#FBBF24',
@@ -240,7 +240,7 @@ export function AchievementBadge({
 type StatColor = 'primary' | 'xp' | 'streak' | 'accent' | 'purple'
 
 const STAT_COLOR_MAP: Record<StatColor, string> = {
-  primary: '#1CB0F6',
+  primary: '#9bedff',
   xp: '#FFC800',
   streak: '#FF4B4B',
   accent: '#FF9600',

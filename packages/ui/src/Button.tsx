@@ -4,7 +4,7 @@ import { NEU } from './tamagui.config';
 
 export const Button = styled(TamaguiButton, {
   name: 'YoyoButton',
-  borderRadius: 16,
+  borderRadius: 9999,
   fontWeight: '700',
   letterSpacing: 0.2,
   borderWidth: 0,
@@ -16,7 +16,7 @@ export const Button = styled(TamaguiButton, {
     variant: {
       primary: {
         backgroundColor: '$brandAqua',
-        color: 'white',
+        color: '#0F1419',
         ...NEU.glowAqua,
         hoverStyle: { backgroundColor: '$brandAquaDark', scale: 1.02 },
         pressStyle: { backgroundColor: '$brandAquaDark', scale: 0.97, ...NEU.pressed },

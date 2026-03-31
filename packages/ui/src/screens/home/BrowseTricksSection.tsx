@@ -46,7 +46,7 @@ const ICON_EMOJI: Record<string, string> = {
 
 const COLOR_HEX: Record<string, string> = {
   teal: '#14B8A6',
-  blue: '#1CB0F6',
+  blue: '#9bedff',
   purple: '#CE82FF',
   cyan: '#00D9FF',
   pink: '#FF86D0',
@@ -66,7 +66,7 @@ function CategoryCell({
   selected: boolean;
   onPress: () => void;
 }) {
-  const hex = COLOR_HEX[category.color] ?? '#1CB0F6';
+  const hex = COLOR_HEX[category.color] ?? '#9bedff';
   const emoji = ICON_EMOJI[category.icon] ?? '🎯';
 
   return (
