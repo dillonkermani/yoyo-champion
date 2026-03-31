@@ -12,9 +12,7 @@ export default function AppRootLayout({ children }: { children: React.ReactNode 
   const isOnboardingComplete = useOnboardingStore(selectIsComplete);
 
   React.useEffect(() => {
-    if (!isAuthenticated) {
-      router.replace('/login');
-    } else if (!isOnboardingComplete) {
+    if (!isAuthenticated || !isOnboardingComplete) {
       router.replace('/onboarding');
     }
   }, [isAuthenticated, isOnboardingComplete, router]);

@@ -171,14 +171,15 @@ export function ProfileScreen({
         </YStack>
       )}
 
+      {/* Spacer pushes logout to bottom */}
+      <YStack flex={1} minHeight={20} />
+
       {/* Logout */}
       {onLogout && (
-        <YStack padding={20} paddingTop={0}>
+        <YStack padding={20} paddingBottom={40}>
           <Button onPress={onLogout} variant="outline" size="md">Log Out</Button>
         </YStack>
       )}
-
-      <YStack height={100} />
     </ScreenContainer>
   );
 }

@@ -738,29 +738,29 @@ export function OnboardingScreen({
   return (
     <YStack
       flex={1}
+      minHeight="100%"
       backgroundColor={T.bg}
-      paddingHorizontal={24}
-      paddingTop={paddingTop + 20}
-      paddingBottom={32}
       maxWidth={520}
       alignSelf="center"
       width="100%"
     >
       {/* Nav bar — hidden on welcome */}
       {!isWelcome && (
-        <NavBar
-          stepIndex={stepIndex}
-          totalSteps={totalSteps}
-          onSkip={onSkip}
-          onBack={onBack}
-        />
+        <YStack paddingHorizontal={24} paddingTop={paddingTop + 20}>
+          <NavBar
+            stepIndex={stepIndex}
+            totalSteps={totalSteps}
+            onSkip={onSkip}
+            onBack={onBack}
+          />
+        </YStack>
       )}
 
       {/* Scrollable content */}
       <ScrollView
         flex={1}
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ flexGrow: 1, paddingTop: isWelcome ? 0 : 20 }}
+        contentContainerStyle={{ flexGrow: 1, paddingTop: isWelcome ? 0 : 20, paddingHorizontal: 24, paddingBottom: 32, paddingTop: isWelcome ? paddingTop + 20 : 20 }}
       >
         {screenType === 'welcome' && (
           <WelcomeContent
@@ -815,11 +815,13 @@ export function OnboardingScreen({
         )}
       </ScrollView>
 
-      <CTAButton
-        label={nextButtonText}
-        onPress={onNext}
-        disabled={isNextDisabled}
-      />
+      <YStack paddingHorizontal={24} paddingBottom={32}>
+        <CTAButton
+          label={nextButtonText}
+          onPress={onNext}
+          disabled={isNextDisabled}
+        />
+      </YStack>
     </YStack>
   );
 }
