@@ -169,7 +169,7 @@ function PathCard({ path }: { path: typeof mockPaths[0] }) {
               {difficultyLabel}
             </span>
             <span className="text-xs text-gray-400">{path.modules.length} modules</span>
-            <span className="text-xs text-gray-400">~{path.estimatedHours}h</span>
+            <span className="text-xs text-gray-400">~{path.estimatedDays}d</span>
           </div>
         </div>
         <Icons.ArrowRight className="w-5 h-5 text-gray-300 group-hover:text-[#9bedff] transition-colors flex-shrink-0 mt-1" />
