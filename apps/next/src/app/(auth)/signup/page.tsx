@@ -150,7 +150,7 @@ export default function SignupPage() {
         <div className="mt-6 text-center space-y-2">
           <button
             onClick={() => {
-              login({ id: 'dev-user', email: 'dev@yoyochampion.com', displayName: 'Dev User', avatarUrl: null, createdAt: new Date().toISOString() });
+              login({ id: 'dev-user', email: 'dev@yoyochampion.com', displayName: 'Dev User', createdAt: new Date().toISOString() });
               useOnboardingStore.getState().completeOnboarding();
               router.replace('/dashboard');
             }}

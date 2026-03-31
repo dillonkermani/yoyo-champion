@@ -31,7 +31,7 @@ export default function AuthIndex() {
       id: 'dev-user',
       email: 'dev@yoyochampion.com',
       displayName: 'Dev User',
-      avatarUrl: null,
+      avatarUrl: undefined,
       createdAt: new Date().toISOString(),
     });
     useOnboardingStore.getState().completeOnboarding();
