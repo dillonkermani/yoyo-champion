@@ -9,56 +9,57 @@ import type { TrickCategory } from "@yoyo/data";
 // ICONS
 // =============================================================================
 
+type IconProps = { className?: string };
 const Icons = {
-  Target: ({ className }) => (
+  Target: ({ className }: IconProps) => (
     <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
       <circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="6" /><circle cx="12" cy="12" r="2" />
     </svg>
   ),
-  Sparkles: ({ className }) => (
+  Sparkles: ({ className }: IconProps) => (
     <svg className={className} viewBox="0 0 24 24" fill="currentColor">
       <path d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z" />
     </svg>
   ),
-  Zap: ({ className }) => (
+  Zap: ({ className }: IconProps) => (
     <svg className={className} viewBox="0 0 24 24" fill="currentColor">
       <path d="M13 2L3 14h8l-1 8 10-12h-8l1-8z" />
     </svg>
   ),
-  Cpu: ({ className }) => (
+  Cpu: ({ className }: IconProps) => (
     <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
       <rect x="4" y="4" width="16" height="16" rx="2" /><rect x="9" y="9" width="6" height="6" />
       <path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3" />
     </svg>
   ),
-  Wind: ({ className }) => (
+  Wind: ({ className }: IconProps) => (
     <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
       <path strokeLinecap="round" strokeLinejoin="round" d="M9.59 4.59A2 2 0 1111 8H2m10.59 11.41A2 2 0 1014 16H2m15.73-8.27A2.5 2.5 0 1119.5 12H2" />
     </svg>
   ),
-  RotateCcw: ({ className }) => (
+  RotateCcw: ({ className }: IconProps) => (
     <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
       <path strokeLinecap="round" strokeLinejoin="round" d="M1 4v6h6M23 20v-6h-6" />
       <path strokeLinecap="round" strokeLinejoin="round" d="M20.49 9A9 9 0 005.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 013.51 15" />
     </svg>
   ),
-  Rocket: ({ className }) => (
+  Rocket: ({ className }: IconProps) => (
     <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
       <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 00-2.91-.09zM12 15l-3-3a22 22 0 012-3.95A12.88 12.88 0 0122 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 01-4 2z" />
     </svg>
   ),
-  Hand: ({ className }) => (
+  Hand: ({ className }: IconProps) => (
     <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
       <path strokeLinecap="round" strokeLinejoin="round" d="M18 11V6a2 2 0 00-2-2 2 2 0 00-2 2M14 10V4a2 2 0 00-2-2 2 2 0 00-2 2v6M10 10.5V6a2 2 0 00-2-2 2 2 0 00-2 2v8" />
       <path strokeLinecap="round" strokeLinejoin="round" d="M18 8a2 2 0 012 2v7a6 6 0 01-6 6H9a6 6 0 01-6-6v-2c0-1.1.9-2 2-2h0" />
     </svg>
   ),
-  ArrowRight: ({ className }) => (
+  ArrowRight: ({ className }: IconProps) => (
     <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
       <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
     </svg>
   ),
-  Check: ({ className }) => (
+  Check: ({ className }: IconProps) => (
     <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
       <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
     </svg>
