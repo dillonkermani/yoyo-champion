@@ -1,4 +1,3 @@
-import React from 'react';
 import { YStack, ScrollView } from 'tamagui';
 import type { YStackProps } from 'tamagui';
 

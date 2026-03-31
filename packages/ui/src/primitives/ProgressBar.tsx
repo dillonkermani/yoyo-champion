@@ -1,4 +1,3 @@
-import React from 'react';
 import { XStack, YStack } from 'tamagui';
 
 export interface ProgressBarProps {

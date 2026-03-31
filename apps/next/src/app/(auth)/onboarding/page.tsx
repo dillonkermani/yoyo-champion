@@ -54,7 +54,7 @@ function OnboardingContent() {
       screenType={flow.config.type}
       choices={flow.config.choices ?? []}
       selectedChoiceIds={flow.selectedChoiceIds}
-      multiSelect={flow.config.multiSelect}
+      multiSelect={flow.config.multiSelect ?? false}
       onChoicePress={flow.handleChoicePress}
       hasTextInput={flow.shouldShowTextInput}
       textInputValue={flow.textInputValue}

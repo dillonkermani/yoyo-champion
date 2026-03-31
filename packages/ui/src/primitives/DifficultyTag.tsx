@@ -1,4 +1,3 @@
-import React from 'react';
 import { XStack } from 'tamagui';
 import { Text } from '../Text';
 import { getDifficultyLabel, getDifficultyColor } from '../utils';

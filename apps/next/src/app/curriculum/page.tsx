@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { getAllCategories, mockTricks, mockPaths, calculatePathProgress } from "@yoyo/data";
+import { getAllCategories, mockTricks, mockPaths } from "@yoyo/data";
 import type { TrickCategory } from "@yoyo/data";
 
 // =============================================================================
@@ -97,10 +97,11 @@ function getCategoryStats(cat: TrickCategory) {
 // COMPONENTS
 // =============================================================================
 
-function CategoryCard({ cat, index }: { cat: TrickCategory; index: number }) {
-  const colors = colorMap[cat.color] || colorMap.blue;
+function CategoryCard({ cat, index: _index }: { cat: TrickCategory; index: number }) {
+  const colors = (colorMap[cat.color] || colorMap['blue'])!;
   const stats = getCategoryStats(cat);
-  const IconComponent = Icons[cat.icon] || Icons.Target;
+  const IconComponent = (Icons[cat.icon] || Icons['Target'])!;
+  const CheckIcon = Icons['Check']!;
 
   return (
     <div
@@ -123,7 +124,7 @@ function CategoryCard({ cat, index }: { cat: TrickCategory; index: number }) {
           <div className="space-y-1.5">
             {stats.sampleTricks.map((trick) => (
               <div key={trick.id} className="flex items-center gap-2 text-sm text-gray-600">
-                <Icons.Check className="w-4 h-4 text-gray-300 flex-shrink-0" />
+                <CheckIcon className="w-4 h-4 text-gray-300 flex-shrink-0" />
                 <span>{trick.name}</span>
                 <span className="text-xs text-gray-400 ml-auto">+{trick.xpReward} XP</span>
               </div>
@@ -145,7 +146,8 @@ function CategoryCard({ cat, index }: { cat: TrickCategory; index: number }) {
   );
 }
 
-function PathCard({ path, index }: { path: typeof mockPaths[0]; index: number }) {
+function PathCard({ path, index: _index }: { path: (typeof mockPaths)[0]; index: number }) {
+  const ArrowRightIcon = Icons['ArrowRight']!;
   const difficultyLabel = ["", "Beginner", "Beginner", "Intermediate", "Advanced", "Expert"][path.difficulty] || "Beginner";
   const difficultyColor = path.difficulty <= 2 ? "text-teal-600 bg-teal-50" : path.difficulty <= 3 ? "text-[#1CB0F6] bg-[#1CB0F6]/10" : "text-[#CE82FF] bg-[#CE82FF]/10";
 
@@ -168,10 +170,10 @@ function PathCard({ path, index }: { path: typeof mockPaths[0]; index: number })
               {difficultyLabel}
             </span>
             <span className="text-xs text-gray-400">{path.modules.length} modules</span>
-            <span className="text-xs text-gray-400">~{path.estimatedHours}h</span>
+            <span className="text-xs text-gray-400">~{path.estimatedDays}d</span>
           </div>
         </div>
-        <Icons.ArrowRight className="w-5 h-5 text-gray-300 group-hover:text-[#9bedff] transition-colors flex-shrink-0 mt-1" />
+        <ArrowRightIcon className="w-5 h-5 text-gray-300 group-hover:text-[#9bedff] transition-colors flex-shrink-0 mt-1" />
       </div>
     </div>
   );
@@ -185,7 +187,6 @@ export default function CurriculumPage() {
   const categories = getAllCategories();
   const paths = mockPaths;
   const totalTricks = mockTricks.length;
-  const featuredPaths = paths.filter((p) => p.isFeatured);
 
   return (
     <div className="bg-white min-h-screen">

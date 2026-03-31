@@ -1,4 +1,3 @@
-import React from 'react';
 import { YStack } from 'tamagui';
 import { VideoPlayer } from '../../VideoPlayer';
 import { Text } from '../../Text';

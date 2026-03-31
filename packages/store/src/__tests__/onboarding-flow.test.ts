@@ -3,42 +3,41 @@ import { ONBOARDING_STEPS } from '../onboarding-flow';
 import type { OnboardingStepId } from '../onboarding-flow';
 
 describe('onboarding-flow', () => {
-  it('has exactly 7 steps', () => {
-    expect(ONBOARDING_STEPS).toHaveLength(7);
+  it('has exactly 6 steps', () => {
+    expect(ONBOARDING_STEPS).toHaveLength(6);
   });
 
   it('follows the correct step order', () => {
     const expectedOrder: OnboardingStepId[] = [
+      'account_user',
+      'experience',
+      'quick_info',
+      'current_yoyo',
+      'goal',
       'intro_video',
-      'skill-level',
-      'yoyo_experience',
-      'goals',
-      'favorite_yoyo',
-      'styles',
-      'handedness',
     ];
-    const actualOrder = ONBOARDING_STEPS.map((step) => step.id);
+    const actualOrder = ONBOARDING_STEPS.map((step) => step.key);
     expect(actualOrder).toEqual(expectedOrder);
   });
 
   it('each step has required config fields', () => {
     for (const step of ONBOARDING_STEPS) {
-      expect(step.id).toBeTruthy();
+      expect(step.key).toBeTruthy();
       expect(typeof step.questionTitle).toBe('string');
       expect(step.questionTitle.length).toBeGreaterThan(0);
       expect(typeof step.questionEmoji).toBe('string');
       expect(step.questionEmoji.length).toBeGreaterThan(0);
       expect(typeof step.questionSubtitle).toBe('string');
-      expect(typeof step.multiSelect).toBe('boolean');
-      expect(typeof step.getChoices).toBe('function');
+      expect(typeof step.type).toBe('string');
     }
   });
 
-  it('each step returns at least one choice', () => {
-    for (const step of ONBOARDING_STEPS) {
-      const choices = step.getChoices();
-      expect(choices.length).toBeGreaterThan(0);
-      for (const choice of choices) {
+  it('choice-type steps have at least one choice', () => {
+    const choiceSteps = ONBOARDING_STEPS.filter((s) => s.type === 'choices');
+    expect(choiceSteps.length).toBeGreaterThan(0);
+    for (const step of choiceSteps) {
+      expect(step.choices!.length).toBeGreaterThan(0);
+      for (const choice of step.choices!) {
         expect(choice.id).toBeTruthy();
         expect(typeof choice.label).toBe('string');
         expect(choice.label.length).toBeGreaterThan(0);
@@ -46,40 +45,30 @@ describe('onboarding-flow', () => {
     }
   });
 
-  it('intro_video step is not multi-select', () => {
-    const introStep = ONBOARDING_STEPS.find((s) => s.id === 'intro_video');
+  it('intro_video step is type video', () => {
+    const introStep = ONBOARDING_STEPS.find((s) => s.key === 'intro_video');
     expect(introStep).toBeDefined();
-    expect(introStep!.multiSelect).toBe(false);
-    expect(introStep!.getChoices()).toHaveLength(1);
-    expect(introStep!.getChoices()[0]!.id).toBe('continue');
+    expect(introStep!.type).toBe('video');
   });
 
-  it('handedness step has exactly 2 choices', () => {
-    const handednessStep = ONBOARDING_STEPS.find((s) => s.id === 'handedness');
-    expect(handednessStep).toBeDefined();
-    const choices = handednessStep!.getChoices();
-    expect(choices).toHaveLength(2);
-    expect(choices.map((c) => c.id)).toEqual(['right', 'left']);
+  it('account_user step has hasSubQuestion', () => {
+    const accountStep = ONBOARDING_STEPS.find((s) => s.key === 'account_user');
+    expect(accountStep).toBeDefined();
+    expect(accountStep!.hasSubQuestion).toBe(true);
+    expect(accountStep!.choices).toHaveLength(3);
   });
 
-  it('goals and styles steps are multi-select', () => {
-    const goalsStep = ONBOARDING_STEPS.find((s) => s.id === 'goals');
-    const stylesStep = ONBOARDING_STEPS.find((s) => s.id === 'styles');
-    expect(goalsStep!.multiSelect).toBe(true);
-    expect(stylesStep!.multiSelect).toBe(true);
+  it('current_yoyo and goal steps have text input', () => {
+    const yoyoStep = ONBOARDING_STEPS.find((s) => s.key === 'current_yoyo');
+    const goalStep = ONBOARDING_STEPS.find((s) => s.key === 'goal');
+    expect(yoyoStep!.hasTextInput).toBe(true);
+    expect(goalStep!.hasTextInput).toBe(true);
   });
 
-  it('single-select steps are not multi-select', () => {
-    const singleSelectIds: OnboardingStepId[] = [
-      'intro_video',
-      'skill-level',
-      'yoyo_experience',
-      'favorite_yoyo',
-      'handedness',
-    ];
-    for (const id of singleSelectIds) {
-      const step = ONBOARDING_STEPS.find((s) => s.id === id);
-      expect(step!.multiSelect).toBe(false);
-    }
+  it('quick_info step has no choices', () => {
+    const quickInfoStep = ONBOARDING_STEPS.find((s) => s.key === 'quick_info');
+    expect(quickInfoStep).toBeDefined();
+    expect(quickInfoStep!.type).toBe('quick_info');
+    expect(quickInfoStep!.choices).toBeUndefined();
   });
 });

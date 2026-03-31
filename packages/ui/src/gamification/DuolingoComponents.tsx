@@ -1,6 +1,5 @@
-import { styled, Stack, type StackProps } from '@tamagui/core'
+import { Stack, type StackProps } from '@tamagui/core'
 import { YStack, XStack, Text } from 'tamagui'
-import { NEU } from '../tamagui.config' // kept for reference only
 
 // ---------------------------------------------------------------------------
 // 1. Encouraging messages
@@ -18,7 +17,7 @@ export type MessageCategory = keyof typeof ENCOURAGING_MESSAGES
 
 export function getRandomMessage(category: MessageCategory): string {
   const msgs = ENCOURAGING_MESSAGES[category]
-  return msgs[Math.floor(Math.random() * msgs.length)]
+  return msgs[Math.floor(Math.random() * msgs.length)]!
 }
 
 // ---------------------------------------------------------------------------

@@ -1,4 +1,3 @@
-import React from 'react';
 import { YStack } from 'tamagui';
 import { Text } from './Text';
 

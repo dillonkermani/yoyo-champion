@@ -1,4 +1,3 @@
-import React from 'react';
 import { XStack, YStack, Text } from 'tamagui';
 import { getDifficultyLabel, getDifficultyColor } from './utils';
 // Clean shadow design - NEU removed

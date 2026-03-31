@@ -1,4 +1,3 @@
-import React from 'react';
 import { YStack, XStack, ScrollView } from 'tamagui';
 import { Text } from '../../Text';
 import { SectionHeader } from '../../primitives/SectionHeader';
