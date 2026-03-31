@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { getAllCategories, mockTricks, mockPaths, calculatePathProgress } from "@yoyo/data";
+import { getAllCategories, mockTricks, mockPaths } from "@yoyo/data";
 import type { TrickCategory } from "@yoyo/data";
 
 // =============================================================================
