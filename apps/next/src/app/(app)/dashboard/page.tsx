@@ -1,52 +1,74 @@
 "use client";
+import { useState, useMemo } from 'react';
 import { HomeScreen } from '@yoyo/ui';
 import { useUserStore, useGamificationStore, useProgressStore } from '@yoyo/store';
-import { selectXp, selectLevel, selectLevelProgress, selectCurrentStreak } from '@yoyo/store';
-import { mockTricks, mockPaths } from '@yoyo/data';
+import { selectLevel, selectCurrentStreak } from '@yoyo/store';
+import { mockTricks, getAllCategories, getRecentNews, advancedCategories } from '@yoyo/data';
 import { useRouter } from 'next/navigation';
 
 export default function DashboardPage() {
   const router = useRouter();
   const displayName = useUserStore((s) => s.user?.displayName ?? s.user?.username ?? 'Champion');
   const streak = useProgressStore(selectCurrentStreak);
-  const xp = useGamificationStore(selectXp);
   const level = useGamificationStore(selectLevel);
-  const levelProgress = useGamificationStore(selectLevelProgress);
 
-  const xpPercent = typeof levelProgress === 'object' && levelProgress
-    ? (levelProgress.current / levelProgress.required) * 100
-    : typeof levelProgress === 'number' ? levelProgress : 0;
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(null);
 
-  const featuredTricks = mockTricks.slice(0, 5).map((t) => ({
-    id: t.id,
-    name: t.name,
-    difficulty: t.difficulty,
-    genre: t.genre,
-    xpReward: t.xpReward,
-  }));
+  const browseCategories = useMemo(
+    () =>
+      getAllCategories().map((c) => ({
+        id: c.id,
+        name: c.name,
+        icon: c.icon,
+        color: c.color,
+        trickCount: mockTricks.filter((t) => c.genres.includes(t.genre)).length,
+      })),
+    [],
+  );
 
-  const activePaths = mockPaths.slice(0, 3).map((p) => ({
-    id: p.id,
-    title: p.title,
-    difficulty: p.difficulty,
-    progressPercent: 0,
-    totalXp: p.totalXp,
-  }));
+  const allCategories = useMemo(() => getAllCategories(), []);
+
+  const filteredTricks = useMemo(() => {
+    let result = mockTricks;
+    if (selectedCategoryId) {
+      const cat = allCategories.find((c) => c.id === selectedCategoryId);
+      if (cat) result = result.filter((t) => cat.genres.includes(t.genre));
+    }
+    if (searchQuery.trim()) {
+      const q = searchQuery.toLowerCase();
+      result = result.filter((t) => t.name.toLowerCase().includes(q));
+    }
+    return result.slice(0, 20).map((t) => ({
+      id: t.id,
+      name: t.name,
+      difficulty: t.difficulty,
+      genre: t.genre,
+      xpReward: t.xpReward,
+    }));
+  }, [selectedCategoryId, searchQuery, allCategories]);
+
+  const newsItems = useMemo(() => getRecentNews(5), []);
 
   return (
     <HomeScreen
       displayName={displayName}
       level={level}
-      xp={xp}
       streak={streak}
-      xpProgressPercent={xpPercent}
-      featuredTricks={featuredTricks}
-      activePaths={activePaths}
+      introVideoUri="intro-video.mp4"
+      categories={browseCategories}
+      tricks={filteredTricks}
+      searchQuery={searchQuery}
+      onSearchChange={setSearchQuery}
+      selectedCategoryId={selectedCategoryId}
+      onCategoryPress={(id) => setSelectedCategoryId((prev) => (prev === id ? null : id))}
       onTrickPress={(id) => {
         const trick = mockTricks.find((t) => t.id === id);
         if (trick) router.push(`/trick/${trick.slug}`);
       }}
-      onSeeAllTricks={() => router.push('/library')}
+      onViewAllTricks={() => router.push('/library')}
+      advancedCategories={advancedCategories}
+      newsItems={newsItems}
     />
   );
 }

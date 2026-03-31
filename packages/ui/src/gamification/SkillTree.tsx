@@ -47,9 +47,9 @@ function getNodeState(
 
 const SC: Record<NodeState, { bg: string; border: string; text: string }> = {
   locked:        { bg: '#E0E0E0', border: '#BDBDBD', text: '#9E9E9E' },
-  available:     { bg: '#FFFFFF', border: '#1CB0F6', text: '#333333' },
+  available:     { bg: '#FFFFFF', border: '#9bedff', text: '#333333' },
   'in-progress': { bg: '#FFF8E1', border: '#FFC800', text: '#333333' },
-  completed:     { bg: '#1CB0F6', border: '#0095DB', text: '#FFFFFF' },
+  completed:     { bg: '#9bedff', border: '#7dd9f0', text: '#FFFFFF' },
   mastered:      { bg: '#FFC800', border: '#A07800', text: '#FFFFFF' },
 };
 
@@ -138,7 +138,7 @@ const SectionBar = styled(XStack, {
   borderRadius: 12,
   backgroundColor: '#FFFFFF',
   borderWidth: 1,
-  borderColor: '#E8ECF0',
+  borderColor: '#E1E8ED',
   alignItems: 'center',
   gap: 12,
   animation: 'quick',

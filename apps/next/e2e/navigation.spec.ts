@@ -1,85 +1,51 @@
 import { test, expect } from "./fixtures";
 
 test.describe("Web navigation", () => {
-  test("sidebar renders on dashboard at lg viewport", async ({ page }) => {
-    await page.setViewportSize({ width: 1280, height: 800 });
+  test("bottom tab bar renders on dashboard", async ({ page }) => {
     await page.goto("/dashboard");
-    await expect(page.locator("aside").first()).toBeVisible();
+    await expect(page.getByText("Home").last()).toBeVisible();
+    await expect(page.getByText("Learn").last()).toBeVisible();
+    await expect(page.getByText("Shop").last()).toBeVisible();
+    await expect(page.getByText("Profile").last()).toBeVisible();
   });
 
-  test("sidebar contains Home nav link", async ({ page }) => {
-    await page.setViewportSize({ width: 1280, height: 800 });
+  test("tab bar contains Home tab with emoji", async ({ page }) => {
     await page.goto("/dashboard");
-    // Scope to the first aside (app sidebar) and match by href
-    await expect(
-      page.locator("aside").first().locator('a[href="/dashboard"]').first()
-    ).toBeVisible();
+    await expect(page.getByText("🏠").last()).toBeVisible();
   });
 
-  test("sidebar contains Champion Path nav link", async ({ page }) => {
-    await page.setViewportSize({ width: 1280, height: 800 });
+  test("tab bar contains Learn tab with emoji", async ({ page }) => {
     await page.goto("/dashboard");
-    await expect(
-      page.locator("aside").first().locator('a[href="/library"]').first()
-    ).toBeVisible();
+    await expect(page.getByText("📖").last()).toBeVisible();
   });
 
-  test("sidebar contains Shop nav link", async ({ page }) => {
-    await page.setViewportSize({ width: 1280, height: 800 });
+  test("tab bar contains Shop tab with emoji", async ({ page }) => {
     await page.goto("/dashboard");
-    await expect(
-      page.locator("aside").first().locator('a[href="/shop"]').first()
-    ).toBeVisible();
+    await expect(page.getByText("🛍️").last()).toBeVisible();
   });
 
-  test("sidebar contains For You nav link", async ({ page }) => {
-    await page.setViewportSize({ width: 1280, height: 800 });
+  test("tab bar contains For You tab with emoji", async ({ page }) => {
     await page.goto("/dashboard");
-    await expect(
-      page.locator("aside").first().locator('a[href="/for-you"]').first()
-    ).toBeVisible();
+    await expect(page.getByText("▶️").last()).toBeVisible();
   });
 
-  test("sidebar Champion Path navigates to /library", async ({ page }) => {
-    await page.setViewportSize({ width: 1280, height: 800 });
-    await page.goto("/dashboard");
-    await page
-      .locator("aside")
-      .first()
-      .locator('a[href="/library"]')
-      .first()
-      .click({ force: true });
-    await expect(page).toHaveURL(/\/library/);
-  });
-
-  test("header is visible on mobile viewport", async ({ page }) => {
-    await page.setViewportSize({ width: 375, height: 812 });
-    await page.goto("/dashboard");
-    await expect(page.getByRole("banner").first()).toBeVisible();
-  });
-
-  test("can navigate from landing to dashboard via login flow", async ({ page }) => {
+  test("root URL loads dashboard content", async ({ page }) => {
     await page.goto("/");
-    await expect(page.getByRole("heading", { name: /Become the Yo-Yo Player/i })).toBeVisible();
-    await page.goto("/dashboard");
-    await expect(page.getByText(/Hey,/i)).toBeVisible();
+    await expect(page.getByText(/Welcome back/i)).toBeVisible();
   });
 
-  test("can navigate from dashboard to library", async ({ page }) => {
-    await page.goto("/dashboard");
+  test("can navigate to library", async ({ page }) => {
     await page.goto("/library");
-    await expect(page.getByRole("heading", { name: /Trick Library/i })).toBeVisible();
+    await expect(page.getByText(/Trick Library/i).first()).toBeVisible();
   });
 
-  test("can navigate from dashboard to paths", async ({ page }) => {
-    await page.goto("/dashboard");
-    await page.goto("/paths");
-    await expect(page.getByRole("heading", { name: /Learning Paths/i })).toBeVisible();
-  });
-
-  test("can navigate from dashboard to profile", async ({ page }) => {
-    await page.goto("/dashboard");
+  test("can navigate to profile", async ({ page }) => {
     await page.goto("/profile");
-    await expect(page.getByText(/Tricks Mastered/i).first()).toBeVisible();
+    await expect(page.getByText(/Total XP/i)).toBeVisible();
+  });
+
+  test("can navigate to onboarding", async ({ page }) => {
+    await page.goto("/onboarding");
+    await expect(page.getByText(/Learn Yoyo/i)).toBeVisible();
   });
 });

@@ -63,7 +63,7 @@ export function TrickDetailScreen({
           </XStack>
         )}
         <XStack gap={8} alignItems="center">
-          <Text fontSize={13} color="#636e72">Est. {estimatedMinutes} min</Text>
+          <Text fontSize={13} color="#536471">Est. {estimatedMinutes} min</Text>
           {completed && (
             <XStack backgroundColor="#e6f5e8" borderRadius={100} paddingHorizontal={10} paddingVertical={3}>
               <Text fontSize={12} fontWeight="600" color="#58CC02">Mastered</Text>
@@ -71,13 +71,13 @@ export function TrickDetailScreen({
           )}
         </XStack>
 
-        <Text fontSize={15} color="#2d3436" lineHeight={22}>{description}</Text>
+        <Text fontSize={15} color="#0F1419" lineHeight={22}>{description}</Text>
 
-        <Text fontSize={18} fontWeight="700" letterSpacing={-0.3} color="#2d3436">Steps</Text>
+        <Text fontSize={18} fontWeight="700" letterSpacing={-0.3} color="#0F1419">Steps</Text>
         {steps.map((step) => (
           <YStack
             key={step.id}
-            backgroundColor="$neuSurface"
+            backgroundColor="white"
             borderRadius={16}
             padding={14}
             gap={6}
@@ -97,9 +97,9 @@ export function TrickDetailScreen({
               >
                 <Text fontSize={12} fontWeight="700" color="white">{step.order}</Text>
               </YStack>
-              <Text fontSize={15} fontWeight="600" color="#2d3436" flex={1}>{step.title}</Text>
+              <Text fontSize={15} fontWeight="600" color="#0F1419" flex={1}>{step.title}</Text>
             </XStack>
-            <Text fontSize={13} color="#636e72" lineHeight={20} paddingLeft={38}>{step.description}</Text>
+            <Text fontSize={13} color="#536471" lineHeight={20} paddingLeft={38}>{step.description}</Text>
           </YStack>
         ))}
 

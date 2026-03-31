@@ -1,6 +1,6 @@
 import React from 'react';
 import { styled, Stack, XStack, YStack, Text } from 'tamagui';
-import { NEU } from '../tamagui.config';
+import { NEU } from '../tamagui.config'; // kept for glow effects only
 
 /* ------------------------------------------------------------------ */
 /*  LevelBadge                                                        */
@@ -71,10 +71,9 @@ export function XPProgressBar({
     <YStack gap={4}>
       <XStack
         height={height}
-        backgroundColor="#dde1e7"
+        backgroundColor="#EEF0F3"
         borderRadius={height / 2}
         overflow="hidden"
-        {...NEU.inset}
       >
         <YStack
           height={height}
@@ -151,7 +150,7 @@ function CompactVariant({ level, lifetimeXp, levelProgress }: Omit<XPDisplayProp
       <YStack flex={1} gap={2}>
         <XStack
           height={6}
-          backgroundColor="#dde1e7"
+          backgroundColor="#EEF0F3"
           borderRadius={3}
           overflow="hidden"
         >
@@ -221,7 +220,7 @@ export function XPDisplay({ level, lifetimeXp, levelProgress, variant = 'full', 
   }
 
   return (
-    <XPCard onPress={onPress} cursor={onPress ? 'pointer' : undefined} {...NEU.card}>
+    <XPCard onPress={onPress} cursor={onPress ? 'pointer' : undefined} shadowColor="#000" shadowOffset={{ width: 0, height: 2 }} shadowRadius={8} shadowOpacity={0.08} elevation={3}>
       <FullVariant level={level} lifetimeXp={lifetimeXp} levelProgress={levelProgress} />
     </XPCard>
   );

@@ -1,6 +1,6 @@
 import React from 'react';
 import { XStack, YStack, Text } from 'tamagui';
-import { NEU } from './tamagui.config';
+// Clean shadow design - NEU removed
 
 export interface YoyoSlot {
   id: string;
@@ -24,17 +24,19 @@ export function YoyoCase({ yoyos, onToggleWishlist }: YoyoCaseProps) {
           width={90}
           height={90}
           borderRadius={16}
-          backgroundColor={yoyo.owned ? '$neuSurface' : '$neuSurfacePressed'}
+          backgroundColor={yoyo.owned ? 'white' : '#F0F2F5'}
           alignItems="center"
           justifyContent="center"
           padding={8}
           animation="quick"
-          pressStyle={{ scaleY: 0.97, scaleX: 1.005, opacity: 0.92, ...NEU.pressed }}
+          pressStyle={{ opacity: 0.9, scale: 0.97 }}
           cursor="pointer"
           position="relative"
+          borderWidth={1}
+          borderColor={yoyo.owned ? '#E1E8ED' : '#D5D9DD'}
           {...(yoyo.owned
-            ? { shadowColor: yoyo.color ?? '#1CB0F6', shadowOffset: { width: 0, height: 2 }, shadowRadius: 10, shadowOpacity: 0.3, elevation: 3 }
-            : NEU.inset
+            ? { shadowColor: yoyo.color ?? '#9bedff', shadowOffset: { width: 0, height: 2 }, shadowRadius: 10, shadowOpacity: 0.3, elevation: 3 }
+            : {}
           )}
         >
           <Text fontSize={28} opacity={yoyo.owned ? 1 : 0.4}>{yoyo.owned ? '🪀' : '🔒'}</Text>
@@ -42,7 +44,7 @@ export function YoyoCase({ yoyos, onToggleWishlist }: YoyoCaseProps) {
             fontSize={10}
             textAlign="center"
             numberOfLines={1}
-            color={yoyo.owned ? '#2d3436' : '#a0a8b0'}
+            color={yoyo.owned ? '#0F1419' : '#8899A6'}
           >
             {yoyo.name}
           </Text>

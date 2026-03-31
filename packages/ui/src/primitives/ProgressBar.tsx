@@ -8,7 +8,7 @@ export interface ProgressBarProps {
   backgroundColor?: string;
 }
 
-export function ProgressBar({ value, color = '#1CB0F6', height = 10, backgroundColor = '#dde1e7' }: ProgressBarProps) {
+export function ProgressBar({ value, color = '#9bedff', height = 10, backgroundColor = '#EEF0F3' }: ProgressBarProps) {
   const clampedValue = Math.min(100, Math.max(0, value));
   return (
     <XStack
@@ -16,12 +16,6 @@ export function ProgressBar({ value, color = '#1CB0F6', height = 10, backgroundC
       backgroundColor={backgroundColor}
       borderRadius={height / 2}
       overflow="hidden"
-      // Inset neumorphic track
-      shadowColor="#b8c0cc"
-      shadowOffset={{ width: 2, height: 2 }}
-      shadowRadius={4}
-      shadowOpacity={0.4}
-      elevation={1}
     >
       <YStack
         height={height}

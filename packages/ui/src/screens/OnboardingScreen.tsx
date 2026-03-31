@@ -1,7 +1,7 @@
-import React from 'react';
-import { YStack, XStack, Input, Switch, ScrollView, Stack } from 'tamagui';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { YStack, XStack, Input, ScrollView, Stack } from 'tamagui';
+import { Switch as RNSwitch } from 'react-native';
 import { Text } from '../Text';
-import { NEU } from '../tamagui.config';
 
 export interface OnboardingChoice {
   id: string;
@@ -16,7 +16,7 @@ export interface OnboardingScreenProps {
   questionTitle: string;
   questionEmoji?: string;
   questionSubtitle?: string;
-  screenType: 'welcome' | 'choices' | 'quick_info' | 'auth' | 'video';
+  screenType: 'welcome' | 'choices' | 'quick_info' | 'video';
   choices?: OnboardingChoice[];
   selectedChoiceIds?: string[];
   multiSelect?: boolean;
@@ -49,20 +49,20 @@ export interface OnboardingScreenProps {
 
 // ── Design Tokens ──────────────────────────────────────────────────────
 const T = {
-  bg: '#FFFFFF',
+  bg: '#F7F8FA',
   cardBg: '#FFFFFF',
-  text: '#1A1A2E',
-  textSub: '#6B7280',
-  muted: '#9CA3AF',
-  border: '#E8ECF1',
-  accent: '#1CB0F6',
-  accentDark: '#0095DB',
-  accentLight: '#E8F7FE',
-  accentDisabled: '#B8E4FA',
+  text: '#0F1419',
+  textSub: '#536471',
+  muted: '#8899A6',
+  border: '#E1E8ED',
+  accent: '#9bedff',
+  accentDark: '#7dd9f0',
+  accentLight: '#E8FBFF',
+  accentDisabled: '#c5f4ff',
   gold: '#FFC800',
   green: '#58CC02',
   white: '#FFFFFF',
-  black: '#1A1A2E',
+  black: '#0F1419',
   warningBg: '#FEF3C7',
   warningText: '#92400E',
 } as const;
@@ -157,7 +157,7 @@ function CTAButton({
   return (
     <YStack
       backgroundColor={disabled ? T.accentDisabled : T.accent}
-      borderRadius={18}
+      borderRadius={9999}
       height={58}
       justifyContent="center"
       alignItems="center"
@@ -166,10 +166,16 @@ function CTAButton({
       pressStyle={disabled ? {} : { scale: 0.97, opacity: 0.9, backgroundColor: T.accentDark }}
       cursor={disabled ? 'default' : 'pointer'}
       opacity={disabled ? 0.5 : 1}
-      {...(disabled ? {} : NEU.glowAqua)}
+      {...(disabled ? {} : {
+        shadowColor: '#9bedff',
+        shadowOffset: { width: 0, height: 2 },
+        shadowRadius: 14,
+        shadowOpacity: 0.35,
+        elevation: 4,
+      })}
       marginTop={16}
     >
-      <Text fontSize={18} fontWeight="800" color={T.white} letterSpacing={0.3}>
+      <Text fontSize={18} fontWeight="800" color={T.black} letterSpacing={0.3}>
         {label}
       </Text>
     </YStack>
@@ -197,18 +203,30 @@ function ChoiceCard({
       onPress={onPress}
       animation="quick"
       pressStyle={{ scale: 0.97, opacity: 0.9 }}
-      hoverStyle={{ borderColor: isSelected ? T.accent : '#C5CAD1', scale: 1.01 }}
+      hoverStyle={{ borderColor: isSelected ? T.accent : '#C4CDD5', scale: 1.01 }}
       cursor="pointer"
       gap={14}
       alignItems="center"
-      {...(isSelected ? NEU.glowAqua : NEU.card)}
+      {...(isSelected ? {
+        shadowColor: '#9bedff',
+        shadowOffset: { width: 0, height: 2 },
+        shadowRadius: 14,
+        shadowOpacity: 0.35,
+        elevation: 4,
+      } : {
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 1 },
+        shadowRadius: 4,
+        shadowOpacity: 0.06,
+        elevation: 2,
+      })}
     >
       {choice.emoji && (
         <Stack
           width={52}
           height={52}
           borderRadius={16}
-          backgroundColor={isSelected ? T.accent : '#F3F4F6'}
+          backgroundColor={isSelected ? T.accent : '#EEF0F3'}
           justifyContent="center"
           alignItems="center"
         >
@@ -219,7 +237,7 @@ function ChoiceCard({
         <Text
           fontSize={16}
           fontWeight="700"
-          color={isSelected ? T.accent : T.text}
+          color={T.text}
         >
           {choice.label}
         </Text>
@@ -268,15 +286,21 @@ function PillButton({
       onPress={onPress}
       animation="quick"
       pressStyle={{ scale: 0.96, opacity: 0.9 }}
-      hoverStyle={{ borderColor: isSelected ? T.accent : '#C5CAD1' }}
+      hoverStyle={{ borderColor: isSelected ? T.accent : '#C4CDD5' }}
       cursor="pointer"
       alignItems="center"
-      {...(isSelected ? NEU.glowAqua : {})}
+      {...(isSelected ? {
+        shadowColor: '#9bedff',
+        shadowOffset: { width: 0, height: 2 },
+        shadowRadius: 14,
+        shadowOpacity: 0.35,
+        elevation: 4,
+      } : {})}
     >
       <Text
         fontSize={16}
         fontWeight="700"
-        color={isSelected ? T.white : T.text}
+        color={isSelected ? T.black : T.text}
       >
         {label}
       </Text>
@@ -355,7 +379,11 @@ function WelcomeContent({
         backgroundColor={T.accentLight}
         justifyContent="center"
         alignItems="center"
-        {...NEU.glowAqua}
+        shadowColor="#9bedff"
+        shadowOffset={{ width: 0, height: 2 }}
+        shadowRadius={14}
+        shadowOpacity={0.35}
+        elevation={4}
       >
         <Text fontSize={48} lineHeight={56}>{questionEmoji || '\uD83E\uDE80'}</Text>
       </Stack>
@@ -496,6 +524,175 @@ function ChoicesContent({
   );
 }
 
+// ── Autocomplete Input ────────────────────────────────────────────────
+function AutocompleteInput({
+  value,
+  onChangeText,
+  placeholder,
+  suggestions,
+  onSelect,
+  isLoading,
+}: {
+  value: string;
+  onChangeText: (text: string) => void;
+  placeholder: string;
+  suggestions: string[];
+  onSelect: (item: string) => void;
+  isLoading?: boolean;
+}) {
+  const [showDropdown, setShowDropdown] = useState(false);
+
+  return (
+    <YStack zIndex={10}>
+      <Input
+        value={value}
+        onChangeText={(text: string) => {
+          onChangeText(text);
+          setShowDropdown(true);
+        }}
+        onFocus={() => setShowDropdown(true)}
+        placeholder={placeholder}
+        borderRadius={16}
+        borderWidth={2}
+        borderColor={showDropdown && suggestions.length > 0 ? T.accent : T.border}
+        height={52}
+        paddingHorizontal={16}
+        fontSize={15}
+        color={T.text}
+        placeholderTextColor={T.muted}
+        backgroundColor={T.cardBg}
+        focusStyle={{ borderColor: T.accent }}
+      />
+      {isLoading && value.length > 0 && (
+        <Text fontSize={12} color={T.muted} marginTop={4} marginLeft={8}>Searching...</Text>
+      )}
+      {showDropdown && suggestions.length > 0 && (
+        <YStack
+          position="relative"
+          backgroundColor={T.cardBg}
+          borderRadius={14}
+          borderWidth={1.5}
+          borderColor={T.border}
+          marginTop={4}
+          maxHeight={180}
+          overflow="hidden"
+          shadowColor="#000"
+          shadowOffset={{ width: 0, height: 4 }}
+          shadowRadius={12}
+          shadowOpacity={0.1}
+          elevation={6}
+        >
+          <ScrollView nestedScrollEnabled showsVerticalScrollIndicator={false}>
+            {suggestions.map((item, i) => (
+              <XStack
+                key={item + i}
+                paddingHorizontal={16}
+                paddingVertical={12}
+                onPress={() => {
+                  onSelect(item);
+                  setShowDropdown(false);
+                }}
+                cursor="pointer"
+                animation="quick"
+                pressStyle={{ backgroundColor: T.accentLight }}
+                hoverStyle={{ backgroundColor: T.accentLight }}
+                borderBottomWidth={i < suggestions.length - 1 ? 1 : 0}
+                borderBottomColor={T.border}
+              >
+                <Text fontSize={15} color={T.text}>{item}</Text>
+              </XStack>
+            ))}
+          </ScrollView>
+        </YStack>
+      )}
+    </YStack>
+  );
+}
+
+// ── Country / Region hooks ────────────────────────────────────────────
+function useCountrySearch(query: string) {
+  const [results, setResults] = useState<string[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+
+    if (!query || query.length < 2) {
+      setResults([]);
+      return;
+    }
+
+    setIsLoading(true);
+    debounceRef.current = setTimeout(async () => {
+      try {
+        const res = await fetch(
+          `https://restcountries.com/v3.1/name/${encodeURIComponent(query)}?fields=name`
+        );
+        if (!res.ok) { setResults([]); setIsLoading(false); return; }
+        const data = await res.json();
+        const names: string[] = data
+          .map((c: { name: { common: string } }) => c.name.common)
+          .sort((a: string, b: string) => a.localeCompare(b))
+          .slice(0, 8);
+        setResults(names);
+      } catch {
+        setResults([]);
+      }
+      setIsLoading(false);
+    }, 300);
+
+    return () => { if (debounceRef.current) clearTimeout(debounceRef.current); };
+  }, [query]);
+
+  return { results, isLoading };
+}
+
+function useRegionSearch(country: string, query: string) {
+  const [allRegions, setAllRegions] = useState<string[]>([]);
+  const [filtered, setFiltered] = useState<string[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  // Fetch all states/regions when country changes
+  useEffect(() => {
+    if (!country) { setAllRegions([]); return; }
+
+    setIsLoading(true);
+    (async () => {
+      try {
+        const res = await fetch('https://countriesnow.space/api/v0.1/countries/states', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ country }),
+        });
+        if (!res.ok) { setAllRegions([]); setIsLoading(false); return; }
+        const data = await res.json();
+        const states: string[] = (data?.data?.states ?? [])
+          .map((s: { name: string }) => s.name)
+          .sort((a: string, b: string) => a.localeCompare(b));
+        setAllRegions(states);
+      } catch {
+        setAllRegions([]);
+      }
+      setIsLoading(false);
+    })();
+  }, [country]);
+
+  // Filter locally based on query
+  useEffect(() => {
+    if (!query) {
+      setFiltered(allRegions.slice(0, 8));
+      return;
+    }
+    const lower = query.toLowerCase();
+    setFiltered(
+      allRegions.filter((r) => r.toLowerCase().includes(lower)).slice(0, 8)
+    );
+  }, [query, allRegions]);
+
+  return { results: filtered, isLoading };
+}
+
 // ── Quick Info Screen ──────────────────────────────────────────────────
 function QuickInfoContent({
   questionEmoji,
@@ -522,6 +719,45 @@ function QuickInfoContent({
   region?: string | null;
   onRegionChange?: (r: string) => void;
 }) {
+  const [countryQuery, setCountryQuery] = useState(country ?? '');
+  const [regionQuery, setRegionQuery] = useState(region ?? '');
+  const [countryConfirmed, setCountryConfirmed] = useState(!!country);
+
+  const { results: countrySuggestions, isLoading: countryLoading } = useCountrySearch(
+    countryConfirmed ? '' : countryQuery
+  );
+  const { results: regionSuggestions, isLoading: regionLoading } = useRegionSearch(
+    countryConfirmed ? countryQuery : '',
+    regionQuery
+  );
+
+  const handleCountryType = useCallback((text: string) => {
+    setCountryQuery(text);
+    setCountryConfirmed(false);
+    onCountryChange?.(text);
+    // Reset region when country changes
+    setRegionQuery('');
+    onRegionChange?.('');
+  }, [onCountryChange, onRegionChange]);
+
+  const handleCountrySelect = useCallback((name: string) => {
+    setCountryQuery(name);
+    setCountryConfirmed(true);
+    onCountryChange?.(name);
+    setRegionQuery('');
+    onRegionChange?.('');
+  }, [onCountryChange, onRegionChange]);
+
+  const handleRegionType = useCallback((text: string) => {
+    setRegionQuery(text);
+    onRegionChange?.(text);
+  }, [onRegionChange]);
+
+  const handleRegionSelect = useCallback((name: string) => {
+    setRegionQuery(name);
+    onRegionChange?.(name);
+  }, [onRegionChange]);
+
   return (
     <YStack gap={28} flex={1}>
       <QuestionHeader emoji={questionEmoji} title={questionTitle} subtitle={questionSubtitle} />
@@ -546,7 +782,11 @@ function QuickInfoContent({
         padding={18}
         borderWidth={2}
         borderColor={T.border}
-        {...NEU.card}
+        shadowColor="#000"
+        shadowOffset={{ width: 0, height: 1 }}
+        shadowRadius={4}
+        shadowOpacity={0.06}
+        elevation={2}
       >
         <YStack flex={1} gap={4}>
           <Text fontSize={16} fontWeight="700" color={T.text}>
@@ -556,172 +796,36 @@ function QuickInfoContent({
             Flip videos for left-handed viewing
           </Text>
         </YStack>
-        <Switch
-          size="$4"
-          checked={videoMirror ?? false}
-          onCheckedChange={() => onVideoMirrorToggle?.()}
-          backgroundColor={videoMirror ? T.accent : T.border}
-        >
-          <Switch.Thumb animation="quick" backgroundColor={T.white} />
-        </Switch>
+        <RNSwitch
+          value={videoMirror ?? false}
+          onValueChange={() => onVideoMirrorToggle?.()}
+          trackColor={{ false: T.border, true: T.accent }}
+          thumbColor={T.white}
+        />
       </XStack>
 
       {/* Location */}
       <YStack gap={10}>
-        <XStack justifyContent="space-between" alignItems="center">
-          <Text fontSize={16} fontWeight="700" color={T.text}>
-            Where are you from?
-          </Text>
-          <Text
-            fontSize={13}
-            color={T.muted}
-            onPress={() => { onCountryChange?.(''); onRegionChange?.(''); }}
-            cursor="pointer"
-          >
-            Rather not say
-          </Text>
-        </XStack>
-        <Input
-          value={country ?? ''}
-          onChangeText={onCountryChange}
-          placeholder="Country"
-          borderRadius={16}
-          borderWidth={2}
-          borderColor={T.border}
-          height={52}
-          paddingHorizontal={16}
-          fontSize={15}
-          color={T.text}
-          placeholderTextColor={T.muted}
-          backgroundColor={T.cardBg}
-          focusStyle={{ borderColor: T.accent }}
+        <Text fontSize={16} fontWeight="700" color={T.text}>
+          Where are you from?
+        </Text>
+        <AutocompleteInput
+          value={countryQuery}
+          onChangeText={handleCountryType}
+          placeholder="Search country..."
+          suggestions={countrySuggestions}
+          onSelect={handleCountrySelect}
+          isLoading={countryLoading}
         />
-        <Input
-          value={region ?? ''}
-          onChangeText={onRegionChange}
-          placeholder="State / Region"
-          borderRadius={16}
-          borderWidth={2}
-          borderColor={T.border}
-          height={52}
-          paddingHorizontal={16}
-          fontSize={15}
-          color={T.text}
-          placeholderTextColor={T.muted}
-          backgroundColor={T.cardBg}
-          focusStyle={{ borderColor: T.accent }}
+        <AutocompleteInput
+          value={regionQuery}
+          onChangeText={handleRegionType}
+          placeholder={countryConfirmed ? 'Search state / region...' : 'Select a country first'}
+          suggestions={regionSuggestions}
+          onSelect={handleRegionSelect}
+          isLoading={regionLoading}
         />
       </YStack>
-    </YStack>
-  );
-}
-
-// ── Auth Screen ────────────────────────────────────────────────────────
-function AuthContent({
-  questionEmoji,
-  questionTitle,
-  questionSubtitle,
-  isChildUnder13,
-  onNext,
-}: {
-  questionEmoji?: string;
-  questionTitle: string;
-  questionSubtitle?: string;
-  isChildUnder13?: boolean | null;
-  onNext: () => void;
-}) {
-  return (
-    <YStack gap={28} flex={1}>
-      <QuestionHeader emoji={questionEmoji} title={questionTitle} subtitle={questionSubtitle} centered />
-
-      {isChildUnder13 && (
-        <XStack
-          backgroundColor={T.warningBg}
-          borderRadius={14}
-          padding={16}
-          gap={10}
-          alignItems="center"
-        >
-          <Text fontSize={20}>{'\u26A0\uFE0F'}</Text>
-          <Text fontSize={14} fontWeight="600" color={T.warningText} flex={1}>
-            Parent email required for accounts under 13
-          </Text>
-        </XStack>
-      )}
-
-      <YStack gap={14}>
-        {/* Google */}
-        <XStack
-          backgroundColor={T.cardBg}
-          borderRadius={18}
-          height={58}
-          justifyContent="center"
-          alignItems="center"
-          borderWidth={2}
-          borderColor={T.border}
-          onPress={onNext}
-          animation="quick"
-          pressStyle={{ scale: 0.97, opacity: 0.9 }}
-          hoverStyle={{ borderColor: '#C5CAD1' }}
-          cursor="pointer"
-          gap={10}
-          {...NEU.card}
-        >
-          <Text fontSize={22} fontWeight="700" color="#4285F4">G</Text>
-          <Text fontSize={16} fontWeight="700" color={T.text}>
-            Continue with Google
-          </Text>
-        </XStack>
-
-        {/* Apple */}
-        <XStack
-          backgroundColor={T.black}
-          borderRadius={18}
-          height={58}
-          justifyContent="center"
-          alignItems="center"
-          onPress={onNext}
-          animation="quick"
-          pressStyle={{ scale: 0.97, opacity: 0.9 }}
-          cursor="pointer"
-          gap={10}
-          shadowColor="#000"
-          shadowOffset={{ width: 0, height: 2 }}
-          shadowRadius={8}
-          shadowOpacity={0.3}
-          elevation={4}
-        >
-          <Text fontSize={22} color={T.white}>{'\uF8FF'}</Text>
-          <Text fontSize={16} fontWeight="700" color={T.white}>
-            Continue with Apple
-          </Text>
-        </XStack>
-
-        {/* Email */}
-        <XStack
-          backgroundColor={T.cardBg}
-          borderRadius={18}
-          height={58}
-          justifyContent="center"
-          alignItems="center"
-          borderWidth={2.5}
-          borderColor={T.accent}
-          onPress={onNext}
-          animation="quick"
-          pressStyle={{ scale: 0.97, opacity: 0.9 }}
-          cursor="pointer"
-          gap={10}
-        >
-          <Text fontSize={16}>{'\u2709\uFE0F'}</Text>
-          <Text fontSize={16} fontWeight="700" color={T.accent}>
-            Continue with Email
-          </Text>
-        </XStack>
-      </YStack>
-
-      <Text fontSize={12} color={T.muted} textAlign="center" lineHeight={18}>
-        By continuing, you agree to our Terms of Service and Privacy Policy.
-      </Text>
     </YStack>
   );
 }
@@ -741,23 +845,31 @@ function VideoContent({
       <QuestionHeader emoji={questionEmoji} title={questionTitle} subtitle={questionSubtitle} />
 
       <YStack
-        backgroundColor="#F0F4F8"
+        backgroundColor="#EEF0F3"
         borderRadius={20}
         aspectRatio={16 / 9}
         width="100%"
         justifyContent="center"
         alignItems="center"
-        {...NEU.card}
+        shadowColor="#000"
+        shadowOffset={{ width: 0, height: 1 }}
+        shadowRadius={4}
+        shadowOpacity={0.06}
+        elevation={2}
         overflow="hidden"
       >
         <Stack
           width={72}
           height={72}
           borderRadius={36}
-          backgroundColor="rgba(28,176,246,0.9)"
+          backgroundColor="rgba(155,237,255,0.9)"
           justifyContent="center"
           alignItems="center"
-          {...NEU.glowAqua}
+          shadowColor="#9bedff"
+          shadowOffset={{ width: 0, height: 2 }}
+          shadowRadius={14}
+          shadowOpacity={0.35}
+          elevation={4}
         >
           <Text fontSize={32} color={T.white} marginLeft={4}>
             {'\u25B6'}
@@ -810,29 +922,29 @@ export function OnboardingScreen({
   return (
     <YStack
       flex={1}
+      minHeight="100%"
       backgroundColor={T.bg}
-      paddingHorizontal={24}
-      paddingTop={paddingTop + 20}
-      paddingBottom={32}
       maxWidth={520}
       alignSelf="center"
       width="100%"
     >
       {/* Nav bar — hidden on welcome */}
       {!isWelcome && (
-        <NavBar
-          stepIndex={stepIndex}
-          totalSteps={totalSteps}
-          onSkip={onSkip}
-          onBack={onBack}
-        />
+        <YStack paddingHorizontal={24} paddingTop={paddingTop + 20}>
+          <NavBar
+            stepIndex={stepIndex}
+            totalSteps={totalSteps}
+            onSkip={onSkip}
+            onBack={onBack}
+          />
+        </YStack>
       )}
 
       {/* Scrollable content */}
       <ScrollView
         flex={1}
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ flexGrow: 1, paddingTop: isWelcome ? 0 : 20 }}
+        contentContainerStyle={{ flexGrow: 1, paddingTop: isWelcome ? 0 : 20, paddingHorizontal: 24, paddingBottom: 32, paddingTop: isWelcome ? paddingTop + 20 : 20 }}
       >
         {screenType === 'welcome' && (
           <WelcomeContent
@@ -878,16 +990,6 @@ export function OnboardingScreen({
           />
         )}
 
-        {screenType === 'auth' && (
-          <AuthContent
-            questionEmoji={questionEmoji}
-            questionTitle={questionTitle}
-            questionSubtitle={questionSubtitle}
-            isChildUnder13={isChildUnder13}
-            onNext={onNext}
-          />
-        )}
-
         {screenType === 'video' && (
           <VideoContent
             questionEmoji={questionEmoji}
@@ -897,14 +999,13 @@ export function OnboardingScreen({
         )}
       </ScrollView>
 
-      {/* CTA — auth handles its own buttons */}
-      {screenType !== 'auth' && (
+      <YStack paddingHorizontal={24} paddingBottom={32}>
         <CTAButton
           label={nextButtonText}
           onPress={onNext}
           disabled={isNextDisabled}
         />
-      )}
+      </YStack>
     </YStack>
   );
 }

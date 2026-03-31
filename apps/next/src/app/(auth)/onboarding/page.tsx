@@ -1,21 +1,50 @@
 "use client";
+import { Suspense } from 'react';
 import { OnboardingScreen } from '@yoyo/ui';
-import { useOnboardingFlow, useUserStore, selectIsAuthenticated } from '@yoyo/store';
-import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+import { useOnboardingFlow, ONBOARDING_STEPS, useOnboardingStore } from '@yoyo/store';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useEffect, useRef } from 'react';
 
 export default function OnboardingPage() {
+  return (
+    <Suspense>
+      <OnboardingContent />
+    </Suspense>
+  );
+}
+
+function OnboardingContent() {
   const router = useRouter();
-  const isAuthenticated = useUserStore(selectIsAuthenticated);
+  const searchParams = useSearchParams();
+  const didSyncFromUrl = useRef(false);
 
+  const flow = useOnboardingFlow(() => router.replace('/signup'));
+
+  // On mount, restore step from URL if present
   useEffect(() => {
-    if (!isAuthenticated) router.replace('/login');
-  }, [isAuthenticated, router]);
+    const urlStep = searchParams.get('step');
+    if (urlStep && !didSyncFromUrl.current) {
+      const step = ONBOARDING_STEPS.find((s) => s.key === urlStep);
+      if (step) {
+        useOnboardingStore.getState().goToStep(step.key);
+      }
+      didSyncFromUrl.current = true;
+    }
+  }, [searchParams]);
 
-  const flow = useOnboardingFlow(() => router.replace('/dashboard'));
+  // Sync step index to URL
+  useEffect(() => {
+    const stepKey = ONBOARDING_STEPS[flow.stepIndex]?.key;
+    if (stepKey) {
+      const currentUrlStep = searchParams.get('step');
+      if (currentUrlStep !== stepKey) {
+        router.replace(`/onboarding?step=${stepKey}`, { scroll: false });
+      }
+    }
+  }, [flow.stepIndex, searchParams, router]);
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'stretch', minHeight: '100vh' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', backgroundColor: '#F7F8FA' }}>
     <OnboardingScreen
       stepIndex={flow.stepIndex}
       totalSteps={flow.totalSteps}
@@ -23,7 +52,7 @@ export default function OnboardingPage() {
       questionEmoji={flow.config.questionEmoji}
       questionSubtitle={flow.config.questionSubtitle}
       screenType={flow.config.type}
-      choices={flow.config.choices}
+      choices={flow.config.choices ?? []}
       selectedChoiceIds={flow.selectedChoiceIds}
       multiSelect={flow.config.multiSelect}
       onChoicePress={flow.handleChoicePress}

@@ -31,7 +31,7 @@ const Dot = styled(Stack, {
       },
       future: {
         width: 8,
-        backgroundColor: '#c5cad1',
+        backgroundColor: '#C4CDD5',
       },
     },
   } as const,
@@ -55,13 +55,13 @@ const WizardButton = styled(Stack, {
       primary: {
         backgroundColor: '$brandAqua',
         ...NEU.glowAqua,
-        pressStyle: { opacity: 0.92, scale: 0.97, backgroundColor: '$brandAquaDark', ...NEU.pressed },
+        pressStyle: { opacity: 0.92, scale: 0.97, backgroundColor: '$brandAquaDark' },
       },
       outline: {
-        backgroundColor: '$neuSurface',
+        backgroundColor: 'white',
         borderWidth: 1.5,
         borderColor: '$brandAqua',
-        pressStyle: { opacity: 0.92, scale: 0.97, backgroundColor: '$neuSurfacePressed', ...NEU.pressed },
+        pressStyle: { opacity: 0.92, scale: 0.97, backgroundColor: '#F0F2F5' },
       },
     },
     disabled: {
@@ -88,7 +88,7 @@ export function OnboardingWizard({
   const isFirstStep = currentStep === 0;
 
   return (
-    <YStack flex={1} backgroundColor={NEU.surface} padding="$4">
+    <YStack flex={1} backgroundColor={'#F7F8FA'} padding="$4">
       {/* Header: dots + skip */}
       <XStack alignItems="center" justifyContent="center" paddingVertical="$3">
         <XStack gap={6} alignItems="center" flex={1} justifyContent="center">

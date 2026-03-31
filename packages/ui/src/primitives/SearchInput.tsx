@@ -1,6 +1,5 @@
 import React from 'react';
 import { Input } from 'tamagui';
-import { NEU } from '../tamagui.config';
 
 export interface SearchInputProps {
   value: string;
@@ -15,14 +14,14 @@ export function SearchInput({ value, onChangeText, placeholder = 'Search tricks.
       onChangeText={onChangeText}
       placeholder={placeholder}
       borderRadius={14}
-      borderWidth={0}
-      backgroundColor="$neuSurfacePressed"
+      borderWidth={1.5}
+      borderColor="#E1E8ED"
+      backgroundColor="white"
       paddingHorizontal={16}
       size="$4"
-      color="#2d3436"
-      placeholderTextColor="#a0a8b0"
-      // Inset shadow for recessed look
-      {...NEU.inset}
+      color="#0F1419"
+      placeholderTextColor="#8899A6"
+      focusStyle={{ borderColor: '#9bedff', borderWidth: 2 }}
     />
   );
 }

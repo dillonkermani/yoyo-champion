@@ -6,7 +6,7 @@ import { useParams } from 'next/navigation';
 
 export default function TrickPage() {
   const params = useParams();
-  const slug = typeof params.slug === 'string' ? params.slug : '';
+  const slug = typeof params['slug'] === 'string' ? params['slug'] : '';
   const trick = getTrickBySlug(slug);
   const masteredTricks = useProgressStore(selectMasteredTricks);
 

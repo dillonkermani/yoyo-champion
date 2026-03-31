@@ -128,7 +128,7 @@ function TagChip({ tag }: { tag: string }) {
 
 /* ────────────────────── Feed Card ────────────────────── */
 
-const CARD_COLORS = ['#1CB0F6', '#CE82FF', '#FF9600', '#FF4B4B', '#58CC02', '#FFC800'];
+const CARD_COLORS = ['#9bedff', '#CE82FF', '#FF9600', '#FF4B4B', '#58CC02', '#FFC800'];
 
 function FeedCard({
   video,

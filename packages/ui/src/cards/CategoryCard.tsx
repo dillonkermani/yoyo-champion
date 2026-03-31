@@ -1,7 +1,7 @@
 import React from 'react';
 import { YStack, XStack } from 'tamagui';
 import { Text } from '../Text';
-import { NEU } from '../tamagui.config';
+// Clean shadow design - NEU removed
 
 const ICON_EMOJI: Record<string, string> = {
   Target: '🎯',
@@ -16,7 +16,7 @@ const ICON_EMOJI: Record<string, string> = {
 
 const COLOR_HEX: Record<string, string> = {
   teal: '#58CC02',
-  blue: '#1CB0F6',
+  blue: '#9bedff',
   purple: '#CE82FF',
   cyan: '#00BCD4',
   pink: '#FF6B9D',
@@ -44,12 +44,12 @@ export function CategoryCard({
   bonusXP,
   onPress,
 }: CategoryCardProps) {
-  const hex = COLOR_HEX[color] ?? '#1CB0F6';
+  const hex = COLOR_HEX[color] ?? '#9bedff';
   const emoji = ICON_EMOJI[icon] ?? '🪀';
 
   return (
     <XStack
-      backgroundColor="$neuSurface"
+      backgroundColor="white"
       borderRadius={20}
       padding={18}
       marginBottom={14}
@@ -57,17 +57,17 @@ export function CategoryCard({
       alignItems="center"
       onPress={onPress}
       animation="quick"
-      pressStyle={{
-        scaleY: 0.97,
-        scaleX: 1.005,
-        opacity: 0.92,
-        backgroundColor: '$neuSurfacePressed',
-        ...NEU.pressed,
-      }}
+      pressStyle={{ opacity: 0.9, scale: 0.98 }}
       cursor="pointer"
+      borderWidth={1}
+      borderColor="#E1E8ED"
       borderLeftWidth={5}
       borderLeftColor={hex}
-      {...NEU.card}
+      shadowColor="#000"
+      shadowOffset={{ width: 0, height: 2 }}
+      shadowRadius={8}
+      shadowOpacity={0.08}
+      elevation={3}
     >
       {/* Left: icon + info */}
       <YStack
@@ -84,13 +84,13 @@ export function CategoryCard({
       </YStack>
 
       <YStack flex={1} gap={4}>
-        <Text fontSize={16} fontWeight="700" color="#2d3436">
+        <Text fontSize={16} fontWeight="700" color="#0F1419">
           {name}
         </Text>
-        <Text fontSize={12} color="#636e72" numberOfLines={2}>
+        <Text fontSize={12} color="#536471" numberOfLines={2}>
           {description}
         </Text>
-        <Text fontSize={11} color="#b2bec3" marginTop={2}>
+        <Text fontSize={11} color="#8899A6" marginTop={2}>
           {trickCount} {trickCount === 1 ? 'trick' : 'tricks'}
         </Text>
       </YStack>

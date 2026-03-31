@@ -8,7 +8,7 @@ export interface OnboardingChoice {
   description?: string;
 }
 
-export type OnboardingScreenType = 'welcome' | 'choices' | 'quick_info' | 'auth' | 'video';
+export type OnboardingScreenType = 'welcome' | 'choices' | 'quick_info' | 'video';
 
 export interface OnboardingStepConfig {
   key: OnboardingStep;
@@ -23,13 +23,6 @@ export interface OnboardingStepConfig {
 }
 
 export const ONBOARDING_STEPS: OnboardingStepConfig[] = [
-  {
-    key: 'welcome',
-    questionTitle: 'Learn Yoyo the Right Way',
-    questionEmoji: '🪀',
-    questionSubtitle: 'Built by a 2x World Champion.',
-    type: 'welcome',
-  },
   {
     key: 'account_user',
     questionTitle: 'Who will be using this account?',
@@ -90,13 +83,6 @@ export const ONBOARDING_STEPS: OnboardingStepConfig[] = [
       { id: 'other', label: 'Other', emoji: '💭' },
     ],
     hasTextInput: true,
-  },
-  {
-    key: 'account_creation',
-    questionTitle: 'Create Your Account',
-    questionEmoji: '🔐',
-    questionSubtitle: 'Sign up to save your progress.',
-    type: 'auth',
   },
   {
     key: 'intro_video',
@@ -213,8 +199,6 @@ export function useOnboardingFlow(onComplete: () => void) {
   // Determine if next is disabled
   const getIsNextDisabled = (): boolean => {
     switch (config.key) {
-      case 'welcome':
-        return false;
       case 'account_user':
         if (!store.accountUser) return true;
         if (showSubQuestion && store.isChildUnder13 === null) return true;
@@ -227,8 +211,6 @@ export function useOnboardingFlow(onComplete: () => void) {
         return store.currentYoyoType === null;
       case 'goal':
         return store.goal === null;
-      case 'account_creation':
-        return false; // placeholder
       case 'intro_video':
         return false;
       default:
@@ -238,9 +220,7 @@ export function useOnboardingFlow(onComplete: () => void) {
 
   // Get appropriate button text
   const getNextButtonText = (): string => {
-    if (config.key === 'welcome') return 'Start';
     if (config.key === 'intro_video') return 'Continue';
-    if (config.key === 'account_creation') return 'Continue';
     return 'Next';
   };
 

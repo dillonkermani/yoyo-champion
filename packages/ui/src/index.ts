@@ -35,7 +35,9 @@ export type { CategoryCardProps } from './cards/CategoryCard';
 
 // Screens
 export { HomeScreen } from './screens/HomeScreen';
-export type { HomeScreenProps, FeaturedTrick, ActivePath } from './screens/HomeScreen';
+export type { HomeScreenProps, BrowseCategory, BrowseTrick, AdvancedCategory, NewsDisplayItem } from './screens/HomeScreen';
+export { NewsCard } from './cards/NewsCard';
+export type { NewsCardProps } from './cards/NewsCard';
 export { UploadsGrid } from './UploadsGrid';
 export type { UploadsGridProps, UploadThumbnail } from './UploadsGrid';
 export { LearnScreen } from './screens/LearnScreen';
@@ -64,6 +66,8 @@ export type { VideoComment, VideoCommentsProps } from './VideoComments';
 // Primitives — new
 export { AnimatedTabPicker } from './primitives/AnimatedTabPicker';
 export type { TabItem, AnimatedTabPickerProps } from './primitives/AnimatedTabPicker';
+export { CustomTabBar, WebTabBar, TAB_ROUTE_NAMES } from './primitives/CustomTabBar';
+export type { TabRouteName } from './primitives/CustomTabBar';
 
 // Assets
 export { Logo } from './assets/Logo';

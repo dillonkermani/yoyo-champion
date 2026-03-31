@@ -103,7 +103,7 @@ export function Mascot({ mood = 'happy', size = 'md', showLabel = false }: Masco
         width={px}
         height={px}
         borderRadius={px / 2}
-        backgroundColor="#1CB0F6"
+        backgroundColor="#9bedff"
         alignItems="center"
         justifyContent="center"
         animation="quick"

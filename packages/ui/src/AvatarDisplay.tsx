@@ -1,6 +1,6 @@
 import React from 'react';
 import { YStack, Text } from 'tamagui';
-import { NEU } from './tamagui.config';
+// Clean shadow design - NEU removed
 
 export interface AvatarDisplayProps {
   displayName?: string;
@@ -12,7 +12,7 @@ export interface AvatarDisplayProps {
 export function AvatarDisplay({
   displayName = 'Player',
   level = 1,
-  color = '#1CB0F6',
+  color = '#9bedff',
   size = 80,
 }: AvatarDisplayProps) {
   const initials =
@@ -44,11 +44,15 @@ export function AvatarDisplay({
         </Text>
       </YStack>
       <YStack
-        backgroundColor="$neuSurface"
+        backgroundColor="white"
         paddingHorizontal={12}
         paddingVertical={4}
         borderRadius={20}
-        {...NEU.button}
+        shadowColor="#000"
+        shadowOffset={{ width: 0, height: 1 }}
+        shadowRadius={4}
+        shadowOpacity={0.1}
+        elevation={2}
       >
         <Text fontSize={12} fontWeight="600" color="$xpGoldDark">
           LV.{level}

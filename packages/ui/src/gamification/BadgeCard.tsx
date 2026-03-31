@@ -1,6 +1,6 @@
 import { styled } from '@tamagui/core';
 import { Stack, XStack, YStack, Text } from 'tamagui';
-import { NEU } from '../tamagui.config';
+import { NEU } from '../tamagui.config'; // kept for glow effects only
 
 // ---------------------------------------------------------------------------
 // Types
@@ -53,8 +53,10 @@ const RARITY_BORDER: Record<BadgeRarity, string> = {
   legendary: '#fbbf24',
 };
 
-const RARITY_GLOW: Record<BadgeRarity, typeof NEU.card> = {
-  common: NEU.card,
+const CLEAN_SHADOW = { shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowRadius: 8, shadowOpacity: 0.08, elevation: 3 } as const;
+
+const RARITY_GLOW: Record<BadgeRarity, Record<string, any>> = {
+  common: CLEAN_SHADOW,
   uncommon: NEU.glowAqua,
   rare: NEU.glowRare,
   epic: NEU.glowEpic,
@@ -91,7 +93,7 @@ const CardFrame = styled(YStack, {
   animation: 'quick',
   cursor: 'pointer',
   hoverStyle: { scale: 1.03, y: -5 },
-  pressStyle: { scale: 0.98, ...NEU.pressed },
+  pressStyle: { opacity: 0.9, scale: 0.97 },
 });
 
 // ---------------------------------------------------------------------------
@@ -107,7 +109,7 @@ export function BadgeCard({
   onPress,
 }: BadgeCardProps) {
   const rarity = badge.rarity;
-  const glowStyle = isLocked ? NEU.card : RARITY_GLOW[rarity];
+  const glowStyle = isLocked ? CLEAN_SHADOW : RARITY_GLOW[rarity];
   const displayIcon = isLocked ? '❓' : badge.icon;
   const displayName = isLocked ? '???' : badge.name;
   const displayDesc = isLocked
@@ -189,7 +191,7 @@ export function BadgeCard({
         fontSize={15}
         fontWeight="700"
         textAlign="center"
-        color={isLocked ? '#999' : '#1a1a2e'}
+        color={isLocked ? '#8899A6' : '#0F1419'}
         marginBottom={4}
         numberOfLines={1}
       >
@@ -201,7 +203,7 @@ export function BadgeCard({
         <YStack gap={4} marginTop={4}>
           <Text
             fontSize={12}
-            color={isLocked ? '#aaa' : '#555'}
+            color={isLocked ? '#8899A6' : '#536471'}
             textAlign="center"
             numberOfLines={2}
           >
@@ -241,7 +243,7 @@ const PillFrame = styled(XStack, {
   animation: 'quick',
   cursor: 'pointer',
   hoverStyle: { scale: 1.05 },
-  pressStyle: { scale: 0.97, ...NEU.pressed },
+  pressStyle: { opacity: 0.9, scale: 0.97 },
 });
 
 export function MiniBadge({ badge, onPress }: MiniBadgeProps) {
@@ -252,7 +254,7 @@ export function MiniBadge({ badge, onPress }: MiniBadgeProps) {
       onPress={onPress}
     >
       <Text fontSize={16}>{badge.icon}</Text>
-      <Text fontSize={12} fontWeight="600" color="#1a1a2e" numberOfLines={1}>
+      <Text fontSize={12} fontWeight="600" color="#0F1419" numberOfLines={1}>
         {badge.name}
       </Text>
     </PillFrame>

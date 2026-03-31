@@ -47,10 +47,10 @@ export function ShopScreen({ shopUrl, onOpenExternal, renderWebView, paddingTop 
       ) : (
         <YStack flex={1} alignItems="center" justifyContent="center" padding={40} gap={16}>
           <Text fontSize={48}>🛒</Text>
-          <Text fontSize={18} fontWeight="700" color="#2d3436" textAlign="center">
+          <Text fontSize={18} fontWeight="700" color="#0F1419" textAlign="center">
             Browse the Shop
           </Text>
-          <Text fontSize={14} color="#636e72" textAlign="center">
+          <Text fontSize={14} color="#536471" textAlign="center">
             Check out the latest yo-yos, strings, and accessories from top brands.
           </Text>
           {onOpenExternal && (
@@ -59,13 +59,13 @@ export function ShopScreen({ shopUrl, onOpenExternal, renderWebView, paddingTop 
             </Button>
           )}
           <YStack
-            backgroundColor="$neuSurface"
+            backgroundColor="white"
             borderRadius={12}
             padding={12}
             marginTop={8}
             {...NEU.card}
           >
-            <Text fontSize={12} color="#636e72" textAlign="center" selectable>
+            <Text fontSize={12} color="#536471" textAlign="center" selectable>
               {shopUrl}
             </Text>
           </YStack>
