@@ -34,7 +34,7 @@ export default function SignupPage() {
     login({
       id: `user-${Date.now()}`,
       email,
-      username: email.split('@')[0],
+      username: email.split('@')[0] ?? email,
       displayName: name,
       wishlist: [],
       introVideoWatched: false,
