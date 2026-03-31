@@ -97,7 +97,7 @@ function getCategoryStats(cat: TrickCategory) {
 // COMPONENTS
 // =============================================================================
 
-function CategoryCard({ cat, index }: { cat: TrickCategory; index: number }) {
+function CategoryCard({ cat }: { cat: TrickCategory }) {
   const colors = colorMap[cat.color] || colorMap.blue;
   const stats = getCategoryStats(cat);
   const IconComponent = Icons[cat.icon] || Icons.Target;
@@ -145,7 +145,7 @@ function CategoryCard({ cat, index }: { cat: TrickCategory; index: number }) {
   );
 }
 
-function PathCard({ path, index }: { path: typeof mockPaths[0]; index: number }) {
+function PathCard({ path }: { path: typeof mockPaths[0] }) {
   const difficultyLabel = ["", "Beginner", "Beginner", "Intermediate", "Advanced", "Expert"][path.difficulty] || "Beginner";
   const difficultyColor = path.difficulty <= 2 ? "text-teal-600 bg-teal-50" : path.difficulty <= 3 ? "text-[#1CB0F6] bg-[#1CB0F6]/10" : "text-[#CE82FF] bg-[#CE82FF]/10";
 
@@ -185,7 +185,6 @@ export default function CurriculumPage() {
   const categories = getAllCategories();
   const paths = mockPaths;
   const totalTricks = mockTricks.length;
-  const featuredPaths = paths.filter((p) => p.isFeatured);
 
   return (
     <div className="bg-white min-h-screen">
@@ -245,8 +244,8 @@ export default function CurriculumPage() {
             <p className="mt-2 text-gray-600">Master each category to unlock new skills and earn bonus XP</p>
           </div>
           <div className="grid sm:grid-cols-2 gap-5">
-            {categories.map((cat, i) => (
-              <CategoryCard key={cat.id} cat={cat} index={i} />
+            {categories.map((cat) => (
+              <CategoryCard key={cat.id} cat={cat} />
             ))}
           </div>
         </div>
@@ -260,8 +259,8 @@ export default function CurriculumPage() {
             <p className="mt-2 text-gray-600">Guided journeys that take you from beginner to advanced, step by step</p>
           </div>
           <div className="space-y-4">
-            {paths.map((path, i) => (
-              <PathCard key={path.id} path={path} index={i} />
+            {paths.map((path) => (
+              <PathCard key={path.id} path={path} />
             ))}
           </div>
         </div>
