@@ -10,12 +10,13 @@ export default function AppRootLayout({ children }: { children: React.ReactNode 
   const pathname = usePathname();
   const isAuthenticated = useUserStore(selectIsAuthenticated);
   const isOnboardingComplete = useOnboardingStore(selectIsComplete);
+  const isOnboarding = pathname?.startsWith('/onboarding') ?? false;
 
   React.useEffect(() => {
     if (!isAuthenticated || !isOnboardingComplete) {
-      router.replace('/onboarding');
+      if (!isOnboarding) router.replace('/onboarding');
     }
-  }, [isAuthenticated, isOnboardingComplete, router]);
+  }, [isAuthenticated, isOnboardingComplete, isOnboarding, router]);
 
   // Prefetch all tab routes so first navigation is instant
   React.useEffect(() => {
@@ -25,11 +26,13 @@ export default function AppRootLayout({ children }: { children: React.ReactNode 
   }, [router]);
 
   return (
-    <View style={styles.root}>
-      <View style={styles.content}>
+    <View style={isOnboarding ? styles.rootOnboarding : styles.root}>
+      <View style={isOnboarding ? styles.contentFull : styles.content}>
         {children}
       </View>
-      <WebTabBar pathname={pathname} onNavigate={(path) => router.push(path)} />
+      {!isOnboarding && (
+        <WebTabBar pathname={pathname} onNavigate={(path) => router.push(path)} />
+      )}
     </View>
   );
 }
@@ -40,8 +43,17 @@ const styles = StyleSheet.create({
     minHeight: '100vh' as any,
     position: 'relative',
   },
+  rootOnboarding: {
+    height: '100vh' as any,
+    position: 'relative',
+  },
   content: {
     flex: 1,
     paddingBottom: 80,
+  },
+  contentFull: {
+    flex: 1,
+    minHeight: 0 as any,
+    overflow: 'hidden' as any,
   },
 });

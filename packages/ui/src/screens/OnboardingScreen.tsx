@@ -159,7 +159,7 @@ function CTAButton({
     <YStack
       backgroundColor={disabled ? T.accentDisabled : T.accent}
       borderRadius={9999}
-      height={58}
+      height={52}
       justifyContent="center"
       alignItems="center"
       onPress={disabled ? undefined : onPress}
@@ -174,9 +174,9 @@ function CTAButton({
         shadowOpacity: 0.35,
         elevation: 4,
       })}
-      marginTop={16}
+      marginTop={8}
     >
-      <Text fontSize={18} fontWeight="800" color={T.black} letterSpacing={0.3}>
+      <Text fontSize={17} fontWeight="800" color={T.black} letterSpacing={0.3}>
         {label}
       </Text>
     </YStack>
@@ -196,17 +196,17 @@ function ChoiceCard({
   return (
     <XStack
       backgroundColor={isSelected ? T.accentLight : T.cardBg}
-      borderRadius={20}
-      padding={18}
-      paddingHorizontal={20}
-      borderWidth={2.5}
+      borderRadius={16}
+      paddingVertical={12}
+      paddingHorizontal={16}
+      borderWidth={2}
       borderColor={isSelected ? T.accent : T.border}
       onPress={onPress}
       animation="quick"
       pressStyle={{ scale: 0.97, opacity: 0.9 }}
       hoverStyle={{ borderColor: isSelected ? T.accent : '#C4CDD5', scale: 1.01 }}
       cursor="pointer"
-      gap={14}
+      gap={12}
       alignItems="center"
       {...(isSelected ? {
         shadowColor: '#9bedff',
@@ -224,14 +224,14 @@ function ChoiceCard({
     >
       {choice.emoji && (
         <Stack
-          width={52}
-          height={52}
-          borderRadius={16}
+          width={40}
+          height={40}
+          borderRadius={12}
           backgroundColor={isSelected ? T.accent : '#EEF0F3'}
           justifyContent="center"
           alignItems="center"
         >
-          <Text fontSize={24} lineHeight={28}>{choice.emoji}</Text>
+          <Text fontSize={20} lineHeight={24}>{choice.emoji}</Text>
         </Stack>
       )}
       <YStack flex={1} gap={2}>
@@ -322,27 +322,27 @@ function QuestionHeader({
   centered?: boolean;
 }) {
   return (
-    <YStack gap={10} alignItems={centered ? 'center' : 'flex-start'}>
+    <YStack gap={8} alignItems={centered ? 'center' : 'flex-start'}>
       {emoji && (
         <Stack
-          width={72}
-          height={72}
-          borderRadius={22}
+          width={56}
+          height={56}
+          borderRadius={18}
           backgroundColor={T.accentLight}
           justifyContent="center"
           alignItems="center"
-          marginBottom={4}
+          marginBottom={2}
         >
-          <Text fontSize={30} lineHeight={36}>{emoji}</Text>
+          <Text fontSize={26} lineHeight={32}>{emoji}</Text>
         </Stack>
       )}
       <Text
-        fontSize={28}
+        fontSize={24}
         fontWeight="900"
         color={T.text}
-        letterSpacing={-0.8}
+        letterSpacing={-0.6}
         textAlign={centered ? 'center' : 'left'}
-        lineHeight={34}
+        lineHeight={30}
       >
         {title}
       </Text>
@@ -472,10 +472,10 @@ function ChoicesContent({
   onSubChoicePress?: (id: string) => void;
 }) {
   return (
-    <YStack gap={28} flex={1}>
+    <YStack gap={20} flex={1}>
       <QuestionHeader emoji={questionEmoji} title={questionTitle} subtitle={questionSubtitle} />
 
-      <YStack gap={12}>
+      <YStack gap={10}>
         {choices.map((choice) => (
           <ChoiceCard
             key={choice.id}
@@ -760,7 +760,7 @@ function QuickInfoContent({
   }, [onRegionChange]);
 
   return (
-    <YStack gap={28} flex={1}>
+    <YStack gap={20} flex={1}>
       <QuestionHeader emoji={questionEmoji} title={questionTitle} subtitle={questionSubtitle} />
 
       {/* Handedness */}
@@ -945,7 +945,7 @@ export function OnboardingScreen({
       <ScrollView
         flex={1}
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ flexGrow: 1, paddingTop: isWelcome ? 0 : 20, paddingHorizontal: 24, paddingBottom: 32, paddingTop: isWelcome ? paddingTop + 20 : 20 }}
+        contentContainerStyle={{ flexGrow: 1, paddingHorizontal: 24, paddingBottom: 16, paddingTop: isWelcome ? paddingTop + 20 : 12 }}
       >
         {screenType === 'welcome' && (
           <WelcomeContent
@@ -1000,7 +1000,7 @@ export function OnboardingScreen({
         )}
       </ScrollView>
 
-      <YStack paddingHorizontal={24} paddingBottom={32}>
+      <YStack paddingHorizontal={24} paddingBottom={16}>
         <CTAButton
           label={nextButtonText}
           onPress={onNext}
