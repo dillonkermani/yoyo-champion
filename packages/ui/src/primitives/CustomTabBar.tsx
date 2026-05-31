@@ -273,10 +273,12 @@ export function CustomTabBar({ state, descriptors: _descriptors, navigation, bot
 
 const styles = StyleSheet.create({
   container: {
-    position: Platform.OS === 'web' ? ('fixed' as any) : 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
+    // On native (Expo) the bar overlays the screen at the bottom.
+    // On web the parent layout positions/sizes a centered wrapper around it,
+    // so the inner container is just a normal block.
+    ...(Platform.OS === 'web'
+      ? ({ position: 'relative', width: '100%', backdropFilter: 'blur(12px)' } as any)
+      : { position: 'absolute', bottom: 0, left: 0, right: 0 }),
     zIndex: 50,
     backgroundColor: 'rgba(255,255,255,0.95)',
     borderTopLeftRadius: 24,
@@ -290,7 +292,6 @@ const styles = StyleSheet.create({
     // Border
     borderTopWidth: StyleSheet.hairlineWidth,
     borderTopColor: 'rgba(0,0,0,0.05)',
-    ...(Platform.OS === 'web' ? { backdropFilter: 'blur(12px)' } as any : {}),
   },
   indicator: {
     position: 'absolute',

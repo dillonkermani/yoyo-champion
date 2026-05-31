@@ -1,4 +1,4 @@
-import { YStack, XStack, ScrollView } from 'tamagui';
+import { YStack, XStack } from 'tamagui';
 import { Text } from '../../Text';
 import { SectionHeader } from '../../primitives/SectionHeader';
 import { NEU } from '../../tamagui.config';
@@ -21,12 +21,13 @@ export function AdvancedComingSoon({ categories }: AdvancedComingSoonProps) {
   return (
     <YStack paddingHorizontal={20}>
       <SectionHeader title="Advanced Tricks" />
-      <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ marginHorizontal: -20 }}>
-        <XStack gap={12} paddingHorizontal={20}>
-          {categories.map((cat) => (
+      <XStack gap={12} flexWrap="wrap">
+        {categories.map((cat) => (
             <YStack
               key={cat.id}
-              width={150}
+              flexBasis={`calc(50% - 6px)` as any}
+              $gtSm={{ flexBasis: `calc(33.333% - 8px)` as any }}
+              minWidth={140}
               height={170}
               borderRadius={16}
               backgroundColor="white"
@@ -58,8 +59,7 @@ export function AdvancedComingSoon({ categories }: AdvancedComingSoonProps) {
               </XStack>
             </YStack>
           ))}
-        </XStack>
-      </ScrollView>
+      </XStack>
     </YStack>
   );
 }

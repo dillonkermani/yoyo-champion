@@ -2,8 +2,7 @@
 import * as React from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { useOnboardingStore, selectIsComplete, useUserStore, selectIsAuthenticated } from "@yoyo/store";
-import { WebTabBar } from "@yoyo/ui";
-import { View, StyleSheet } from "react-native";
+import { WebTabBar } from "@/components/web-tab-bar";
 
 export default function AppRootLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
@@ -11,12 +10,28 @@ export default function AppRootLayout({ children }: { children: React.ReactNode 
   const isAuthenticated = useUserStore(selectIsAuthenticated);
   const isOnboardingComplete = useOnboardingStore(selectIsComplete);
   const isOnboarding = pathname?.startsWith('/onboarding') ?? false;
+  const [hydrated, setHydrated] = React.useState(
+    () => useUserStore.persist.hasHydrated() && useOnboardingStore.persist.hasHydrated(),
+  );
 
   React.useEffect(() => {
+    const check = () => {
+      if (useUserStore.persist.hasHydrated() && useOnboardingStore.persist.hasHydrated()) {
+        setHydrated(true);
+      }
+    };
+    const unsubU = useUserStore.persist.onFinishHydration(check);
+    const unsubO = useOnboardingStore.persist.onFinishHydration(check);
+    check();
+    return () => { unsubU(); unsubO(); };
+  }, []);
+
+  React.useEffect(() => {
+    if (!hydrated) return;
     if (!isAuthenticated || !isOnboardingComplete) {
       if (!isOnboarding) router.replace('/onboarding');
     }
-  }, [isAuthenticated, isOnboardingComplete, isOnboarding, router]);
+  }, [hydrated, isAuthenticated, isOnboardingComplete, isOnboarding, router]);
 
   // Prefetch all tab routes so first navigation is instant
   React.useEffect(() => {
@@ -26,34 +41,20 @@ export default function AppRootLayout({ children }: { children: React.ReactNode 
   }, [router]);
 
   return (
-    <View style={isOnboarding ? styles.rootOnboarding : styles.root}>
-      <View style={isOnboarding ? styles.contentFull : styles.content}>
+    <div className="min-h-screen w-full bg-[#F7F8FA] flex flex-col items-center">
+      <div
+        className="w-full max-w-[640px] flex flex-col"
+        style={{ paddingBottom: isOnboarding ? 0 : 96 }}
+      >
         {children}
-      </View>
+      </div>
       {!isOnboarding && (
-        <WebTabBar pathname={pathname} onNavigate={(path) => router.push(path)} />
+        <div className="pointer-events-none fixed inset-x-0 bottom-0 z-50 flex justify-center">
+          <div className="pointer-events-auto w-full max-w-[640px]">
+            <WebTabBar pathname={pathname} onNavigate={(path) => router.push(path)} />
+          </div>
+        </div>
       )}
-    </View>
+    </div>
   );
 }
-
-const styles = StyleSheet.create({
-  root: {
-    flex: 1,
-    minHeight: '100vh' as any,
-    position: 'relative',
-  },
-  rootOnboarding: {
-    height: '100vh' as any,
-    position: 'relative',
-  },
-  content: {
-    flex: 1,
-    paddingBottom: 80,
-  },
-  contentFull: {
-    flex: 1,
-    minHeight: 0 as any,
-    overflow: 'hidden' as any,
-  },
-});
