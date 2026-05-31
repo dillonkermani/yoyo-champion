@@ -67,5 +67,7 @@ apps/expo/.expo/
 # Misc
 .claude-flow/
 .claude/
+.playwright-mcp/
+.swarm/
 *.tgz
 .yarn/install-state.gz

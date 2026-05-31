@@ -1,5 +1,6 @@
 {
-  "extends": ["next/core-web-vitals"],
+  "root": true,
+  "ignorePatterns": ["**/node_modules/**", "**/.next/**", "**/.expo/**", "**/dist/**", "**/out/**", "**/.turbo/**", "**/.tamagui/**"],
   "rules": {
     "no-console": ["warn", { "allow": ["warn", "error"] }],
     "prefer-const": "error",
