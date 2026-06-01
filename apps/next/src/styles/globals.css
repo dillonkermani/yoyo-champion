@@ -6,6 +6,10 @@
 
 @layer base {
   :root {
+    /* Tell the browser this is a light-themed app so Chrome's auto-dark mode
+       doesn't recolor backgrounds (which was wiping out our Tamagui bg props). */
+    color-scheme: light;
+
     /* Light theme as default - YoYoChampion branding */
     --background: 0 0% 100%;
     --foreground: 0 0% 8%;

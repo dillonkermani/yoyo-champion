@@ -1,7 +1,6 @@
 import { YStack, XStack } from 'tamagui';
-import { TrickCard } from '../TrickCard';
+import { BrowseTrickTile } from './home/BrowseTrickTile';
 import { SearchInput } from '../primitives/SearchInput';
-import { FilterChip } from '../primitives/FilterChip';
 import { ScreenContainer } from '../primitives/ScreenContainer';
 import { Text } from '../Text';
 import { NEU } from '../tamagui.config';
@@ -9,9 +8,9 @@ import { NEU } from '../tamagui.config';
 export interface LearnTrick {
   id: string;
   name: string;
-  difficulty: number;
-  genre: string;
-  xpReward: number;
+  level: 'beginner' | 'unresponsive';
+  durationSec: number;
+  thumbnails: { default: string; hq: string; sd: string; max: string };
 }
 
 export interface LearnScreenProps {
@@ -33,8 +32,6 @@ export function LearnScreen({
   tricks,
   searchQuery,
   onSearchChange,
-  activeFilter,
-  onFilterChange,
   onTrickPress,
   onBack,
   categoryName,
@@ -68,29 +65,40 @@ export function LearnScreen({
           <Text fontSize={22} fontWeight="800" letterSpacing={-0.5} color="#0F1419">{title}</Text>
         )}
         <SearchInput value={searchQuery} onChangeText={onSearchChange} placeholder="Search tricks..." />
-        <XStack gap={8} flexWrap="wrap">
-          {FILTERS.map((filter) => (
-            <FilterChip
-              key={filter}
-              label={filter}
-              selected={activeFilter === filter}
-              onPress={() => onFilterChange(filter)}
-            />
-          ))}
-        </XStack>
+        {/* Difficulty chips kept as scaffolding while we collect manual tagging. */}
+        <YStack gap={4} opacity={0.45} pointerEvents="none">
+          <XStack gap={8} flexWrap="wrap">
+            {FILTERS.map((filter) => (
+              <XStack
+                key={filter}
+                backgroundColor="white"
+                borderRadius={100}
+                paddingHorizontal={12}
+                paddingVertical={6}
+                {...NEU.button}
+              >
+                <Text fontSize={12} fontWeight="700" color="#536471">{filter}</Text>
+              </XStack>
+            ))}
+          </XStack>
+          <Text fontSize={11} color="#8899A6">Difficulty filters — coming soon</Text>
+        </YStack>
         <Text fontSize={12} letterSpacing={0.3} color="#536471">{tricks.length} tricks</Text>
       </YStack>
       <YStack padding={20} paddingTop={0}>
-        {tricks.map((trick) => (
-          <TrickCard
-            key={trick.id}
-            name={trick.name}
-            difficulty={trick.difficulty}
-            genre={trick.genre}
-            xpReward={trick.xpReward}
-            onPress={onTrickPress ? () => onTrickPress(trick.id) : undefined}
-          />
-        ))}
+        <XStack flexWrap="wrap" justifyContent="space-between" rowGap={12}>
+          {tricks.map((trick) => (
+            <YStack key={trick.id} width="48%">
+              <BrowseTrickTile
+                name={trick.name}
+                level={trick.level}
+                durationSec={trick.durationSec}
+                thumbnails={trick.thumbnails}
+                onPress={onTrickPress ? () => onTrickPress(trick.id) : undefined}
+              />
+            </YStack>
+          ))}
+        </XStack>
       </YStack>
       <YStack height={100} />
     </ScreenContainer>

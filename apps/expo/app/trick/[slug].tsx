@@ -15,13 +15,10 @@ export default function TrickDetailPage() {
   return (
     <TrickDetailScreen
       name={trick.name}
-      difficulty={trick.difficulty}
-      genre={trick.genre}
-      style={trick.style}
-      xpReward={trick.xpReward}
-      estimatedMinutes={trick.estimatedMinutes}
-      description={trick.description}
-      steps={trick.steps}
+      level={trick.level}
+      durationSec={trick.durationSec}
+      thumbnails={trick.thumbnails}
+      ytId={trick.ytId}
       completed={masteredTricks.some((t) => t.trickId === trick.id)}
       paddingTop={insets.top}
     />

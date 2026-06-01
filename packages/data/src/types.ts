@@ -41,23 +41,43 @@ export interface TrickStep {
   tipText?: string;
 }
 
+export type TrickLevel = 'beginner' | 'unresponsive';
+
+export interface TrickThumbnails {
+  default: string;
+  hq: string;
+  sd: string;
+  max: string;
+}
+
+// The catalog is generated from YouTube playlists (see scripts/scrape-playlists.ts).
+// Required fields are derivable from YouTube metadata. The legacy fields below
+// (difficulty/genre/xpReward/etc.) are retained as optional so older UI surfaces
+// keep typechecking, but they are not populated by the generated data.
 export interface Trick {
   id: string;
+  ytId: string;
   slug: string;
   name: string;
-  description: string;
-  difficulty: TrickDifficulty;
-  style: YoYoStyle;
-  genre: TrickGenre;
-  xpReward: number;
-  thumbnailUrl: string;
-  previewGif: string;
-  videos: TrickVideo[];
-  steps: TrickStep[];
-  prerequisites: string[];
-  commonMistakes: string[];
-  tips: string[];
-  estimatedMinutes: number;
+  level: TrickLevel;
+  playlistId: string;
+  episode?: number;
+  durationSec: number;
+  thumbnails: TrickThumbnails;
+  // Legacy (always undefined for generated data — kept optional for back-compat)
+  description?: string;
+  difficulty?: TrickDifficulty;
+  style?: YoYoStyle;
+  genre?: TrickGenre;
+  xpReward?: number;
+  thumbnailUrl?: string;
+  previewGif?: string;
+  videos?: TrickVideo[];
+  steps?: TrickStep[];
+  prerequisites?: string[];
+  commonMistakes?: string[];
+  tips?: string[];
+  estimatedMinutes?: number;
 }
 
 export interface PathModule {

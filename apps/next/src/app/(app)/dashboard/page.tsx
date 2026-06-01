@@ -15,6 +15,7 @@ export default function DashboardPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(null);
 
+  // Categories are kept as scaffolding (greyed out) until manual tagging exists.
   const browseCategories = useMemo(
     () =>
       getAllCategories().map((c) => ({
@@ -22,19 +23,13 @@ export default function DashboardPage() {
         name: c.name,
         icon: c.icon,
         color: c.color,
-        trickCount: mockTricks.filter((t) => c.genres.includes(t.genre)).length,
+        trickCount: 0,
       })),
     [],
   );
 
-  const allCategories = useMemo(() => getAllCategories(), []);
-
   const filteredTricks = useMemo(() => {
     let result = mockTricks;
-    if (selectedCategoryId) {
-      const cat = allCategories.find((c) => c.id === selectedCategoryId);
-      if (cat) result = result.filter((t) => cat.genres.includes(t.genre));
-    }
     if (searchQuery.trim()) {
       const q = searchQuery.toLowerCase();
       result = result.filter((t) => t.name.toLowerCase().includes(q));
@@ -42,11 +37,11 @@ export default function DashboardPage() {
     return result.slice(0, 20).map((t) => ({
       id: t.id,
       name: t.name,
-      difficulty: t.difficulty,
-      genre: t.genre,
-      xpReward: t.xpReward,
+      level: t.level,
+      durationSec: t.durationSec,
+      thumbnails: t.thumbnails,
     }));
-  }, [selectedCategoryId, searchQuery, allCategories]);
+  }, [searchQuery]);
 
   const newsItems = useMemo(() => getRecentNews(5), []);
 

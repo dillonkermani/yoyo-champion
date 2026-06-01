@@ -62,7 +62,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning style={{ colorScheme: 'light' }}>
+      <head>
+        {/* Forces Chrome out of auto-dark mode so our explicit Tamagui background
+            colors render correctly. */}
+        <meta name="color-scheme" content="light only" />
+      </head>
       <body className={`${jost.variable} font-sans antialiased`}>
         <Providers>{children}</Providers>
       </body>

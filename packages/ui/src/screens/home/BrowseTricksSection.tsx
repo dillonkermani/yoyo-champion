@@ -2,7 +2,7 @@ import { YStack, XStack } from 'tamagui';
 import { Text } from '../../Text';
 import { SearchInput } from '../../primitives/SearchInput';
 import { SectionHeader } from '../../primitives/SectionHeader';
-import { TrickCard } from '../../TrickCard';
+import { BrowseTrickTile } from './BrowseTrickTile';
 import { NEU } from '../../tamagui.config';
 
 export interface BrowseCategory {
@@ -16,9 +16,9 @@ export interface BrowseCategory {
 export interface BrowseTrick {
   id: string;
   name: string;
-  difficulty: number;
-  genre: string;
-  xpReward: number;
+  level: 'beginner' | 'unresponsive';
+  durationSec: number;
+  thumbnails: { default: string; hq: string; sd: string; max: string };
 }
 
 export interface BrowseTricksSectionProps {
@@ -54,32 +54,19 @@ const COLOR_HEX: Record<string, string> = {
   red: '#FF4B4B',
 };
 
-const PREVIEW_COUNT = 3;
+const PREVIEW_COUNT = 6;
 
-function CategoryCell({
-  category,
-  selected,
-  onPress,
-}: {
-  category: BrowseCategory;
-  selected: boolean;
-  onPress: () => void;
-}) {
+function CategoryCellDisabled({ category }: { category: BrowseCategory }) {
   const hex = COLOR_HEX[category.color] ?? '#9bedff';
   const emoji = ICON_EMOJI[category.icon] ?? '🎯';
-
   return (
     <YStack
       width="48%"
-      backgroundColor={selected ? `${hex}15` : 'white'}
+      backgroundColor="white"
       borderRadius={14}
       padding={12}
       marginBottom={10}
-      borderWidth={2}
-      borderColor={selected ? hex : 'transparent'}
-      onPress={onPress}
-      pressStyle={{ opacity: 0.85 }}
-      cursor="pointer"
+      opacity={0.5}
       {...NEU.card}
     >
       <XStack alignItems="center" gap={10}>
@@ -97,9 +84,7 @@ function CategoryCell({
           <Text fontSize={13} fontWeight="700" color="#0F1419" numberOfLines={1}>
             {category.name}
           </Text>
-          <Text fontSize={11} color="#8899A6">
-            {category.trickCount} tricks
-          </Text>
+          <Text fontSize={11} color="#8899A6">Coming soon</Text>
         </YStack>
       </XStack>
     </YStack>
@@ -111,8 +96,6 @@ export function BrowseTricksSection({
   tricks,
   searchQuery,
   onSearchChange,
-  selectedCategoryId,
-  onCategoryPress,
   onTrickPress,
   onViewAllTricks,
 }: BrowseTricksSectionProps) {
@@ -126,29 +109,33 @@ export function BrowseTricksSection({
         <SearchInput value={searchQuery} onChangeText={onSearchChange} placeholder="Search tricks by name..." />
       </YStack>
 
-      <XStack flexWrap="wrap" justifyContent="space-between">
-        {categories.map((cat) => (
-          <CategoryCell
-            key={cat.id}
-            category={cat}
-            selected={selectedCategoryId === cat.id}
-            onPress={() => onCategoryPress(cat.id)}
-          />
-        ))}
-      </XStack>
+      {/* Category strip — kept as scaffolding, greyed out until we have manual tagging */}
+      <YStack marginBottom={8}>
+        <Text fontSize={11} color="#8899A6" marginBottom={6}>
+          Categories — coming soon
+        </Text>
+        <XStack flexWrap="wrap" justifyContent="space-between">
+          {categories.map((cat) => (
+            <CategoryCellDisabled key={cat.id} category={cat} />
+          ))}
+        </XStack>
+      </YStack>
 
       {previewTricks.length > 0 ? (
-        <YStack marginTop={8}>
-          {previewTricks.map((trick) => (
-            <TrickCard
-              key={trick.id}
-              name={trick.name}
-              difficulty={trick.difficulty}
-              genre={trick.genre}
-              xpReward={trick.xpReward}
-              onPress={() => onTrickPress(trick.id)}
-            />
-          ))}
+        <YStack marginTop={8} gap={12}>
+          <XStack flexWrap="wrap" justifyContent="space-between" rowGap={12}>
+            {previewTricks.map((trick) => (
+              <YStack key={trick.id} width="48%">
+                <BrowseTrickTile
+                  name={trick.name}
+                  level={trick.level}
+                  durationSec={trick.durationSec}
+                  thumbnails={trick.thumbnails}
+                  onPress={() => onTrickPress(trick.id)}
+                />
+              </YStack>
+            ))}
+          </XStack>
           {(hasMore || onViewAllTricks) && (
             <YStack
               backgroundColor="white"
@@ -158,11 +145,7 @@ export function BrowseTricksSection({
               onPress={onViewAllTricks}
               pressStyle={{ opacity: 0.7 }}
               cursor="pointer"
-              shadowColor="#000"
-              shadowOffset={{ width: 0, height: 2 }}
-              shadowRadius={8}
-              shadowOpacity={0.08}
-              elevation={3}
+              {...NEU.card}
             >
               <Text fontSize={14} fontWeight="700" color="$brandAqua">
                 View All{tricks.length > PREVIEW_COUNT ? ` (${tricks.length})` : ''}

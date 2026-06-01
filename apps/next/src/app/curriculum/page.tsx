@@ -88,8 +88,8 @@ function getCategoryStats(cat: TrickCategory) {
   const tricks = mockTricks.filter((t) =>
     cat.genres.includes(t.genre as any)
   );
-  const beginner = tricks.filter((t) => t.difficulty <= 2).length;
-  const advanced = tricks.filter((t) => t.difficulty >= 3).length;
+  const beginner = tricks.filter((t) => (t.difficulty ?? 0) <= 2).length;
+  const advanced = tricks.filter((t) => (t.difficulty ?? 0) >= 3).length;
   return { total: tricks.length, beginner, advanced, sampleTricks: tricks.slice(0, 3) };
 }
 

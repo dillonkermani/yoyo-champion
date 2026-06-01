@@ -13,66 +13,39 @@ export default function ChampionPathTab() {
 
   const allCategories = useMemo(() => getAllCategories(), []);
 
-  const categoryItems = useMemo(() => {
-    return allCategories.map((cat) => {
-      const trickCount = mockTricks.filter((t) =>
-        cat.genres.includes(t.genre as typeof cat.genres[number]),
-      ).length;
-      return {
+  // Categories are scaffolding until manual genre tagging exists; trick counts
+  // can't be computed against the YouTube-derived catalog, so show 0.
+  const categoryItems = useMemo(
+    () =>
+      allCategories.map((cat) => ({
         id: cat.id,
         name: cat.name,
         description: cat.description,
         icon: cat.icon,
         color: cat.color,
-        trickCount,
+        trickCount: 0,
         bonusXP: cat.bonusXP,
-      };
-    });
-  }, [allCategories]);
+      })),
+    [allCategories],
+  );
 
-  const selectedCategory = selectedCategoryId
-    ? getCategoryById(selectedCategoryId)
-    : null;
+  const selectedCategory = selectedCategoryId ? getCategoryById(selectedCategoryId) : null;
 
   const tricks = useMemo(() => {
     let list = mockTricks;
-
-    // Filter by category genres when a category is selected
-    if (selectedCategory) {
-      list = list.filter((t) =>
-        selectedCategory.genres.includes(t.genre as typeof selectedCategory.genres[number]),
-      );
-    }
-
     if (searchQuery) {
       const q = searchQuery.toLowerCase();
-      list = list.filter(
-        (t) =>
-          t.name.toLowerCase().includes(q) ||
-          t.genre.toLowerCase().includes(q),
-      );
-    }
-    if (activeFilter !== 'All') {
-      const difficultyMap: Record<string, number> = {
-        Beginner: 1,
-        Easy: 2,
-        Intermediate: 3,
-        Advanced: 4,
-        Master: 5,
-      };
-      const diff = difficultyMap[activeFilter];
-      if (diff !== undefined) list = list.filter((t) => t.difficulty === diff);
+      list = list.filter((t) => t.name.toLowerCase().includes(q));
     }
     return list.map((t) => ({
       id: t.id,
       name: t.name,
-      difficulty: t.difficulty,
-      genre: t.genre,
-      xpReward: t.xpReward,
+      level: t.level,
+      durationSec: t.durationSec,
+      thumbnails: t.thumbnails,
     }));
-  }, [searchQuery, activeFilter, selectedCategory]);
+  }, [searchQuery]);
 
-  // Category browse view
   if (!selectedCategoryId) {
     return (
       <CategoryBrowseScreen
@@ -87,7 +60,6 @@ export default function ChampionPathTab() {
     );
   }
 
-  // Trick list view filtered by category
   return (
     <LearnScreen
       tricks={tricks}

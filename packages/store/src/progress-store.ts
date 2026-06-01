@@ -206,6 +206,16 @@ export const useProgressStore = create<ProgressStore>()(
       name: 'yoyo-progress-storage',
       storage: createJSONStorage(() => getStorage()),
       skipHydration: true,
+      // v2: trick ids switched from internal `trick-NNN` to YouTube videoIds when
+      // the catalog moved to the scraped playlists. Persisted mastered/in-progress
+      // entries from v1 reference dead ids, so they're dropped on first load.
+      version: 2,
+      migrate: (persisted: unknown, fromVersion: number) => {
+        if (fromVersion < 2 && persisted && typeof persisted === 'object') {
+          return { ...(persisted as Record<string, unknown>), trickProgress: {} };
+        }
+        return persisted as ProgressState;
+      },
     }
   )
 );
