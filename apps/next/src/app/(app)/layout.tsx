@@ -14,6 +14,29 @@ export default function AppRootLayout({ children }: { children: React.ReactNode 
     () => useUserStore.persist.hasHydrated() && useOnboardingStore.persist.hasHydrated(),
   );
 
+  // Pending tab target — set on click, cleared once the route actually commits.
+  // This drives instant tab-bar highlight even while React is suspending on the
+  // new route. We don't gate the rest of the UI on it; loading.tsx handles that.
+  const [pendingPath, setPendingPath] = React.useState<string | null>(null);
+  const [isPending, startTransition] = React.useTransition();
+
+  React.useEffect(() => {
+    if (pendingPath && pathname && pathname.startsWith(pendingPath)) {
+      setPendingPath(null);
+    }
+  }, [pathname, pendingPath]);
+
+  const handleNavigate = React.useCallback(
+    (path: string) => {
+      if (pathname === path) return;
+      setPendingPath(path);
+      startTransition(() => {
+        router.push(path);
+      });
+    },
+    [router, pathname],
+  );
+
   React.useEffect(() => {
     const check = () => {
       if (useUserStore.persist.hasHydrated() && useOnboardingStore.persist.hasHydrated()) {
@@ -40,6 +63,8 @@ export default function AppRootLayout({ children }: { children: React.ReactNode 
     });
   }, [router]);
 
+  const activePath = pendingPath ?? pathname;
+
   return (
     <div className="min-h-screen w-full bg-[#F7F8FA] flex flex-col items-center">
       <div
@@ -51,7 +76,7 @@ export default function AppRootLayout({ children }: { children: React.ReactNode 
       {!isOnboarding && (
         <div className="pointer-events-none fixed inset-x-0 bottom-0 z-50 flex justify-center">
           <div className="pointer-events-auto w-full max-w-[640px]">
-            <WebTabBar pathname={pathname} onNavigate={(path) => router.push(path)} />
+            <WebTabBar pathname={activePath} onNavigate={handleNavigate} isPending={isPending} />
           </div>
         </div>
       )}

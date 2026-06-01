@@ -28,15 +28,22 @@ function isActiveTab(tabPath: string, pathname: string | null): boolean {
 export interface WebTabBarProps {
   pathname: string | null;
   onNavigate: (path: string) => void;
+  isPending?: boolean;
 }
 
-export function WebTabBar({ pathname, onNavigate }: WebTabBarProps) {
+export function WebTabBar({ pathname, onNavigate, isPending = false }: WebTabBarProps) {
   return (
     <nav
       aria-label="Primary"
       className="relative w-full bg-white/95 backdrop-blur-md border-t border-black/5 rounded-t-3xl shadow-[0_-2px_8px_rgba(0,0,0,0.06)]"
       style={{ paddingBottom: "env(safe-area-inset-bottom, 8px)" }}
     >
+      {isPending && (
+        <span
+          aria-hidden
+          className="absolute top-0 left-0 right-0 h-[2px] bg-fun-blue/80 animate-pulse"
+        />
+      )}
       <ul className="flex flex-row items-stretch h-[60px] px-1">
         {TABS.map((tab) => {
           const active = isActiveTab(tab.path, pathname);
