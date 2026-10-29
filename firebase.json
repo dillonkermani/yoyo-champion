@@ -23,6 +23,25 @@
           }
         ]
       }
-    ]
+    ],
+    "cleanUrls": true
+  },
+  "firestore": {
+    "rules": "config/firebase/firestore.rules"
+  },
+  "emulators": {
+    "firestore": {
+      "port": 8287
+    },
+    "auth": {
+      "port": 9287
+    },
+    "ui": {
+      "enabled": false
+    },
+    "singleProjectMode": true,
+    "hosting": {
+      "port": 5287
+    }
   }
 }
