@@ -22,7 +22,7 @@ export interface LearnScreenProps {
   onTrickPress?: (id: string) => void;
   onBack?: () => void;
   categoryId?: string;
-  categoryName?: string;
+  categoryName?: string | undefined;
   paddingTop?: number;
 }
 
