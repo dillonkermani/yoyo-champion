@@ -156,6 +156,20 @@ export {
 export { useOnboardingFlow, ONBOARDING_STEPS } from './onboarding-flow';
 export type { OnboardingStepConfig, OnboardingStepId } from './onboarding-flow';
 
+// Compare Store (storefront side-by-side)
+export {
+  useCompareStore,
+  hydrateCompareStore,
+  selectCompareHandles,
+  selectCompareCount,
+  selectIsCompared,
+  selectCompareFull,
+  MAX_COMPARE,
+  type CompareState,
+  type CompareActions,
+  type CompareStore,
+} from './compare-store';
+
 // Storage abstraction
 export { setStorage, getStorage } from './storage';
 
@@ -167,6 +181,7 @@ import { hydrateUIStore as _hydrateUIStore } from './ui-store';
 import { hydrateOnboardingStore as _hydrateOnboardingStore } from './onboarding-store';
 import { hydrateSocialStore as _hydrateSocialStore } from './social-store';
 import { hydrateVideoStore as _hydrateVideoStore } from './video-store';
+import { hydrateCompareStore as _hydrateCompareStore } from './compare-store';
 
 export const hydrateAllStores = () => {
   _hydrateUserStore();
@@ -176,4 +191,5 @@ export const hydrateAllStores = () => {
   _hydrateOnboardingStore();
   _hydrateSocialStore();
   _hydrateVideoStore();
+  _hydrateCompareStore();
 };

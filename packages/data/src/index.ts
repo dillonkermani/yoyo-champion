@@ -113,3 +113,6 @@ export {
 export type {
   AdvancedCategory,
 } from './advanced-categories';
+
+// Storefront catalog (synced from gentrystein.com) + editorial metadata
+export * from './store';
