@@ -6,6 +6,7 @@ import type { User } from "firebase/auth";
 import {
   TRICK_LADDER,
   ladderReward,
+  unresponsiveUpsell,
   nextRungIndex,
   isLadderComplete,
   productUrl,
@@ -337,9 +338,30 @@ function SignUp({ onDone }: { onDone: (p: PlayerProfile) => Promise<void> }) {
   );
 }
 
+// Safari tints its status bar and toolbar from theme-color and the page background, so a
+// full-screen colored state repaints both with its own color while it's showing.
+function usePaintBrowserBars(ref: React.RefObject<HTMLElement | null>) {
+  useEffect(() => {
+    if (!ref.current) return;
+    const color = getComputedStyle(ref.current).backgroundColor;
+    const { documentElement: html, body } = document;
+    const meta = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]');
+    const prev = { html: html.style.backgroundColor, body: body.style.backgroundColor, meta: meta?.content };
+    html.style.backgroundColor = body.style.backgroundColor = color;
+    if (meta) meta.content = color;
+    return () => {
+      html.style.backgroundColor = prev.html;
+      body.style.backgroundColor = prev.body;
+      if (meta && prev.meta !== undefined) meta.content = prev.meta;
+    };
+  }, [ref]);
+}
+
 function Waiting({ req }: { req: CheckRequest }) {
+  const screen = useRef<HTMLDivElement>(null);
+  usePaintBrowserBars(screen);
   return (
-    <div className="fixed inset-0 overflow-y-auto bg-[#FFFBEB]">
+    <div ref={screen} className="fixed inset-0 overflow-y-auto bg-[#FFFBEB]">
       <div className="mx-auto flex min-h-full max-w-md flex-col items-center justify-center gap-3 px-5 py-6 text-center">
       <span className="rounded-full bg-gold px-3 py-1 text-xs font-bold">Waiting for an admin</span>
       <h1 className="text-5xl font-extrabold">{req.name}</h1>
@@ -370,8 +392,10 @@ function LiveClock() {
 }
 
 function Complete({ name, onNext }: { name?: string | undefined; onNext: () => void }) {
+  const screen = useRef<HTMLDivElement>(null);
+  usePaintBrowserBars(screen);
   return (
-    <div className="fixed inset-0 overflow-y-auto bg-gradient-to-b from-green-600 to-green-500 text-white">
+    <div ref={screen} className="fixed inset-0 overflow-y-auto bg-green-500 text-white">
       <div className="mx-auto flex min-h-full max-w-md flex-col items-center gap-4 px-5 pb-6 pt-4 text-center">
       <div className="mt-auto grid h-36 w-36 animate-[pulse-ring_1.6s_ease-in-out_infinite] place-items-center rounded-full bg-white motion-reduce:animate-none">
         <svg viewBox="0 0 24 24" className="w-20" fill="none" stroke="#16A34A" strokeWidth={3.2} strokeLinecap="round" strokeLinejoin="round" aria-hidden>
@@ -392,7 +416,9 @@ function Complete({ name, onNext }: { name?: string | undefined; onNext: () => v
 
 function Reward({ user, profile }: { user: User; profile: PlayerProfile | null }) {
   const product = ladderReward();
+  const upsell = unresponsiveUpsell();
   const [subscribed, setSubscribed] = useState(profile?.newsletter ?? false);
+  const [ready, setReady] = useState<boolean | null>(null);
   return (
     <>
       <div className="rounded-2xl bg-ink p-4 text-white">
@@ -425,6 +451,36 @@ function Reward({ user, profile }: { user: User; profile: PlayerProfile | null }
         </button>
       ) : (
         <p className="mt-3 text-center text-sm text-slate">You&apos;ll get the next trick by email.</p>
+      )}
+
+      {ready === null && (
+        <div className="mt-6 rounded-2xl bg-sky p-4 text-center">
+          <p className="text-lg font-extrabold">Ready to level up to unresponsive?</p>
+          <div className="mt-3 flex gap-2">
+            <button className="flex-1 rounded-xl bg-aqua py-3 font-extrabold text-white" onClick={() => setReady(true)}>
+              Yes, I&apos;m ready
+            </button>
+            <button className="flex-1 rounded-xl border-2 border-line bg-white py-3 font-bold" onClick={() => setReady(false)}>
+              Not yet
+            </button>
+          </div>
+        </div>
+      )}
+      {ready && (
+        <a
+          href={productUrl(upsell)}
+          className="mt-6 flex items-center gap-3 rounded-2xl border-2 border-gold bg-[#FFFBEB] p-3 animate-in fade-in slide-in-from-bottom-4"
+        >
+          {upsell.images[0] && (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img src={shopifyImage(upsell.images[0], 300)} alt={upsell.title} className="h-20 w-20 shrink-0 rounded-xl bg-white object-contain" />
+          )}
+          <span className="flex min-w-0 flex-col">
+            <b>{upsell.title}</b>
+            <span className="text-sm text-slate">3 yo-yos, beginner to unresponsive</span>
+            <b>{formatMoney(upsell.priceFrom)} · Get it →</b>
+          </span>
+        </a>
       )}
     </>
   );

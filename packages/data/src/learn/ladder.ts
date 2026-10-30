@@ -33,12 +33,17 @@ export const TRICK_LADDER: LadderRung[] = [
 ];
 
 export const LADDER_REWARD_HANDLE = 'vyral-dna-trick-pack';
+// Offered after the reward to players who say they're ready for unresponsive yo-yos.
+export const UNRESPONSIVE_UPSELL_HANDLE = 'yoyo-master-pack';
 
-export function ladderReward(): StoreProduct {
-  const product = getProductByHandle(LADDER_REWARD_HANDLE);
-  if (!product) throw new Error(`Reward product "${LADDER_REWARD_HANDLE}" is missing from the catalog`);
+function catalogProduct(handle: string): StoreProduct {
+  const product = getProductByHandle(handle);
+  if (!product) throw new Error(`Ladder product "${handle}" is missing from the catalog`);
   return product;
 }
+
+export const ladderReward = (): StoreProduct => catalogProduct(LADDER_REWARD_HANDLE);
+export const unresponsiveUpsell = (): StoreProduct => catalogProduct(UNRESPONSIVE_UPSELL_HANDLE);
 
 // Index of the first rung not yet approved, or TRICK_LADDER.length when done.
 export function nextRungIndex(approvedSlugs: readonly string[]): number {

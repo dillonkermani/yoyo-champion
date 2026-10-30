@@ -3,6 +3,8 @@ import {
   TRICK_LADDER,
   LADDER_REWARD_HANDLE,
   ladderReward,
+  UNRESPONSIVE_UPSELL_HANDLE,
+  unresponsiveUpsell,
   nextRungIndex,
   isLadderComplete,
 } from '../learn/ladder';
@@ -38,6 +40,15 @@ describe('ladderReward', () => {
     expect(p.handle).toBe(LADDER_REWARD_HANDLE);
     expect(p.images.length).toBeGreaterThan(0);
     expect(productUrl(p)).toBe('https://gentrystein.com/products/vyral-dna-trick-pack');
+  });
+});
+
+describe('unresponsiveUpsell', () => {
+  it('is the Yoyo Master Pack from the real catalog, linked to gentrystein.com', () => {
+    const p = unresponsiveUpsell();
+    expect(p.handle).toBe(UNRESPONSIVE_UPSELL_HANDLE);
+    expect(p.images.length).toBeGreaterThan(0);
+    expect(productUrl(p)).toBe('https://gentrystein.com/products/yoyo-master-pack');
   });
 });
 
