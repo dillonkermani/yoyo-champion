@@ -1,6 +1,7 @@
 "use client";
 
 import { app } from "@/lib/firebase";
+import { getApps, initializeApp } from "firebase/app";
 import {
   getAuth,
   connectAuthEmulator,
@@ -31,17 +32,23 @@ import {
 } from "firebase/firestore";
 import { TRICK_LADDER } from "@yoyo/data";
 
+// The admin page runs on its own Firebase app so its Google sign-in never replaces the
+// player's anonymous session when both are used in the same browser.
+const adminApp = getApps().find((a) => a.name === "learn-admin") ?? initializeApp(app.options, "learn-admin");
+
 export const auth = getAuth(app);
 export const db = getFirestore(app);
+const adminAuth = getAuth(adminApp);
+const adminDb = getFirestore(adminApp);
 
 // Local end-to-end testing against `firebase emulators:start` (ports from firebase.json).
 if (process.env.NEXT_PUBLIC_FIREBASE_EMULATORS === "1") {
-  connectAuthEmulator(auth, "http://127.0.0.1:9287", { disableWarnings: true });
-  connectFirestoreEmulator(db, "127.0.0.1", 8287);
+  for (const a of [auth, adminAuth]) connectAuthEmulator(a, "http://127.0.0.1:9287", { disableWarnings: true });
+  for (const d of [db, adminDb]) connectFirestoreEmulator(d, "127.0.0.1", 8287);
   // Popups can't be driven by browser automation; lets local tests sign an admin in directly.
   if (typeof window !== "undefined") {
     (window as unknown as { __learnSignIn?: unknown }).__learnSignIn = (email: string, password: string) =>
-      signInWithEmailAndPassword(auth, email, password);
+      signInWithEmailAndPassword(adminAuth, email, password);
   }
 }
 
@@ -66,17 +73,21 @@ export interface PlayerProfile {
   newsletter: boolean;
 }
 
-export const watchAuth = (cb: (user: User | null) => void) => onAuthStateChanged(auth, cb);
+export const watchAdmin = (cb: (user: User | null) => void) => onAuthStateChanged(adminAuth, cb);
 
 // Players never see a login: an anonymous account keeps their progress on this phone.
-export const ensurePlayer = async (): Promise<User> =>
-  auth.currentUser ?? (await signInAnonymously(auth)).user;
+// Wait for the saved session first, or a refresh would start a brand-new player.
+export async function ensurePlayer(): Promise<User> {
+  await auth.authStateReady();
+  if (auth.currentUser?.isAnonymous) return auth.currentUser;
+  return (await signInAnonymously(auth)).user;
+}
 
-export const adminSignIn = () => signInWithPopup(auth, new GoogleAuthProvider());
-export const adminSignOut = () => signOut(auth);
+export const adminSignIn = () => signInWithPopup(adminAuth, new GoogleAuthProvider());
+export const adminSignOut = () => signOut(adminAuth);
 
 export const isAdmin = async (uid: string): Promise<boolean> =>
-  (await getDoc(doc(db, "admins", uid))).exists();
+  (await getDoc(doc(adminDb, "admins", uid))).exists();
 
 export function watchProgress(uid: string, cb: (approved: string[]) => void) {
   return onSnapshot(doc(db, "progress", uid), (snap) => cb((snap.data()?.["approved"] as string[]) ?? []));
@@ -115,14 +126,14 @@ export async function requestCheck(uid: string, name: string, rung: number) {
 export const cancelRequest = (id: string) => deleteDoc(doc(db, "checkRequests", id));
 
 export function watchPendingQueue(cb: (reqs: CheckRequest[]) => void) {
-  return onSnapshot(query(collection(db, "checkRequests"), where("status", "==", "pending")), (snap) =>
+  return onSnapshot(query(collection(adminDb, "checkRequests"), where("status", "==", "pending")), (snap) =>
     cb(snap.docs.map((d) => toRequest(d.id, d.data())).sort((a, b) => -newestFirst(a, b))),
   );
 }
 
 export async function decide(req: CheckRequest, admin: User, approve: boolean, tip?: string) {
-  const batch = writeBatch(db);
-  batch.update(doc(db, "checkRequests", req.id), {
+  const batch = writeBatch(adminDb);
+  batch.update(doc(adminDb, "checkRequests", req.id), {
     status: approve ? "approved" : "rejected",
     decidedBy: admin.uid,
     decidedByName: admin.displayName ?? "Club admin",
@@ -130,7 +141,7 @@ export async function decide(req: CheckRequest, admin: User, approve: boolean, t
     ...(tip ? { tip } : {}),
   });
   if (approve) {
-    batch.set(doc(db, "progress", req.uid), { approved: arrayUnion(req.slug) }, { merge: true });
+    batch.set(doc(adminDb, "progress", req.uid), { approved: arrayUnion(req.slug) }, { merge: true });
   }
   await batch.commit();
 }

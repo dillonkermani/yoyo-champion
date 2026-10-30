@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import type { User } from "firebase/auth";
 import { TRICK_LADDER } from "@yoyo/data";
 import {
-  watchAuth,
+  watchAdmin,
   adminSignIn,
   adminSignOut,
   isAdmin,
@@ -21,7 +21,7 @@ export default function AdminPage() {
 
   useEffect(
     () =>
-      watchAuth((u) => {
+      watchAdmin((u) => {
         setUser(u);
         setAdmin(null);
         if (u && !u.isAnonymous) isAdmin(u.uid).then(setAdmin).catch(() => setAdmin(false));
