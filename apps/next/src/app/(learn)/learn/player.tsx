@@ -41,6 +41,8 @@ export default function LearnPlayer({ step }: { step?: string }) {
   const [signingUp, setSigningUp] = useState(false);
   const [showReward, setShowReward] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
+  // Kept here, not in <Trick>: the waiting screen replaces <Trick> before the server answers.
+  const [landError, setLandError] = useState<string | null>(null);
   const prevApproved = useRef<number | null>(null);
 
   useEffect(() => {
@@ -128,7 +130,16 @@ export default function LearnPlayer({ step }: { step?: string }) {
       index={rung}
       approvedCount={approved.length}
       rejected={lastForRung?.status === "rejected" ? lastForRung : undefined}
-      onLanded={() => (profile ? requestCheck(user.uid, profile.name, rung) : setSigningUp(true))}
+      error={landError}
+      onLanded={async () => {
+        if (!profile) return setSigningUp(true);
+        setLandError(null);
+        try {
+          await requestCheck(user.uid, profile.name, rung);
+        } catch {
+          setLandError("That didn't go through. Check your connection and tap again.");
+        }
+      }}
       />
     </>
   );
@@ -185,17 +196,18 @@ function Trick({
   index,
   approvedCount,
   rejected,
+  error,
   onLanded,
 }: {
   index: number;
   approvedCount: number;
   rejected?: CheckRequest | undefined;
+  error: string | null;
   onLanded: () => unknown;
 }) {
   const r = TRICK_LADDER[index]!;
   const [showTip, setShowTip] = useState(false);
   const [busy, setBusy] = useState(false);
-  const [err, setErr] = useState<string | null>(null);
   return (
     <>
       <Progress done={approvedCount} current={index} />
@@ -230,11 +242,8 @@ function Trick({
         disabled={busy}
         onClick={async () => {
           setBusy(true);
-          setErr(null);
           try {
             await onLanded();
-          } catch {
-            setErr("That didn't go through. Check your connection and tap again.");
           } finally {
             setBusy(false);
           }
@@ -242,7 +251,7 @@ function Trick({
       >
         I landed it
       </button>
-      {err && <p role="alert" className="mt-2 text-center text-sm font-bold text-red-600">{err}</p>}
+      {error && <p role="alert" className="mt-2 text-center text-sm font-bold text-red-600">{error}</p>}
       {r.ytId && (
         <button className={linkBtn} onClick={() => setShowTip((s) => !s)}>
           {showTip ? "Hide tip" : "Stuck? Get a tip"}
