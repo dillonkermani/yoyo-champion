@@ -1,4 +1,3 @@
-import { describe, it, expect } from '@jest/globals';
 
 describe('Expo app', () => {
   it('app module exists', () => {

@@ -22,6 +22,8 @@ const nextConfig = {
       { protocol: "https", hostname: "cdn.discordapp.com", port: "", pathname: "/**" },
       { protocol: "https", hostname: "*.cloudinary.com", port: "", pathname: "/**" },
       { protocol: "https", hostname: "res.cloudinary.com", port: "", pathname: "/**" },
+      { protocol: "https", hostname: "cdn.shopify.com", port: "", pathname: "/**" },
+      { protocol: "https", hostname: "i.ytimg.com", port: "", pathname: "/**" },
     ],
     formats: ["image/avif", "image/webp"],
   },

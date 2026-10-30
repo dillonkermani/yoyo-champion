@@ -85,9 +85,7 @@ const colorMap: Record<string, { bg: string; bgLight: string; text: string; bord
 // =============================================================================
 
 function getCategoryStats(cat: TrickCategory) {
-  const tricks = mockTricks.filter((t) =>
-    cat.genres.includes(t.genre as any)
-  );
+  const tricks = mockTricks.filter((t) => t.genre !== undefined && cat.genres.includes(t.genre));
   const beginner = tricks.filter((t) => (t.difficulty ?? 0) <= 2).length;
   const advanced = tricks.filter((t) => (t.difficulty ?? 0) >= 3).length;
   return { total: tricks.length, beginner, advanced, sampleTricks: tricks.slice(0, 3) };

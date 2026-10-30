@@ -1,5 +1,5 @@
 import React from 'react';
-import { Linking, Platform } from 'react-native';
+import { Linking } from 'react-native';
 import { ShopScreen } from '@yoyo/ui';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Text } from 'tamagui';

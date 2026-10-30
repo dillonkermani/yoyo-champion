@@ -23,7 +23,7 @@ export default function HomeTab() {
         name: c.name,
         icon: c.icon,
         color: c.color,
-        trickCount: mockTricks.filter((t) => c.genres.includes(t.genre)).length,
+        trickCount: mockTricks.filter((t) => t.genre !== undefined && c.genres.includes(t.genre)).length,
       })),
     [],
   );
@@ -34,7 +34,7 @@ export default function HomeTab() {
     let result = mockTricks;
     if (selectedCategoryId) {
       const cat = allCategories.find((c) => c.id === selectedCategoryId);
-      if (cat) result = result.filter((t) => cat.genres.includes(t.genre));
+      if (cat) result = result.filter((t) => t.genre !== undefined && cat.genres.includes(t.genre));
     }
     if (searchQuery.trim()) {
       const q = searchQuery.toLowerCase();
@@ -43,9 +43,9 @@ export default function HomeTab() {
     return result.slice(0, 20).map((t) => ({
       id: t.id,
       name: t.name,
-      difficulty: t.difficulty,
-      genre: t.genre,
-      xpReward: t.xpReward,
+      level: t.level,
+      durationSec: t.durationSec,
+      thumbnails: t.thumbnails,
     }));
   }, [selectedCategoryId, searchQuery, allCategories]);
 

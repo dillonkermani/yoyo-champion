@@ -49,7 +49,8 @@ export default function RootLayout() {
   return (
     <SafeAreaProvider>
       <StatusBar barStyle="dark-content" />
-      <TamaguiProvider config={tamaguiConfig} defaultTheme="light">
+      {/* Same config the web app uses; the cast only bridges Tamagui's RN-flavoured style types. */}
+      <TamaguiProvider config={tamaguiConfig as NonNullable<React.ComponentProps<typeof TamaguiProvider>['config']>} defaultTheme="light">
         <RootNavigator />
       </TamaguiProvider>
     </SafeAreaProvider>

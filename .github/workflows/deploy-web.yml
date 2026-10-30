@@ -8,6 +8,7 @@ on:
       - "apps/next/**"
       - "packages/**"
       - "firebase.json"
+      - "config/firebase/**"
       - ".github/workflows/deploy-web.yml"
 
 jobs:
@@ -45,3 +46,13 @@ jobs:
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
           projectId: yoyochampion-671fe
           channelId: live
+
+      # Rules ship with the code that relies on them (config/firebase/firestore.rules).
+      - name: Deploy Firestore rules
+        run: |
+          printf '%s' "$FIREBASE_SERVICE_ACCOUNT" > "$RUNNER_TEMP/sa.json"
+          GOOGLE_APPLICATION_CREDENTIALS="$RUNNER_TEMP/sa.json" \
+            npx --yes firebase-tools@14 deploy --only firestore:rules --project yoyochampion-671fe --non-interactive
+          rm -f "$RUNNER_TEMP/sa.json"
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}

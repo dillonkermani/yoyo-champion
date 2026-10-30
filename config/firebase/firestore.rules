@@ -1,0 +1,74 @@
+rules_version = '2';
+
+// Trick ladder (learn.yoyochampion.com).
+// A player's phone can only ASK for a check-off. Approving or rejecting one,
+// and writing ladder progress, needs a signed-in user listed in /admins.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isSelf(uid) {
+      return signedIn() && request.auth.uid == uid;
+    }
+
+    function isAdmin() {
+      return signedIn() && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+
+    // Admins are added by hand in the Firebase console. Nobody can write here from a client.
+    match /admins/{uid} {
+      allow read: if isSelf(uid);
+      allow write: if false;
+    }
+
+    // Name + contact email. Under-13 players give a parent's email.
+    match /players/{uid} {
+      allow read: if isSelf(uid) || isAdmin();
+      allow create, update: if isSelf(uid)
+        && request.resource.data.keys().hasOnly(['name', 'email', 'emailIsParent', 'newsletter', 'createdAt'])
+        && request.resource.data.name is string
+        && request.resource.data.name.size() > 0
+        && request.resource.data.name.size() <= 40
+        && request.resource.data.email is string
+        && request.resource.data.email.matches('^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$')
+        && request.resource.data.emailIsParent is bool
+        && request.resource.data.newsletter is bool;
+      allow delete: if false;
+    }
+
+    match /checkRequests/{id} {
+      allow read: if isAdmin() || (signedIn() && resource.data.uid == request.auth.uid);
+
+      allow create: if signedIn()
+        && request.resource.data.keys().hasOnly(['uid', 'name', 'rung', 'slug', 'status', 'createdAt'])
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.status == 'pending'
+        && request.resource.data.rung is int
+        && request.resource.data.rung >= 0
+        && request.resource.data.rung < 5
+        && request.resource.data.slug is string
+        && request.resource.data.name is string
+        && request.resource.data.createdAt == request.time;
+
+      // Only an admin decides, and only these fields may change.
+      allow update: if isAdmin()
+        && resource.data.status == 'pending'
+        && request.resource.data.status in ['approved', 'rejected']
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['status', 'decidedBy', 'decidedByName', 'decidedAt', 'tip']);
+
+      // A player may cancel their own request while it is still pending.
+      allow delete: if signedIn()
+        && resource.data.uid == request.auth.uid
+        && resource.data.status == 'pending';
+    }
+
+    match /progress/{uid} {
+      allow read: if isSelf(uid) || isAdmin();
+      allow write: if isAdmin();
+    }
+  }
+}
